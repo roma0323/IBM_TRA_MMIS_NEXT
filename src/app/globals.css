@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+.active {
+  font-size: 16px;
+  color: #d10000;
+}
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
