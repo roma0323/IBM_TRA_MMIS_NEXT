@@ -3,6 +3,7 @@
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import { Button } from "@/components/ui/button"
+import { ModeToggle } from "@/components/ui/mode_toggle"
 import "@/styles/globals.css"
 
 export default function Navbar() {
@@ -19,6 +20,7 @@ export default function Navbar() {
         <Link className={`link ${pathname === '/dashboard/detail' ? 'active' : ''}`} href="/dashboard/detail">
         detail
         </Link>
+        <ModeToggle />
     </div>
 
 }
