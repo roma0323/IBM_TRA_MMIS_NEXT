@@ -2,15 +2,16 @@
 
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
-import "../globals.css"
+import { Button } from "@/components/ui/button"
+import "@/styles/globals.css"
 
 export default function Navbar() {
     const pathname = usePathname()
 
     return <div>
 
-        <Link className={`link ${pathname === '/' ? 'active' : ''}`} href="/">
-            Home
+        <Link  href="/">
+            <Button className={`link ${pathname === '/' ? 'active' : ''}`}>Home</Button> 
         </Link> 
         <Link className={`link ${pathname === '/dashboard' ? 'active' : ''}`} href="/dashboard">
         dashboard

@@ -1,4 +1,14 @@
-import Navbar from "./components/navbar"
+import Navbar from "@/components/navbar"
+import "@/styles/globals.css"
+import { Inter as FontSans } from "next/font/google"
+ 
+import { cn } from "@/lib/utils"
+ 
+const fontSans = FontSans({
+  subsets: ["latin"],
+  variable: "--font-sans",
+})
+
 
 export default function RootLayout({
   children,
@@ -7,7 +17,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
+      <body className={cn(
+          "min-h-screen bg-background font-sans antialiased",
+          fontSans.variable
+        )}>
         <Navbar />
         <main>{children}</main>
       </body>
