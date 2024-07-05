@@ -9,7 +9,16 @@
     border: 1px solid hsl(var(--active-button-color));
     border-radius: 0.5rem; /* Adjust the radius as needed */
     }
+.mid_nav_active{
+  color: hsl(var(--active-button-color));
+  border-bottom: 3px solid hsl(var(--active-button-color));
+}
 
+.mid_nav_unactive{
+  border-bottom-width: 2px;
+  border-bottom-style: solid;
+  border-bottom-color: #b0cbff;
+}
   @layer base {
     :root {
       --background: 0 0% 100%;
