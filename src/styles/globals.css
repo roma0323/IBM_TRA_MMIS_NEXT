@@ -5,9 +5,10 @@
 
 
   .active {
-    background-color: hsl(var(--active-button-color));
-    color: hsl(var(--foreground));
-  }
+    color: hsl(var(--active-button-color));
+    border: 1px solid hsl(var(--active-button-color));
+    border-radius: 0.5rem; /* Adjust the radius as needed */
+    }
 
   @layer base {
     :root {
@@ -41,7 +42,7 @@
 
       --radius: 0.5rem;
 
-      --active-button-color: 250, 100%, 42%;
+      --active-button-color: 221, 100%, 60%;
 /* homepage css */
       --headline-1-font-family: "Noto Sans JP", Helvetica;
       --headline-1-font-size: 24px;
@@ -102,7 +103,7 @@
       --input: 217.2 32.6% 17.5%;
       --ring: 212.7 26.8% 83.9%;
 
-      --active-button-color: 259, 95%, 86%;
+      --active-button-color: 221, 100%, 60%;
 
     }
   }

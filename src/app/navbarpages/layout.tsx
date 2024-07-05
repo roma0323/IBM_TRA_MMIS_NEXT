@@ -6,5 +6,5 @@ export default function DashboardLayout({
   }: {
     children: React.ReactNode
   }) {
-    return <section>{children}<Navbar /></section>
+    return <section><Navbar />{children}</section>
   }

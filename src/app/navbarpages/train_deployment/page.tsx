@@ -13,47 +13,7 @@ export default function Page() {
   return (
     <div className="flex flex-col min-h-screen items-center relative">
       <div className="flex flex-col items-center relative self-stretch w-full flex-[0_0_auto]">
-        <div className="inline-flex items-start relative flex-[0_0_auto]">
-          <div className="flex w-[1440px] items-center gap-5 px-5 py-3 relative self-stretch bg-white">
-            <img className="relative w-8 h-8" alt="Menu" src="menu-fill0-wght400-grad0-opsz24-1.svg" />
-            <img className="relative w-[34px] h-px mt-[-128.00px]" alt="Line" />
-            <div className="inline-flex items-center gap-3 px-1 py-0 relative flex-[0_0_auto]">
-              <div className="relative w-20 h-[58.18px] bg-[url(/IBM-LOGO-frame.svg)] bg-cover bg-[50%_50%]" />
-              <div className="relative w-fit font-title-title-medium-semi font-[number:var(--title-title-medium-semi-font-weight)] text-[#4e4e4e] text-[length:var(--title-title-medium-semi-font-size)] tracking-[var(--title-title-medium-semi-letter-spacing)] leading-[var(--title-title-medium-semi-line-height)] [font-style:var(--title-title-medium-semi-font-style)]">
-                新 MMIS 績效管理指標
-              </div>
-            </div>
-            <div className="relative flex-1 grow h-[19px]" />
-            <div className="inline-flex items-center justify-center gap-2.5 px-3 py-2 relative flex-[0_0_auto] rounded overflow-hidden border border-solid border-[#397eff]">
-              <div className="relative w-fit mt-[-1.00px] font-label-label-large-semi font-[number:var(--label-label-large-semi-font-weight)] text-[#397eff] text-[length:var(--label-label-large-semi-font-size)] tracking-[var(--label-label-large-semi-letter-spacing)] leading-[var(--label-label-large-semi-line-height)] [font-style:var(--label-label-large-semi-font-style)]">
-                車輛資訊
-              </div>
-            </div>
-            <div className="inline-flex items-center justify-center gap-2.5 px-3 py-2 relative flex-[0_0_auto] rounded-[30px] overflow-hidden">
-              <div className="relative w-fit mt-[-1.00px] font-label-label-large-semi font-[number:var(--label-label-large-semi-font-weight)] text-[#646464] text-[length:var(--label-label-large-semi-font-size)] tracking-[var(--label-label-large-semi-letter-spacing)] leading-[var(--label-label-large-semi-line-height)] [font-style:var(--label-label-large-semi-font-style)]">
-                機務段配置資訊
-              </div>
-            </div>
-            <div className="inline-flex items-center justify-center gap-2.5 px-3 py-2 relative flex-[0_0_auto] rounded-[30px] overflow-hidden">
-              <div className="relative w-fit mt-[-1.00px] font-label-label-large-semi font-[number:var(--label-label-large-semi-font-weight)] text-[#646464] text-[length:var(--label-label-large-semi-font-size)] tracking-[var(--label-label-large-semi-letter-spacing)] leading-[var(--label-label-large-semi-line-height)] [font-style:var(--label-label-large-semi-font-style)]">
-                機廠檢修資訊
-              </div>
-            </div>
-            <div className="inline-flex items-center justify-center gap-2.5 px-3 py-2 relative flex-[0_0_auto] rounded-[30px] overflow-hidden">
-              <div className="relative w-fit mt-[-1.00px] font-label-label-large-semi font-[number:var(--label-label-large-semi-font-weight)] text-[#646464] text-[length:var(--label-label-large-semi-font-size)] tracking-[var(--label-label-large-semi-letter-spacing)] leading-[var(--label-label-large-semi-line-height)] [font-style:var(--label-label-large-semi-font-style)]">
-                故障通報
-              </div>
-            </div>
-            <div className="inline-flex items-center justify-center gap-2.5 px-3 py-2 relative flex-[0_0_auto] rounded-[30px] overflow-hidden">
-              <div className="relative w-fit mt-[-1.00px] font-label-label-large-semi font-[number:var(--label-label-large-semi-font-weight)] text-[#646464] text-[length:var(--label-label-large-semi-font-size)] tracking-[var(--label-label-large-semi-letter-spacing)] leading-[var(--label-label-large-semi-line-height)] [font-style:var(--label-label-large-semi-font-style)]">
-                檢修動態
-              </div>
-            </div>
-            <div className="flex w-[54px] items-center justify-center gap-2.5 p-1 relative bg-neutral-100 rounded-2xl overflow-hidden">
-              <img className="relative w-6 h-6" alt="Dark mode" src="dark-mode.png" />
-            </div>
-          </div>
-        </div>
+        
         <div className="flex w-[1440px] items-center gap-5 px-6 py-0 relative flex-[0_0_auto] bg-white">
           <div className="inline-flex items-center relative flex-[0_0_auto]">
             <div className="inline-flex items-center gap-1 relative flex-[0_0_auto]">
