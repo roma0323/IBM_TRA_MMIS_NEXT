@@ -14,12 +14,22 @@ export default function Navbar() {
         <Link  href="/">
             <Button className={`link ${pathname === '/' ? 'active' : ''}`}>Home</Button> 
         </Link> 
-        <Link className={`link ${pathname === '/dashboard' ? 'active' : ''}`} href="/dashboard">
-        dashboard
+        <Link className={`link ${pathname === '/navbarpages/factory_maintenance' ? 'active' : ''}`} href="/navbarpages/factory_maintenance">
+        factory_maintenance
         </Link>
-        <Link className={`link ${pathname === '/dashboard/detail' ? 'active' : ''}`} href="/dashboard/detail">
-        detail
+        <Link className={`link ${pathname === '/navbarpages/fault_notification' ? 'active' : ''}`} href="/navbarpages/fault_notification">
+        fault_notification
         </Link>
+        <Link className={`link ${pathname === '/navbarpages/locomotive_depot' ? 'active' : ''}`} href="/navbarpages/locomotive_depot">
+        locomotive_depot
+        </Link>
+        <Link className={`link ${pathname === '/navbarpages/maintenance_materials' ? 'active' : ''}`} href="/navbarpages/maintenance_materials">
+        maintenance_materials
+        </Link>
+        <Link className={`link ${pathname === '/navbarpages/train_deployment' ? 'active' : ''}`} href="/navbarpages/train_deployment">
+        train_deployment
+        </Link>
+
         <ModeToggle />
     </div>
 
