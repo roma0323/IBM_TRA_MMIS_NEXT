@@ -7,7 +7,7 @@
 "use client";
 
 import React from "react";
-import { DataCard } from "../../../components/DataCard";
+import { DataCard } from "../../../components/homepage/DataCard";
 
 export default function Page() {
   return (

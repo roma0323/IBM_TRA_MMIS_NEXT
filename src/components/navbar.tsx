@@ -2,7 +2,6 @@
 
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
-import { Button } from "@/components/ui/button"
 import { ModeToggle } from "@/components/ui/mode_toggle"
 import "@/styles/globals.css"
 
@@ -12,7 +11,7 @@ export default function Navbar() {
     return <div>
         <div className="inline-flex items-start relative flex-[0_0_auto]">
             <div className="flex w-[1440px] items-center gap-5 px-5 py-3 relative self-stretch ">
-                <img className="relative w-8 h-8" alt="Menu" src="menu-fill0-wght400-grad0-opsz24-1.svg" />
+                <div className="relative  w-8 h-8 bg-[url(/icon-menu.svg)] bg-cover bg-[50%_50%]" />
 
 
                 <div className="inline-flex items-center gap-3 px-1 py-0 relative flex-[0_0_auto]">

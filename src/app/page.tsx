@@ -6,8 +6,8 @@
 "use client";
 
 import React from "react";
-import { NavigationCard } from "../components/NavigationCard";
-import { IbmLogoFrame } from "../components/IbmLogoFrame";
+import { NavigationCard } from "../components/homepage/NavigationCard";
+import { IbmLogoFrame } from "../components/homepage/IbmLogoFrame";
 import Link from 'next/link'
 
 
@@ -39,7 +39,7 @@ export default function Page() {
             <Link href="/navbarpages/locomotive_depot">
 
               <NavigationCard
-                logoClassName="bg-[url(/icon-locomotive-depot.png)]"
+                logoClassName="bg-[url(/icon-locomotive-depot.svg)]"
                 text="機務段車輛配置"
                 text1="各機務段、車型配置資料、可用率查看"
               />
@@ -48,7 +48,7 @@ export default function Page() {
             <Link href="/navbarpages/factory_maintenance">
 
               <NavigationCard
-                logoClassName="bg-[url(/icon-locomotive-depot.png)]"
+                logoClassName="bg-[url(/icon-locomotive-depot.svg)]"
                 text="機廠檢修動態"
                 text1="各機廠檢修動態"
               />
@@ -56,7 +56,7 @@ export default function Page() {
             <Link href="/navbarpages/fault_notification">
 
               <NavigationCard
-                logoClassName="bg-[url(/icon-fault-notification.png)]"
+                logoClassName="bg-[url(/icon-fault-notification.svg)]"
                 text="故障通報狀態"
                 text1="每日故障報表、ATP 故障分析、年度故障報表"
               />
@@ -64,7 +64,7 @@ export default function Page() {
             <Link href="/navbarpages/maintenance_materials">
 
               <NavigationCard
-                logoClassName="bg-[url(/icon-maintenance-materials.png)]"
+                logoClassName="bg-[url(/icon-maintenance-materials.svg)]"
                 text="車輛維修用料"
                 text1="各區段、車型維修資料儀表板"
               />
