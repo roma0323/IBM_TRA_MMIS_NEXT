@@ -8,6 +8,7 @@ const config = {
     './components/**/*.{ts,tsx}',
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
+    "./src/**/*.{html,js,ts,jsx,tsx}"
 	],
   prefix: "",
   theme: {
@@ -25,6 +26,8 @@ const config = {
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
+        "on-primary": "var(--on-primary)",
+        surface: "var(--surface)",
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
@@ -75,6 +78,10 @@ const config = {
       },
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],
+        "headline-1": "var(--headline-1-font-family)",
+        "label-text-2": "var(--label-text-2-font-family)",
+        "title-1": "var(--title-1-font-family)",
+        "title-2": "var(--title-2-font-family)",
       },
     },
   },
