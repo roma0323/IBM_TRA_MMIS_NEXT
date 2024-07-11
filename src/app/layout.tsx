@@ -1,9 +1,9 @@
-import Navbar from "@/components/navbar"
 
 import "@/styles/globals.css"
 import { Inter as FontSans } from "next/font/google"
 import { ThemeProvider } from "@/components/theme-provider"
 import { cn } from "@/lib/utils"
+import Chatbot from "@/components/chatbot"; // Adjust this import according to your project structure
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -31,6 +31,8 @@ export default function RootLayout({
           <main>{children}</main>
 
         </ThemeProvider>
+        <Chatbot />
+
       </body>
     </html>
   )
