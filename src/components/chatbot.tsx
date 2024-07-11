@@ -16,7 +16,7 @@ const Chatbot = () => {
       <button
         onClick={toggleChatbot}
         className="fixed bottom-4 right-4 hover:scale-105">
-        <img src="chatbot-icon.png" alt="Chatbot Icon" className="w-16 h-16" />
+        <img src="./chatbot-icon.png" alt="Chatbot Icon" className="w-16 h-16" />
       </button>
 
 
