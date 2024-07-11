@@ -7,11 +7,11 @@
 "use client";
 
 import React from "react";
-import { DataCard } from "../../../components/homepage/DataCard";
+import { DataCard } from "@/components/homepage/DataCard";
 
 export default function Page() {
   return (
-    <div className="flex flex-col min-h-screen items-center relative">
+    <div className="flex flex-col min-h-screen items-center relative ">
       
       
       
