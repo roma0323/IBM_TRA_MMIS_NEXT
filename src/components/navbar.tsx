@@ -16,7 +16,7 @@ export default function Navbar() {
 
                 <div className="inline-flex items-center gap-3 px-1 py-0 relative flex-[0_0_auto]">
                     <Link href="/">
-                        <div className="relative w-20 h-[58.18px] bg-[url(/IBM-LOGO-frame.svg)] bg-cover bg-[50%_50%]" />
+                        <div className="relative w-20 h-[58.18px] bg-[url(/ibm-logo-frame.svg)] bg-cover bg-[50%_50%]" />
                     </Link>
                     <div className="relative w-fit font-title-title-medium-semi font-[number:var(--title-title-medium-semi-font-weight)] text-[length:var(--title-title-medium-semi-font-size)] tracking-[var(--title-title-medium-semi-letter-spacing)] leading-[var(--title-title-medium-semi-line-height)] [font-style:var(--title-title-medium-semi-font-style)]">
                         新 MMIS 績效管理指標
@@ -55,10 +55,10 @@ export default function Navbar() {
                     </div>
                 </Link>
 
-                <Link className={`link ${pathname.startsWith('/navbarpages/maintenance_materials') ? 'active' : ''}`} href="/navbarpages/maintenance_materials">
+                <Link className={`link ${pathname.startsWith('/navbarpages/inventory_performance') ? 'active' : ''}`} href="/navbarpages/inventory_performance">
                     <div className="inline-flex items-center justify-center gap-2.5 px-3 py-2 relative flex-[0_0_auto] rounded-[30px] overflow-hidden">
                         <div className="relative w-fit mt-[-1.00px] font-label-label-large-semi font-[number:var(--label-label-large-semi-font-weight)]  text-[length:var(--label-label-large-semi-font-size)] tracking-[var(--label-label-large-semi-letter-spacing)] leading-[var(--label-label-large-semi-line-height)] [font-style:var(--label-label-large-semi-font-style)]">
-                            檢修動態
+                            庫存績效
                         </div>
                     </div>
                 </Link>

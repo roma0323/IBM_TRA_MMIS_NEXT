@@ -16,7 +16,7 @@ const Chatbot = () => {
       <button
         onClick={toggleChatbot}
         className="fixed bottom-4 right-4 hover:scale-105">
-        <img src="./chatbot-icon.png" alt="Chatbot Icon" className="w-16 h-16" />
+        <img src="/./chatbot-icon.png" alt="Chatbot Icon" className="w-16 h-16" />
       </button>
 
 
@@ -59,7 +59,7 @@ const Chatbot = () => {
                     Minimum text check, Hide check icon
                   </p>
                 </div>
-                <img className="absolute w-[37px] h-7 top-[60px] left-[202px]" alt="Rectangle" src="profile.png" />
+                <img className="absolute w-[37px] h-7 top-[60px] left-[202px]" alt="Rectangle" src="/./profile.png" />
               </div>
               <div className="inline-flex items-end absolute top-[77px] left-[55px]">
                 <div className="relative w-[16.53px] h-[5.79px]">
@@ -89,16 +89,16 @@ const Chatbot = () => {
               </div>
               <div className="inline-flex items-start gap-[5.79px] px-[16.53px] py-0 absolute top-[104px] left-[185px]">
                 <div className="inline-flex items-start gap-[6.61px] p-[3.31px] relative flex-[0_0_auto] mt-[-1.00px] mb-[-1.00px] ml-[-1.00px] mr-[-1.00px] bg-[#397eff] rounded-[6.61px] border border-solid border-white">
-                  <img className="relative w-[13.23px] h-[13.23px]" alt="Vuesax outline" src="clipboard-text.svg" />
-                  <img className="relative w-[13.23px] h-[13.23px]" alt="Vuesax linear like" src="like.svg" />
-                  <img className="relative w-[13.23px] h-[13.23px]" alt="Vuesax linear" src="dislike.svg" />
+                  <img className="relative w-[13.23px] h-[13.23px]" alt="Vuesax outline" src="/clipboard-text.svg" />
+                  <img className="relative w-[13.23px] h-[13.23px]" alt="Vuesax linear like" src="/like.svg" />
+                  <img className="relative w-[13.23px] h-[13.23px]" alt="Vuesax linear" src="/dislike.svg" />
                 </div>
               </div>
               <div className="absolute w-10 h-10 top-[115px] left-0 bg-[#397eff] rounded-[82.67px]">
                 <img
                   className="absolute w-[27px] h-[27px] top-1.5 left-[7px]"
                   alt="Wapp GP tlogo"
-                  src="chatbot-icon.png"
+                  src="/chatbot-icon.png"
                 />
               </div>
             </div>
@@ -109,7 +109,7 @@ const Chatbot = () => {
                     More no. of lines text and showing complete list of features like time stamp + check icon READ
                   </p>
                 </div>
-                <img className="top-[75px] left-[202px] absolute w-[37px] h-7" alt="Rectangle" src="profile.png" />
+                <img className="top-[75px] left-[202px] absolute w-[37px] h-7" alt="Rectangle" src="/profile.png" />
               </div>
               <div className="top-[93px] left-[55px] inline-flex items-end absolute">
                 <div className="relative w-[16.53px] h-[5.79px]">
@@ -143,7 +143,7 @@ const Chatbot = () => {
               <div className="relative w-fit mt-[-0.83px] [font-family:'Inter-Regular',Helvetica] font-normal text-[#444444] text-[14.9px] tracking-[0] leading-[normal]">
                 Type your message here...
               </div>
-              <img className="relative w-[19.84px] h-[19.84px]" alt="Vuesax linear send-icon" src="send-icon.svg" />
+              <img className="relative w-[19.84px] h-[19.84px]" alt="Vuesax linear send-icon" src="/send-icon.svg" />
             </div>
           </div>
         </div>
