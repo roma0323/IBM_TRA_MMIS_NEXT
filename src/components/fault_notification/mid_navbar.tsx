@@ -13,8 +13,8 @@ export default function MidNavbar() {
     const id = searchParam.get("id")!;
 
     switch (pathname) {
-        case '/navbarpages/locomotive_depot':
-            content = '總覽';
+        case '/navbarpages/fault_notification':
+            content = '每日故障通報 Ａ＋Ｂ';
             break;
     }
     return (
@@ -26,7 +26,7 @@ export default function MidNavbar() {
 
                         <div className="inline-flex items-center gap-1 relative flex-[0_0_auto]">
                             <div className="mt-[-1.00px] font-display-display-small-dem font-[number:var(--display-display-small-dem-font-weight)]  text-[length:var(--display-display-small-dem-font-size)] relative w-fit tracking-[var(--display-display-small-dem-letter-spacing)] leading-[var(--display-display-small-dem-line-height)] [font-style:var(--display-display-small-dem-font-style)]">
-                                機務段配置資訊
+                                故障通報
                             </div>
                         </div>
                         <div className="inline-flex items-center gap-1 relative flex-[0_0_auto]">
@@ -56,13 +56,20 @@ export default function MidNavbar() {
                     <div className="flex items-start gap-[5px] relative self-stretch w-full flex-[0_0_auto]">
                         
                         <Link href={{
-                            pathname: "/navbarpages/locomotive_depot",
-                        }} className={`link ${pathname === '/navbarpages/locomotive_depot' ? 'mid_nav_active' : 'mid_nav_unactive'}`} >
+                            pathname: "/navbarpages/fault_notification",
+                        }} className={`link ${pathname === '/navbarpages/fault_notification' ? 'mid_nav_active' : 'mid_nav_unactive'}`} >
                             <div className=" inline-flex h-10 items-center px-4 py-0 relative flex-[0_0_auto] ">
-                                總覽
+                            每日故障通報 Ａ＋Ｂ
                         </div>
                         </Link>
-                        
+                        <Link href={{
+                            pathname: "/navbarpages/fault_notification/annual_report",
+                            query: { id: "故障通報數據年度報告" },
+                        }} className={`link ${id === '故障通報數據年度報告' ? 'mid_nav_active' : 'mid_nav_unactive'}`}>
+                            <div className="inline-flex h-10 items-center px-4 py-0 relative flex-[0_0_auto] ">
+                            故障通報數據年度報告
+                            </div>
+                        </Link>
                     </div>
                 </div>
             </div>

@@ -26,7 +26,7 @@ export default function MidNavbar() {
 
                         <div className="inline-flex items-center gap-1 relative flex-[0_0_auto]">
                             <div className="mt-[-1.00px] font-display-display-small-dem font-[number:var(--display-display-small-dem-font-weight)]  text-[length:var(--display-display-small-dem-font-size)] relative w-fit tracking-[var(--display-display-small-dem-letter-spacing)] leading-[var(--display-display-small-dem-line-height)] [font-style:var(--display-display-small-dem-font-style)]">
-                                車種配置與使用率
+                                機廠檢修資訊
                             </div>
                         </div>
                         <div className="inline-flex items-center gap-1 relative flex-[0_0_auto]">

@@ -23,7 +23,7 @@ export default function Navbar() {
                     </div>
                 </div>
                 <div className="relative flex-1 grow h-[19px]" />
-                <Link className={`link ${pathname === '/navbarpages/train_deployment' ? 'active' : ''}`} href="/navbarpages/train_deployment">
+                <Link className={`link ${pathname.startsWith('/navbarpages/train_deployment') ? 'active' : ''}`} href="/navbarpages/train_deployment">
                     <div className=" inline-flex items-center justify-center gap-2.5 px-3 py-2 relative flex-[0_0_auto] rounded overflow-hidden">
                         <div className="relative w-fit mt-[-1.00px] font-label-label-large-semi font-[number:var(--label-label-large-semi-font-weight)]  text-[length:var(--label-label-large-semi-font-size)] tracking-[var(--label-label-large-semi-letter-spacing)] leading-[var(--label-label-large-semi-line-height)] [font-style:var(--label-label-large-semi-font-style)]">
                             車輛資訊
@@ -31,7 +31,7 @@ export default function Navbar() {
                     </div>
                 </Link>
 
-                <Link className={`link ${pathname === '/navbarpages/locomotive_depot' ? 'active' : ''}`} href="/navbarpages/locomotive_depot">
+                <Link className={`link ${pathname.startsWith('/navbarpages/locomotive_depot') ? 'active' : ''}`} href="/navbarpages/locomotive_depot">
                     <div className="inline-flex items-center justify-center gap-2.5 px-3 py-2 relative flex-[0_0_auto] rounded-[30px] overflow-hidden">
                         <div className="relative w-fit mt-[-1.00px] font-label-label-large-semi font-[number:var(--label-label-large-semi-font-weight)] text-[length:var(--label-label-large-semi-font-size)] tracking-[var(--label-label-large-semi-letter-spacing)] leading-[var(--label-label-large-semi-line-height)] [font-style:var(--label-label-large-semi-font-style)]">
                             機務段配置資訊
@@ -39,7 +39,7 @@ export default function Navbar() {
                     </div>
                 </Link>
 
-                <Link className={`link ${pathname === '/navbarpages/factory_maintenance' ? 'active' : ''}`} href="/navbarpages/factory_maintenance">
+                <Link className={`link ${pathname.startsWith('/navbarpages/factory_maintenance') ? 'active' : ''}`} href="/navbarpages/factory_maintenance">
                     <div className="inline-flex items-center justify-center gap-2.5 px-3 py-2 relative flex-[0_0_auto] rounded-[30px] overflow-hidden">
                         <div className="relative w-fit mt-[-1.00px] font-label-label-large-semi font-[number:var(--label-label-large-semi-font-weight)]  text-[length:var(--label-label-large-semi-font-size)] tracking-[var(--label-label-large-semi-letter-spacing)] leading-[var(--label-label-large-semi-line-height)] [font-style:var(--label-label-large-semi-font-style)]">
                             機廠檢修資訊
@@ -47,7 +47,7 @@ export default function Navbar() {
                     </div>
                 </Link>
 
-                <Link className={`link ${pathname === '/navbarpages/fault_notification' ? 'active' : ''}`} href="/navbarpages/fault_notification">
+                <Link className={`link ${pathname.startsWith('/navbarpages/fault_notification') ? 'active' : ''}`} href="/navbarpages/fault_notification">
                     <div className="inline-flex items-center justify-center gap-2.5 px-3 py-2 relative flex-[0_0_auto] rounded-[30px] overflow-hidden">
                         <div className="relative w-fit mt-[-1.00px] font-label-label-large-semi font-[number:var(--label-label-large-semi-font-weight)]  text-[length:var(--label-label-large-semi-font-size)] tracking-[var(--label-label-large-semi-letter-spacing)] leading-[var(--label-label-large-semi-line-height)] [font-style:var(--label-label-large-semi-font-style)]">
                             故障通報
@@ -55,7 +55,7 @@ export default function Navbar() {
                     </div>
                 </Link>
 
-                <Link className={`link ${pathname === '/navbarpages/maintenance_materials' ? 'active' : ''}`} href="/navbarpages/maintenance_materials">
+                <Link className={`link ${pathname.startsWith('/navbarpages/maintenance_materials') ? 'active' : ''}`} href="/navbarpages/maintenance_materials">
                     <div className="inline-flex items-center justify-center gap-2.5 px-3 py-2 relative flex-[0_0_auto] rounded-[30px] overflow-hidden">
                         <div className="relative w-fit mt-[-1.00px] font-label-label-large-semi font-[number:var(--label-label-large-semi-font-weight)]  text-[length:var(--label-label-large-semi-font-size)] tracking-[var(--label-label-large-semi-letter-spacing)] leading-[var(--label-label-large-semi-line-height)] [font-style:var(--label-label-large-semi-font-style)]">
                             檢修動態
