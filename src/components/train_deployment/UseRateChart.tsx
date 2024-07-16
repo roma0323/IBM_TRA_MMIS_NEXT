@@ -65,6 +65,7 @@ export default function UseRateChart() {
       data={data}
       margin={{
         top: 30,
+        left:10
       }}
     >
       <XAxis dataKey="name" />

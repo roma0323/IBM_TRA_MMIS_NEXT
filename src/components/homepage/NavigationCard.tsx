@@ -16,9 +16,9 @@ export const NavigationCard = ({
 }: Props): JSX.Element => {
   return (
     <div
-      className={`flex w-[489px] items-center gap-[15px] px-[34px] py-5 relative  rounded-[5px] overflow-hidden border border-solid border-[#4e4e4e] shadow-[0px_0px_4px_#00000080] border-white flex-[0_0_auto] `}
+      className={`flex   w-full items-center gap-[15px] px-[34px] py-5 relative  rounded-[5px] overflow-hidden border border-solid border-[#4e4e4e] shadow-[0px_0px_4px_#00000080] border-white  `}
     >
-      <div className="flex w-[362px] items-center gap-[15px] relative">
+      <div className=" flex w-[362px] items-center gap-[15px] relative">
         <div className={`relative w-[50px] h-[49.9px] bg-cover ${logoClassName}`} />
         <div
           className={`inline-flex flex-col items-start justify-center gap-[5px] relative flex-[0_0_auto] mr-[-25.00px]`}
