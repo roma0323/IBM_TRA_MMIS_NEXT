@@ -8,12 +8,14 @@ import  BigPieChart  from "@/components/train_deployment/BigPieChart";
 
 export default function Page() {
   return (
-    <div className="flex flex-col h-full items-center relative overflow-hidden">
+    <div className=" grid grid-cols-3 flex items-start gap-4 p-6 relative self-stretch flex-[0_0_auto] bg-neutral-100   ">
       
-      <div className="flex items-start gap-4 p-6 relative self-stretch w-full flex-[0_0_auto] bg-neutral-100">
-        <div className="inline-flex flex-col h-[782.82px] items-start gap-4 relative flex-[0_0_auto]">
+
+
+        <div className="h-full inline-flex flex-col  items-start gap-4 relative flex-[0_0_auto]">
+
           {/* 分配資訊   */}
-          <div className="w-[390px] flex-[0_0_auto] rounded-lg flex flex-col items-start relative bg-white overflow-hidden">
+          <div className="w-full flex-[0_0_auto] rounded-lg flex flex-col items-start relative bg-white overflow-hidden">
             <div className="p-2.5 border-b [border-bottom-style:solid] border-[#646464] flex flex-col items-start justify-center relative self-stretch w-full flex-[0_0_auto]">
               <div className="w-fit mt-[-1.00px] [font-family:'Noto_Sans_TC-Regular',Helvetica] font-normal  relative text-[#4e4e4e] tracking-[0] leading-[normal]">
                 分配資訊
@@ -30,9 +32,9 @@ export default function Page() {
           {/* 分配資訊   */}
 
           {/* 近30 天使用率   */}
-          <div className="self-stretch w-full flex-[0_0_auto] rounded-lg flex flex-col items-start relative bg-white overflow-hidden">
+          <div className="w-full self-stretch  flex-[0_0_auto] rounded-lg flex flex-col items-center relative bg-white overflow-hidden">
             <div className="flex flex-col items-start justify-center gap-2.5 p-2.5 relative self-stretch w-full flex-[0_0_auto] bg-white border-b [border-bottom-style:solid] border-[#646464]">
-              <p className="w-fit mt-[-1.00px] [font-family:'Noto_Sans_TC-Regular',Helvetica] font-normal text-base relative text-[#4e4e4e] tracking-[0] leading-[normal]">
+              <p className=" mt-[-1.00px] [font-family:'Noto_Sans_TC-Regular',Helvetica] font-normal text-base relative text-[#4e4e4e] tracking-[0] leading-[normal]">
                 近30 天使用率 3/1 ~ 4/1
               </p>
             </div>
@@ -42,7 +44,7 @@ export default function Page() {
           {/* 近30 天使用率   */}
 
           {/* 近30 城際列車 - 車種配置   */}
-          <div className="w-[390px] relative flex-1 rounded-lg flex flex-col items-center justify-center relative bg-white 	">
+          <div className=" w-full h-full relative flex-1 rounded-lg flex flex-col items-center justify-center relative bg-white 	">
             <div className="flex flex-col items-start justify-center p-2.5   w-full  bg-white border-b [border-bottom-style:solid] border-[#646464]">
               <div className="w-fit mt-[-1.00px] [font-family:'Noto_Sans_TC-Regular',Helvetica] font-normal text-base relative text-[#4e4e4e] tracking-[0] leading-[normal]">
                 城際列車 - 車種配置
@@ -53,12 +55,11 @@ export default function Page() {
             </div>
           </div>
           {/* 近30 城際列車 - 車種配置   */}
-
-
-
-
         </div>
-        <div className="h-[782.82px] gap-2.5 flex-1 grow rounded-lg flex flex-col items-start relative bg-white overflow-hidden">
+
+
+
+        <div className="h-full gap-2.5 flex-1 grow rounded-lg flex flex-col items-start relative bg-white overflow-hidden">
           <div className="flex flex-col items-start justify-center gap-2.5 p-2.5 relative self-stretch w-full flex-[0_0_auto] bg-white border-b [border-bottom-style:solid] border-[#646464]">
             <div className="w-fit mt-[-1.00px] [font-family:'Noto_Sans_TC-Regular',Helvetica] font-normal text-base relative text-[#4e4e4e] tracking-[0] leading-[normal]">
               城際列車 - 車種分配資訊
@@ -250,7 +251,7 @@ export default function Page() {
             </div>
           </div>
         </div>
-        <div className="h-[782.82px] gap-4 flex-1 grow flex flex-col items-start relative">
+        <div className="h-full gap-4 flex-1 grow flex flex-col items-start relative">
           <div className="gap-2.5 flex-1 self-stretch w-full grow rounded-lg flex flex-col items-start relative bg-white overflow-hidden">
             <div className="flex flex-col items-start justify-center gap-2.5 p-2.5 relative self-stretch w-full flex-[0_0_auto] bg-white border-b [border-bottom-style:solid] border-[#646464]">
               <div className="w-fit mt-[-1.00px] [font-family:'Noto_Sans_TC-Regular',Helvetica] font-normal text-base relative text-[#4e4e4e] tracking-[0] leading-[normal]">
@@ -475,6 +476,5 @@ export default function Page() {
           </div>
         </div>
       </div>
-    </div>
   );
 };

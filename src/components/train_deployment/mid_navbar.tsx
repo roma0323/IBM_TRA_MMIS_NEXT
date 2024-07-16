@@ -19,8 +19,8 @@ export default function MidNavbar() {
     }
     return (
         <div>
-            <div className="flex  flex-col items-center relative self-stretch w-full flex-[0_0_auto]">
-                <div className="  flex w-[1440px] items-center gap-5 px-6 py-0 relative flex-[0_0_auto] ">
+            <div className=" w-screen flex  flex-col items-center relative self-stretch  flex-[0_0_auto]">
+                <div className="h-[10vh] w-full flex  items-center gap-5 px-6 relative flex-[0_0_auto] ">
                     <div className="inline-flex items-center relative flex-[0_0_auto]">
 
 
@@ -40,7 +40,9 @@ export default function MidNavbar() {
                             </div>
                         </div>
                     </div>
-                    <div className="relative flex-1 grow h-2.5" />
+
+                    <div className="relative flex-1 grow" />
+
                     <div className="inline-flex items-center justify-center gap-2.5 p-[5px] relative flex-[0_0_auto]">
                         <div className="inline-flex flex-col items-end justify-center gap-[5px] p-2.5 relative flex-[0_0_auto] rounded-[5px] overflow-hidden">
                             <div className="relative w-fit mt-[-1.00px] font-label-label-medium-dem font-[number:var(--label-label-medium-dem-font-weight)]  text-[length:var(--label-label-medium-dem-font-size)] tracking-[var(--label-label-medium-dem-letter-spacing)] leading-[var(--label-label-medium-dem-line-height)] [font-style:var(--label-label-medium-dem-font-style)]">
@@ -52,7 +54,9 @@ export default function MidNavbar() {
                         </div>
                     </div>
                 </div>
-                <div className="flex flex-col items-center justify-center gap-[5px] pt-2.5 pb-0 px-6 relative self-stretch w-full flex-[0_0_auto] ">
+
+
+                <div className=" flex flex-col items-center justify-center px-6 relative self-stretch w-full flex-[0_0_auto] ">
                     <div className="flex items-start gap-[5px] relative self-stretch w-full flex-[0_0_auto]">
                         
                         <Link href={{

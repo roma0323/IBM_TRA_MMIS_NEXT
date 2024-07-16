@@ -8,9 +8,9 @@ import "@/styles/globals.css"
 export default function Navbar() {
     const pathname = usePathname()
 
-    return <div>
-        <div className="inline-flex items-start relative flex-[0_0_auto]">
-            <div className="flex w-[1440px] items-center gap-5 px-5 py-3 relative self-stretch ">
+    return (
+    <div>
+        <div className="flex h-[8vh] w-screen  items-center gap-3 px-5 py-3 relative self-stretch inline-flex  flex-[0_0_auto]">
                 <div className="relative  w-8 h-8 bg-[url(/icon-menu.svg)] bg-cover bg-[50%_50%]" />
 
 
@@ -22,7 +22,7 @@ export default function Navbar() {
                         新 MMIS 績效管理指標
                     </div>
                 </div>
-                <div className="relative flex-1 grow h-[19px]" />
+                <div className="relative flex-1 grow" />
                 <Link className={`link ${pathname.startsWith('/navbarpages/train_deployment') ? 'active' : ''}`} href="/navbarpages/train_deployment">
                     <div className=" inline-flex items-center justify-center gap-2.5 px-3 py-2 relative flex-[0_0_auto] rounded overflow-hidden">
                         <div className="relative w-fit mt-[-1.00px] font-label-label-large-semi font-[number:var(--label-label-large-semi-font-weight)]  text-[length:var(--label-label-large-semi-font-size)] tracking-[var(--label-label-large-semi-letter-spacing)] leading-[var(--label-label-large-semi-line-height)] [font-style:var(--label-label-large-semi-font-style)]">
@@ -76,9 +76,8 @@ export default function Navbar() {
 
 
 
-    </div>
 
-
+    )
 
 }
 

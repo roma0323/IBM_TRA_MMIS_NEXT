@@ -60,14 +60,11 @@ export default function UseRateChart() {
 
 
   return (
-    <ResponsiveContainer width="100%" aspect={1.5}>
+    <ResponsiveContainer width="80%" aspect={1.5}>
 <BarChart
       data={data}
       margin={{
-        top: 5,
-        right: 30,
-        left: 20,
-        bottom: 5,
+        top: 30,
       }}
     >
       <XAxis dataKey="name" />
