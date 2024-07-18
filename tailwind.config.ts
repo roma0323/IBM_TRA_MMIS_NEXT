@@ -20,6 +20,10 @@ const config = {
       },
     },
     extend: {
+      gridTemplateColumns: {
+        // Custom 18 column grid
+        '17': 'repeat(17, minmax(0, 1fr))',
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
