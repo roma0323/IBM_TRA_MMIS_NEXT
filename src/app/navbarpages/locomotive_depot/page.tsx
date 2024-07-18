@@ -1,229 +1,42 @@
 // `app/dashboard/page.tsx` is the UI for the `/dashboard` URL
-import { LabelChip } from "@/components/locomotive_depot/LabelChip"
+import { LabelAndNumberByArea } from "@/components/locomotive_depot/LabelAndNumberByArea"
 import { Header } from "@/components/locomotive_depot/header"
 
 export default function Page() {
-    return    (
-    
-    <div className="bg-gray-100 grid grid-cols-4 flex min-h-screen  relative justify-center gap-2.5 p-6  ">
+  return (
+
+    <div className="bg-gray-100 grid grid-cols-4 flex-grow  relative justify-center gap-3 p-6  ">
 
 
 
 
-      <div className="inline-flex flex-col h-[678.82px] items-start gap-2.5 relative flex-[0_0_auto] bg-white rounded-lg overflow-hidden">
-        <div className="bg-white flex flex-col items-start justify-center gap-2.5 p-2.5 relative self-stretch w-full flex-[0_0_auto] border-b [border-bottom-style:solid] border-[#646464]">
-          <div className="mt-[-1.00px] [font-family:'Noto_Sans_TC-Regular',Helvetica] font-normal text-[#4e4e4e] text-base relative w-fit tracking-[0] leading-[normal]">
-            城際列車 - 機務段分配
-          </div>
+      <div className=" flex-col  items-start gap-2.5 relative  bg-white rounded-lg h-full overflow-hidden ">
+
+        <div className="flex flex-col text-[#000000] items-start justify-center p-2.5 relative self-stretch w-full flex-[0_0_auto] border-b [border-bottom-style:solid] border-[#646464]">
+          城際列車 - 機務段分配
         </div>
-        <div className="inline-flex flex-col items-start gap-4 p-3 relative flex-1 grow">
-          <div className="flex flex-col w-[390px] items-start relative flex-[0_0_auto] bg-[#f5f5f533] rounded-lg overflow-hidden">
-            <div className="flex flex-col items-start justify-center gap-2.5 p-2.5 relative self-stretch w-full flex-[0_0_auto]">
-              <div className="mt-[-1.00px] [font-family:'Noto_Sans_TC-Regular',Helvetica] font-normal text-[#4e4e4e] text-base relative w-fit tracking-[0] leading-[normal]">
-                台北機務段車輛配置
-              </div>
-            </div>
-            <div className="flex flex-col items-start px-2.5 py-0 relative self-stretch w-full flex-[0_0_auto]">
-              <img className="self-stretch w-full object-cover relative h-px" alt="Line" src="line-6.svg" />
-              <div className="flex flex-col items-start justify-center px-0 py-[5px] relative self-stretch w-full flex-[0_0_auto] rounded-[5px] overflow-hidden">
-                <div className="flex items-center justify-center gap-2.5 relative self-stretch w-full flex-[0_0_auto]">
-                  <div className="px-2.5 py-1 self-stretch rounded-[10px] overflow-hidden flex items-center gap-[5px] relative flex-1 grow">
-                    <div className="flex items-center justify-between relative flex-1 grow">
-                      <div className="inline-flex items-center justify-center gap-2.5 p-[3px] relative flex-[0_0_auto] rounded-[50px]">
-                        <LabelChip className="!flex-[0_0_auto]" property1="default" />
-                      </div>
-                      <div className="opacity-0 font-label-label-large-semi font-[number:var(--label-label-large-semi-font-weight)] text-[#36aa00] text-[length:var(--label-label-large-semi-font-size)] relative w-fit tracking-[var(--label-label-large-semi-letter-spacing)] leading-[var(--label-label-large-semi-line-height)] [font-style:var(--label-label-large-semi-font-style)]">
-                        +10%
-                      </div>
-                    </div>
-                    <div className="inline-flex flex-col items-start relative flex-[0_0_auto]">
-                      <div className="relative w-fit mt-[-1.00px] font-title-title-medium-semi font-[number:var(--title-title-medium-semi-font-weight)] text-[#4e4e4e] text-[length:var(--title-title-medium-semi-font-size)] tracking-[var(--title-title-medium-semi-letter-spacing)] leading-[var(--title-title-medium-semi-line-height)] [font-style:var(--title-title-medium-semi-font-style)]">
-                        67
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex items-center justify-center gap-2.5 relative self-stretch w-full flex-[0_0_auto]">
-                  <div className="px-2.5 py-1 self-stretch rounded-[10px] overflow-hidden flex items-center gap-[5px] relative flex-1 grow">
-                    <div className="flex items-center justify-between relative flex-1 grow">
-                      <div className="inline-flex items-center justify-center gap-2.5 px-0 py-[3px] relative flex-[0_0_auto] rounded-[50px]">
-                        <LabelChip
-                          className="!flex-[0_0_auto]"
-                          property1="default"
-                          seriousClassName="!text-[#d9730d]"
-                          text="通勤列車"
-                        />
-                      </div>
-                      <div className="opacity-0 font-label-label-large-semi font-[number:var(--label-label-large-semi-font-weight)] text-[#36aa00] text-[length:var(--label-label-large-semi-font-size)] relative w-fit tracking-[var(--label-label-large-semi-letter-spacing)] leading-[var(--label-label-large-semi-line-height)] [font-style:var(--label-label-large-semi-font-style)]">
-                        +10%
-                      </div>
-                    </div>
-                    <div className="inline-flex flex-col items-start relative flex-[0_0_auto]">
-                      <div className="relative w-fit mt-[-1.00px] font-title-title-medium-semi font-[number:var(--title-title-medium-semi-font-weight)] text-[#4e4e4e] text-[length:var(--title-title-medium-semi-font-size)] tracking-[var(--title-title-medium-semi-letter-spacing)] leading-[var(--title-title-medium-semi-line-height)] [font-style:var(--title-title-medium-semi-font-style)]">
-                        1
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex items-center justify-center gap-2.5 relative self-stretch w-full flex-[0_0_auto]">
-                  <div className="px-2.5 py-1 self-stretch rounded-[10px] overflow-hidden flex items-center gap-[5px] relative flex-1 grow">
-                    <div className="flex items-center justify-between relative flex-1 grow">
-                      <div className="inline-flex items-center justify-center gap-2.5 px-0 py-[3px] relative flex-[0_0_auto] rounded-[50px]">
-                        <LabelChip
-                          className="!flex-[0_0_auto]"
-                          property1="default"
-                          seriousClassName="!text-[#d9730d]"
-                          text="通勤列車"
-                        />
-                      </div>
-                      <div className="opacity-0 font-label-label-large-semi font-[number:var(--label-label-large-semi-font-weight)] text-[#36aa00] text-[length:var(--label-label-large-semi-font-size)] relative w-fit tracking-[var(--label-label-large-semi-letter-spacing)] leading-[var(--label-label-large-semi-line-height)] [font-style:var(--label-label-large-semi-font-style)]">
-                        +10%
-                      </div>
-                    </div>
-                    <div className="inline-flex flex-col items-start relative flex-[0_0_auto]">
-                      <div className="relative w-fit mt-[-1.00px] font-title-title-medium-semi font-[number:var(--title-title-medium-semi-font-weight)] text-[#4e4e4e] text-[length:var(--title-title-medium-semi-font-size)] tracking-[var(--title-title-medium-semi-letter-spacing)] leading-[var(--title-title-medium-semi-line-height)] [font-style:var(--title-title-medium-semi-font-style)]">
-                        38
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex items-center justify-center gap-2.5 relative self-stretch w-full flex-[0_0_auto]">
-                  <div className="px-2.5 py-1 self-stretch rounded-[10px] overflow-hidden flex items-center gap-[5px] relative flex-1 grow">
-                    <div className="flex items-center justify-between relative flex-1 grow">
-                      <div className="inline-flex items-center justify-center gap-2.5 px-0 py-[3px] relative flex-[0_0_auto] rounded-[50px]">
-                        <LabelChip
-                          className="!flex-[0_0_auto]"
-                          property1="default"
-                          seriousClassName="!text-[#538164]"
-                          text="柴油客車"
-                        />
-                      </div>
-                      <div className="opacity-0 font-label-label-large-semi font-[number:var(--label-label-large-semi-font-weight)] text-[#36aa00] text-[length:var(--label-label-large-semi-font-size)] relative w-fit tracking-[var(--label-label-large-semi-letter-spacing)] leading-[var(--label-label-large-semi-line-height)] [font-style:var(--label-label-large-semi-font-style)]">
-                        +10%
-                      </div>
-                    </div>
-                    <div className="inline-flex flex-col items-start relative flex-[0_0_auto]">
-                      <div className="relative w-fit mt-[-1.00px] font-title-title-medium-semi font-[number:var(--title-title-medium-semi-font-weight)] text-[#4e4e4e] text-[length:var(--title-title-medium-semi-font-size)] tracking-[var(--title-title-medium-semi-letter-spacing)] leading-[var(--title-title-medium-semi-line-height)] [font-style:var(--title-title-medium-semi-font-style)]">
-                        26
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex items-center justify-center gap-2.5 relative self-stretch w-full flex-[0_0_auto]">
-                  <div className="px-2.5 py-1 self-stretch rounded-[10px] overflow-hidden flex items-center gap-[5px] relative flex-1 grow">
-                    <div className="flex items-center justify-between relative flex-1 grow">
-                      <div className="inline-flex items-center justify-center gap-2.5 px-0 py-[3px] relative flex-[0_0_auto] rounded-[50px]">
-                        <LabelChip
-                          className="!flex-[0_0_auto]"
-                          property1="default"
-                          seriousClassName="!text-[#8f65af]"
-                          text="柴液機車"
-                        />
-                      </div>
-                      <div className="opacity-0 font-label-label-large-semi font-[number:var(--label-label-large-semi-font-weight)] text-[#36aa00] text-[length:var(--label-label-large-semi-font-size)] relative w-fit tracking-[var(--label-label-large-semi-letter-spacing)] leading-[var(--label-label-large-semi-line-height)] [font-style:var(--label-label-large-semi-font-style)]">
-                        +10%
-                      </div>
-                    </div>
-                    <div className="inline-flex flex-col items-start relative flex-[0_0_auto]">
-                      <div className="relative w-fit mt-[-1.00px] font-title-title-medium-semi font-[number:var(--title-title-medium-semi-font-weight)] text-[#4e4e4e] text-[length:var(--title-title-medium-semi-font-size)] tracking-[var(--title-title-medium-semi-letter-spacing)] leading-[var(--title-title-medium-semi-line-height)] [font-style:var(--title-title-medium-semi-font-style)]">
-                        3
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+
+
+
+        <div className="  w-full h-[67dvh] relative  overflow-scroll">
+          <div className="flex flex-col w-full items-start relative flex-[0_0_auto] bg-[#f5f5f533] rounded-lg overflow-hidden">
+          <LabelAndNumberByArea area_name="台北機務段車輛配置"/>
+          <LabelAndNumberByArea area_name="新竹機務段車輛配置"/>
+          <LabelAndNumberByArea area_name="花蓮機務段車輛配置"/>
+            
+
+
+
           </div>
-          <div className="flex flex-col items-start relative self-stretch w-full flex-[0_0_auto] bg-[#f5f5f533] rounded-lg overflow-hidden">
-            <div className="flex flex-col items-start justify-center gap-2.5 p-2.5 relative self-stretch w-full flex-[0_0_auto]">
-              <div className="mt-[-1.00px] [font-family:'Noto_Sans_TC-Regular',Helvetica] font-normal text-[#4e4e4e] text-base relative w-fit tracking-[0] leading-[normal]">
-                新竹機務段車輛配置
-              </div>
-            </div>
-            <div className="flex flex-col items-start px-2.5 py-0 relative self-stretch w-full flex-[0_0_auto]">
-              <img className="self-stretch w-full object-cover relative h-px" alt="Line" src="line-6.svg" />
-              <div className="flex flex-col items-start justify-center px-0 py-[5px] relative self-stretch w-full flex-[0_0_auto] rounded-[5px] overflow-hidden">
-                <div className="flex items-center justify-center gap-2.5 relative self-stretch w-full flex-[0_0_auto]">
-                  <div className="px-2.5 py-1 self-stretch rounded-[10px] overflow-hidden flex items-center gap-[5px] relative flex-1 grow">
-                    <div className="flex items-center justify-between relative flex-1 grow">
-                      <div className="inline-flex items-center justify-center gap-2.5 p-[3px] relative flex-[0_0_auto] rounded-[50px]">
-                        <LabelChip className="!flex-[0_0_auto]" property1="default" text="ALL" />
-                      </div>
-                      <div className="opacity-0 font-label-label-large-semi font-[number:var(--label-label-large-semi-font-weight)] text-[#36aa00] text-[length:var(--label-label-large-semi-font-size)] relative w-fit tracking-[var(--label-label-large-semi-letter-spacing)] leading-[var(--label-label-large-semi-line-height)] [font-style:var(--label-label-large-semi-font-style)]">
-                        +10%
-                      </div>
-                    </div>
-                    <div className="inline-flex flex-col items-start relative flex-[0_0_auto]">
-                      <div className="relative w-fit mt-[-1.00px] font-title-title-medium-semi font-[number:var(--title-title-medium-semi-font-weight)] text-[#4e4e4e] text-[length:var(--title-title-medium-semi-font-size)] tracking-[var(--title-title-medium-semi-letter-spacing)] leading-[var(--title-title-medium-semi-line-height)] [font-style:var(--title-title-medium-semi-font-style)]">
-                        233
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="flex flex-col items-start relative self-stretch w-full flex-[0_0_auto] bg-[#f5f5f533] rounded-lg overflow-hidden">
-            <div className="flex flex-col items-start justify-center gap-2.5 p-2.5 relative self-stretch w-full flex-[0_0_auto]">
-              <div className="mt-[-1.00px] [font-family:'Noto_Sans_TC-Regular',Helvetica] font-normal text-[#4e4e4e] text-base relative w-fit tracking-[0] leading-[normal]">
-                花蓮機務段車輛配置
-              </div>
-            </div>
-            <div className="flex flex-col items-start px-2.5 py-0 relative self-stretch w-full flex-[0_0_auto]">
-              <img className="self-stretch w-full object-cover relative h-px" alt="Line" src="line-6.svg" />
-              <div className="flex flex-col items-start justify-center px-0 py-[5px] relative self-stretch w-full flex-[0_0_auto] rounded-[5px] overflow-hidden">
-                <div className="flex items-center justify-center gap-2.5 relative self-stretch w-full flex-[0_0_auto]">
-                  <div className="px-2.5 py-1 self-stretch rounded-[10px] overflow-hidden flex items-center gap-[5px] relative flex-1 grow">
-                    <div className="flex items-center justify-between relative flex-1 grow">
-                      <div className="inline-flex items-center justify-center gap-2.5 p-[3px] relative flex-[0_0_auto] rounded-[50px]">
-                        <LabelChip className="!flex-[0_0_auto]" property1="default" text="ALL" />
-                      </div>
-                      <div className="opacity-0 font-label-label-large-semi font-[number:var(--label-label-large-semi-font-weight)] text-[#36aa00] text-[length:var(--label-label-large-semi-font-size)] relative w-fit tracking-[var(--label-label-large-semi-letter-spacing)] leading-[var(--label-label-large-semi-line-height)] [font-style:var(--label-label-large-semi-font-style)]">
-                        +10%
-                      </div>
-                    </div>
-                    <div className="inline-flex flex-col items-start relative flex-[0_0_auto]">
-                      <div className="relative w-fit mt-[-1.00px] font-title-title-medium-semi font-[number:var(--title-title-medium-semi-font-weight)] text-[#4e4e4e] text-[length:var(--title-title-medium-semi-font-size)] tracking-[var(--title-title-medium-semi-letter-spacing)] leading-[var(--title-title-medium-semi-line-height)] [font-style:var(--title-title-medium-semi-font-style)]">
-                        465
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="flex flex-col items-start relative self-stretch w-full flex-[0_0_auto] bg-[#f5f5f533] rounded-lg overflow-hidden">
-            <div className="flex flex-col items-start justify-center gap-2.5 p-2.5 relative self-stretch w-full flex-[0_0_auto]">
-              <div className="mt-[-1.00px] [font-family:'Noto_Sans_TC-Regular',Helvetica] font-normal text-[#4e4e4e] text-base relative w-fit tracking-[0] leading-[normal]">
-                七堵機務段車輛配置
-              </div>
-            </div>
-            <div className="flex flex-col items-start px-2.5 py-0 relative self-stretch w-full flex-[0_0_auto]">
-              <img className="self-stretch w-full object-cover relative h-px" alt="Line" src="line-6.svg" />
-              <div className="flex flex-col items-start justify-center px-0 py-[5px] relative self-stretch w-full flex-[0_0_auto] rounded-[5px] overflow-hidden">
-                <div className="flex items-center justify-center gap-2.5 relative self-stretch w-full flex-[0_0_auto]">
-                  <div className="px-2.5 py-1 self-stretch rounded-[10px] overflow-hidden flex items-center gap-[5px] relative flex-1 grow">
-                    <div className="flex items-center justify-between relative flex-1 grow">
-                      <div className="inline-flex items-center justify-center gap-2.5 p-[3px] relative flex-[0_0_auto] rounded-[50px]">
-                        <LabelChip className="!flex-[0_0_auto]" property1="default" text="ALL" />
-                      </div>
-                      <div className="opacity-0 font-label-label-large-semi font-[number:var(--label-label-large-semi-font-weight)] text-[#36aa00] text-[length:var(--label-label-large-semi-font-size)] relative w-fit tracking-[var(--label-label-large-semi-letter-spacing)] leading-[var(--label-label-large-semi-line-height)] [font-style:var(--label-label-large-semi-font-style)]">
-                        +10%
-                      </div>
-                    </div>
-                    <div className="inline-flex flex-col items-start relative flex-[0_0_auto]">
-                      <div className="relative w-fit mt-[-1.00px] font-title-title-medium-semi font-[number:var(--title-title-medium-semi-font-weight)] text-[#4e4e4e] text-[length:var(--title-title-medium-semi-font-size)] tracking-[var(--title-title-medium-semi-letter-spacing)] leading-[var(--title-title-medium-semi-line-height)] [font-style:var(--title-title-medium-semi-font-style)]">
-                        124
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+
         </div>
+
+
+
+
       </div>
-      <div className="flex flex-col col-span-3 h-[668.82px] items-start relative bg-white rounded-lg overflow-hidden">
+
+      <div className="flex flex-col col-span-3 items-start relative bg-white rounded-lg overflow-hidden">
         <div className="flex flex-col items-start justify-center gap-2.5 p-2.5 relative self-stretch w-full flex-[0_0_auto] border-b [border-bottom-style:solid] border-[#646464]">
           <div className="mt-[-1.00px] [font-family:'Noto_Sans_TC-Regular',Helvetica] font-normal text-[#4e4e4e] text-base relative w-fit tracking-[0] leading-[normal]">
             台北機務段資訊
@@ -381,7 +194,7 @@ export default function Page() {
             <Header cellType="body" className="!mr-[-10.00px] !items-center !w-[52px]" height="normal" text1="0" />
             <Header cellType="body" className="!mr-[-10.00px] !items-center !w-[52px]" height="normal" text1="100%" />
           </div>
-          
+
           <div className="flex items-center gap-px px-2.5 py-[5px] relative self-stretch w-full flex-[0_0_auto] bg-white overflow-hidden border-b [border-bottom-style:solid]">
             <Header
               cellType="body-label"
@@ -407,13 +220,13 @@ export default function Page() {
             <Header cellType="body" className="!mr-[-10.00px] !items-center !w-[52px]" height="normal" text1="0" />
             <Header cellType="body" className="!mr-[-10.00px] !items-center !w-[52px]" height="normal" text1="83%" />
           </div>
-          
+
         </div>
       </div>
 
 
 
-    </div>) 
+    </div>)
 
-    
-  }
+
+}

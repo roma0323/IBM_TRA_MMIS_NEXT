@@ -19,8 +19,8 @@ export default function MidNavbar() {
     }
     return (
         <div>
-            <div className="flex  flex-col items-center relative self-stretch w-full flex-[0_0_auto]">
-                <div className="h-[10vh] w-full flex  items-center gap-5 px-6 relative flex-[0_0_auto] ">
+            <div className=" w-screen flex  flex-col items-center sticky self-stretch  flex-[0_0_auto]">
+            <div className="h-[10vh] w-full flex  items-center gap-5 px-6 relative flex-[0_0_auto] ">
 
                     <div className="inline-flex items-center relative flex-[0_0_auto]">
                         <div className="inline-flex items-center gap-1 relative flex-[0_0_auto]">

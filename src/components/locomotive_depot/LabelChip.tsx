@@ -3,26 +3,50 @@ import React from "react";
 
 interface Props {
   property1: "default";
-  className: any;
-  seriousClassName: any;
+  className?: string;
   text: string;
 }
 
-export const LabelChip = ({ property1, className, seriousClassName, text = "ALL" }: Props): JSX.Element => {
+export const LabelChip = ({ property1, className = "", text = "ALL" }: Props): JSX.Element => {
+  let style_template = "";
+
+  switch (text) {
+    case "通勤列車":
+      style_template = "text-[#FFBB54]";
+      break;
+    case "城際列車":
+      style_template = "text-[#D9730D]";
+      break;
+    case "電力列車":
+      style_template = "text-[#8F65AF]";
+      break;
+    case "柴液機車":
+      style_template = "text-[#28BF02]";
+      break;
+    case "客車":
+      style_template = "text-[#00BBC7]";
+      break;
+    case "柴油客車":
+      style_template = "text-[#538164]";
+      break;
+    case "貨車":
+      style_template = "text-[#C3554E]";
+      break;
+    default:
+      style_template = "text-[#397EFF]";
+  }
+
   return (
     <div
-      className={`inline-flex items-center justify-center gap-[5px] p-1 relative bg-[#fffffff2] rounded-[5px] overflow-hidden ${className}`}
-    >
-      <div
-        className={`relative w-fit mt-[-1.00px] font-label-label-small-semi font-[number:var(--label-label-small-semi-font-weight)] text-[#397eff] text-[length:var(--label-label-small-semi-font-size)] tracking-[var(--label-label-small-semi-letter-spacing)] leading-[var(--label-label-small-semi-line-height)] [font-style:var(--label-label-small-semi-font-style)] ${seriousClassName}`}
-      >
-        {text}
-      </div>
+      className={`inline-flex items-center justify-center gap-[5px] p-1 relative bg-[#fffffff2] ${style_template} rounded-[5px] overflow-hidden ${className}`}>
+      {text}
     </div>
   );
 };
 
 LabelChip.propTypes = {
   property1: PropTypes.oneOf(["default"]),
-  text: PropTypes.string,
+  text: PropTypes.string.isRequired,
 };
+
+export default LabelChip;
