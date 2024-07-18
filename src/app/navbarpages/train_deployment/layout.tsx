@@ -6,5 +6,5 @@ export default function DashboardLayout({
   }: {
     children: React.ReactNode
   }) {
-    return <section><MidNavbar />{children}</section>
+    return <section className="flex-grow flex flex-col relative"><MidNavbar />{children}</section>
   }

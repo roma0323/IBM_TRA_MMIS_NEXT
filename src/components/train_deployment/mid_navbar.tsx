@@ -19,23 +19,17 @@ export default function MidNavbar() {
     }
     return (
         <div>
-            <div className=" w-screen flex  flex-col items-center relative self-stretch  flex-[0_0_auto]">
+            <div className=" w-screen flex  flex-col items-center sticky self-stretch  flex-[0_0_auto]">
                 <div className="h-[10vh] w-full flex  items-center gap-5 px-6 relative flex-[0_0_auto] ">
+
                     <div className="inline-flex items-center relative flex-[0_0_auto]">
-
-
                         <div className="inline-flex items-center gap-1 relative flex-[0_0_auto]">
-                            <div className="mt-[-1.00px] font-display-display-small-dem font-[number:var(--display-display-small-dem-font-weight)]  text-[length:var(--display-display-small-dem-font-size)] relative w-fit tracking-[var(--display-display-small-dem-letter-spacing)] leading-[var(--display-display-small-dem-line-height)] [font-style:var(--display-display-small-dem-font-style)]">
-                                車種配置與使用率
+                            <div className=" text-3xl ">
+                            車輛配置資訊/
                             </div>
                         </div>
                         <div className="inline-flex items-center gap-1 relative flex-[0_0_auto]">
-                            <div className="mt-[-1.00px] font-display-display-small-dem font-[number:var(--display-display-small-dem-font-weight)]  text-[length:var(--display-display-small-dem-font-size)] relative w-fit tracking-[var(--display-display-small-dem-letter-spacing)] leading-[var(--display-display-small-dem-line-height)] [font-style:var(--display-display-small-dem-font-style)]">
-                                /
-                            </div>
-                        </div>
-                        <div className="inline-flex items-center gap-1 relative flex-[0_0_auto]">
-                            <div className="mt-[-1.00px] font-display-display-small-dem font-[number:var(--display-display-small-dem-font-weight)] text-[#397eff] text-[length:var(--display-display-small-dem-font-size)] relative w-fit tracking-[var(--display-display-small-dem-letter-spacing)] leading-[var(--display-display-small-dem-line-height)] [font-style:var(--display-display-small-dem-font-style)]">
+                            <div className="text-3xl  text-[#397eff]">
                                 {content}{id}
                             </div>
                         </div>
@@ -58,20 +52,20 @@ export default function MidNavbar() {
 
                 <div className=" flex flex-col items-center justify-center px-6 relative self-stretch w-full flex-[0_0_auto] ">
                     <div className="flex items-start gap-[5px] relative self-stretch w-full flex-[0_0_auto]">
-                        
+
                         <Link href={{
                             pathname: "/navbarpages/train_deployment",
                         }} className={`link ${pathname === '/navbarpages/train_deployment' ? 'mid_nav_active' : 'mid_nav_unactive'}`} >
                             <div className=" inline-flex h-10 items-center px-4 py-0 relative flex-[0_0_auto] ">
                                 總覽
-                        </div>
+                            </div>
                         </Link>
                         <Link href={{
                             pathname: "/navbarpages/train_deployment/certain_train",
                             query: { id: "通勤列車" },
                         }} className={`link ${id === '通勤列車' ? 'mid_nav_active' : 'mid_nav_unactive'}`}>
                             <div className="inline-flex h-10 items-center px-4 py-0 relative flex-[0_0_auto] ">
-                                    通勤列車
+                                通勤列車
                             </div>
                         </Link>
                         <Link href={{
@@ -79,50 +73,50 @@ export default function MidNavbar() {
                             query: { id: "城際列車" },
                         }} className={`link ${id === '城際列車' ? 'mid_nav_active' : 'mid_nav_unactive'}`} >
                             <div className=" inline-flex h-10 items-center px-4 py-0 relative flex-[0_0_auto] ">
-                            城際列車
-                        </div>
+                                城際列車
+                            </div>
                         </Link><Link href={{
                             pathname: "/navbarpages/train_deployment/certain_train",
                             query: { id: "電力機車" },
                         }} className={`link ${id === '電力機車' ? 'mid_nav_active' : 'mid_nav_unactive'}`} >
                             <div className=" inline-flex h-10 items-center px-4 py-0 relative flex-[0_0_auto] ">
-                            電力機車
-                        </div>
+                                電力機車
+                            </div>
                         </Link><Link href={{
                             pathname: "/navbarpages/train_deployment/certain_train",
                             query: { id: "柴液機車" },
                         }} className={`link ${id === '柴液機車' ? 'mid_nav_active' : 'mid_nav_unactive'}`} >
                             <div className=" inline-flex h-10 items-center px-4 py-0 relative flex-[0_0_auto] ">
-                            柴液機車
-                        </div>
+                                柴液機車
+                            </div>
                         </Link>
                         <Link href={{
                             pathname: "/navbarpages/train_deployment/certain_train",
                             query: { id: "客車" },
                         }} className={`link ${id === '客車' ? 'mid_nav_active' : 'mid_nav_unactive'}`} >
                             <div className=" inline-flex h-10 items-center px-4 py-0 relative flex-[0_0_auto] ">
-                            客車
-                        </div>
+                                客車
+                            </div>
                         </Link>
                         <Link href={{
                             pathname: "/navbarpages/train_deployment/certain_train",
                             query: { id: "柴油客車" },
                         }} className={`link ${id === '柴油客車' ? 'mid_nav_active' : 'mid_nav_unactive'}`} >
                             <div className=" inline-flex h-10 items-center px-4 py-0 relative flex-[0_0_auto] ">
-                            柴油客車
-                        </div>
+                                柴油客車
+                            </div>
                         </Link>
                         <Link href={{
                             pathname: "/navbarpages/train_deployment/certain_train",
                             query: { id: "貨車" },
                         }} className={`link ${id === '貨車' ? 'mid_nav_active' : 'mid_nav_unactive'}`} >
                             <div className=" inline-flex h-10 items-center px-4 py-0 relative flex-[0_0_auto] ">
-                            貨車
-                        </div>
+                                貨車
+                            </div>
                         </Link>
-                        
 
-                        
+
+
                     </div>
                 </div>
             </div>

@@ -45,12 +45,12 @@ const navigationData = [
 
 export default function Page() {
   return (
-    <div className="flex flex-col min-h-screen items-center gap-2.5 relative ">
-      <div className="flex flex-col items-end gap-2.5 relative flex-1 self-stretch w-full grow">
+    <div className="flex flex-col h-full items-center gap-2.5 relative ">
+      <div className="flex flex-col items-end gap-2.5 relative h-full flex-1 self-stretch w-full grow">
 
-        <div className="flex items-end gap-2.5 relative flex-1 self-stretch w-full grow ">
+        <div className="flex items-end gap-2.5 relative flex-1 self-stretch h-full w-full grow ">
 
-          <div className="relative w-3/5 h-screen bg-[url(/cover-photo.png)] bg-cover bg-right" />
+          <div className="relative w-3/5 h-full bg-[url(/cover-photo.png)] bg-cover bg-right" />
 
 
           <div className="flex flex-col items-end gap-2.5 p-[30px] relative flex-1 self-stretch grow">

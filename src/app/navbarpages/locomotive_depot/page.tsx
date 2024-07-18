@@ -5,12 +5,12 @@ import { Header } from "@/components/locomotive_depot/header"
 export default function Page() {
     return    (
     
-    <div className="bg-gray-100 flex min-h-screen items-center relative justify-center gap-2.5 p-6  ">
+    <div className="bg-gray-100 grid grid-cols-4 flex min-h-screen  relative justify-center gap-2.5 p-6  ">
 
 
 
 
-      <div className="inline-flex flex-col h-[668.82px] items-start gap-2.5 relative flex-[0_0_auto] bg-white rounded-lg overflow-hidden">
+      <div className="inline-flex flex-col h-[678.82px] items-start gap-2.5 relative flex-[0_0_auto] bg-white rounded-lg overflow-hidden">
         <div className="bg-white flex flex-col items-start justify-center gap-2.5 p-2.5 relative self-stretch w-full flex-[0_0_auto] border-b [border-bottom-style:solid] border-[#646464]">
           <div className="mt-[-1.00px] [font-family:'Noto_Sans_TC-Regular',Helvetica] font-normal text-[#4e4e4e] text-base relative w-fit tracking-[0] leading-[normal]">
             城際列車 - 機務段分配
@@ -223,7 +223,7 @@ export default function Page() {
           </div>
         </div>
       </div>
-      <div className="flex flex-col w-[968px] h-[668.82px] items-start relative bg-white rounded-lg overflow-hidden">
+      <div className="flex flex-col col-span-3 h-[668.82px] items-start relative bg-white rounded-lg overflow-hidden">
         <div className="flex flex-col items-start justify-center gap-2.5 p-2.5 relative self-stretch w-full flex-[0_0_auto] border-b [border-bottom-style:solid] border-[#646464]">
           <div className="mt-[-1.00px] [font-family:'Noto_Sans_TC-Regular',Helvetica] font-normal text-[#4e4e4e] text-base relative w-fit tracking-[0] leading-[normal]">
             台北機務段資訊
@@ -410,6 +410,9 @@ export default function Page() {
           
         </div>
       </div>
+
+
+
     </div>) 
 
     

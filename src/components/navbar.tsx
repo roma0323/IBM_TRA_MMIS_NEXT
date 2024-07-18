@@ -10,23 +10,23 @@ export default function Navbar() {
 
     return (
     <div>
-        <div className="flex h-[8vh] w-screen  items-center gap-3 px-5 py-3 relative self-stretch inline-flex  flex-[0_0_auto]">
+        <div className="flex h-[8vh] w-screen  items-center gap-3 px-5 py-3  self-stretch inline-flex  flex-[0_0_auto]">
                 <div className="relative  w-8 h-8 bg-[url(/icon-menu.svg)] bg-cover bg-[50%_50%]" />
 
 
                 <div className="inline-flex items-center gap-3 px-1 py-0 relative flex-[0_0_auto]">
                     <Link href="/">
-                        <div className="relative w-20 h-[58.18px] bg-[url(/ibm-logo-frame.svg)] bg-cover bg-[50%_50%]" />
+                        <div className="relative w-20 h-16 bg-[url(/ibm-logo-frame.svg)] bg-cover bg-[50%_50%]" />
                     </Link>
-                    <div className="relative w-fit font-title-title-medium-semi font-[number:var(--title-title-medium-semi-font-weight)] text-[length:var(--title-title-medium-semi-font-size)] tracking-[var(--title-title-medium-semi-letter-spacing)] leading-[var(--title-title-medium-semi-line-height)] [font-style:var(--title-title-medium-semi-font-style)]">
+                    {/* <div className="relative w-fit font-title-title-medium-semi font-[number:var(--title-title-medium-semi-font-weight)] text-[length:var(--title-title-medium-semi-font-size)] tracking-[var(--title-title-medium-semi-letter-spacing)] leading-[var(--title-title-medium-semi-line-height)] [font-style:var(--title-title-medium-semi-font-style)]">
                         新 MMIS 績效管理指標
-                    </div>
+                    </div> */}
                 </div>
                 <div className="relative flex-1 grow" />
                 <Link className={`link ${pathname.startsWith('/navbarpages/train_deployment') ? 'active' : ''}`} href="/navbarpages/train_deployment">
                     <div className=" inline-flex items-center justify-center gap-2.5 px-3 py-2 relative flex-[0_0_auto] rounded overflow-hidden">
                         <div className="relative w-fit mt-[-1.00px] font-label-label-large-semi font-[number:var(--label-label-large-semi-font-weight)]  text-[length:var(--label-label-large-semi-font-size)] tracking-[var(--label-label-large-semi-letter-spacing)] leading-[var(--label-label-large-semi-line-height)] [font-style:var(--label-label-large-semi-font-style)]">
-                            車輛資訊
+                            車輛配置資訊
                         </div>
                     </div>
                 </Link>

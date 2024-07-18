@@ -19,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={cn(
-        "min-h-screen bg-background font-sans antialiased",
+        "h-screen bg-background font-sans antialiased",
         fontSans.variable
       )}>
         <ThemeProvider
@@ -28,7 +28,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <main>{children}</main>
+          <main className="h-full relative">{children}</main>
 
         </ThemeProvider>
         <Chatbot />

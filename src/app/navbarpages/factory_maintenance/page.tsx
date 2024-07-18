@@ -12,9 +12,9 @@ import { Header } from "@/components/factory_maintenance/Header";
 export default function Page() {
     return (
 
-    <div className="flex flex-col min-h-screen items-center relative bg-neutral-100">
-      <div className="flex items-start gap-4 p-6 relative flex-1 self-stretch w-full grow bg-neutral-100">
-        <div className="inline-flex flex-col items-start gap-4 relative self-stretch flex-[0_0_auto]">
+      <div className="grid grid-cols-4 relative bg-neutral-100  gap-4 p-6 h-  ">
+        <div>sdvjknsd</div>
+        {/* <div className="inline-flex flex-col items-start gap-4 relative self-stretch flex-[0_0_auto]">
           <div className="gap-2.5 flex-1 self-stretch w-full grow bg-white rounded-lg overflow-hidden flex flex-col items-start relative">
             <div className="flex flex-col items-start justify-center gap-2.5 p-2.5 relative self-stretch w-full flex-[0_0_auto] bg-white border-b [border-bottom-style:solid] border-[#646464]">
               <div className="relative w-fit mt-[-1.00px] [font-family:'Noto_Sans_TC-Regular',Helvetica] font-normal text-[#4e4e4e] text-base tracking-[0] leading-[normal]">
@@ -81,7 +81,7 @@ export default function Page() {
             </div>
           </div>
         </div>
-        <div className="gap-2.5 flex-1 self-stretch grow flex flex-col items-start relative">
+        <div className="col-span-2 gap-2.5 flex-1 self-stretch grow flex flex-col items-start relative">
           <div className="flex flex-col items-start relative flex-1 self-stretch w-full grow">
             <div className="rounded-[5px_5px_0px_0px] overflow-hidden flex flex-col items-start justify-center gap-2.5 p-2.5 relative self-stretch w-full flex-[0_0_auto] bg-white border-b [border-bottom-style:solid] border-[#646464]">
               <div className="relative w-fit mt-[-1.00px] [font-family:'Noto_Sans_TC-Regular',Helvetica] font-normal text-[#4e4e4e] text-base tracking-[0] leading-[normal]">
@@ -212,9 +212,8 @@ export default function Page() {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
-    </div>
 
     )
   }
