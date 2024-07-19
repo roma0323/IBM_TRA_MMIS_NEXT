@@ -38,7 +38,7 @@ export const LabelChip = ({ property1, className = "", text = "ALL" }: Props): J
 
   return (
     <div
-      className={`inline-flex items-center justify-center gap-[5px] p-1 relative bg-[#fffffff2] ${style_template} rounded-[5px] overflow-hidden ${className}`}>
+      className={` items-center justify-center  p-1 relative bg-[#fffffff2] ${style_template} rounded-[5px] ${className}`}>
       {text}
     </div>
   );

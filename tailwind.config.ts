@@ -22,7 +22,7 @@ const config = {
     extend: {
       gridTemplateColumns: {
         // Custom 18 column grid
-        '17': 'repeat(17, minmax(0, 1fr))',
+        '18': 'repeat(18, minmax(0, 1fr))',
       },
       colors: {
         border: "hsl(var(--border))",
