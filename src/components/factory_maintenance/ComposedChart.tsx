@@ -18,7 +18,8 @@ export default class Example extends PureComponent {
     const { data } = this.props;
     const dataWithDifference = data.map(entry => ({
       ...entry,
-      當月差距: entry.當月達成 - entry.當月預計,
+      當月達成: entry.當月達成 + 20,
+      當月差距: entry.當月達成 + 20 - entry.當月預計,
     }));
 
     return (
@@ -26,17 +27,16 @@ export default class Example extends PureComponent {
         <ComposedChart
           data={dataWithDifference}
           margin={{
-            left: 10,
           }}
         >
           <CartesianGrid stroke="#f5f5f5" />
-          <XAxis dataKey="name" scale="band" />
+          <XAxis dataKey="name" />
           <YAxis yAxisId="left" />
-          <YAxis yAxisId="right" orientation="right" />
+          <YAxis yAxisId="right" orientation="right" label={{ value: '當月差距', angle: -90, position: 'insideRight' }} />
           <Tooltip />
           <Legend />
-          <Bar yAxisId="left" stackId="a" dataKey="當月達成" barSize={20} fill="#413ea0" />
-          <Bar yAxisId="left" stackId="a" dataKey="當月預計" barSize={20} fill="#ff1213" />
+          <Bar yAxisId="left" dataKey="當月達成" barSize={30} fill="#413ea0" />
+          <Bar yAxisId="left" dataKey="當月預計" barSize={30} fill="#ff1213" />
           <Line yAxisId="right" type="monotone" dataKey="當月差距" stroke="#ff7300" />
         </ComposedChart>
       </ResponsiveContainer>

@@ -2,58 +2,61 @@
 
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { TrainInFactoryCard } from "@/components/factory_maintenance/TrainInFactoryCard";
 import ComposedChart from "@/components/factory_maintenance/ComposedChart";
 
+const fetchDataAndTransform = async () => {
+  try {
+    const response = await fetch('http://tra.webtw.xyz:8888/maximo/zz_data?method=getFacRepairYearPlan&year=2022', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json',
+      },
+    });
+    const data = await response.json();
 
-const data = [
-  {
-    name: 'Page A',
-    當月預計: 590,
-    當月達成: 800,
-  },
-  {
-    name: 'Page B',
-    當月預計: 868,
-    當月達成: 967,
-  },
-  {
-    name: 'Page C',
-    當月預計: 1397,
-    當月達成: 1098,
-  },
-  {
-    name: 'Page D',
-    當月預計: 1480,
-    當月達成: 1200,
-  },
-  {
-    name: 'Page E',
-    當月預計: 1520,
-    當月達成: 1108,
-  },
-  {
-    name: 'Page F',
-    當月預計: 1400,
-    當月達成: 680,
-  },
-];
+    if (data.length < 4) {
+      throw new Error("Insufficient data received from the API.");
+    }
 
-const MXY00_data = [];
-const MZY00_data = [];
-const WAY00_data = [];
-const all_data = [];
+    const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
+    const transformData = (dataset) => {
+      return monthNames.map((month, index) => {
+        const monthIndex = (index + 1).toString().padStart(2, '0');
+        return {
+          name: month,
+          當月預計: dataset[`${monthIndex}_PLAN`],
+          當月達成: dataset[`${monthIndex}_ACT`]
+        };
+      });
+    };
+
+    const transformedData = data.slice(0, 4).map(transformData);
+
+    return transformedData;
+
+  } catch (error) {
+    console.error("Error fetching or processing data:", error);
+    return [];
+  }
+};
 
 export default function Page() {
+  const [data, setData] = useState([[], [], [], []]);
+
+  useEffect(() => {
+    fetchDataAndTransform().then(transformedData => {
+      setData(transformedData);
+    });
+  }, []);
+
   return (
-
-    <div className="grid grid-cols-7  flex-grow relative bg-neutral-100  gap-4 p-6  ">
-
-
-      <div className=" col-span-2 bg-white  items-center relative rounded-lg overflow-hidden">
-        <div className="flex flex-col  items-start justify-center p-2.5 relative self-stretch w-full flex-[0_0_auto] border-b [border-bottom-style:solid] border-[#646464]">
+    <div className="grid grid-cols-7 flex-grow relative bg-neutral-100 gap-4 p-6">
+      <div className="col-span-2 bg-white items-center relative rounded-lg overflow-hidden">
+        <div className="flex flex-col items-start justify-center p-2.5 relative self-stretch w-full flex-[0_0_auto] border-b [border-bottom-style:solid] border-[#646464]">
           城際列車 - 機務段分配
         </div>
 
@@ -65,24 +68,18 @@ export default function Page() {
           cumulativeTargetRate={64}
           annualTargetNumber={113}
         />
-
-
       </div>
 
-      <div className=" col-span-5 bg-white flex flex-col  items-center relative rounded-lg">
-        <div className="  items-start justify-center p-2.5 relative self-stretch w-full flex-[0_0_auto] border-b [border-bottom-style:solid] border-[#646464]">
+      <div className="col-span-5 bg-white flex flex-col items-center relative rounded-lg">
+        <div className="items-start justify-center p-2.5 relative self-stretch w-full flex-[0_0_auto] border-b [border-bottom-style:solid] border-[#646464]">
           城際列車 - 機務段分配
         </div>
-        <div className="flex-grow w-full flex flex-col items-center justify-start">
-          <ComposedChart data={data}/>
-        </div>
-        <div className="flex-grow w-full flex flex-col items-center justify-start">
-          <ComposedChart data={data}/>
-        </div>
-
-
+        {data.map((chartData, index) => (
+          <div key={index} className="flex-grow w-full flex flex-col items-center justify-start">
+            <ComposedChart data={chartData} />
+          </div>
+        ))}
       </div>
     </div>
-
   )
 }
