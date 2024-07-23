@@ -69,13 +69,16 @@ export default function UseRateChart() {
       }}
     >
       <XAxis dataKey="name" />
+      <YAxis yAxisId="right" orientation="right" />
+
       <YAxis
-        domain={[0, 100]}
+        domain={[0, 10]}
         tickFormatter={(value) => `${value}%`} // Optional: for displaying as percentage
-      />          <Tooltip />
+      />          
+      <Tooltip />
       <ReferenceLine y={0} stroke="#000" />
       {/* <Brush dataKey="name" height={30} stroke="#8884d8" /> */}
-      <Bar dataKey="using_rate" fill="#397EFF" background={{ fill: '#eee' }}/>
+      <Bar yAxisId="right" dataKey="using_rate" fill="#397EFF" background={{ fill: '#eee' }}/>
     </BarChart></ResponsiveContainer>
     
 

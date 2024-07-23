@@ -92,6 +92,5 @@ RowByTrain.propTypes = {
 };
 
 export default RowByTrain;
- 
 
-      
+

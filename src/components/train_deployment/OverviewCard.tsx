@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import { DataCard } from "@/components/train_deployment/DataCard";
 import  UseRateChart  from "@/components/train_deployment/UseRateChart";
+import  ComposedChart  from "@/components/factory_maintenance/ComposedChart";
 
 interface Props {
   text: string;
