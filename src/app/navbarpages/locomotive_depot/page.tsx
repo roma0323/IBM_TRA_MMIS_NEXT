@@ -3,8 +3,29 @@ import { LabelAndNumberByArea } from "@/components/locomotive_depot/LabelAndNumb
 import { RowByTrain } from "@/components/locomotive_depot/RowByTrain";
 import React, { useState, useEffect } from "react";
 
+type TrainData = {
+  dept: string;
+  deptdesc: string;
+  cartype: string;
+  carcatalog: string;
+  belongto: number;
+  borrowin: number;
+  borrowout: number;
+  current_cnt: number;
+  current_use: number;
+  current_temp: number;
+  current_ready: number;
+  maintain_w: number;
+  maintain_sec: number;
+  maintain_fac: number;
+  oth_waitrep: number;
+  oth_return: number;
+  oth_stop: number;
+  availability: number;
+};
+
 export default function Page() {
-  const [trainData, setTrainData] = useState([]);
+  const [trainData, setTrainData] = useState<TrainData[]>([]);
   const [selectedLabel, setSelectedLabel] = useState<string | null>(null);
   const [selectedArea, setSelectedArea] = useState<string | null>(null);
 

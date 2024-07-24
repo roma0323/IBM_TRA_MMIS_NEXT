@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { PieChart, Pie, Sector, ResponsiveContainer } from 'recharts';
+import { PieChart, Pie, Sector, ResponsiveContainer, SectorProps } from 'recharts';
 
 const data = [
   { name: '太魯閣 - TEMU1000', value: 100 },
@@ -8,7 +8,23 @@ const data = [
   { name: 'PP電力機車 - E1000', value: 90 },
 ];
 
-const renderActiveShape = (props) => {
+interface CustomSectorProps extends SectorProps {
+  cx: number;
+  cy: number;
+  midAngle: number;
+  innerRadius: number;
+  outerRadius: number;
+  startAngle: number;
+  endAngle: number;
+  fill: string;
+  payload: {
+    name: string;
+  };
+  percent: number;
+  value: number;
+}
+
+const renderActiveShape: React.FC<CustomSectorProps> = (props) => {
   const RADIAN = Math.PI / 180;
   const { cx, cy, midAngle, innerRadius, outerRadius, startAngle, endAngle, fill, payload, percent, value } = props;
   const sin = Math.sin(-RADIAN * midAngle);
@@ -23,7 +39,6 @@ const renderActiveShape = (props) => {
 
   return (
     <g>
-      
       <Sector
         cx={cx}
         cy={cy}
@@ -42,7 +57,6 @@ const renderActiveShape = (props) => {
         outerRadius={outerRadius + 10}
         fill={fill}
       />
-      
       <path d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`} stroke={fill} fill="none" />
       <circle cx={ex} cy={ey} r={2} fill={fill} stroke="none" />
       <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} textAnchor={textAnchor} fill="#333">{`PV ${value}`}</text>
@@ -63,7 +77,7 @@ export default class Example extends PureComponent {
     activeIndex: 0,
   };
 
-  onPieEnter = (_, index) => {
+  onPieEnter = (_: any, index: number) => {
     this.setState({
       activeIndex: index,
     });
@@ -72,7 +86,7 @@ export default class Example extends PureComponent {
   render() {
     return (
       <ResponsiveContainer width="100%" aspect={1.4}>
-        <PieChart >
+        <PieChart>
           <Pie
             activeIndex={this.state.activeIndex}
             activeShape={renderActiveShape}

@@ -3,7 +3,7 @@ import React from "react";
 import { DataCard } from "@/components/train_deployment/DataCard";
 
 interface Props {
-  onClick: (text: string) => void; // Add onClick prop
+  // onClick: (text: string) => void; // Add onClick prop
   totalVehicles: number;
   cumulativeAchievementRate: number;
   cumulativeRepairedVehicles: number;
@@ -12,7 +12,7 @@ interface Props {
 }
 
 export const TrainInFactoryCard = ({ 
-  onClick,
+  // onClick,
   totalVehicles,
   cumulativeAchievementRate,
   cumulativeRepairedVehicles,
@@ -44,7 +44,7 @@ export const TrainInFactoryCard = ({
 };
 
 TrainInFactoryCard.propTypes = {
-  onClick: PropTypes.func.isRequired, // Define prop type for onClick
+  // onClick: PropTypes.func.isRequired, // Define prop type for onClick
   totalVehicles: PropTypes.number.isRequired,
   cumulativeAchievementRate: PropTypes.number.isRequired,
   cumulativeRepairedVehicles: PropTypes.number.isRequired,

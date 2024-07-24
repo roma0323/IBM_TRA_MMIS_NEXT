@@ -6,6 +6,10 @@ import React, { useEffect, useState } from "react";
 import { TrainInFactoryCard } from "@/components/factory_maintenance/TrainInFactoryCard";
 import ComposedChart from "@/components/factory_maintenance/ComposedChart";
 
+type DataSet = {
+  [key: string]: number;
+};
+
 const fetchDataAndTransform = async () => {
   try {
     const response = await fetch('http://tra.webtw.xyz:8888/maximo/zz_data?method=getFacRepairYearPlan&year=2022', {
@@ -23,7 +27,7 @@ const fetchDataAndTransform = async () => {
 
     const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
-    const transformData = (dataset) => {
+    const transformData = (dataset: DataSet) => {
       return monthNames.map((month, index) => {
         const monthIndex = (index + 1).toString().padStart(2, '0');
         return {
