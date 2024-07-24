@@ -1,5 +1,4 @@
 // `app/dashboard/page.tsx` is the UI for the `/dashboard` URL
-"use client";
 
 import React from "react";
 import { Header } from "@/components/factory_maintenance/Header";

@@ -1,10 +1,7 @@
 
 
-"use client";
 
 import React from "react";
-import { Header } from "@/components/factory_maintenance/Header";
-import { DataCard } from "@/components/fault_notification/DataCard";
 
 export default function Page() {
   return (

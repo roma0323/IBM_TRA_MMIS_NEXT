@@ -1,11 +1,12 @@
 'use client'
-
+import React, { Suspense } from "react";
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import { ModeToggle } from "@/components/ui/mode_toggle"
 import "@/styles/globals.css"
 
-export default function Navbar() {
+const Navbar: React.FC = () => {
+
     const pathname = usePathname()
 
     return (
@@ -18,9 +19,6 @@ export default function Navbar() {
                     <Link href="/">
                         <div className="relative w-20 h-16 bg-[url(/ibm-logo-frame.svg)] bg-cover bg-[50%_50%]" />
                     </Link>
-                    {/* <div className="relative w-fit font-title-title-medium-semi font-[number:var(--title-title-medium-semi-font-weight)] text-[length:var(--title-title-medium-semi-font-size)] tracking-[var(--title-title-medium-semi-letter-spacing)] leading-[var(--title-title-medium-semi-line-height)] [font-style:var(--title-title-medium-semi-font-style)]">
-                        新 MMIS 績效管理指標
-                    </div> */}
                 </div>
                 <div className="relative flex-1 grow" />
                 <Link className={`link ${pathname.startsWith('/navbarpages/train_deployment') ? 'active' : ''}`} href="/navbarpages/train_deployment">
@@ -69,15 +67,14 @@ export default function Navbar() {
             </div>
         </div>
 
-
-
-
-
-
-
-
-
     )
 
 }
 
+export default function Page() {
+    return (
+      <Suspense fallback={<div>Loading...</div>}>
+        <Navbar />
+      </Suspense>
+    );
+  }

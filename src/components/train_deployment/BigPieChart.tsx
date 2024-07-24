@@ -8,7 +8,7 @@ const data = [
   { name: 'PP電力機車 - E1000', value: 90 },
 ];
 
-interface CustomSectorProps extends SectorProps {
+interface CustomSectorProps {
   cx: number;
   cy: number;
   midAngle: number;
@@ -24,7 +24,7 @@ interface CustomSectorProps extends SectorProps {
   value: number;
 }
 
-const renderActiveShape: React.FC<CustomSectorProps> = (props) => {
+const renderActiveShape = (props: CustomSectorProps) => {
   const RADIAN = Math.PI / 180;
   const { cx, cy, midAngle, innerRadius, outerRadius, startAngle, endAngle, fill, payload, percent, value } = props;
   const sin = Math.sin(-RADIAN * midAngle);
@@ -89,7 +89,7 @@ export default class Example extends PureComponent {
         <PieChart>
           <Pie
             activeIndex={this.state.activeIndex}
-            activeShape={renderActiveShape}
+            activeShape={renderActiveShape as any}
             data={data}
             cx="50%"
             cy="50%"

@@ -1,7 +1,7 @@
 'use client';
+import React, { useState, useEffect, Suspense } from "react";
 import { LabelAndNumberByArea } from "@/components/locomotive_depot/LabelAndNumberByArea";
 import { RowByTrain } from "@/components/locomotive_depot/RowByTrain";
-import React, { useState, useEffect } from "react";
 
 type TrainData = {
   dept: string;
@@ -24,7 +24,7 @@ type TrainData = {
   availability: number;
 };
 
-export default function Page() {
+const TrainPageContent: React.FC = () => {
   const [trainData, setTrainData] = useState<TrainData[]>([]);
   const [selectedLabel, setSelectedLabel] = useState<string | null>(null);
   const [selectedArea, setSelectedArea] = useState<string | null>(null);
@@ -49,6 +49,7 @@ export default function Page() {
     setSelectedLabel((prevLabel) => (prevLabel === label && selectedArea === area ? null : label));
     setSelectedArea((prevArea) => (prevArea === area && selectedLabel === label ? null : area));
   };
+
   const filteredTrainData = trainData.filter(train => {
     const areaMatches = selectedArea === "全部機務段" || !selectedArea || train.deptdesc.includes(selectedArea.replace("車輛配置", ""));
     const labelMatches = selectedLabel === "All" || !selectedLabel || train.carcatalog === selectedLabel;
@@ -67,6 +68,7 @@ export default function Page() {
     "臺東機務段",
     "宜蘭機務分段"
   ];
+
   return (
     <div className="bg-gray-100 grid grid-cols-4 flex-grow relative justify-center gap-3 p-6">
       <div className="flex-col items-start gap-2.5 relative bg-white rounded-lg h-full overflow-hidden">
@@ -82,7 +84,6 @@ export default function Page() {
                 onLabelClick={(label) => handleLabelClick(label, area)}
               />
             ))}
-
           </div>
         </div>
       </div>
@@ -143,5 +144,13 @@ export default function Page() {
         </div>
       )}
     </div>
+  );
+}
+
+export default function Page() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <TrainPageContent />
+    </Suspense>
   );
 }

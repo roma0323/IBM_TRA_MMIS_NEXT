@@ -1,10 +1,11 @@
 // pages/[param].js
 'use client'
 import Link from 'next/link'
+import React, { Suspense } from "react";
 import { usePathname } from 'next/navigation'
 import { useSearchParams } from "next/navigation";
 
-export default function MidNavbar() {
+const MidNavbar: React.FC = () => {
 
     const pathname = usePathname()
     let content;
@@ -125,3 +126,10 @@ export default function MidNavbar() {
     );
 };
 
+export default function Page() {
+    return (
+      <Suspense fallback={<div>Loading...</div>}>
+        <MidNavbar />
+      </Suspense>
+    );
+  }
