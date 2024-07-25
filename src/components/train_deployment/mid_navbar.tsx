@@ -11,7 +11,7 @@ const MidNavbar: React.FC = () => {
     let content;
 
     const searchParam = useSearchParams();
-    const id = searchParam.get("id")!;
+    const id = searchParam ? searchParam.get("id") : '';
 
     switch (pathname) {
         case '/navbarpages/train_deployment':

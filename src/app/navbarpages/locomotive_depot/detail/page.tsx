@@ -1,5 +1,5 @@
 // import  ClientPage  from "./clientCom";
-import  ClientPage  from "../page";
+import  ClientPage  from "@/components/locomotive_depot/ClientPage";
 
 
 async function getData() {
@@ -15,8 +15,8 @@ async function getData() {
 
 export default async function Page() {
   const data = await getData()
-  console.log(data.data)
   return <main>
+    detail
       <ClientPage initialData={data.data} />
       </main>
 }
