@@ -68,7 +68,7 @@ const TrainPageContent: React.FC<ClientComponentProps> = ({ initialData }) => {
     <div className="bg-gray-100 grid grid-cols-4 flex-grow relative justify-center gap-3 p-6">
       <div className="flex-col items-start gap-2.5 relative bg-white rounded-lg h-full overflow-hidden">
         <div className="flex flex-col text-[#000000] items-start justify-center p-2.5 relative self-stretch w-full flex-[0_0_auto] border-b [border-bottom-style:solid] border-[#646464]">
-          城際列車 - 機務段分配{initialData[0].dept}
+          城際列車 - 機務段分配
         </div>
         <div className="w-full h-[67dvh] relative overflow-scroll">
           <div className="flex flex-col w-full items-start relative flex-[0_0_auto] bg-[#f5f5f533] rounded-lg overflow-hidden">
@@ -83,7 +83,6 @@ const TrainPageContent: React.FC<ClientComponentProps> = ({ initialData }) => {
         </div>
       </div>
 
-      {selectedLabel && (
         <div className="flex-col col-span-3 items-start gap-2.5 relative bg-white rounded-lg h-full overflow-hidden">
           <div className="flex flex-col text-[#000000] items-start justify-center p-2.5 relative self-stretch w-full flex-[0_0_auto] border-b [border-bottom-style:solid] border-[#646464]">
             {selectedArea} - {selectedLabel}
@@ -109,8 +108,9 @@ const TrainPageContent: React.FC<ClientComponentProps> = ({ initialData }) => {
                 <div className="p-2 flex items-end">停用</div>
                 <div className="p-2 flex items-end">留車</div>
               </div>
+              {selectedLabel && (
 
-              {filteredTrainData.map((train, index) => (
+<div> {filteredTrainData.map((train, index) => (
                 <RowByTrain
                   key={index}
                   className=""
@@ -133,11 +133,16 @@ const TrainPageContent: React.FC<ClientComponentProps> = ({ initialData }) => {
                   oth_stop={train.oth_stop}
                   availability={train.availability}
                 />
-              ))}
+              ))}</div>
+             
+
+            )}
+
+              
             </div>
           </div>
         </div>
-      )}
+     
     </div>
   );
 }
