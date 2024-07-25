@@ -24,25 +24,20 @@ type TrainData = {
   availability: number;
 };
 
-const TrainPageContent: React.FC = () => {
+type TrainDataArray = TrainData[];
+
+interface ClientComponentProps {
+  initialData: TrainDataArray;
+}
+
+const TrainPageContent: React.FC<ClientComponentProps> = ({ initialData }) => {
+
   const [trainData, setTrainData] = useState<TrainData[]>([]);
   const [selectedLabel, setSelectedLabel] = useState<string | null>(null);
   const [selectedArea, setSelectedArea] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch('http://tra.webtw.xyz:8888/maximo/zz_data?method=getSumStatusList&multiplier=0&dept=&qdate=2024-07-18', {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json, text/plain, */*',
-          'Content-Type': 'application/json',
-        },
-      });
-      const data = await response.json();
-      setTrainData(data.data);
-    };
-
-    fetchData();
+    setTrainData(initialData);
   }, []);
 
   const handleLabelClick = (label: string, area: string) => {
@@ -73,7 +68,7 @@ const TrainPageContent: React.FC = () => {
     <div className="bg-gray-100 grid grid-cols-4 flex-grow relative justify-center gap-3 p-6">
       <div className="flex-col items-start gap-2.5 relative bg-white rounded-lg h-full overflow-hidden">
         <div className="flex flex-col text-[#000000] items-start justify-center p-2.5 relative self-stretch w-full flex-[0_0_auto] border-b [border-bottom-style:solid] border-[#646464]">
-          城際列車 - 機務段分配
+          城際列車 - 機務段分配{initialData[0].dept}
         </div>
         <div className="w-full h-[67dvh] relative overflow-scroll">
           <div className="flex flex-col w-full items-start relative flex-[0_0_auto] bg-[#f5f5f533] rounded-lg overflow-hidden">
@@ -147,10 +142,17 @@ const TrainPageContent: React.FC = () => {
   );
 }
 
-export default function Page() {
+
+
+
+// Define the type for the array of these objects
+
+export default function ClientPage({ initialData }: ClientComponentProps) {
+  const [data, setData] = useState(initialData);
   return (
+    
     <Suspense fallback={<div>Loading...</div>}>
-      <TrainPageContent />
+      <TrainPageContent initialData={data} />
     </Suspense>
   );
 }
