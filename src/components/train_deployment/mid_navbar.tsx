@@ -61,6 +61,15 @@ const MidNavbar: React.FC = () => {
                                 總覽
                             </div>
                         </Link>
+                        
+                        <Link href={{
+                            pathname: "/navbarpages/train_deployment/certain_train",
+                            query: { id: "城際列車" },
+                        }} className={`link ${id === '城際列車' ? 'mid_nav_active' : 'mid_nav_unactive'}`} >
+                            <div className=" inline-flex h-10 items-center px-4 py-0 relative flex-[0_0_auto] ">
+                                城際列車
+                            </div>
+                        </Link>
                         <Link href={{
                             pathname: "/navbarpages/train_deployment/certain_train",
                             query: { id: "通勤列車" },
@@ -71,19 +80,20 @@ const MidNavbar: React.FC = () => {
                         </Link>
                         <Link href={{
                             pathname: "/navbarpages/train_deployment/certain_train",
-                            query: { id: "城際列車" },
-                        }} className={`link ${id === '城際列車' ? 'mid_nav_active' : 'mid_nav_unactive'}`} >
-                            <div className=" inline-flex h-10 items-center px-4 py-0 relative flex-[0_0_auto] ">
-                                城際列車
-                            </div>
-                        </Link><Link href={{
-                            pathname: "/navbarpages/train_deployment/certain_train",
                             query: { id: "電力機車" },
                         }} className={`link ${id === '電力機車' ? 'mid_nav_active' : 'mid_nav_unactive'}`} >
                             <div className=" inline-flex h-10 items-center px-4 py-0 relative flex-[0_0_auto] ">
                                 電力機車
                             </div>
                         </Link><Link href={{
+                            pathname: "/navbarpages/train_deployment/certain_train",
+                            query: { id: "柴電機車" },
+                        }} className={`link ${id === '柴電機車' ? 'mid_nav_active' : 'mid_nav_unactive'}`} >
+                            <div className=" inline-flex h-10 items-center px-4 py-0 relative flex-[0_0_auto] ">
+                                柴電機車
+                            </div>
+                        </Link>
+                        <Link href={{
                             pathname: "/navbarpages/train_deployment/certain_train",
                             query: { id: "柴液機車" },
                         }} className={`link ${id === '柴液機車' ? 'mid_nav_active' : 'mid_nav_unactive'}`} >
@@ -93,18 +103,19 @@ const MidNavbar: React.FC = () => {
                         </Link>
                         <Link href={{
                             pathname: "/navbarpages/train_deployment/certain_train",
-                            query: { id: "客車" },
-                        }} className={`link ${id === '客車' ? 'mid_nav_active' : 'mid_nav_unactive'}`} >
-                            <div className=" inline-flex h-10 items-center px-4 py-0 relative flex-[0_0_auto] ">
-                                客車
-                            </div>
-                        </Link>
-                        <Link href={{
-                            pathname: "/navbarpages/train_deployment/certain_train",
                             query: { id: "柴油客車" },
                         }} className={`link ${id === '柴油客車' ? 'mid_nav_active' : 'mid_nav_unactive'}`} >
                             <div className=" inline-flex h-10 items-center px-4 py-0 relative flex-[0_0_auto] ">
                                 柴油客車
+                            </div>
+                        </Link>
+                        
+                        <Link href={{
+                            pathname: "/navbarpages/train_deployment/certain_train",
+                            query: { id: "客車" },
+                        }} className={`link ${id === '客車' ? 'mid_nav_active' : 'mid_nav_unactive'}`} >
+                            <div className=" inline-flex h-10 items-center px-4 py-0 relative flex-[0_0_auto] ">
+                                客車
                             </div>
                         </Link>
                         <Link href={{

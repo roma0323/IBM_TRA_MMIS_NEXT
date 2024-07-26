@@ -1,35 +1,24 @@
-// // `app/dashboard/page.tsx` is the UI for the `/dashboard` URL
-// export default function Page() {
-//     return <h1>Hello, trrain deployment Page!</h1>
-//   }
-
-
-"use client";
-
-import React from "react";
-import { DataCard } from "@/components/homepage/DataCard";
-import { OverviewCard } from "@/components/train_deployment/OverviewCard";
-import UseRateChart from "@/components/train_deployment/UseRateChart";
-
-export default function Page() {
-  return (
 
 
 
-    <div className="grid grid-cols-4 flex-grow  relative  bg-gray-200 overflow-hidden ">
-
-      <OverviewCard text="柴液機車" />
-      <OverviewCard text="柴液機車" />
-      <OverviewCard text="柴液機車" />
-      <OverviewCard text="柴液機車" />
-      <OverviewCard text="柴液機車" />
-      <OverviewCard text="柴液機車" />
-      <OverviewCard text="柴液機車" />
-      <OverviewCard text="柴液機車" />
-    </div>
+// import  ClientPage  from "./clientCom";
+import  ClientPage  from "@/components/train_deployment/ClientPage";
 
 
+async function getData() {
+  const res = await fetch('http://tra.webtw.xyz:8888/maximo/zz_data?method=getSumStatusList&qdate=2024-07-25&sumtotal=1', {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json, text/plain, */*',
+      'Content-Type': 'application/json',
+    },
+  });
+  return res.json()
+}
 
-
-  );
-};
+export default async function Page() {
+  const data = await getData()
+  return <main>
+      <ClientPage initialData={data.data} />
+      </main>
+}
