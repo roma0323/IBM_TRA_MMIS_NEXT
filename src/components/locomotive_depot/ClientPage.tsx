@@ -66,7 +66,7 @@ const TrainPageContent: React.FC<ClientComponentProps> = ({ initialData }) => {
 
   return (
     <div className="bg-gray-100 grid grid-cols-4 flex-grow relative justify-center gap-3 p-6">
-      <div className="flex-col items-start gap-2.5 relative bg-white rounded-lg h-full overflow-hidden">
+      <div className="flex-col items-start gap-2.5 relative bg-white rounded-lg  overflow-hidden">
         <div className="flex flex-col text-[#000000] items-start justify-center p-2.5 relative self-stretch w-full flex-[0_0_auto] border-b [border-bottom-style:solid] border-[#646464]">
           城際列車 - 機務段分配
         </div>
