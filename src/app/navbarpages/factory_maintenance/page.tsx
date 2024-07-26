@@ -125,7 +125,6 @@ export default function Page() {
         {data.map((chartData, index) => (
           activeCardIndex === index && (
             <div key={index} className="flex-grow w-full flex flex-col my-8 items-center justify-start">
-              jbbjh
               <ComposedChartMonthly data={chartData} />
               <ComposedChartAccmulate data={chartData} />
             </div>

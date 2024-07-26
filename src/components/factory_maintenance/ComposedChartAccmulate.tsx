@@ -47,9 +47,9 @@ export default class Example extends PureComponent<ExampleProps> {
           <YAxis yAxisId="right" orientation="right" label={{ value: '累績差距', angle: -90, position: 'insideRight' }} />
           <Tooltip />
           <Legend />
-          <Bar yAxisId="left" dataKey="累積預計" barSize={30} fill="#ff1213" />
+          <Bar yAxisId="left" dataKey="累積預計" barSize={30} fill="#397EFF" />
           <Bar yAxisId="left" dataKey="累積達成" barSize={30} fill="#413ea0" />
-          <Line yAxisId="right" type="monotone" dataKey="累積差距" stroke="#ff7300" />
+          <Line yAxisId="right" type="monotone" dataKey="累積差距" stroke="#ff1213" />
         </RechartsComposedChart>
 
         
