@@ -19,7 +19,7 @@ export const OverviewCard = ({ Data  }: ClientPageProps): JSX.Element => {
                 <div className="flex items-center gap-5 px-0 py-[5px] relative self-stretch w-full flex-[0_0_auto] rounded-[5px] overflow-hidden">
                   <DataCard  text={Data.current_ready} text1="車輛可用數" />
                   <DataCard  text={Data.current_cnt} text1="總車輛數" />
-                  <DataCard  text={`${Math.round((Data.current_ready/Data.current_cnt)*100).toString()}%`} text1="可用率" />
+                  <DataCard  text={`${Math.round(Data.availability*100).toString()}%`} text1="可用率" />
                 </div>
                 <UseRateChart />
               </div>
