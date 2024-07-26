@@ -10,7 +10,7 @@ interface Props {
 export const OverviewCard = ({ text = "柴液機車" }: Props): JSX.Element => {
   return (
 
-    <div className=" bg-white  m-3 items-center relative rounded-lg overflow-hidden">
+    <div className=" bg-white  m-3 items-center relative rounded-lg overflow-hidden cursor-pointer transition-transform duration-300 ease-in-out transform hover:scale-105 hover:border-bottom hover:border-gray-300 hover:shadow-lg">
               <div className="flex flex-col text-[#397EFF] items-start justify-center p-2.5 relative self-stretch w-full flex-[0_0_auto] border-b [border-bottom-style:solid] border-[#646464]">
                   {text}
               </div>

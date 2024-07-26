@@ -11,7 +11,7 @@ interface Props {
 
 export const LabelChipAndNumber = ({ className, text = "ALL", train_amount, onClick }: Props): JSX.Element => {
   return (
-    <div className="w-full px-6 flex items-center justify-between relative " onClick={() => onClick(text)}>
+    <div className="w-full py-1 px-6 flex items-center justify-between relative cursor-pointer transition-transform rounded-xl duration-300 ease-in-out transform hover:scale-105 hover:border hover:border-gray-200" onClick={() => onClick(text)}>
       <LabelChip text={text} className={`bg-[#fffffff2] ${className}`} property1="default" />
       <div>{train_amount}</div>
     </div>
