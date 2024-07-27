@@ -14,8 +14,7 @@ const ClientPage: React.FC<ClientPageProps> = ({ initialData }) => {
         <Link
           key={index}
           href={{
-            pathname: "/navbarpages/train_deployment/certain_train",
-            query: { id: data.carcatalog },
+            pathname: `/navbarpages/train_deployment/certain_train/${ data.carcatalog}`,
           }}
         >
           <OverviewCard Data={data} />

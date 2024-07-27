@@ -3,21 +3,33 @@
 import Link from 'next/link'
 import React, { Suspense } from "react";
 import { usePathname } from 'next/navigation'
-import { useSearchParams } from "next/navigation";
+
+
+const trainTypes = [
+    { id: "城際列車", name: "城際列車" },
+    { id: "通勤列車", name: "通勤列車" },
+    { id: "電力機車", name: "電力機車" },
+    { id: "柴電機車", name: "柴電機車" },
+    { id: "柴液機車", name: "柴液機車" },
+    { id: "柴油客車", name: "柴油客車" },
+    { id: "客車", name: "客車" },
+    { id: "貨車", name: "貨車" }
+];
+
 
 const MidNavbar: React.FC = () => {
 
-    const pathname = usePathname()
+    const pathname = usePathname()|| ''
     let content;
-
-    const searchParam = useSearchParams();
-    const id = searchParam ? searchParam.get("id") : '';
+    const lastPartOfPath = pathname.split('/').pop()|| '';
+    const decodedLastPart = decodeURIComponent(lastPartOfPath);
 
     switch (pathname) {
         case '/navbarpages/train_deployment':
             content = '總覽';
             break;
     }
+
     return (
         <div>
             <div className=" w-screen flex  flex-col items-center sticky self-stretch  flex-[0_0_auto]">
@@ -26,12 +38,12 @@ const MidNavbar: React.FC = () => {
                     <div className="inline-flex items-center relative flex-[0_0_auto]">
                         <div className="inline-flex items-center gap-1 relative flex-[0_0_auto]">
                             <div className=" text-3xl ">
-                            車輛配置資訊/
+                                車輛配置資訊/
                             </div>
                         </div>
                         <div className="inline-flex items-center gap-1 relative flex-[0_0_auto]">
                             <div className="text-3xl  text-[#397eff]">
-                                {content}{id}
+                                {content}{decodedLastPart}
                             </div>
                         </div>
                     </div>
@@ -61,71 +73,20 @@ const MidNavbar: React.FC = () => {
                                 總覽
                             </div>
                         </Link>
-                        
-                        <Link href={{
-                            pathname: "/navbarpages/train_deployment/certain_train",
-                            query: { id: "城際列車" },
-                        }} className={`link ${id === '城際列車' ? 'mid_nav_active' : 'mid_nav_unactive'}`} >
-                            <div className=" inline-flex h-10 items-center px-4 py-0 relative flex-[0_0_auto] ">
-                                城際列車
+
+                        {trainTypes.map(train => (
+                            <Link
+                            href={{
+                              pathname: `/navbarpages/train_deployment/certain_train/${train.name}`,
+                            }}
+                            className={`link ${decodedLastPart === train.name ? 'mid_nav_active' : 'mid_nav_unactive'}`}
+                            key={train.id}
+                          >
+                            <div className="inline-flex h-10 items-center px-4 py-0 relative flex-[0_0_auto]">
+                              {train.name}
                             </div>
-                        </Link>
-                        <Link href={{
-                            pathname: "/navbarpages/train_deployment/certain_train",
-                            query: { id: "通勤列車" },
-                        }} className={`link ${id === '通勤列車' ? 'mid_nav_active' : 'mid_nav_unactive'}`}>
-                            <div className="inline-flex h-10 items-center px-4 py-0 relative flex-[0_0_auto] ">
-                                通勤列車
-                            </div>
-                        </Link>
-                        <Link href={{
-                            pathname: "/navbarpages/train_deployment/certain_train",
-                            query: { id: "電力機車" },
-                        }} className={`link ${id === '電力機車' ? 'mid_nav_active' : 'mid_nav_unactive'}`} >
-                            <div className=" inline-flex h-10 items-center px-4 py-0 relative flex-[0_0_auto] ">
-                                電力機車
-                            </div>
-                        </Link><Link href={{
-                            pathname: "/navbarpages/train_deployment/certain_train",
-                            query: { id: "柴電機車" },
-                        }} className={`link ${id === '柴電機車' ? 'mid_nav_active' : 'mid_nav_unactive'}`} >
-                            <div className=" inline-flex h-10 items-center px-4 py-0 relative flex-[0_0_auto] ">
-                                柴電機車
-                            </div>
-                        </Link>
-                        <Link href={{
-                            pathname: "/navbarpages/train_deployment/certain_train",
-                            query: { id: "柴液機車" },
-                        }} className={`link ${id === '柴液機車' ? 'mid_nav_active' : 'mid_nav_unactive'}`} >
-                            <div className=" inline-flex h-10 items-center px-4 py-0 relative flex-[0_0_auto] ">
-                                柴液機車
-                            </div>
-                        </Link>
-                        <Link href={{
-                            pathname: "/navbarpages/train_deployment/certain_train",
-                            query: { id: "柴油客車" },
-                        }} className={`link ${id === '柴油客車' ? 'mid_nav_active' : 'mid_nav_unactive'}`} >
-                            <div className=" inline-flex h-10 items-center px-4 py-0 relative flex-[0_0_auto] ">
-                                柴油客車
-                            </div>
-                        </Link>
-                        
-                        <Link href={{
-                            pathname: "/navbarpages/train_deployment/certain_train",
-                            query: { id: "客車" },
-                        }} className={`link ${id === '客車' ? 'mid_nav_active' : 'mid_nav_unactive'}`} >
-                            <div className=" inline-flex h-10 items-center px-4 py-0 relative flex-[0_0_auto] ">
-                                客車
-                            </div>
-                        </Link>
-                        <Link href={{
-                            pathname: "/navbarpages/train_deployment/certain_train",
-                            query: { id: "貨車" },
-                        }} className={`link ${id === '貨車' ? 'mid_nav_active' : 'mid_nav_unactive'}`} >
-                            <div className=" inline-flex h-10 items-center px-4 py-0 relative flex-[0_0_auto] ">
-                                貨車
-                            </div>
-                        </Link>
+                          </Link>
+                        ))}
 
 
 
@@ -139,8 +100,8 @@ const MidNavbar: React.FC = () => {
 
 export default function Page() {
     return (
-      <Suspense fallback={<div>Loading...</div>}>
-        <MidNavbar />
-      </Suspense>
+        <Suspense fallback={<div>Loading...</div>}>
+            <MidNavbar />
+        </Suspense>
     );
-  }
+}
