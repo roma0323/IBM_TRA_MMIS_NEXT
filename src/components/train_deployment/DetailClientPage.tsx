@@ -19,11 +19,10 @@ type ClientPageProps = {
 
 
 const DetailClientPage: React.FC<ClientPageProps> = ({ initialData }) => {
-    const sum = initialData.reduce((acc, item) => acc + item.current_cnt, 0);
+    const cnt_sum = initialData.reduce((acc, item) => acc + item.current_cnt, 0);
+    const ready_sum = initialData.reduce((acc, item) => acc + item.current_ready, 0);
     return (
         <div className=" grid grid-cols-3 flex items-start gap-4 p-6 relative self-stretch flex-[0_0_auto] bg-neutral-100   ">
-<div>{sum}</div>
-
 
             <div className="h-full inline-flex flex-col  items-start gap-4 relative flex-[0_0_auto]">
 
@@ -34,9 +33,9 @@ const DetailClientPage: React.FC<ClientPageProps> = ({ initialData }) => {
                     </div>
                     <div className="flex flex-col items-start gap-[5px] px-2.5 py-0 relative self-stretch w-full flex-[0_0_auto]">
                         <div className="flex items-center gap-5 px-0 py-[5px] relative self-stretch w-full flex-[0_0_auto] rounded-[5px] overflow-hidden">
-                            <DataCard text="440" text1="總車輛數" />
-                            <DataCard text="440" text1="總車輛數" />
-                            <DataCard text="83.9 %" text1="可用率" />
+                            <DataCard text={cnt_sum} text1="可用數" />
+                            <DataCard text={ready_sum} text1="總輛數" />
+                            <DataCard text={`${Math.round(ready_sum/cnt_sum*100).toString()}%`} text1="可用率" />
                         </div>
                     </div>
                 </div>

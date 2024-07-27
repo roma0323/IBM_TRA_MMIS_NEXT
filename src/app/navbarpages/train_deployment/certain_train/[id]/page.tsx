@@ -1,7 +1,15 @@
 import DetailClientPage from "@/components/train_deployment/DetailClientPage";
 
+interface Params {
+  id: string;
+}
+
+interface PageProps {
+  params: Params;
+}
+
 // This function runs only on the server
-async function getData(id) {
+async function getData(id:String) {
 
   const res = await fetch(`http://tra.webtw.xyz:8888/maximo/zz_data?method=getSumStatusList&qdate=2024-07-25&carcatalog=${id}`, {
     method: 'POST',
@@ -18,16 +26,13 @@ async function getData(id) {
   return res.json();
 }
 
-export default async function Page({ params }) {
-  console.log("ssssssssss",params.id)
+export default async function Page({ params }:PageProps) {
+  const decodedLastPart = decodeURIComponent(params.id);
 
-  const data = await getData(params.id);
+  const data = await getData(decodedLastPart);
   return (
     <main>
-      {/* <div>{data.data[0].carcatalog}</div> */}
-      <div>sdcsdc</div>
-
-      {/* <DetailClientPage initialData={data.data} /> */}
+      <DetailClientPage initialData={data.data} /> 
     </main>
   );
 }

@@ -20,13 +20,12 @@ const trainTypes = [
 const MidNavbar: React.FC = () => {
 
     const pathname = usePathname()|| ''
-    let content;
     const lastPartOfPath = pathname.split('/').pop()|| '';
-    const decodedLastPart = decodeURIComponent(lastPartOfPath);
+    let decodedLastPart = decodeURIComponent(lastPartOfPath);
 
-    switch (pathname) {
-        case '/navbarpages/train_deployment':
-            content = '總覽';
+    switch (decodedLastPart) {
+        case 'train_deployment':
+            decodedLastPart = '總覽';
             break;
     }
 
@@ -43,7 +42,7 @@ const MidNavbar: React.FC = () => {
                         </div>
                         <div className="inline-flex items-center gap-1 relative flex-[0_0_auto]">
                             <div className="text-3xl  text-[#397eff]">
-                                {content}{decodedLastPart}
+                                {decodedLastPart}
                             </div>
                         </div>
                     </div>

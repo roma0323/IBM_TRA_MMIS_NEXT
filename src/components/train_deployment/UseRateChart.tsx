@@ -1,16 +1,11 @@
-import React, { PureComponent } from 'react';
-import { useState, useEffect } from 'react';
-
+import React, { useState, useEffect } from 'react';
 import {
   BarChart,
   Bar,
-  Brush,
   ReferenceLine,
   XAxis,
   YAxis,
-  CartesianGrid,
   Tooltip,
-  Legend,
   ResponsiveContainer,
 } from 'recharts';
 
@@ -58,28 +53,27 @@ export default function UseRateChart() {
     return null; // Or a loading spinner, or some placeholder content
   }
 
-
   return (
     <ResponsiveContainer width="100%" aspect={2}>
-<BarChart
-      data={data}
-      margin={{
-        top: 10,
-      }}
-    >
-      <XAxis dataKey="name" />
-      <YAxis yAxisId="right" orientation="right" />
-
-      <YAxis
-        domain={[0, 10]}
-        tickFormatter={(value) => `${value}%`} // Optional: for displaying as percentage
-      />          
-      <Tooltip />
-      <ReferenceLine y={0} stroke="#000" />
-      {/* <Brush dataKey="name" height={30} stroke="#8884d8" /> */}
-      <Bar yAxisId="right" dataKey="using_rate" fill="#397EFF" background={{ fill: '#eee' }}/>
-    </BarChart></ResponsiveContainer>
-    
-
+      <BarChart
+        data={data}
+        margin={{
+          top: 10,
+          right: 10,
+        }}
+      >
+        <XAxis dataKey="name" />
+        <YAxis
+          tickFormatter={(value) => `${value}%`}
+        />
+        <Tooltip />
+        <ReferenceLine y={0} stroke="#000" />
+        <Bar
+          dataKey="using_rate"
+          fill="#397EFF"
+          background={{ fill: '#eee' }}
+        />
+      </BarChart>
+    </ResponsiveContainer>
   );
 }

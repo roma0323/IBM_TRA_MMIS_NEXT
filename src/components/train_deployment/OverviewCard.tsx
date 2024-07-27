@@ -17,8 +17,8 @@ export const OverviewCard = ({ Data  }: ClientPageProps): JSX.Element => {
               </div>
               <div className="flex flex-col items-start px-2.5 py-0 relative self-stretch w-full items-start flex-[0_0_auto] ">
                 <div className="flex items-center gap-5 px-0 py-[5px] relative self-stretch w-full flex-[0_0_auto] rounded-[5px] overflow-hidden">
-                  <DataCard  text={Data.current_ready} text1="車輛可用數" />
-                  <DataCard  text={Data.current_cnt} text1="總車輛數" />
+                  <DataCard  text={Data.current_ready} text1="可用數" />
+                  <DataCard  text={Data.current_cnt} text1="總輛數" />
                   <DataCard  text={`${Math.round(Data.availability*100).toString()}%`} text1="可用率" />
                 </div>
                 <UseRateChart />
