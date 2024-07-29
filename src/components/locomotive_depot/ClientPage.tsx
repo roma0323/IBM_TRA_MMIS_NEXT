@@ -83,66 +83,48 @@ const TrainPageContent: React.FC<ClientComponentProps> = ({ initialData }) => {
         </div>
       </div>
 
-        <div className="flex-col col-span-3 items-start gap-2.5 relative bg-white rounded-lg h-full overflow-hidden">
-          <div className="flex flex-col text-[#000000] items-start justify-center p-2.5 relative self-stretch w-full flex-[0_0_auto] border-b [border-bottom-style:solid] border-[#646464]">
-            {selectedArea} - {selectedLabel}
-          </div>
+      <div className="flex-col col-span-3 items-start gap-2.5 relative bg-white rounded-lg h-full overflow-hidden">
+        <div className="flex flex-col text-[#000000] items-start justify-center p-2.5 relative self-stretch w-full flex-[0_0_auto] border-b [border-bottom-style:solid] border-[#646464]">
+          {selectedArea} - {selectedLabel}
+        </div>
 
-          <div className="w-full h-[67dvh] relative overflow-scroll">
-            <div className="flex flex-col w-full items-start relative flex-[0_0_auto] p-5 bg-[#f5f5f533] rounded-lg overflow-hidden">
-              <div className="grid grid-cols-18 gap-4 bg-gray-100 border-b-2 border-gray-200 rounded-lg text-left">
-                <div className="col-span-2 p-2 flex items-end">車種</div>
-                <div className="col-span-2 p-2 flex items-end">型號</div>
-                <div className="p-2 flex items-end">配置</div>
-                <div className="p-2 flex items-end">借出</div>
-                <div className="p-2 flex items-end">借入</div>
-                <div className="p-2 flex items-end">可用</div>
-                <div className="p-2 flex items-end">定期</div>
-                <div className="p-2 flex items-end">臨時</div>
-                <div className="p-2 flex items-end">預備</div>
-                <div className="p-2 flex items-end">W OR 保養</div>
-                <div className="p-2 flex items-end">段修</div>
-                <div className="p-2 flex items-end">廠修</div>
-                <div className="p-2 flex items-end">待料 待修</div>
-                <div className="p-2 flex items-end">無火 回送</div>
-                <div className="p-2 flex items-end">停用</div>
-                <div className="p-2 flex items-end">留車</div>
-              </div>
-              {selectedLabel && (
+        <div className="w-full h-[67dvh] relative overflow-scroll">
+          <div className="flex flex-col w-full items-start relative flex-[0_0_auto] p-5 bg-[#f5f5f533] rounded-lg overflow-hidden">
+            <div className="grid grid-cols-16 gap-4 bg-gray-100 border-b-2 border-gray-200 rounded-lg text-left">
+              <div className="p-2 flex items-end">車種</div>
+              <div className="py-2 flex items-end">型號</div>
+              <div className="p-2 flex items-end">配置</div>
+              <div className="p-2 flex items-end">借出</div>
+              <div className="p-2 flex items-end">借入</div>
+              <div className="p-2 flex items-end">可用</div>
+              <div className="p-2 flex items-end">定期</div>
+              <div className="p-2 flex items-end">臨時</div>
+              <div className="p-2 flex items-end">預備</div>
+              <div className="p-2 flex items-end">W OR 保養</div>
+              <div className="p-2 flex items-end">段修</div>
+              <div className="p-2 flex items-end">廠修</div>
+              <div className="p-2 flex items-end">待料 待修</div>
+              <div className="p-2 flex items-end">無火 回送</div>
+              <div className="p-2 flex items-end">停用</div>
+              <div className="p-2 flex items-end">留車</div>
+            </div>
+            {selectedLabel && (
 
-<div> {filteredTrainData.map((train, index) => (
+              <div> {filteredTrainData.map((train, index) => (
                 <RowByTrain
                   key={index}
-                  className=""
-                  dept={train.dept}
-                  deptdesc={train.deptdesc}
-                  cartype={train.cartype}
-                  carcatalog={train.carcatalog}
-                  belongto={train.belongto}
-                  borrowin={train.borrowin}
-                  borrowout={train.borrowout}
-                  current_cnt={train.current_cnt}
-                  current_use={train.current_use}
-                  current_temp={train.current_temp}
-                  current_ready={train.current_ready}
-                  maintain_w={train.maintain_w}
-                  maintain_sec={train.maintain_sec}
-                  maintain_fac={train.maintain_fac}
-                  oth_waitrep={train.oth_waitrep}
-                  oth_return={train.oth_return}
-                  oth_stop={train.oth_stop}
-                  availability={train.availability}
+                  trainData={train}
                 />
               ))}</div>
-             
+
 
             )}
 
-              
-            </div>
+
           </div>
         </div>
-     
+      </div>
+
     </div>
   );
 }
@@ -155,7 +137,7 @@ const TrainPageContent: React.FC<ClientComponentProps> = ({ initialData }) => {
 export default function ClientPage({ initialData }: ClientComponentProps) {
   const [data, setData] = useState(initialData);
   return (
-    
+
     <Suspense fallback={<div>Loading...</div>}>
       <TrainPageContent initialData={data} />
     </Suspense>
