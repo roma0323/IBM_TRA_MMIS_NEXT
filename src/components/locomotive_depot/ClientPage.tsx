@@ -109,18 +109,13 @@ const TrainPageContent: React.FC<ClientComponentProps> = ({ initialData }) => {
               <div className="p-2 flex items-end">留車</div>
             </div>
             {selectedLabel && (
-
               <div> {filteredTrainData.map((train, index) => (
                 <RowByTrain
                   key={index}
                   trainData={train}
                 />
               ))}</div>
-
-
             )}
-
-
           </div>
         </div>
       </div>
@@ -137,7 +132,6 @@ const TrainPageContent: React.FC<ClientComponentProps> = ({ initialData }) => {
 export default function ClientPage({ initialData }: ClientComponentProps) {
   const [data, setData] = useState(initialData);
   return (
-
     <Suspense fallback={<div>Loading...</div>}>
       <TrainPageContent initialData={data} />
     </Suspense>
