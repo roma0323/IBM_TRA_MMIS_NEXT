@@ -54,7 +54,7 @@ export default function UseRateChart() {
   }
 
   return (
-    <ResponsiveContainer width="100%" aspect={2}>
+    <ResponsiveContainer width="100%" aspect={2.5}>
       <BarChart
         data={data}
         margin={{

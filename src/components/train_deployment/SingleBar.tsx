@@ -22,7 +22,7 @@ export default class Example extends PureComponent {
 
   render() {
     return (
-      <ResponsiveContainer width="100%" aspect={4}>
+      <ResponsiveContainer width="100%" aspect={4.5}>
         <BarChart
           layout="vertical"
           data={data}

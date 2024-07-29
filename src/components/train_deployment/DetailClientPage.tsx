@@ -53,10 +53,11 @@ const DetailClientPage: React.FC<ClientPageProps> = ({ initialData }) => {
 
                 {/* 近30 城際列車 - 車種配置   */}
                 <div className=" w-full h-full relative flex-1 rounded-lg flex flex-col items-center justify-center relative bg-white 	">
-                    <div className="flex flex-col items-start justify-center p-2.5   w-full  border-b  border-[#646464]">
-                        城際列車 - 車種配置
+
+                    <div className="flex flex-col items-start justify-center  p-2.5   w-full  border-b  border-[#646464]">
+                    城際列車 - 車種配置
                     </div>
-                    <div className="relative w-full h-5/6 flex items-start justify-center ">
+                    <div className="relative w-full  flex items-start justify-center ">
                         <BigPieChart />
                     </div>
                 </div>
@@ -71,7 +72,7 @@ const DetailClientPage: React.FC<ClientPageProps> = ({ initialData }) => {
                     城際列車 - 車種分配資訊
                 </div>
 
-                <div className="flex flex-col items-start gap-2.5 px-3 py-2 relative flex-1 self-stretch w-full grow" >
+                <div className="overflow-auto flex flex-col items-start gap-2.5 px-3 py-2 relative  w-full h-[67vh]" >
                     {trainData.map((train, index) => (
                         <DeploymentByTrainCategory
                             key={index}
