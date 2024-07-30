@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import React from "react";
 import { DataCard } from "@/components/train_deployment/DataCard";
 // import UseRateLineChart from "@/components/train_deployment/UseRateLineChart";
@@ -26,8 +25,4 @@ export const OverviewCard = ({ Data  }: ClientPageProps): JSX.Element => {
               </div>
             </div>
   );
-};
-
-OverviewCard.propTypes = {
-  text: PropTypes.string,
 };

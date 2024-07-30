@@ -7,6 +7,8 @@ import BigPieChart from "@/components/train_deployment/BigPieChart";
 import DeploymentByTrainCategory from "@/components/train_deployment/DeploymentByTrainCategory";
 // import UseRateLineChart from "@/components/train_deployment/UseRateLineChart";
 import UseRateAreaChart from "@/components/train_deployment/UseRateAreaChart";
+import {DetailTrainByDepot} from "@/components/train_deployment/DetailTrainByDepot";
+
 
 const trainData = [
     { trainName: "太魯閣-TEMU1000", trainCount: 200 },
@@ -36,7 +38,7 @@ const DetailClientPage: React.FC<ClientPageProps> = ({ initialData }) => {
                         <div className="flex items-center gap-5 px-0 py-[5px] relative self-stretch w-full flex-[0_0_auto] rounded-[5px] overflow-hidden">
                             <DataCard text={cnt_sum} text1="可用數" />
                             <DataCard text={ready_sum} text1="總輛數" />
-                            <DataCard text={`${Math.round(ready_sum/cnt_sum*100).toString()}%`} text1="可用率" />
+                            <DataCard text={`${Math.round(ready_sum / cnt_sum * 100).toString()}%`} text1="可用率" />
                         </div>
                     </div>
                 </div>
@@ -56,7 +58,7 @@ const DetailClientPage: React.FC<ClientPageProps> = ({ initialData }) => {
                 <div className=" w-full h-full relative rounded-lg flex flex-col items-start justify-start  bg-white 	">
 
                     <div className="flex flex-col items-start justify-center  p-2.5   w-full  border-b  border-[#646464]">
-                    城際列車 - 車種配置
+                        城際列車 - 車種配置
                     </div>
                     <div className="relative w-full  flex items-start justify-center ">
                         <BigPieChart />
@@ -84,8 +86,18 @@ const DetailClientPage: React.FC<ClientPageProps> = ({ initialData }) => {
                 </div>
             </div>
 
-            <div className="h-full gap-4 flex-1 grow flex flex-col items-start relative bg-white">
+            <div className="h-full gap-2.5 flex-1 grow rounded-lg flex flex-col items-start relative bg-white overflow-hidden">
 
+                <div className="flex flex-col items-start justify-center p-2.5   w-full  border-b  border-[#646464] ">
+                    城際列車 - 機務段分配資訊</div>
+
+                    <div className="overflow-auto flex flex-col items-start gap-2.5 px-3 py-2 relative  w-full h-[67vh]" >
+                    <DetailTrainByDepot />
+                    <DetailTrainByDepot />
+                    <DetailTrainByDepot />
+                </div>
+
+                    
             </div>
 
 
