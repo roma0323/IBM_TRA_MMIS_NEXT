@@ -50,7 +50,7 @@ export const RowByTrain = ({
       <div className="p-2 flex items-end">{trainData.oth_waitrep}</div>
       <div className="p-2 flex items-end">{trainData.oth_return}</div>
       <div className="p-2 flex items-end">{trainData.oth_stop}</div>
-      <div className="p-2 flex items-end">{trainData.availability}</div>
+      <div className="p-2 flex items-end">{Number(trainData.availability.toFixed(2))}</div>
     </div>
   );
 };

@@ -1,3 +1,23 @@
+//RSTP RSTF貨車
+//RSTA客車
+//RSTL 動力車
+
+// [{
+//   "AVAILABLE": "2019",
+//   "TOTAL": "2490",
+//   "ALL_D": "2024-07-29",
+//   "USUALFLAG": "1",
+//   "RATION": "81.08433734939759036",
+//   "EQ11": "RSTL"
+// }, {
+//   "AVAILABLE": "270",
+//   "TOTAL": "376",
+//   "ALL_D": "2024-07-29",
+//   "USUALFLAG": "1",
+//   "RATION": "84.81375358166189111",
+//   "EQ11": "RSTP"
+// }]
+
 'use client'
 import { useEffect, useState } from 'react';
 

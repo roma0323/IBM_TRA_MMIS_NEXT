@@ -3,9 +3,10 @@
 
 import React from "react";
 import { DataCard } from "@/components/train_deployment/DataCard";
-import UseRateChart from "@/components/train_deployment/UseRateChart";
 import BigPieChart from "@/components/train_deployment/BigPieChart";
 import DeploymentByTrainCategory from "@/components/train_deployment/DeploymentByTrainCategory";
+// import UseRateLineChart from "@/components/train_deployment/UseRateLineChart";
+import UseRateAreaChart from "@/components/train_deployment/UseRateAreaChart";
 
 const trainData = [
     { trainName: "太魯閣-TEMU1000", trainCount: 200 },
@@ -44,9 +45,9 @@ const DetailClientPage: React.FC<ClientPageProps> = ({ initialData }) => {
                 {/* 近30 天使用率   */}
                 <div className="w-full self-stretch  flex-[0_0_auto] rounded-lg flex flex-col items-center relative bg-white overflow-hidden">
                     <div className="flex flex-col items-start justify-center p-2.5   w-full  border-b  border-[#646464]">
-                        近30 天使用率 3/1 ~ 4/1
+                        近30 天使用率
                     </div>
-                    <UseRateChart />
+                    <UseRateAreaChart />
 
                 </div>
                 {/* 近30 天使用率   */}
