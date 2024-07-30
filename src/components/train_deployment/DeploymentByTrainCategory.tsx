@@ -6,20 +6,25 @@ interface MyComponentProps {
   trainName: string;
   trainCount: number;
   onClick: () => void;
+  isActive: boolean;
 }
 
-const DeploymentByTrainCategory: React.FC<MyComponentProps> = ({ trainName, trainCount, onClick }) => {
-  const [isActive, setIsActive] = useState(false);
+const DeploymentByTrainCategory: React.FC<MyComponentProps> = ({ trainName, trainCount, onClick, isActive }) => {
+  const [isHovered, setIsHovered] = useState(false);
 
   const handleToggle = () => {
-    setIsActive(prevState => !prevState);
     onClick();
   };
 
   return (
     <div
-      className="flex items-start gap-3 p-4 self-stretch w-full flex-[0_0_auto] bg-[#3034380d] rounded overflow-hidden border-[#397EFF] border-l-4 flex-col justify-center relative"
+      className={`flex items-start gap-3 p-4 self-stretch w-full flex-[0_0_auto] bg-[#3034380d] rounded overflow-hidden cursor-pointer transition-transform duration-300 ease-in-out transform   hover:shadow-lg
+        ${
+        isActive ? 'border-[#397EFF] border-l-4' : ''
+      } flex-col justify-center relative`}
       onClick={handleToggle}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
       <div className="text-lg">
         {trainName}

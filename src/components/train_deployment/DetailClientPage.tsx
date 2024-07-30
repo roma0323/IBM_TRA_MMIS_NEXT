@@ -78,6 +78,7 @@ const DetailClientPage: React.FC<ClientPageProps> = ({ initialData }) => {
                             trainName={train.trainName}
                             trainCount={train.trainCount}
                             onClick={() => handleTrainClick(train.trainName)}
+                            isActive={selectedTrainName === train.trainName && isDetailVisible}
                         />
                     ))}
                 </div>
