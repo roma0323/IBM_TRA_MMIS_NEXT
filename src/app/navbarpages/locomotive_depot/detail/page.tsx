@@ -16,7 +16,6 @@ async function getData() {
 export default async function Page() {
   const data = await getData()
   return <main>
-    detail
       <ClientPage initialData={data.data} />
       </main>
 }

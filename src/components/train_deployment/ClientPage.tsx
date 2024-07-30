@@ -79,7 +79,6 @@ const CUSTMOER_TRAIN_DATA = {
   return (
     <div className="bg-gray-200 p-3 ">
       <BigOverviewCard Data={ALL_TRAIN_DATA} />
-
       <div className="grid grid-cols-4 flex-grow relative bg-gray-200 overflow-hidden">
       <Link href={{ pathname: `/navbarpages/train_deployment/certain_train/${TRUNK_TRAIN_DATA.NAME}`, }}>
           <OverviewCard Data={TRUNK_TRAIN_DATA} />
@@ -93,17 +92,6 @@ const CUSTMOER_TRAIN_DATA = {
         <Link href={{ pathname: `/navbarpages/train_deployment/certain_train/${UNUSUALLY_USED_TRAIN_DATA.NAME}`, }}>
           <OverviewCard Data={UNUSUALLY_USED_TRAIN_DATA} />
         </Link>
-        
-        {/* {initialData.map((data, index) => (
-          <Link
-            key={index}
-            href={{
-              pathname: `/navbarpages/train_deployment/certain_train/${data.carcatalog}`,
-            }}
-          >
-            <OverviewCard Data={data} />
-          </Link>
-        ))} */}
       </div>
     </div>
 

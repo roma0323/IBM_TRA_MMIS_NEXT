@@ -53,7 +53,7 @@ const DetailClientPage: React.FC<ClientPageProps> = ({ initialData }) => {
                 {/* 近30 天使用率   */}
 
                 {/* 近30 城際列車 - 車種配置   */}
-                <div className=" w-full h-full relative flex-1 rounded-lg flex flex-col items-center justify-center relative bg-white 	">
+                <div className=" w-full h-full relative rounded-lg flex flex-col items-start justify-start  bg-white 	">
 
                     <div className="flex flex-col items-start justify-center  p-2.5   w-full  border-b  border-[#646464]">
                     城際列車 - 車種配置
