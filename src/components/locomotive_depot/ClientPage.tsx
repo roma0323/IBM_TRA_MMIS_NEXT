@@ -3,30 +3,11 @@
 import React, { useState, useEffect, Suspense } from "react";
 import { LabelAndNumberByArea } from "@/components/locomotive_depot/LabelAndNumberByArea";
 import { RowByTrain } from "@/components/locomotive_depot/RowByTrain";
+import SlideNavigation from '@/components/SlideNavigation'; // Import SlideNavigation component
+import BoardTitleSection from '@/components/BoardTitleSection'; // Import the Section component
 
-type TrainData = {
-  dept: string;
-  deptdesc: string;
-  cartype: string;
-  carcatalog: string;
-  belongto: number;
-  borrowin: number;
-  borrowout: number;
-  current_cnt: number;
-  current_use: number;
-  current_temp: number;
-  current_ready: number;
-  maintain_w: number;
-  maintain_sec: number;
-  maintain_fac: number;
-  oth_waitrep: number;
-  oth_return: number;
-  oth_stop: number;
-  availability: number;
-};
-
+type TrainData = { dept: string; deptdesc: string; cartype: string; carcatalog: string; belongto: number; borrowin: number; borrowout: number; current_cnt: number; current_use: number; current_temp: number; current_ready: number; maintain_w: number; maintain_sec: number; maintain_fac: number; oth_waitrep: number; oth_return: number; oth_stop: number; availability: number; };
 type TrainDataArray = TrainData[];
-
 interface ClientComponentProps {
   initialData: TrainDataArray;
 }
@@ -60,47 +41,83 @@ const TrainPageContent: React.FC<ClientComponentProps> = ({ initialData }) => {
     "W OR 保養", "段修", "廠修", "待料 待修", "無火 回送", "停用", "留車"
   ];
 
-  return (
-    <div className="bg-gray-100 grid grid-cols-4 flex-grow relative justify-center gap-3 p-6">
-      <div className="flex-col items-start gap-2.5 relative bg-white rounded-lg overflow-hidden">
-        <div className="flex flex-col text-black items-start justify-center p-2.5 relative self-stretch w-full flex-shrink-0 border-b border-gray-400">
-          城際列車 - 機務段分配
-        </div>
-        <div className="w-full h-[67vh]  relative overflow-scroll">
-          <div className="flex flex-col w-full bg-white items-start relative flex-shrink-0 bg-gray-100 rounded-lg overflow-hidden">
-            {areas.map(area => (
-              <LabelAndNumberByArea
-                key={area}
-                area_name={area}
-                onLabelClick={(label) => handleLabelClick(label, area)}
-              />
-            ))}
-          </div>
-        </div>
-      </div>
+  // Slide navigation logic
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const totalSlides = 3; // Adjust if you have more or less than 3 divs
+  const visibleSlides = 2; // Set to 1 since we want to slide one div at a time
 
-      <div className="flex-col col-span-3 items-start gap-2.5 relative bg-white rounded-lg h-full overflow-hidden">
-        <div className="flex flex-col text-black items-start justify-center p-2.5 relative self-stretch w-full flex-shrink-0 border-b border-gray-400">
-          {selectedArea} - {selectedLabel}
+  const handleMouseEnter = (direction: 'left' | 'right') => {
+    setCurrentIndex((prevIndex) => {
+      if (direction === 'left') {
+        return prevIndex === 0 ? 0 : prevIndex - 1;
+      } else if (direction === 'right') {
+        return prevIndex >= totalSlides - visibleSlides ? prevIndex : prevIndex + 1;
+      }
+      return prevIndex;
+    });
+  };
+
+  const canMoveLeft = currentIndex > 0;
+  const canMoveRight = currentIndex < totalSlides - visibleSlides;
+
+  return (
+    <div className="flex w-full p-6 relative overflow-hidden bg-neutral-100">
+      <div
+        className="flex w-full gap-8 transition-transform duration-500 ease-in-out"
+        style={{ transform: `translateX(-${currentIndex * 26}%)` }} // Adjusted to slide the divs
+      >
+        {/* First Div */}
+        <div className="min-w-[23%] flex items-center justify-center">
+          <BoardTitleSection
+            title="城際列車 - 機務段分配"
+            content={(
+              <div className="flex flex-col w-full bg-white items-start relative flex-shrink-0 bg-gray-100 rounded-lg overflow-hidden">
+                {areas.map(area => (
+                  <LabelAndNumberByArea
+                    key={area}
+                    area_name={area}
+                    onLabelClick={(label) => handleLabelClick(label, area)}
+                  />
+                ))}
+              </div>
+            )}
+          />
         </div>
-        <div className="w-full h-[67vh] relative overflow-scroll">
-          <div className="flex flex-col bg-white w-full items-start relative flex-shrink-0 p-5 bg-gray-100 rounded-lg overflow-hidden">
-            
-            <div className="grid grid-cols-16 gap-4 bg-zinc-100 border-b-2 border-gray-200 rounded-lg text-left">
-              {headers.map((header, index) => (
-                <div key={index} className="p-2 flex items-end">
-                  {header}
-                </div>))}
-            </div>
-            {selectedLabel && filteredTrainData.map((train, index) => (
-              <RowByTrain
-                key={index}
-                trainData={train}
-              />
-            ))}
-          </div>
+
+        {/* Second Div */}
+        <div className="min-w-[75%] flex items-center justify-center">
+          <BoardTitleSection
+            title={`${selectedArea} - ${selectedLabel}`}
+            content={(
+              <div className="flex flex-col bg-white w-full items-start relative flex-shrink-0 p-5 bg-gray-100 rounded-lg overflow-hidden">
+                <div className="grid grid-cols-16 gap-4 bg-zinc-100 border-b-2 border-gray-200 rounded-lg text-left">
+                  {headers.map((header, index) => (
+                    <div key={index} className="p-2 flex items-end">
+                      {header}
+                    </div>
+                  ))}
+                </div>
+                {selectedLabel && filteredTrainData.map((train, index) => (
+                  <RowByTrain
+                    key={index}
+                    trainData={train}
+                  />
+                ))}
+              </div>
+            )}
+          />
+        </div>
+
+        {/* Third Div */}
+        <div className="min-w-[25%] flex items-center justify-center">
+          <BoardTitleSection
+            title="Third Div Content"
+            content={<div>Additional content for the third div</div>}
+          />
         </div>
       </div>
+      <SlideNavigation direction="left" onHover={handleMouseEnter} isVisible={canMoveLeft} />
+      <SlideNavigation direction="right" onHover={handleMouseEnter} isVisible={canMoveRight} />
     </div>
   );
 }

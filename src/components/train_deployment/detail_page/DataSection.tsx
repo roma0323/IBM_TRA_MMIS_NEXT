@@ -2,6 +2,7 @@ import React from 'react';
 import {DataCard} from "@/components/train_deployment/DataCard";
 import UseRateAreaChart from "@/components/train_deployment/UseRateAreaChart";
 import BigPieChart from "@/components/train_deployment/BigPieChart";
+import BoardTitleSection from '@/components/BoardTitleSection'; // Import the BoardTitleSection component
 
 type DataSectionProps = {
   cntSum: number;
@@ -10,6 +11,8 @@ type DataSectionProps = {
 
 const DataSection: React.FC<DataSectionProps> = ({ cntSum, readySum }) => (
   <div className="h-full w-full inline-flex flex-col items-start gap-4 relative flex-[0_0_auto]">
+
+    
     <div className="w-full flex-[0_0_auto] rounded-lg flex flex-col items-start relative bg-white overflow-hidden">
       <div className="flex flex-col items-start justify-center p-2.5 w-full border-b border-[#646464]">
         分配資訊
@@ -22,6 +25,9 @@ const DataSection: React.FC<DataSectionProps> = ({ cntSum, readySum }) => (
         </div>
       </div>
     </div>
+  
+    
+
     <div className="w-full self-stretch flex-[0_0_auto] rounded-lg flex flex-col items-center relative bg-white overflow-hidden">
       <div className="flex flex-col items-start justify-center p-2.5 w-full border-b border-[#646464]">
         近30 天使用率
