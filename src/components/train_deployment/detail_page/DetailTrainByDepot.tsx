@@ -6,7 +6,7 @@ interface DetailTrainByDepotProps {
 
 const DetailTrainByDepot: React.FC<DetailTrainByDepotProps> = ({ trainName }) => {
     return (
-        <div className="flex items-start gap-3 p-4 self-stretch w-full flex-[0_0_auto] bg-[#3034380d] rounded overflow-hidden border-[#397EFF] border-l-4 flex-col justify-center relative">
+        <div className="flex items-start gap-3 p-4 self-stretch w-full flex-[0_0_auto] bg-[#3034380d] rounded overflow-hidden border-l-4 flex-col justify-center relative">
             <div className="relative w-fit mt-[-4.00px]">
                 台北機務段 - {trainName}
             </div>

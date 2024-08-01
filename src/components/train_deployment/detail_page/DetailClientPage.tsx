@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import DataSection from '@/components/train_deployment/detail_page/DataSection';
 import TrainCategorySection from '@/components/train_deployment/detail_page/TrainCategorySection';
 import DepotSection from '@/components/train_deployment/detail_page/DepotSection';
+import MaintenanceSection from '@/components/train_deployment/detail_page/MaintenanceSection';
 
 const trainData = [
   { trainName: "太魯閣-TEMU1000", trainCount: 200 },
@@ -71,7 +72,7 @@ const DetailClientPage: React.FC<ClientPageProps> = ({ initialData }) => {
           />
         </div>
         <div className="min-w-[32%] h-full flex items-center justify-center">
-          <DepotSection
+          <MaintenanceSection
             title="檢修車輛詳情"
             selectedTrainName={selectedTrainName}
             isDetailVisible={isDetailVisible}
