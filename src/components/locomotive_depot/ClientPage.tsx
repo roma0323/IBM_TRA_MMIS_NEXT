@@ -1,4 +1,5 @@
 'use client';
+
 import React, { useState, useEffect, Suspense } from "react";
 import { LabelAndNumberByArea } from "@/components/locomotive_depot/LabelAndNumberByArea";
 import { RowByTrain } from "@/components/locomotive_depot/RowByTrain";
@@ -31,14 +32,13 @@ interface ClientComponentProps {
 }
 
 const TrainPageContent: React.FC<ClientComponentProps> = ({ initialData }) => {
-
   const [trainData, setTrainData] = useState<TrainData[]>([]);
   const [selectedLabel, setSelectedLabel] = useState<string | null>(null);
   const [selectedArea, setSelectedArea] = useState<string | null>(null);
 
   useEffect(() => {
     setTrainData(initialData);
-  }, []);
+  }, [initialData]);
 
   const handleLabelClick = (label: string, area: string) => {
     setSelectedLabel((prevLabel) => (prevLabel === label && selectedArea === area ? null : label));
@@ -52,26 +52,22 @@ const TrainPageContent: React.FC<ClientComponentProps> = ({ initialData }) => {
   });
 
   const areas = [
-    "全部機務段",
-    "七堵機務段",
-    "台北機務段",
-    "新竹機務段",
-    "彰化機務段",
-    "嘉義機務段",
-    "高雄機務段",
-    "花蓮機務段",
-    "臺東機務段",
-    "宜蘭機務分段"
+    "全部機務段", "七堵機務段", "台北機務段", "新竹機務段", "彰化機務段", "嘉義機務段", "高雄機務段", "花蓮機務段", "臺東機務段", "宜蘭機務分段"
+  ];
+
+  const headers = [
+    "車種", "型號", "配置", "借出", "借入", "可用", "定期", "臨時", "預備",
+    "W OR 保養", "段修", "廠修", "待料 待修", "無火 回送", "停用", "留車"
   ];
 
   return (
     <div className="bg-gray-100 grid grid-cols-4 flex-grow relative justify-center gap-3 p-6">
-      <div className="flex-col items-start gap-2.5 relative bg-white rounded-lg  overflow-hidden">
-        <div className="flex flex-col text-[#000000] items-start justify-center p-2.5 relative self-stretch w-full flex-[0_0_auto] border-b [border-bottom-style:solid] border-[#646464]">
+      <div className="flex-col items-start gap-2.5 relative bg-white rounded-lg overflow-hidden">
+        <div className="flex flex-col text-black items-start justify-center p-2.5 relative self-stretch w-full flex-shrink-0 border-b border-gray-400">
           城際列車 - 機務段分配
         </div>
-        <div className="w-full h-[67dvh] relative overflow-scroll">
-          <div className="flex flex-col w-full items-start relative flex-[0_0_auto] bg-[#f5f5f533] rounded-lg overflow-hidden">
+        <div className="w-full h-[67vh]  relative overflow-scroll">
+          <div className="flex flex-col w-full bg-white items-start relative flex-shrink-0 bg-gray-100 rounded-lg overflow-hidden">
             {areas.map(area => (
               <LabelAndNumberByArea
                 key={area}
@@ -84,56 +80,38 @@ const TrainPageContent: React.FC<ClientComponentProps> = ({ initialData }) => {
       </div>
 
       <div className="flex-col col-span-3 items-start gap-2.5 relative bg-white rounded-lg h-full overflow-hidden">
-        <div className="flex flex-col text-[#000000] items-start justify-center p-2.5 relative self-stretch w-full flex-[0_0_auto] border-b [border-bottom-style:solid] border-[#646464]">
+        <div className="flex flex-col text-black items-start justify-center p-2.5 relative self-stretch w-full flex-shrink-0 border-b border-gray-400">
           {selectedArea} - {selectedLabel}
         </div>
-
-        <div className="w-full h-[67dvh] relative overflow-scroll">
-          <div className="flex flex-col w-full items-start relative flex-[0_0_auto] p-5 bg-[#f5f5f533] rounded-lg overflow-hidden">
-            <div className="grid grid-cols-16 gap-4 bg-gray-100 border-b-2 border-gray-200 rounded-lg text-left">
-              <div className="p-2 flex items-end">車種</div>
-              <div className="py-2 flex items-end">型號</div>
-              <div className="p-2 flex items-end">配置</div>
-              <div className="p-2 flex items-end">借出</div>
-              <div className="p-2 flex items-end">借入</div>
-              <div className="p-2 flex items-end">可用</div>
-              <div className="p-2 flex items-end">定期</div>
-              <div className="p-2 flex items-end">臨時</div>
-              <div className="p-2 flex items-end">預備</div>
-              <div className="p-2 flex items-end">W OR 保養</div>
-              <div className="p-2 flex items-end">段修</div>
-              <div className="p-2 flex items-end">廠修</div>
-              <div className="p-2 flex items-end">待料 待修</div>
-              <div className="p-2 flex items-end">無火 回送</div>
-              <div className="p-2 flex items-end">停用</div>
-              <div className="p-2 flex items-end">留車</div>
+        <div className="w-full h-[67vh] relative overflow-scroll">
+          <div className="flex flex-col bg-white w-full items-start relative flex-shrink-0 p-5 bg-gray-100 rounded-lg overflow-hidden">
+            <div className="grid grid-cols-16 gap-4 bg-zinc-100 border-b-2 border-gray-200 rounded-lg text-left">
+            {headers.map((header, index) => (
+                <div key={index} className="p-2 flex items-end">
+                  {header}
+                </div>))}
             </div>
-            {selectedLabel && (
-              <div> {filteredTrainData.map((train, index) => (
-                <RowByTrain
-                  key={index}
-                  trainData={train}
-                />
-              ))}</div>
-            )}
+            {selectedLabel && filteredTrainData.map((train, index) => (
+              <RowByTrain
+                key={index}
+                trainData={train}
+              />
+            ))}
           </div>
         </div>
       </div>
-
     </div>
   );
 }
 
-
-
-
-// Define the type for the array of these objects
-
-export default function ClientPage({ initialData }: ClientComponentProps) {
+const ClientPage: React.FC<ClientComponentProps> = ({ initialData }) => {
   const [data, setData] = useState(initialData);
+
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <TrainPageContent initialData={data} />
     </Suspense>
   );
 }
+
+export default ClientPage;

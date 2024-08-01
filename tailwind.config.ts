@@ -25,6 +25,7 @@ const config = {
         '16': 'repeat(16, minmax(0, 1fr))',
       },
       colors: {
+        
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -33,7 +34,7 @@ const config = {
         "on-primary": "var(--on-primary)",
         surface: "var(--surface)",
         primary: {
-          DEFAULT: "hsl(var(--primary))",
+          DEFAULT: "#397EFF",
           foreground: "hsl(var(--primary-foreground))",
         },
         secondary: {
