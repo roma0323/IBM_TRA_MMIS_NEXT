@@ -16,9 +16,10 @@ const DetailTrainByDepot: React.FC<DetailTrainByDepotProps> = ({ trainName, onIt
     { label: '其他', value: '1' },
     { label: '可用率', value: '1' },
   ];
-
+  // 
+//
   return (
-    <div className="flex items-start gap-3 p-4 self-stretch mx-3 mt-3 flex-[0_0_auto] bg-[#3034380d] rounded-xl overflow-hidden border-l-4 flex-col justify-center relative">
+    <div className={` flex items-start gap-3 p-4 self-stretch mx-3 mt-3 flex-[0_0_auto] bg-[#3034380d] rounded-xl overflow-hidden border-l-4 flex-col justify-center relative $ isActive ? 'border-[#397EFF] border-l-4' : ''} flex-col justify-center relative`}>
       <div className="relative w-fit mt-[-4.00px]">
         台北機務段 - {trainName}
       </div>

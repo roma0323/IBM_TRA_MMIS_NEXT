@@ -1,4 +1,4 @@
-import DetailClientPage from "@/components/train_deployment/detail_page/DetailClientPage";
+import ClientPage from "@/components/train_deployment/detail_page/ClientPage";
 interface Params {
   id: string;
 }
@@ -31,7 +31,7 @@ export default async function Page({ params }:PageProps) {
   const data = await getData(decodedLastPart);
   return (
     <main>
-      <DetailClientPage initialData={data.data} /> 
+      <ClientPage initialData={data.data} /> 
     </main>
   );
 }

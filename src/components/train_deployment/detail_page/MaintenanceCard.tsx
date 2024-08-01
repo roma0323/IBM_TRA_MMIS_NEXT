@@ -28,7 +28,6 @@ const MaintenanceCard: React.FC<MaintenanceCardProps> = ({
       value: selectedItem,
     },
   ];
-
   return (
     <div className="flex items-start gap-3 p-4 self-stretch mx-3 mt-3 bg-[#3034380d] rounded-xl overflow-hidden border-l-4 flex-col justify-center relative">
       <div className="relative w-fit mt-[-4.00px]">

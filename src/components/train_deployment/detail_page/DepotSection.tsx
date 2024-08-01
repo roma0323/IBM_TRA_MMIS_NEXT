@@ -1,11 +1,12 @@
 import React from 'react';
-import TrainByDepotCard from "@/components/train_deployment/detail_page/TrainByDepotCard";
+import DepotSectionCard from "@/components/train_deployment/detail_page/DepotSectionCard";
 import BoardTitleSection from "@/components/BoardTitleSection"; // Import the Section component
 
 type DepotSectionProps = {
   title: string;
   selectedTrainName: string;
   isDetailVisible: boolean;
+  selectedItem: string | null;  // Prop for selected item
   handleItemClick: (itemName: string) => void;  // Add prop for handling item clicks
 };
 
@@ -19,7 +20,7 @@ const DepotSection: React.FC<DepotSectionProps> = ({
     title={title}
     content={
       isDetailVisible ? (
-        <TrainByDepotCard
+        <DepotSectionCard
           trainName={selectedTrainName}
           onItemClick={handleItemClick}
         />

@@ -1,5 +1,5 @@
 import React from 'react';
-import DeploymentByTrainCategory from "@/components/train_deployment/detail_page/DeploymentByTrainCategory";
+import TrainCategorySectionCard from "@/components/train_deployment/detail_page/TrainCategorySectionCard";
 import BoardTitleSection from "@/components/BoardTitleSection"; // Import the BoardTitleSection component
 
 type TrainCategorySectionProps = {
@@ -22,7 +22,7 @@ const TrainCategorySection: React.FC<TrainCategorySectionProps> = ({
     content={
       <div className="overflow-auto flex flex-col items-start gap-2.5 px-3 py-2 relative w-full">
         {trainData.map((train, index) => (
-          <DeploymentByTrainCategory
+          <TrainCategorySectionCard
             key={index}
             trainName={train.trainName}
             trainCount={train.trainCount}

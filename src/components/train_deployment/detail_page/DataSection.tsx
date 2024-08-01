@@ -7,6 +7,7 @@ import BoardTitleSection from '@/components/BoardTitleSection'; // Import the Bo
 type DataSectionProps = {
   cntSum: number;
   readySum: number;
+
 };
 
 const DataSection: React.FC<DataSectionProps> = ({ cntSum, readySum }) => (

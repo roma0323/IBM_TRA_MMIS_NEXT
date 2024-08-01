@@ -83,6 +83,7 @@ const DetailClientPage: React.FC<ClientPageProps> = ({ initialData }) => {
             title={`${initialData[0].carcatalog} - 機務段分配資訊`}
             selectedTrainName={selectedTrainName}
             isDetailVisible={isTrainDetailVisible}
+            selectedItem={selectedItem}  // Pass the selected item
             handleItemClick={handleItemClick}  // Pass the handleItemClick function
           />
         </div>
