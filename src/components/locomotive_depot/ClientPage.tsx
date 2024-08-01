@@ -5,6 +5,7 @@ import { LabelAndNumberByArea } from "@/components/locomotive_depot/LabelAndNumb
 import { RowByTrain } from "@/components/locomotive_depot/RowByTrain";
 import SlideNavigation from '@/components/SlideNavigation'; // Import SlideNavigation component
 import BoardTitleSection from '@/components/BoardTitleSection'; // Import the Section component
+import MaintenanceCard from "@/components/locomotive_depot/MaintenanceCard";
 
 type TrainData = { dept: string; deptdesc: string; cartype: string; carcatalog: string; belongto: number; borrowin: number; borrowout: number; current_cnt: number; current_use: number; current_temp: number; current_ready: number; maintain_w: number; maintain_sec: number; maintain_fac: number; oth_waitrep: number; oth_return: number; oth_stop: number; availability: number; };
 type TrainDataArray = TrainData[];
@@ -16,19 +17,33 @@ const TrainPageContent: React.FC<ClientComponentProps> = ({ initialData }) => {
   const [trainData, setTrainData] = useState<TrainData[]>([]);
   const [selectedLabel, setSelectedLabel] = useState<string | null>(null);
   const [selectedArea, setSelectedArea] = useState<string | null>(null);
+  const [selectedTrainData, setSelectedTrainData] = useState<TrainData | null>(null); // State to track selected train data
 
   useEffect(() => {
     setTrainData(initialData);
   }, [initialData]);
 
   const handleLabelClick = (label: string, area: string) => {
-    setSelectedLabel((prevLabel) => (prevLabel === label && selectedArea === area ? null : label));
-    setSelectedArea((prevArea) => (prevArea === area && selectedLabel === label ? null : area));
+    setSelectedLabel((prevLabel) =>
+      prevLabel === label && selectedArea === area ? null : label
+    );
+    setSelectedArea((prevArea) =>
+      prevArea === area && selectedLabel === label ? null : area
+    );
   };
 
-  const filteredTrainData = trainData.filter(train => {
-    const areaMatches = selectedArea === "全部機務段" || !selectedArea || train.deptdesc.includes(selectedArea.replace("車輛配置", ""));
-    const labelMatches = selectedLabel === "All" || !selectedLabel || train.carcatalog === selectedLabel;
+  const handleTrainDataClick = (train: TrainData) => {
+    handleMouseEnter('right')
+    setSelectedTrainData(train); // Set the selected train data
+  };
+
+  const filteredTrainData = trainData.filter((train) => {
+    const areaMatches =
+      selectedArea === "全部機務段" ||
+      !selectedArea ||
+      train.deptdesc.includes(selectedArea.replace("車輛配置", ""));
+    const labelMatches =
+      selectedLabel === "All" || !selectedLabel || train.carcatalog === selectedLabel;
     return areaMatches && labelMatches;
   });
 
@@ -40,17 +55,16 @@ const TrainPageContent: React.FC<ClientComponentProps> = ({ initialData }) => {
     "車種", "型號", "配置", "借出", "借入", "可用", "定期", "臨時", "預備",
     "W OR 保養", "段修", "廠修", "待料 待修", "無火 回送", "停用", "留車"
   ];
-
-  // Slide navigation logic
+//handleMouseEnter and slide
   const [currentIndex, setCurrentIndex] = useState(0);
   const totalSlides = 3; // Adjust if you have more or less than 3 divs
   const visibleSlides = 2; // Set to 1 since we want to slide one div at a time
 
-  const handleMouseEnter = (direction: 'left' | 'right') => {
+  const handleMouseEnter = (direction: "left" | "right") => {
     setCurrentIndex((prevIndex) => {
-      if (direction === 'left') {
+      if (direction === "left") {
         return prevIndex === 0 ? 0 : prevIndex - 1;
-      } else if (direction === 'right') {
+      } else if (direction === "right") {
         return prevIndex >= totalSlides - visibleSlides ? prevIndex : prevIndex + 1;
       }
       return prevIndex;
@@ -59,6 +73,7 @@ const TrainPageContent: React.FC<ClientComponentProps> = ({ initialData }) => {
 
   const canMoveLeft = currentIndex > 0;
   const canMoveRight = currentIndex < totalSlides - visibleSlides;
+//handleMouseEnter and slide
 
   return (
     <div className="flex w-full p-6 relative overflow-hidden bg-neutral-100">
@@ -70,9 +85,9 @@ const TrainPageContent: React.FC<ClientComponentProps> = ({ initialData }) => {
         <div className="min-w-[25%] flex items-center justify-center">
           <BoardTitleSection
             title="城際列車 - 機務段分配"
-            content={(
+            content={
               <div className="flex flex-col w-full bg-white items-start relative flex-shrink-0 bg-gray-100 rounded-lg overflow-hidden">
-                {areas.map(area => (
+                {areas.map((area) => (
                   <LabelAndNumberByArea
                     key={area}
                     area_name={area}
@@ -80,7 +95,7 @@ const TrainPageContent: React.FC<ClientComponentProps> = ({ initialData }) => {
                   />
                 ))}
               </div>
-            )}
+            }
           />
         </div>
 
@@ -88,7 +103,7 @@ const TrainPageContent: React.FC<ClientComponentProps> = ({ initialData }) => {
         <div className="min-w-[72%] flex items-center justify-center">
           <BoardTitleSection
             title={`${selectedArea} - ${selectedLabel}`}
-            content={(
+            content={
               <div className="flex flex-col bg-white w-full items-start relative flex-shrink-0 p-5 bg-gray-100 rounded-lg overflow-hidden">
                 <div className="grid grid-cols-16 gap-4 bg-zinc-100 border-b-2 border-gray-200 rounded-lg text-left">
                   {headers.map((header, index) => (
@@ -97,22 +112,31 @@ const TrainPageContent: React.FC<ClientComponentProps> = ({ initialData }) => {
                     </div>
                   ))}
                 </div>
-                {selectedLabel && filteredTrainData.map((train, index) => (
-                  <RowByTrain
-                    key={index}
-                    trainData={train}
-                  />
-                ))}
+                {selectedLabel &&
+                  filteredTrainData.map((train, index) => (
+                    <RowByTrain
+                      key={index}
+                      trainData={train}
+                      onClick={() => handleTrainDataClick(train)} // Pass click handler to RowByTrain
+                    />
+                  ))}
               </div>
-            )}
+            }
           />
         </div>
 
         {/* Third Div */}
         <div className="min-w-[25%] flex items-center justify-center">
           <BoardTitleSection
-            title="Third Div Content"
-            content={<div>Additional content for the third div</div>}
+            title="維修詳情"
+            content={
+              selectedTrainData && ( // Conditionally render MaintenanceCard
+                <MaintenanceCard
+                  trainName={selectedTrainData.dept}
+                  selectedItem={selectedTrainData.borrowin.toString()} // Example: pass borrowin data
+                />
+              )
+            }
           />
         </div>
       </div>
@@ -120,7 +144,7 @@ const TrainPageContent: React.FC<ClientComponentProps> = ({ initialData }) => {
       <SlideNavigation direction="right" onHover={handleMouseEnter} isVisible={canMoveRight} />
     </div>
   );
-}
+};
 
 const ClientPage: React.FC<ClientComponentProps> = ({ initialData }) => {
   const [data, setData] = useState(initialData);
@@ -130,6 +154,6 @@ const ClientPage: React.FC<ClientComponentProps> = ({ initialData }) => {
       <TrainPageContent initialData={data} />
     </Suspense>
   );
-}
+};
 
 export default ClientPage;

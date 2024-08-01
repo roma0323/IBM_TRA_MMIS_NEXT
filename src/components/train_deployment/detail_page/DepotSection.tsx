@@ -1,5 +1,5 @@
 import React from 'react';
-import DetailTrainByDepot from "@/components/train_deployment/detail_page/DetailTrainByDepot";
+import TrainByDepotCard from "@/components/train_deployment/detail_page/TrainByDepotCard";
 import BoardTitleSection from "@/components/BoardTitleSection"; // Import the Section component
 
 type DepotSectionProps = {
@@ -19,7 +19,7 @@ const DepotSection: React.FC<DepotSectionProps> = ({
     title={title}
     content={
       isDetailVisible ? (
-        <DetailTrainByDepot
+        <TrainByDepotCard
           trainName={selectedTrainName}
           onItemClick={handleItemClick}
         />
