@@ -1,139 +1,84 @@
-"use client";
-
+'use client';
 import React, { useState } from 'react';
-import { DataCard } from "@/components/train_deployment/DataCard";
-import BigPieChart from "@/components/train_deployment/BigPieChart";
-import DeploymentByTrainCategory from "@/components/train_deployment/DeploymentByTrainCategory";
-import UseRateAreaChart from "@/components/train_deployment/UseRateAreaChart";
-import DetailTrainByDepot from "@/components/train_deployment/DetailTrainByDepot";
-
-
+import DataSection from '@/components/train_deployment/detail_page/DataSection';
+import TrainCategorySection from '@/components/train_deployment/detail_page/TrainCategorySection';
+import DepotSection from '@/components/train_deployment/detail_page/DepotSection';
 
 const trainData = [
-    { trainName: "太魯閣-TEMU1000", trainCount: 200 },
-    { trainName: "普悠瑪-TEMU2000", trainCount: 150 },
-    { trainName: "自強號-TEMU3000", trainCount: 120 },
-    // Add more train data as needed
+  { trainName: "太魯閣-TEMU1000", trainCount: 200 },
+  { trainName: "普悠瑪-TEMU2000", trainCount: 150 },
+  { trainName: "自強號-TEMU3000", trainCount: 120 },
 ];
 
 type ClientPageProps = {
-    initialData: any[];
+  initialData: any[];
 };
 
 const DetailClientPage: React.FC<ClientPageProps> = ({ initialData }) => {
-    const [selectedTrainName, setSelectedTrainName] = useState('');
-    const [isDetailVisible, setIsDetailVisible] = useState(false);
+  const [selectedTrainName, setSelectedTrainName] = useState('');
+  const [isDetailVisible, setIsDetailVisible] = useState(false);
 
-    const handleTrainClick = (trainName: string) => {
-        if (trainName === selectedTrainName) {
-            setIsDetailVisible(!isDetailVisible);
-        } else {
-            setSelectedTrainName(trainName);
-            setIsDetailVisible(true);
-        }
-    };
+  const handleTrainClick = (trainName: string) => {
+    if (trainName === selectedTrainName) {
+      setIsDetailVisible(!isDetailVisible);
+    } else {
+      setSelectedTrainName(trainName);
+      setIsDetailVisible(true);
+    }
+  };
 
-    const cnt_sum = initialData.reduce((acc, item) => acc + item.current_cnt, 0);
-    const ready_sum = initialData.reduce((acc, item) => acc + item.current_ready, 0);
+  const cntSum = initialData.reduce((acc, item) => acc + item.current_cnt, 0);
+  const readySum = initialData.reduce((acc, item) => acc + item.current_ready, 0);
 
-    //mouse hover move div
-    const [currentIndex, setCurrentIndex] = useState(0);
-    const totalSlides = 4; // total number of slides
-    const visibleSlides = 3; // number of slides visible at a time
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const totalSlides = 4;
+  const visibleSlides = 3;
 
-    const handleMouseEnter = (direction: 'left' | 'right') => {
-        if (direction === 'left') {
-            setCurrentIndex((prevIndex) => (prevIndex === 0 ? 0 : prevIndex - 1));
-        } else if (direction === 'right') {
-            setCurrentIndex((prevIndex) => (prevIndex >= totalSlides - visibleSlides ? prevIndex : prevIndex + 1));
-        }
-    };
-    //mouse hover move div
-    const canMoveLeft = currentIndex > 0;
-    const canMoveRight = currentIndex < totalSlides - visibleSlides;
+  const handleMouseEnter = (direction: 'left' | 'right') => {
+    if (direction === 'left') {
+      setCurrentIndex((prevIndex) => (prevIndex === 0 ? 0 : prevIndex - 1));
+    } else if (direction === 'right') {
+      setCurrentIndex((prevIndex) => (prevIndex >= totalSlides - visibleSlides ? prevIndex : prevIndex + 1));
+    }
+  };
 
-    return (
-        <div className=" flex w-full  p-6 relative  overflow-hidden bg-neutral-100">
+  const canMoveLeft = currentIndex > 0;
+  const canMoveRight = currentIndex < totalSlides - visibleSlides;
 
-            <div
-                className="flex w-full gap-8  transition-transform duration-500 ease-in-out"
-                style={{ transform: `translateX(-${currentIndex * 34}%)` }}
-            >
-                <div className="min-w-[33%] h-full  flex items-center justify-center    ">
-                    <div className="h-full w-full  inline-flex flex-col items-start gap-4 relative flex-[0_0_auto]">
-                        {/* 分配資訊 */}
-                        <div className="w-full flex-[0_0_auto] rounded-lg flex flex-col items-start relative bg-white overflow-hidden">
-                            <div className="flex flex-col items-start justify-center p-2.5 w-full border-b border-[#646464]">
-                                分配資訊
-                            </div>
-                            <div className="flex flex-col items-start gap-[5px] px-2.5 py-0 relative self-stretch w-full flex-[0_0_auto]">
-                                <div className="flex items-center gap-5 px-0 py-[5px] relative self-stretch w-full flex-[0_0_auto] rounded-[5px] overflow-hidden">
-                                    <DataCard text={cnt_sum} text1="可用數" />
-                                    <DataCard text={ready_sum} text1="總輛數" />
-                                    <DataCard text={`${Math.round((ready_sum / cnt_sum) * 100)}%`} text1="可用率" />
-                                </div>
-                            </div>
-                        </div>
-                        {/* 近30 天使用率 */}
-                        <div className="w-full self-stretch flex-[0_0_auto] rounded-lg flex flex-col items-center relative bg-white overflow-hidden">
-                            <div className="flex flex-col items-start justify-center p-2.5 w-full border-b border-[#646464]">
-                                近30 天使用率
-                            </div>
-                            <UseRateAreaChart />
-                        </div>
-                        {/* 近30 城際列車 - 車種配置 */}
-                        <div className="w-full h-full relative rounded-lg flex flex-col items-start justify-start bg-white">
-                            <div className="flex flex-col items-start justify-center p-2.5 w-full border-b border-[#646464]">
-                                城際列車 - 車種配置
-                            </div>
-                            <div className="relative w-full flex items-start justify-center">
-                                <BigPieChart />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="min-w-[32%] h-full  flex items-center justify-center    ">
-                    <div className="h-full gap-2.5 flex-1 grow rounded-lg flex flex-col items-start relative bg-white overflow-hidden">
-                        <div className="flex flex-col items-start justify-center p-2.5 w-full border-b border-[#646464]">
-                            城際列車 - 車種分配資訊
-                        </div>
-                        <div className="overflow-auto flex flex-col items-start gap-2.5 px-3 py-2 relative w-full h-[67vh]">
-                            {trainData.map((train, index) => (
-                                <DeploymentByTrainCategory
-                                    key={index}
-                                    trainName={train.trainName}
-                                    trainCount={train.trainCount}
-                                    onClick={() => handleTrainClick(train.trainName)}
-                                    isActive={selectedTrainName === train.trainName && isDetailVisible}
-                                />
-                            ))}
-                        </div>
-                    </div>
-                </div>
-                <div className="min-w-[32%] h-full  flex items-center justify-center    ">
-                    <div className="h-full gap-2.5 flex-1 grow rounded-lg flex flex-col items-start relative bg-white overflow-hidden">
-                        <div className="flex flex-col items-start justify-center p-2.5 w-full border-b border-[#646464]">
-                            城際列車 - 機務段分配資訊
-                        </div>
-                        <div className="overflow-auto flex flex-col items-start gap-2.5 px-3 py-2 relative w-full h-[67vh]">
-                            {isDetailVisible && <DetailTrainByDepot trainName={selectedTrainName} />}
-                        </div>
-                    </div>
-                </div>
-                <div className="min-w-[32%] h-full  flex items-center justify-center    ">
-                    <div className="h-full gap-2.5 flex-1 grow rounded-lg flex flex-col items-start relative bg-white overflow-hidden">
-                        <div className="flex flex-col items-start justify-center p-2.5 w-full border-b border-[#646464]">
-                            城際列車 - 機務段分配資訊
-                        </div>
-                        <div className="overflow-auto flex flex-col items-start gap-2.5 px-3 py-2 relative w-full h-[67vh]">
-                            {isDetailVisible && <DetailTrainByDepot trainName={selectedTrainName} />}
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            {canMoveLeft && (
+  return (
+    <div className="flex w-full p-6 relative overflow-hidden bg-neutral-100">
+      <div
+        className="flex w-full gap-8 transition-transform duration-500 ease-in-out"
+        style={{ transform: `translateX(-${currentIndex * 34}%)` }}
+      >
+        <div className="min-w-[33%] h-full flex items-center justify-center">
+          <DataSection cntSum={cntSum} readySum={readySum} />
+        </div>
+        <div className="min-w-[32%] h-full flex items-center justify-center">
+          <TrainCategorySection
+            initialData={initialData}
+            trainData={trainData}
+            selectedTrainName={selectedTrainName}
+            isDetailVisible={isDetailVisible}
+            handleTrainClick={handleTrainClick}
+          />
+        </div>
+        <div className="min-w-[32%] h-full flex items-center justify-center">
+          <DepotSection
+            title={`${initialData[0].carcatalog} - 機務段分配資訊`}
+            selectedTrainName={selectedTrainName}
+            isDetailVisible={isDetailVisible}
+          />
+        </div>
+        <div className="min-w-[32%] h-full flex items-center justify-center">
+          <DepotSection
+            title="「檢修狀態」車輛詳情"
+            selectedTrainName={selectedTrainName}
+            isDetailVisible={isDetailVisible}
+          />
+        </div>
+      </div>
+      {canMoveLeft && (
         <div
           onMouseEnter={() => handleMouseEnter('left')}
           className="absolute top-0 left-0 h-full w-[3vw] bg-gradient-to-r from-slate-300 to-transparent cursor-pointer flex items-center justify-center text-[#397EFF] text-3xl"
@@ -149,8 +94,8 @@ const DetailClientPage: React.FC<ClientPageProps> = ({ initialData }) => {
           {'>'}
         </div>
       )}
-        </div>
-    );
+    </div>
+  );
 };
 
 export default DetailClientPage;
