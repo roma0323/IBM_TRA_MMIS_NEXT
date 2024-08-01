@@ -1,5 +1,5 @@
 import React from 'react';
-import DeploymentByTrainCategory from "@/components/train_deployment/DeploymentByTrainCategory";
+import DeploymentByTrainCategory from "@/components/train_deployment/detail_page/DeploymentByTrainCategory";
 
 type TrainCategorySectionProps = {
   initialData: any[];

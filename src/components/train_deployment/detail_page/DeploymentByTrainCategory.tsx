@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import SingleBar from "@/components/train_deployment/SingleBar";
-import SmallPieChart from "@/components/train_deployment/SmallPieChart";
+import SingleBar from "@/components/train_deployment/detail_page/SingleBar";
+import SmallPieChart from "@/components/train_deployment/detail_page/SmallPieChart";
 
 interface MyComponentProps {
   trainName: string;

@@ -1,5 +1,5 @@
 import React from 'react';
-import DetailTrainByDepot from "@/components/train_deployment/DetailTrainByDepot";
+import DetailTrainByDepot from "@/components/train_deployment/detail_page/DetailTrainByDepot";
 
 type DepotSectionProps = {
   title: string;

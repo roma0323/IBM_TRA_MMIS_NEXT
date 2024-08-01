@@ -1,5 +1,4 @@
-import DetailClientPage from "@/components/train_deployment/DetailClientPage";
-
+import DetailClientPage from "@/components/train_deployment/detail_page/DetailClientPage";
 interface Params {
   id: string;
 }

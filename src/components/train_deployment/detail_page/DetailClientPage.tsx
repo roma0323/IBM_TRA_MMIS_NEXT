@@ -72,7 +72,7 @@ const DetailClientPage: React.FC<ClientPageProps> = ({ initialData }) => {
         </div>
         <div className="min-w-[32%] h-full flex items-center justify-center">
           <DepotSection
-            title="「檢修狀態」車輛詳情"
+            title="檢修車輛詳情"
             selectedTrainName={selectedTrainName}
             isDetailVisible={isDetailVisible}
           />
