@@ -63,11 +63,11 @@ const TrainPageContent: React.FC<ClientComponentProps> = ({ initialData }) => {
   return (
     <div className="flex w-full p-6 relative overflow-hidden bg-neutral-100">
       <div
-        className="flex w-full gap-8 transition-transform duration-500 ease-in-out"
+        className="flex w-full gap-10 transition-transform duration-500 ease-in-out"
         style={{ transform: `translateX(-${currentIndex * 26}%)` }} // Adjusted to slide the divs
       >
         {/* First Div */}
-        <div className="min-w-[23%] flex items-center justify-center">
+        <div className="min-w-[25%] flex items-center justify-center">
           <BoardTitleSection
             title="城際列車 - 機務段分配"
             content={(
@@ -85,7 +85,7 @@ const TrainPageContent: React.FC<ClientComponentProps> = ({ initialData }) => {
         </div>
 
         {/* Second Div */}
-        <div className="min-w-[75%] flex items-center justify-center">
+        <div className="min-w-[72%] flex items-center justify-center">
           <BoardTitleSection
             title={`${selectedArea} - ${selectedLabel}`}
             content={(

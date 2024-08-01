@@ -9,14 +9,12 @@ type SlideNavigationProps = {
 const SlideNavigation: React.FC<SlideNavigationProps> = ({ direction, onHover, isVisible }) => {
   if (!isVisible) return null; // Don't render anything if not visible
 
+  const gradientClasses = direction === 'left' ? 'bg-gradient-to-r from-slate-300 to-transparent' : 'bg-gradient-to-l from-slate-200 to-transparent';
+
   return (
     <div
       onMouseEnter={() => onHover(direction)}
-      className={`absolute top-0 ${
-        direction === 'left' ? 'left-0' : 'right-0'
-      } h-full w-[3vw] bg-gradient-to-${direction === 'left' ? 'r' : 'l'} from-slate-${
-        direction === 'left' ? '300' : '200'
-      } to-transparent cursor-pointer flex items-center justify-center text-[#397EFF] text-3xl`}
+      className={`absolute top-0 ${direction === 'left' ? 'left-0' : 'right-0'} h-full w-[3vw] ${gradientClasses} cursor-pointer flex items-center justify-center text-[#397EFF] text-3xl`}
     >
       {direction === 'left' ? '<' : '>'}
     </div>
