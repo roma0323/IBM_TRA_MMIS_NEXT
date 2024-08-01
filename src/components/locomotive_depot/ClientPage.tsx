@@ -85,8 +85,9 @@ const TrainPageContent: React.FC<ClientComponentProps> = ({ initialData }) => {
         </div>
         <div className="w-full h-[67vh] relative overflow-scroll">
           <div className="flex flex-col bg-white w-full items-start relative flex-shrink-0 p-5 bg-gray-100 rounded-lg overflow-hidden">
+            
             <div className="grid grid-cols-16 gap-4 bg-zinc-100 border-b-2 border-gray-200 rounded-lg text-left">
-            {headers.map((header, index) => (
+              {headers.map((header, index) => (
                 <div key={index} className="p-2 flex items-end">
                   {header}
                 </div>))}

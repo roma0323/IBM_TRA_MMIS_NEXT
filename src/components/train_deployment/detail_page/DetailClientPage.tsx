@@ -17,15 +17,31 @@ type ClientPageProps = {
 
 const DetailClientPage: React.FC<ClientPageProps> = ({ initialData }) => {
   const [selectedTrainName, setSelectedTrainName] = useState('');
-  const [isDetailVisible, setIsDetailVisible] = useState(false);
+  const [isMaintenaceDetailVisible, setIsMaintenaceDetailVisible] = useState(false);
+  const [isTrainDetailVisible, setIsTrainDetailVisible] = useState(false);
+  const [selectedItem, setSelectedItem] = useState<string | null>(null);  // State for selected item
 
   const handleTrainClick = (trainName: string) => {
+    handleMouseEnter('left')
     if (trainName === selectedTrainName) {
-      setIsDetailVisible(!isDetailVisible);
+      setIsTrainDetailVisible(!isTrainDetailVisible);
     } else {
       setSelectedTrainName(trainName);
-      setIsDetailVisible(true);
+      setIsTrainDetailVisible(true);
     }
+  };
+
+  const handleItemClick = (itemName: string) => {
+    handleMouseEnter('right')
+    if (itemName === selectedItem) {
+      setIsMaintenaceDetailVisible(!isMaintenaceDetailVisible);
+    } else {
+      setSelectedItem(itemName);
+      setIsMaintenaceDetailVisible(true);
+    }
+
+    // setSelectedItem(itemName);  // Update selected item
+    // setIsDetailVisible(true);  // Ensure detail is visible
   };
 
   const cntSum = initialData.reduce((acc, item) => acc + item.current_cnt, 0);
@@ -60,7 +76,7 @@ const DetailClientPage: React.FC<ClientPageProps> = ({ initialData }) => {
             initialData={initialData}
             trainData={trainData}
             selectedTrainName={selectedTrainName}
-            isDetailVisible={isDetailVisible}
+            isDetailVisible={isTrainDetailVisible}
             handleTrainClick={handleTrainClick}
           />
         </div>
@@ -68,14 +84,16 @@ const DetailClientPage: React.FC<ClientPageProps> = ({ initialData }) => {
           <DepotSection
             title={`${initialData[0].carcatalog} - 機務段分配資訊`}
             selectedTrainName={selectedTrainName}
-            isDetailVisible={isDetailVisible}
+            isDetailVisible={isTrainDetailVisible}
+            handleItemClick={handleItemClick}  // Pass the handleItemClick function
           />
         </div>
         <div className="min-w-[32%] h-full flex items-center justify-center">
           <MaintenanceSection
             title="檢修車輛詳情"
             selectedTrainName={selectedTrainName}
-            isDetailVisible={isDetailVisible}
+            isDetailVisible={isMaintenaceDetailVisible&&isTrainDetailVisible}
+            selectedItem={selectedItem}  // Pass the selected item
           />
         </div>
       </div>
