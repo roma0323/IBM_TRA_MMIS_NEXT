@@ -9,18 +9,18 @@ interface TrainDataInArray { className?: string; dept: string; deptdesc: string;
 
 interface TrainData {
   trainData: TrainDataInArray;
-  onClick: () => void; // Prop for click handler
+  onClick: (cartype: string, belongto: number, data: number) => void; // Prop for click handler with parameters
 }
 
 export const RowByTrain = ({
   trainData,
   onClick, // Destructure onClick
 }: TrainData): JSX.Element => {
+  const handleClick = (data: number) => {
+    onClick(trainData.cartype, trainData.belongto, data); // Pass the relevant data to the callback
+  };
   return (
-    <div
-      className="grid grid-cols-16 gap-4 w-full border-b-2 border-gray-200 text-left cursor-pointer"
-      onClick={onClick} // Handle click event
-    >
+    <div className="grid grid-cols-16 gap-4 w-full border-b-2 border-gray-200 text-left">
       <div className="p-2 flex items-end">
         <LabelChip
           text={trainData.carcatalog}
@@ -30,18 +30,18 @@ export const RowByTrain = ({
       </div>
       <div className="py-2 flex items-end">{trainData.cartype}</div>
       <div className="p-2 flex items-end">{trainData.belongto}</div>
-      <div className="p-2 flex items-end">{trainData.borrowin}</div>
-      <div className="p-2 flex items-end">{trainData.borrowout}</div>
-      <div className="p-2 flex items-end">{trainData.current_cnt}</div>
-      <div className="p-2 flex items-end">{trainData.current_use}</div>
-      <div className="p-2 flex items-end">{trainData.current_temp}</div>
-      <div className="p-2 flex items-end">{trainData.current_ready}</div>
-      <div className="p-2 flex items-end">{trainData.maintain_w}</div>
-      <div className="p-2 flex items-end">{trainData.maintain_sec}</div>
-      <div className="p-2 flex items-end">{trainData.maintain_fac}</div>
-      <div className="p-2 flex items-end">{trainData.oth_waitrep}</div>
-      <div className="p-2 flex items-end">{trainData.oth_return}</div>
-      <div className="p-2 flex items-end">{trainData.oth_stop}</div>
+      <div className="p-2 flex items-end" onClick={() => handleClick(trainData.borrowin)}>{trainData.borrowin}</div>
+      <div className="p-2 flex items-end" onClick={() => handleClick(trainData.borrowout)}>{trainData.borrowout}</div>
+      <div className="p-2 flex items-end" onClick={() => handleClick(trainData.current_cnt)}>{trainData.current_cnt}</div>
+      <div className="p-2 flex items-end" onClick={() => handleClick(trainData.current_use)}>{trainData.current_use}</div>
+      <div className="p-2 flex items-end" onClick={() => handleClick(trainData.current_temp)}>{trainData.current_temp}</div>
+      <div className="p-2 flex items-end" onClick={() => handleClick(trainData.current_ready)}>{trainData.current_ready}</div>
+      <div className="p-2 flex items-end" onClick={() => handleClick(trainData.maintain_w)}>{trainData.maintain_w}</div>
+      <div className="p-2 flex items-end" onClick={() => handleClick(trainData.maintain_sec)}>{trainData.maintain_sec}</div>
+      <div className="p-2 flex items-end" onClick={() => handleClick(trainData.maintain_fac)}>{trainData.maintain_fac}</div>
+      <div className="p-2 flex items-end" onClick={() => handleClick(trainData.oth_waitrep)}>{trainData.oth_waitrep}</div>
+      <div className="p-2 flex items-end" onClick={() => handleClick(trainData.oth_return)}>{trainData.oth_return}</div>
+      <div className="p-2 flex items-end" onClick={() => handleClick(trainData.oth_stop)}>{trainData.oth_stop}</div>
       <div className="p-2 flex items-end">
         {Number(trainData.availability.toFixed(2))}
       </div>

@@ -11,9 +11,10 @@ type TrainData = { dept: string; deptdesc: string; cartype: string; carcatalog: 
 type TrainDataArray = TrainData[];
 interface ClientComponentProps {
   initialData: TrainDataArray;
+  onRowClick: (cartype: string, belongto: number, clickedData: number) => void; // Add prop for row click handler
 }
 
-const TrainPageContent: React.FC<ClientComponentProps> = ({ initialData }) => {
+const TrainPageContent: React.FC<ClientComponentProps> = ({ initialData, onRowClick }) => { // Receive handler as prop
   const [trainData, setTrainData] = useState<TrainData[]>([]);
   const [selectedLabel, setSelectedLabel] = useState<string | null>(null);
   const [selectedArea, setSelectedArea] = useState<string | null>(null);
@@ -117,7 +118,7 @@ const TrainPageContent: React.FC<ClientComponentProps> = ({ initialData }) => {
                     <RowByTrain
                       key={index}
                       trainData={train}
-                      onClick={() => handleTrainDataClick(train)} // Pass click handler to RowByTrain
+                      onClick={(cartype, belongto, data) => onRowClick(cartype, belongto, data)} // Pass the click handler with parameters
                     />
                   ))}
               </div>
@@ -146,12 +147,12 @@ const TrainPageContent: React.FC<ClientComponentProps> = ({ initialData }) => {
   );
 };
 
-const ClientPage: React.FC<ClientComponentProps> = ({ initialData }) => {
+const ClientPage: React.FC<ClientComponentProps> = ({ initialData, onRowClick }) => { // Add handler to props
   const [data, setData] = useState(initialData);
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <TrainPageContent initialData={data} />
+      <TrainPageContent initialData={data} onRowClick={onRowClick} /> {/* Pass handler to TrainPageContent */}
     </Suspense>
   );
 };
