@@ -11,14 +11,49 @@ type TrainData = { dept: string; deptdesc: string; cartype: string; carcatalog: 
 type TrainDataArray = TrainData[];
 interface ClientComponentProps {
   initialData: TrainDataArray;
-  onRowClick?: (cartype: string, belongto: number, clickedData: number) => void; // Make it optional
 }
 
-const TrainPageContent: React.FC<ClientComponentProps> = ({ initialData, onRowClick }) => { // Receive handler as prop
+const certain_train_maintenance = [
+  {
+    dept: "MHY00",
+    deptdesc: "臺北機務段",
+    cartype: "EMU500",
+    assetnum: "EMU503",
+    worktype: "C2",
+    actstart: "2022/11/07",
+    actfinish: "2022/11/09",
+    type: "64",
+    typedesc: "出廠試車",
+    borrowdept: "",
+    statementdesc: "",
+    statement: "",
+    current_use_type: "",
+    current_use_typedesc: "",
+    url: "http://tra.webtw.xyz:8888/maximo/ui/maximo.jsp?event=loadapp&value=zz_pmwo&uniqueid=678482",
+  },
+  {
+    dept: "MHY00",
+    deptdesc: "臺北機務段",
+    cartype: "EMU500",
+    assetnum: "EMU504",
+    worktype: "C1",
+    actstart: "2012/03/01",
+    actfinish: "2012/03/22",
+    type: "06",
+    typedesc: "進廠檢修(3B,4,C)",
+    borrowdept: "",
+    statementdesc: "",
+    statement: "",
+    current_use_type: "",
+    current_use_typedesc: "",
+    url: "http://tra.webtw.xyz:8888/maximo/ui/maximo.jsp?event=loadapp&value=zz_pmwo&uniqueid=678482",
+  },
+];
+
+const TrainPageContent: React.FC<ClientComponentProps> = ({ initialData }) => { // Receive handler as prop
   const [trainData, setTrainData] = useState<TrainData[]>([]);
   const [selectedLabel, setSelectedLabel] = useState<string | null>(null);
   const [selectedArea, setSelectedArea] = useState<string | null>(null);
-  const [selectedTrainData, setSelectedTrainData] = useState<TrainData | null>(null); // State to track selected train data
 
   useEffect(() => {
     setTrainData(initialData);
@@ -31,11 +66,6 @@ const TrainPageContent: React.FC<ClientComponentProps> = ({ initialData, onRowCl
     setSelectedArea((prevArea) =>
       prevArea === area && selectedLabel === label ? null : area
     );
-  };
-
-  const handleTrainDataClick = (train: TrainData) => {
-    handleMouseEnter('right')
-    setSelectedTrainData(train); // Set the selected train data
   };
 
   const filteredTrainData = trainData.filter((train) => {
@@ -56,7 +86,7 @@ const TrainPageContent: React.FC<ClientComponentProps> = ({ initialData, onRowCl
     "車種", "型號", "配置", "借出", "借入", "可用", "定期", "臨時", "預備",
     "W OR 保養", "段修", "廠修", "待料 待修", "無火 回送", "停用", "留車"
   ];
-//handleMouseEnter and slide
+  //handleMouseEnter and slide
   const [currentIndex, setCurrentIndex] = useState(0);
   const totalSlides = 3; // Adjust if you have more or less than 3 divs
   const visibleSlides = 2; // Set to 1 since we want to slide one div at a time
@@ -74,7 +104,7 @@ const TrainPageContent: React.FC<ClientComponentProps> = ({ initialData, onRowCl
 
   const canMoveLeft = currentIndex > 0;
   const canMoveRight = currentIndex < totalSlides - visibleSlides;
-//handleMouseEnter and slide
+  //handleMouseEnter and slide
 
   return (
     <div className="flex w-full p-6 relative overflow-hidden bg-neutral-100">
@@ -84,6 +114,7 @@ const TrainPageContent: React.FC<ClientComponentProps> = ({ initialData, onRowCl
       >
         {/* First Div */}
         <div className="min-w-[25%] flex items-center justify-center">
+          {/* certain_train_maintenance{certain_train_maintenance[0].dept} */}
           <BoardTitleSection
             title="城際列車 - 機務段分配"
             content={
@@ -118,7 +149,6 @@ const TrainPageContent: React.FC<ClientComponentProps> = ({ initialData, onRowCl
                     <RowByTrain
                       key={index}
                       trainData={train}
-                      onClick={(cartype, belongto, data) => onRowClick && onRowClick(cartype, belongto, data)} // Safely call onRowClick
                     />
                   ))}
               </div>
@@ -131,12 +161,9 @@ const TrainPageContent: React.FC<ClientComponentProps> = ({ initialData, onRowCl
           <BoardTitleSection
             title="維修詳情"
             content={
-              selectedTrainData && ( // Conditionally render MaintenanceCard
-                <MaintenanceCard
-                  trainName={selectedTrainData.dept}
-                  selectedItem={selectedTrainData.borrowin.toString()} // Example: pass borrowin data
-                />
-              )
+              <MaintenanceCard
+              />
+
             }
           />
         </div>
@@ -147,14 +174,16 @@ const TrainPageContent: React.FC<ClientComponentProps> = ({ initialData, onRowCl
   );
 };
 
-const ClientPage: React.FC<ClientComponentProps> = ({ initialData, onRowClick }) => { // Add handler to props
+const ClientPage: React.FC<ClientComponentProps> = ({ initialData }) => { // Add handler to props
   const [data, setData] = useState(initialData);
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <TrainPageContent initialData={data} onRowClick={onRowClick} /> {/* Pass handler to TrainPageContent */}
+      <TrainPageContent initialData={data} /> {/* Pass handler to TrainPageContent */}
     </Suspense>
   );
 };
 
 export default ClientPage;
+
+
