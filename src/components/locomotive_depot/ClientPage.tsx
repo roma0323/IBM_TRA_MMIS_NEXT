@@ -11,7 +11,7 @@ type TrainData = { dept: string; deptdesc: string; cartype: string; carcatalog: 
 type TrainDataArray = TrainData[];
 interface ClientComponentProps {
   initialData: TrainDataArray;
-  onRowClick: (cartype: string, belongto: number, clickedData: number) => void; // Add prop for row click handler
+  onRowClick?: (cartype: string, belongto: number, clickedData: number) => void; // Make it optional
 }
 
 const TrainPageContent: React.FC<ClientComponentProps> = ({ initialData, onRowClick }) => { // Receive handler as prop
@@ -118,7 +118,7 @@ const TrainPageContent: React.FC<ClientComponentProps> = ({ initialData, onRowCl
                     <RowByTrain
                       key={index}
                       trainData={train}
-                      onClick={(cartype, belongto, data) => onRowClick(cartype, belongto, data)} // Pass the click handler with parameters
+                      onClick={(cartype, belongto, data) => onRowClick && onRowClick(cartype, belongto, data)} // Safely call onRowClick
                     />
                   ))}
               </div>
