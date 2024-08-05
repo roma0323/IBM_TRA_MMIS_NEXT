@@ -1,5 +1,6 @@
-'use client'
-import React, { useState } from "react";
+'use client';
+
+import React, { useState, useEffect } from "react";
 import ClientPage from "@/components/locomotive_depot/ClientPage";
 
 // Sample data for certain train maintenance
@@ -40,24 +41,32 @@ const certain_train_maintenance = [
   },
 ];
 
-// Function to fetch data from the API
-async function getData() {
-  const res = await fetch(
-    "http://tra.webtw.xyz:8888/maximo/zz_data?method=getSumStatusList&multiplier=0&dept=&qdate=2024-07-18",
-    {
+function Page() {
+  const [data, setData] = useState(null); // State to store fetched data
+  const [error, setError] = useState(null); // State to store any errors
+
+  useEffect(() => {
+    // Fetch data from the API
+    fetch("http://tra.webtw.xyz:8888/maximo/zz_data?method=getSumStatusList&multiplier=0&dept=&qdate=2024-07-18", {
       method: "POST",
       headers: {
         Accept: "application/json, text/plain, */*",
         "Content-Type": "application/json",
       },
-    }
-  );
-  return res.json();
-}
-
-// Default export for the page
-export default async function Page() {
-  const data = await getData(); // Fetch data from the API
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status} ${response.statusText}`);
+        }
+        return response.json();
+      })
+      .then((jsonData) => {
+        setData(jsonData.data); // Update state with fetched data
+      })
+      .catch((error) => {
+        setError(error.message); // Handle and store any errors
+      });
+  }, []); // Empty dependency array to run once on mount
 
   const handleRowClick = (cartype: string, belongto: number, clickedData: number) => {
     console.log("Cartype:", cartype);
@@ -65,9 +74,19 @@ export default async function Page() {
     console.log("Clicked Data:", clickedData);
   };
 
+  if (error) {
+    return <div>Error: {error}</div>; // Render error message if there's an error
+  }
+
+  if (!data) {
+    return <div>Loading...</div>; // Render loading message while data is being fetched
+  }
+
   return (
     <main>
-      <ClientPage initialData={data.data} onRowClick={handleRowClick} /> {/* Pass the handler to ClientPage */}
+      <ClientPage initialData={data} onRowClick={handleRowClick} />
     </main>
   );
 }
+
+export default Page;
