@@ -15,48 +15,12 @@ interface ClientComponentProps {
   initialData: TrainDataArray;
 }
 
-const certain_train_maintenance = [
-  {
-    dept: "MGY00",
-    deptdesc: "七堵機務段",
-    cartype: "EMU500",
-    assetnum: "EMU503",
-    worktype: "C2",
-    actstart: "2022/11/07",
-    actfinish: "2022/11/09",
-    type: "64",
-    typedesc: "出廠試車",
-    borrowdept: "花蓮機務段",
-    statementdesc: "",
-    statement: "",
-    current_use_type: "",
-    current_use_typedesc: "",
-    url: "http://tra.webtw.xyz:8888/maximo/ui/maximo.jsp?event=loadapp&value=zz_pmwo&uniqueid=678482",
-  },
-  {
-    dept: "MYY10",
-    deptdesc: "臺北機務段",
-    cartype: "EMU500",
-    assetnum: "EMU504",
-    worktype: "C1",
-    actstart: "2012/03/01",
-    actfinish: "2012/03/22",
-    type: "06",
-    typedesc: "進廠檢修(3B,4,C)",
-    borrowdept: "花蓮機務段",
-    statementdesc: "",
-    statement: "",
-    current_use_type: "",
-    current_use_typedesc: "",
-    url: "http://tra.webtw.xyz:8888/maximo/ui/maximo.jsp?event=loadapp&value=zz_pmwo&uniqueid=678482",
-  },
-];
-
 const TrainPageContent: React.FC<ClientComponentProps> = ({ initialData }) => {
   const [trainData, setTrainData] = useState<TrainData[]>([]);
   const [selectedLabel, setSelectedLabel] = useState<string | null>(null);
   const [selectedArea, setSelectedArea] = useState<string | null>(null);
   const [activeTrain, setActiveTrain] = useState<{dept: string, cartype: string} | null>(null); // Track the active train
+  const [maintenanceData, setMaintenanceData] = useState<any[]>([]); // New state for maintenance data
 
   useEffect(() => {
     setTrainData(initialData);
@@ -71,13 +35,27 @@ const TrainPageContent: React.FC<ClientComponentProps> = ({ initialData }) => {
     );
   };
 
-  const handleTrainClick = (dept: string, cartype: string, divData: number) => {
+  const handleTrainClick = async (dept: string, cartype: string, divData: string) => {
     console.log(`Dept: ${dept}, Cartype: ${cartype}, DivData: ${divData}`);
     setActiveTrain(prevState =>
       prevState?.dept === dept && prevState?.cartype === cartype
         ? null
         : { dept, cartype }
     );
+
+    try {
+      const response =await fetch(`http://tra.webtw.xyz:8888/maximo/zz_data?method=getSumStatusDetailList&dept=${dept}&cartype=${cartype}&qtype=${divData}&qdate=2024-08-04`, {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json, text/plain, */*',
+          'Content-Type': 'application/json',
+        },
+      });
+      const data = await response.json();
+      setMaintenanceData(data);
+    } catch (error) {
+      console.error("Error fetching maintenance data:", error);
+    }
   };
 
   const filteredTrainData = trainData.filter((train) => {
@@ -126,7 +104,6 @@ const TrainPageContent: React.FC<ClientComponentProps> = ({ initialData }) => {
       >
         {/* First Div */}
         <div className="min-w-[25%] flex items-center justify-center">
-          {/* certain_train_maintenance{certain_train_maintenance[0].dept} */}
           <BoardTitleSection
             title="城際列車 - 機務段分配"
             content={
@@ -148,8 +125,10 @@ const TrainPageContent: React.FC<ClientComponentProps> = ({ initialData }) => {
           <BoardTitleSection
             title={`${selectedArea} - ${selectedLabel}`}
             content={
-              <div   // Add this line to trigger handleMouseEnter
-               className="flex flex-col bg-white w-full items-start relative flex-shrink-0 p-5 bg-gray-100 rounded-lg overflow-hidden">
+              <div
+                className="flex flex-col bg-white w-full items-start relative flex-shrink-0 p-5 bg-gray-100 rounded-lg overflow-hidden"
+                onClick={() => handleMouseEnter("right")}
+              >
                 <div className="grid grid-cols-16 gap-4 bg-zinc-100 border-b-2 border-gray-200 rounded-lg text-left">
                   {headers.map((header, index) => (
                     <div key={index} className="p-2 flex items-end">
@@ -157,16 +136,16 @@ const TrainPageContent: React.FC<ClientComponentProps> = ({ initialData }) => {
                     </div>
                   ))}
                 </div>
-                <div  onClick={() => handleMouseEnter("right")}>{selectedLabel &&
-                  filteredTrainData.map((train, index) => (
-                    <RowByTrain
-                    
-                      key={index}
-                      trainData={train}
-                      onDivClick={handleTrainClick} // Pass the click handler
-                    />
-                  ))}</div>
-                
+                <div>
+                  {selectedLabel &&
+                    filteredTrainData.map((train, index) => (
+                      <RowByTrain
+                        key={index}
+                        trainData={train}
+                        onDivClick={handleTrainClick} // Pass the click handler
+                      />
+                    ))}
+                </div>
               </div>
             }
           />
@@ -178,10 +157,9 @@ const TrainPageContent: React.FC<ClientComponentProps> = ({ initialData }) => {
             title="維修詳情"
             content={
               <div>
-                {certain_train_maintenance
+                {maintenanceData
                   .filter(maintenance => 
-                    maintenance.dept === activeTrain?.dept 
-                    // maintenance.cartype === activeTrain?.cartype
+                    maintenance.dept === activeTrain?.dept
                   )
                   .map((maintenance, index) => (
                     <MaintenanceCard key={index} maintenanceData={maintenance} /> 
@@ -208,4 +186,3 @@ const ClientPage: React.FC<ClientComponentProps> = ({ initialData }) => {
 };
 
 export default ClientPage;
-

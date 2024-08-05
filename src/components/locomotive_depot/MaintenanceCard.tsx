@@ -11,8 +11,7 @@ const MaintenanceCard: React.FC<MaintenanceCardProps> = ({
 }) => {
   const attributes = [
     { label: "車組車號", value: maintenanceData.assetnum },
-    { label: "配屬段", value: maintenanceData.deptdesc },
-    { label: "Work Type", value: maintenanceData.worktype },
+    // { label: "Work Type", value: maintenanceData.worktype },
     { label: "開工", value: maintenanceData.actstart },
     { label: "完工", value: maintenanceData.actfinish },
     { label: "動態代號", value: maintenanceData.type },
@@ -22,7 +21,7 @@ const MaintenanceCard: React.FC<MaintenanceCardProps> = ({
 
   return (
     <div className="flex items-start gap-3 p-4 mx-3 mt-3 self-stretch flex-[0_0_auto] bg-[#3034380d] rounded-xl overflow-hidden border-l-4 flex-col justify-center relative">
-      {maintenanceData.deptdesc} - {maintenanceData.cartype}
+      {maintenanceData.deptdesc} - {maintenanceData.cartype} - {maintenanceData.assetnum}
       {maintenanceData ? (
         <div className="flex inline-flex flex-col items-start w-full items-center justify-between relative self-stretch w-full">
           {attributes.map((attr, index) => (
