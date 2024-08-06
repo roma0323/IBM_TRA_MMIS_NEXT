@@ -19,7 +19,7 @@ export const RowByTrain = ({
   };
 
   return (
-    <div className="grid grid-cols-16 gap-4   w-full border-b-2 border-gray-200 text-left ">
+    <div className="grid grid-cols-17 gap-4   w-full border-b-2 border-gray-200 text-left ">
       <div className="m-2 flex items-center justify-center ">
         <LabelChip
           text={trainData.carcatalog}
@@ -27,7 +27,8 @@ export const RowByTrain = ({
           property1="default"
         />
       </div>
-      <div className="m-1 flex items-center justify-center ">{trainData.cartype}</div>
+      <div className="my-1 flex items-center justify-center ">{trainData.deptdesc}</div>
+      <div className="my-1 flex items-center justify-center ">{trainData.cartype}</div>
       <div className={numberBoxClassName}>{trainData.belongto}</div>
       <div className={numberBoxClassName} onClick={() => handleDivClick("borrowout")}>{trainData.borrowout}</div>
       <div className={numberBoxClassName} onClick={() => handleDivClick("current_temp")}>{trainData.current_temp}</div>

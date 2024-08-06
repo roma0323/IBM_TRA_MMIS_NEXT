@@ -36,13 +36,13 @@ const DeploymentByTrainCategory: React.FC<MyComponentProps> = ({ trainName, trai
           </div>
           <div className="text-md">車輛數</div>
         </div>
-        <div className="relative w-[80px] h-[80px] inline-flex flex-col items-center justify-center flex-[0_0_auto]">
+        {/* <div className="relative w-[80px] h-[80px] inline-flex flex-col items-center justify-center flex-[0_0_auto]">
           <SmallPieChart />
-        </div>
+        </div> */}
       </div>
-      <div className="justify-center self-stretch w-full flex-[0_0_auto] flex flex-col items-start relative">
+      {/* <div className="justify-center self-stretch w-full flex-[0_0_auto] flex flex-col items-start relative">
         <SingleBar />
-      </div>
+      </div> */}
     </div>
   );
 };

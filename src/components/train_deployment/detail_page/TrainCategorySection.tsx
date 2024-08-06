@@ -1,6 +1,6 @@
 import React from 'react';
 import TrainCategorySectionCard from "@/components/train_deployment/detail_page/TrainCategorySectionCard";
-import BoardTitleSection from "@/components/BoardTitleSection"; // Import the BoardTitleSection component
+import BoardTitleSection from "@/components/BoardTitleSection"; 
 
 type TrainCategorySectionProps = {
   initialData: any[];
@@ -26,8 +26,8 @@ const TrainCategorySection: React.FC<TrainCategorySectionProps> = ({
             key={index}
             trainName={train.trainName}
             trainCount={train.trainCount}
-            onClick={() => handleTrainClick(train.trainName)}
-            isActive={selectedTrainName === train.trainName && isDetailVisible}
+            onClick={() => handleTrainClick(train.trainName)} // Pass trainName on click
+            isActive={selectedTrainName === train.trainName}
           />
         ))}
       </div>

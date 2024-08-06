@@ -7,7 +7,7 @@ interface Props {
   onLabelClick: (text: string) => void;
 }
 
-export const LabelAndNumberByArea = ({ area_name = "台北機務段車輛配置", onLabelClick }: Props): JSX.Element => {
+export const LabelAndNumberByArea = ({ area_name = "臺北機務段車輛配置", onLabelClick }: Props): JSX.Element => {
   const [isVisible, setIsVisible] = useState(false);
 
   const handleToggleVisibility = () => {

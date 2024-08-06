@@ -12,7 +12,7 @@ export const DataCard = ({ text = "2681", text1 = "車輛可用數" }: Props): J
       <div className="flex flex-col items-start justify-center p-2 relative flex-1 self-stretch grow bg-white  overflow-hidden">
         <div className="inline-flex flex-col items-start relative flex-[0_0_auto]">
           <div className="inline-flex flex-col items-start justify-center relative flex-[0_0_auto]">
-            <div className="relative w-fit mt-[-1.00px]  text-2xl  leading-[normal]">
+            <div className="relative w-fit mt-[-1.00px]  text-4xl  leading-[normal]">
               {text}
             </div>
           </div>

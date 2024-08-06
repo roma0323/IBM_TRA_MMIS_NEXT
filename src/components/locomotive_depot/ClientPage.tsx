@@ -4,10 +4,10 @@
 
 import React, { useState, useEffect, Suspense } from "react";
 import { LabelAndNumberByArea } from "@/components/locomotive_depot/LabelAndNumberByArea";
-import { RowByTrain } from "@/components/locomotive_depot/RowByTrain";
 import SlideNavigation from '@/components/SlideNavigation'; // Import SlideNavigation component
 import BoardTitleSection from '@/components/BoardTitleSection'; // Import the Section component
-import MaintenanceCard from "@/components/locomotive_depot/MaintenanceCard";
+import TrainOverviewSection from "@/components/locomotive_depot/TrainOverviewSection"; // Import the new TrainOverviewSection component
+import MaintenanceDetailSection from "@/components/locomotive_depot/MaintenanceDetailSection"; // Import the new MaintenanceDetailSection component
 
 type TrainData = { dept: string; deptdesc: string; cartype: string; carcatalog: string; belongto: number; borrowin: number; borrowout: number; current_cnt: number; current_use: number; current_temp: number; current_ready: number; maintain_w: number; maintain_sec: number; maintain_fac: number; oth_waitrep: number; oth_return: number; oth_stop: number; availability: number; };
 type TrainDataArray = TrainData[];
@@ -36,10 +36,8 @@ const TrainPageContent: React.FC<ClientComponentProps> = ({ initialData }) => {
 
   const handleTrainClick = async (dept: string, cartype: string, divData: string) => {
     console.log(`Dept: ${dept}, Cartype: ${cartype}, DivData: ${divData}`);
-
-
     try {
-      const response =await fetch(`http://tra.webtw.xyz:8888/maximo/zz_data?method=getSumStatusDetailList&dept=${dept}&cartype=${cartype}&qtype=${divData}&qdate=2024-08-04`, {
+      const response = await fetch(`http://tra.webtw.xyz:8888/maximo/zz_data?method=getSumStatusDetailList&dept=${dept}&cartype=${cartype}&qtype=${divData}&qdate=2024-08-04`, {
         method: 'POST',
         headers: {
           'Accept': 'application/json, text/plain, */*',
@@ -60,22 +58,22 @@ const TrainPageContent: React.FC<ClientComponentProps> = ({ initialData }) => {
       train.deptdesc.includes(selectedArea.replace("車輛配置", ""));
     const labelMatches =
       selectedLabel === "All" || !selectedLabel || train.carcatalog === selectedLabel;
+      
+    // console.log("filteredTrainData",filteredTrainData)
+    // console.log("selectedLabel",selectedLabel)
+    // console.log("selectedArea",filteredTrainData)  
     return areaMatches && labelMatches;
   });
 
   const areas = [
-    "全部機務段", "七堵機務段", "台北機務段", "新竹機務段", "彰化機務段", "嘉義機務段", "高雄機務段", "花蓮機務段", "臺東機務段", "宜蘭機務分段"
+    "全部機務段", "七堵機務段", "臺北機務段", "新竹機務段", "彰化機務段", "嘉義機務段", "高雄機務段", "花蓮機務段", "臺東機務段", "宜蘭機務分段"
   ];
 
-  const headers = [
-    "車種", "型號", "配置", "借出", "借入", "可用", "定期", "臨時", "預備",
-    "W OR 保養", "段修", "廠修", "待料 待修", "無火 回送", "停用", "可用率"
-  ];
+  
   //handleMouseEnter and slide
   const [currentIndex, setCurrentIndex] = useState(0);
   const totalSlides = 3; // Adjust if you have more or less than 3 divs
   const visibleSlides = 2; // Set to 1 since we want to slide one div at a time
-
   const handleMouseEnter = (direction: "left" | "right") => {
     setCurrentIndex((prevIndex) => {
       if (direction === "left") {
@@ -86,7 +84,6 @@ const TrainPageContent: React.FC<ClientComponentProps> = ({ initialData }) => {
       return prevIndex;
     });
   };
-
   const canMoveLeft = currentIndex > 0;
   const canMoveRight = currentIndex < totalSlides - visibleSlides;
   //handleMouseEnter and slide
@@ -107,59 +104,25 @@ const TrainPageContent: React.FC<ClientComponentProps> = ({ initialData }) => {
                   <LabelAndNumberByArea
                     key={area}
                     area_name={area}
-                    onLabelClick={(label) => handleLabelClick(label, area)}
-                  />
-                ))}
+                    onLabelClick={(label) => handleLabelClick(label, area)}/>))}
               </div>
             }
           />
         </div>
 
         {/* Second Div */}
-        <div className="min-w-[72%] flex items-center justify-center">
-          <BoardTitleSection
-            title={`${selectedArea} - ${selectedLabel}`}
-            content={
-              <div
-                className="flex flex-col bg-white w-full items-start relative flex-shrink-0 p-5 bg-gray-100 rounded-lg overflow-hidden"
-                onClick={() => handleMouseEnter("right")}
-              >
-                <div className="grid grid-cols-16 gap-4 bg-zinc-100 border-b-2 border-gray-200 rounded-lg text-left">
-                  {headers.map((header, index) => (
-                    <div key={index} className="m-2 flex items-center justify-center">
-                      {header}
-                    </div>
-                  ))}
-                </div>
-                <div className="w-full">
-                  {selectedLabel &&
-                    filteredTrainData.map((train, index) => (
-                      <RowByTrain
-                        key={index}
-                        trainData={train}
-                        onDivClick={handleTrainClick} // Pass the click handler
-                      />
-                    ))}
-                </div>
-              </div>
-            }
-          />
-        </div>
+        <TrainOverviewSection
+          filteredTrainData={filteredTrainData}
+          selectedLabel={selectedLabel}
+          selectedArea={selectedArea}
+          handleTrainClick={handleTrainClick}
+          handleMouseEnter={handleMouseEnter}
+        />
 
         {/* Third Div */}
-        <div className="min-w-[25%] flex items-center justify-center">
-          <BoardTitleSection
-            title="車輛詳情"
-            content={
-              <div>
-                {maintenanceData
-                  .map((maintenance, index) => (
-                    <MaintenanceCard key={index} maintenanceData={maintenance} /> 
-                  ))}
-              </div>
-            }
-          />
-        </div>
+        <MaintenanceDetailSection
+          maintenanceData={maintenanceData}
+        />
       </div>
       <SlideNavigation direction="left" onHover={handleMouseEnter} isVisible={canMoveLeft} />
       <SlideNavigation direction="right" onHover={handleMouseEnter} isVisible={canMoveRight} />

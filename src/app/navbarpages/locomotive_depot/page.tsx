@@ -3,7 +3,7 @@ import  ClientPage  from "@/components/locomotive_depot/ClientPage";
 
 
 async function getData() {
-  const res = await fetch('http://tra.webtw.xyz:8888/maximo/zz_data?method=getSumStatusList&multiplier=0&dept=&qdate=2024-07-18', {
+  const res = await fetch('http://tra.webtw.xyz:8888/maximo/zz_data?method=getSumStatusList&multiplier=0&dept=&qdate=2024-08-04', {
     method: 'POST',
     headers: {
       'Accept': 'application/json, text/plain, */*',

@@ -20,8 +20,8 @@ const DataSection: React.FC<DataSectionProps> = ({ cntSum, readySum }) => (
       </div>
       <div className="flex flex-col items-start gap-[5px] px-2.5 py-0 relative self-stretch w-full flex-[0_0_auto]">
         <div className="flex items-center gap-5 px-0 py-[5px] relative self-stretch w-full flex-[0_0_auto] rounded-[5px] overflow-hidden">
-          <DataCard text={cntSum.toString()} text1="可用數" />
-          <DataCard text={readySum.toString()} text1="總輛數" />
+          <DataCard text={readySum.toString()} text1="可用數" />
+          <DataCard text={cntSum.toString()} text1="總輛數" />
           <DataCard text={`${Math.round((readySum / cntSum) * 100)}%`} text1="可用率" />
         </div>
       </div>
