@@ -14,7 +14,6 @@ const TrainCategorySection: React.FC<TrainCategorySectionProps> = ({
   initialData,
   trainData,
   selectedTrainName,
-  isDetailVisible,
   handleTrainClick
 }) => (
   <BoardTitleSection

@@ -2,8 +2,6 @@
 import React, { useState, useEffect } from 'react';
 import DataSection from '@/components/train_deployment/detail_page/DataSection';
 import TrainCategorySection from '@/components/train_deployment/detail_page/TrainCategorySection';
-import DepotSection from '@/components/train_deployment/detail_page/DepotSection';
-import MaintenanceSection from '@/components/train_deployment/detail_page/MaintenanceSection';
 import SlideNavigation from '@/components//SlideNavigation'; 
 import TrainOverviewSection from "@/components/locomotive_depot/TrainOverviewSection";
 import MaintenanceDetailSection from "@/components/locomotive_depot/MaintenanceDetailSection";
@@ -112,9 +110,13 @@ const DetailClientPage: React.FC<ClientPageProps> = ({ initialData }) => {
         className="flex w-full gap-8 transition-transform duration-500 ease-in-out"
         style={{ transform: `translateX(-${currentIndex * 26}%)` }}
       >
+
+        {/* first Div */}
         <div className="min-w-[25%] h-full flex items-center justify-center">
           <DataSection cntSum={cntSum} readySum={readySum} />
         </div>
+
+        {/* second Div */}
         <div className="min-w-[25%] h-full flex items-center justify-center">
           <TrainCategorySection
             initialData={initialData}
@@ -125,7 +127,7 @@ const DetailClientPage: React.FC<ClientPageProps> = ({ initialData }) => {
           />
         </div>
         
-        {/* Second Div */}
+        {/* Third Div */}
         <TrainOverviewSection
           filteredTrainData={filteredTrainData} // Pass fetched data to TrainOverviewSection
           selectedArea={initialData[0].carcatalog}
@@ -134,13 +136,14 @@ const DetailClientPage: React.FC<ClientPageProps> = ({ initialData }) => {
           handleMouseEnter={handleMouseEnter}
         />
 
-        {/* Third Div */}
+        {/* fourth Div */}
         <MaintenanceDetailSection
           maintenanceData={maintenanceData}
         />
       </div>
       <SlideNavigation direction="left" onHover={handleMouseEnter} isVisible={canMoveLeft} />
       <SlideNavigation direction="right" onHover={handleMouseEnter} isVisible={canMoveRight} />
+      
     </div>
   );
 };
