@@ -19,7 +19,6 @@ const TrainPageContent: React.FC<ClientComponentProps> = ({ initialData }) => {
   const [trainData, setTrainData] = useState<TrainData[]>([]);
   const [selectedLabel, setSelectedLabel] = useState<string | null>(null);
   const [selectedArea, setSelectedArea] = useState<string | null>(null);
-  const [activeTrain, setActiveTrain] = useState<{dept: string, cartype: string} | null>(null); // Track the active train
   const [maintenanceData, setMaintenanceData] = useState<any[]>([]); // New state for maintenance data
 
   useEffect(() => {
@@ -37,11 +36,7 @@ const TrainPageContent: React.FC<ClientComponentProps> = ({ initialData }) => {
 
   const handleTrainClick = async (dept: string, cartype: string, divData: string) => {
     console.log(`Dept: ${dept}, Cartype: ${cartype}, DivData: ${divData}`);
-    setActiveTrain(prevState =>
-      prevState?.dept === dept && prevState?.cartype === cartype
-        ? null
-        : { dept, cartype }
-    );
+
 
     try {
       const response =await fetch(`http://tra.webtw.xyz:8888/maximo/zz_data?method=getSumStatusDetailList&dept=${dept}&cartype=${cartype}&qtype=${divData}&qdate=2024-08-04`, {
@@ -131,12 +126,12 @@ const TrainPageContent: React.FC<ClientComponentProps> = ({ initialData }) => {
               >
                 <div className="grid grid-cols-16 gap-4 bg-zinc-100 border-b-2 border-gray-200 rounded-lg text-left">
                   {headers.map((header, index) => (
-                    <div key={index} className="p-2 flex items-end">
+                    <div key={index} className="m-2 flex items-center justify-center">
                       {header}
                     </div>
                   ))}
                 </div>
-                <div>
+                <div className="w-full">
                   {selectedLabel &&
                     filteredTrainData.map((train, index) => (
                       <RowByTrain
@@ -154,13 +149,10 @@ const TrainPageContent: React.FC<ClientComponentProps> = ({ initialData }) => {
         {/* Third Div */}
         <div className="min-w-[25%] flex items-center justify-center">
           <BoardTitleSection
-            title="維修詳情"
+            title="車輛詳情"
             content={
               <div>
                 {maintenanceData
-                  .filter(maintenance => 
-                    maintenance.dept === activeTrain?.dept
-                  )
                   .map((maintenance, index) => (
                     <MaintenanceCard key={index} maintenanceData={maintenance} /> 
                   ))}

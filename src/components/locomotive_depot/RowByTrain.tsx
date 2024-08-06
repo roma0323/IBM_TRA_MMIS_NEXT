@@ -8,6 +8,7 @@ interface TrainData {
   trainData: TrainDataInArray;
   onDivClick: (dept: string, cartype: string, divName: string) => void; // Update callback prop
 }
+const numberBoxClassName="m-1 flex items-center justify-center cursor-pointer rounded-2xl hover:text-primary hover:shadow-md hover:shadow-primary/30 hover:scale-110"
 
 export const RowByTrain = ({
   trainData,
@@ -18,29 +19,29 @@ export const RowByTrain = ({
   };
 
   return (
-    <div className="grid grid-cols-16 gap-4 w-full border-b-2 border-gray-200 text-left cursor-pointer">
-      <div className="p-2 flex items-end">
+    <div className="grid grid-cols-16 gap-4   w-full border-b-2 border-gray-200 text-left ">
+      <div className="m-2 flex items-center justify-center ">
         <LabelChip
           text={trainData.carcatalog}
           className={`bg-[#fffffff2] ${trainData.className}`}
           property1="default"
         />
       </div>
-      <div className="py-2 flex items-end">{trainData.cartype}</div>
-      <div className="p-2 flex items-end">{trainData.belongto}</div>
-      <div className="p-2 flex items-end" onClick={() => handleDivClick("borrowout")}>{trainData.borrowout}</div>
-      <div className="p-2 flex items-end" onClick={() => handleDivClick("current_temp")}>{trainData.current_temp}</div>
-      <div className="p-2 flex items-end" onClick={() => handleDivClick("current_cnt")}>{trainData.current_cnt}</div>
-      <div className="p-2 flex items-end" onClick={() => handleDivClick("current_use")}>{trainData.current_use}</div>
-      <div className="p-2 flex items-end" onClick={() => handleDivClick("current_temp")}>{trainData.current_temp}</div>
-      <div className="p-2 flex items-end" onClick={() => handleDivClick("current_ready")}>{trainData.current_ready}</div>
-      <div className="p-2 flex items-end" onClick={() => handleDivClick("maintain_w")}>{trainData.maintain_w}</div>
-      <div className="p-2 flex items-end" onClick={() => handleDivClick("maintain_sec")}>{trainData.maintain_sec}</div>
-      <div className="p-2 flex items-end" onClick={() => handleDivClick("maintain_fac")}>{trainData.maintain_fac}</div>
-      <div className="p-2 flex items-end" onClick={() => handleDivClick("oth_waitrep")}>{trainData.oth_waitrep}</div>
-      <div className="p-2 flex items-end" onClick={() => handleDivClick("oth_return")}>{trainData.oth_return}</div>
-      <div className="p-2 flex items-end" onClick={() => handleDivClick("oth_stop")}>{trainData.oth_stop}</div>
-      <div className="p-2 flex items-end">
+      <div className="m-1 flex items-center justify-center ">{trainData.cartype}</div>
+      <div className={numberBoxClassName}>{trainData.belongto}</div>
+      <div className={numberBoxClassName} onClick={() => handleDivClick("borrowout")}>{trainData.borrowout}</div>
+      <div className={numberBoxClassName} onClick={() => handleDivClick("current_temp")}>{trainData.current_temp}</div>
+      <div className={numberBoxClassName} onClick={() => handleDivClick("current_cnt")}>{trainData.current_cnt}</div>
+      <div className={numberBoxClassName} onClick={() => handleDivClick("current_use")}>{trainData.current_use}</div>
+      <div className={numberBoxClassName} onClick={() => handleDivClick("current_temp")}>{trainData.current_temp}</div>
+      <div className={numberBoxClassName} onClick={() => handleDivClick("current_ready")}>{trainData.current_ready}</div>
+      <div className={numberBoxClassName} onClick={() => handleDivClick("maintain_w")}>{trainData.maintain_w}</div>
+      <div className={numberBoxClassName} onClick={() => handleDivClick("maintain_sec")}>{trainData.maintain_sec}</div>
+      <div className={numberBoxClassName} onClick={() => handleDivClick("maintain_fac")}>{trainData.maintain_fac}</div>
+      <div className={numberBoxClassName} onClick={() => handleDivClick("oth_waitrep")}>{trainData.oth_waitrep}</div>
+      <div className={numberBoxClassName} onClick={() => handleDivClick("oth_return")}>{trainData.oth_return}</div>
+      <div className={numberBoxClassName} onClick={() => handleDivClick("oth_stop")}>{trainData.oth_stop}</div>
+      <div className={numberBoxClassName}>
         {Number(trainData.availability.toFixed(2))}
       </div>
     </div>
