@@ -6,40 +6,43 @@ import {
   Tooltip,
   AreaChart,
   Area,
+  ComposedChart,
   ResponsiveContainer,
 } from 'recharts';
-const data = [
-  { name: '1', using_rate: 45 },
-  { name: '2', using_rate: 30 },
-  { name: '3', using_rate: 35 },
-  { name: '4', using_rate: 34 },
-  { name: '5', using_rate: 31 },
-  { name: '6', using_rate: 47 },
-  { name: '7', using_rate: 34 },
-  { name: '8', using_rate: 39 },
-  { name: '9', using_rate: 31 },
-  { name: '10', using_rate: 50 },
-  { name: '11', using_rate: 48 },
-  { name: '12', using_rate: 32 },
-  { name: '13', using_rate: 45 },
-  { name: '14', using_rate: 43 },
-  { name: '15', using_rate: 42 },
-  { name: '16', using_rate: 44 },
-  { name: '17', using_rate: 44 },
-  { name: '18', using_rate: 33 },
-  { name: '19', using_rate: 36 },
-  { name: '20', using_rate: 46 },
-  { name: '21', using_rate: 45 },
-  { name: '22', using_rate: 32 },
-  { name: '23', using_rate: 46 },
-  { name: '24', using_rate: 44 },
-  { name: '25', using_rate: 32 },
-  { name: '26', using_rate: 47 },
-  { name: '27', using_rate: 44 },
-  { name: '28', using_rate: 38 },
-  { name: '29', using_rate: 36 },
-  { name: '30', using_rate: 34 }
+const using_rate_data = [
+  { name: '1號', 本月: 45, 上個月: 50 },
+  { name: '2號', 本月: 30, 上個月: 32 },
+  { name: '3號', 本月: 35, 上個月: 44 },
+  { name: '4號', 本月: 34, 上個月: 39 },
+  { name: '5號', 本月: 31, 上個月: 44 },
+  { name: '6號', 本月: 47, 上個月: 52 },
+  { name: '7號', 本月: 34, 上個月: 34 },
+  { name: '8號', 本月: 39, 上個月: 44 },
+  { name: '9號', 本月: 31, 上個月: 36 },
+  { name: '10號', 本月: 50, 上個月: 55 },
+  { name: '11號', 本月: 48, 上個月: 33 },
+  { name: '12號', 本月: 32, 上個月: 37 },
+  { name: '13號', 本月: 45, 上個月: 30 },
+  { name: '14號', 本月: 43, 上個月: 48 },
+  { name: '15號', 本月: 42, 上個月: 47 },
+  { name: '16號', 本月: 44, 上個月: 39 },
+  { name: '17號', 本月: 44, 上個月: 49 },
+  { name: '18號', 本月: 33, 上個月: 38 },
+  { name: '19號', 本月: 36, 上個月: 31 },
+  { name: '20號', 本月: 46, 上個月: 31 },
+  { name: '21號', 本月: 45, 上個月: 50 },
+  { name: '22號', 本月: 32, 上個月: 57 },
+  { name: '23號', 本月: 46, 上個月: 51 },
+  { name: '24號', 本月: 44, 上個月: 49 },
+  { name: '25號', 本月: 32, 上個月: 37 },
+  { name: '26號', 本月: 47, 上個月: 52 },
+  { name: '27號', 本月: 44, 上個月: 49 },
+  { name: '28號', 本月: 38, 上個月: 43 },
+  { name: '29號', 本月: 36, 上個月: 41 },
+  { name: '30號', 本月: 34, 上個月: 40 }
 ];
+
+
 
 
 export default function UseRateChart() {
@@ -48,22 +51,23 @@ export default function UseRateChart() {
   return (
     <ResponsiveContainer width="100%" aspect={4}>
 
-      <AreaChart
-          data={data}
-          margin={{
-            top: 10,
-            right: 10,
-          }}
-        >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
-          <YAxis
-      tickFormatter={(value) => `${value}%`}
-      domain={[0, 100]} // Set the Y-axis range from 0 to 100
-    />
+      <ComposedChart
+        data={using_rate_data}
+        margin={{
+          top: 10,
+          right: 10,
+        }}
+      >
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="name" />
+        <YAxis
+          tickFormatter={(value) => `${value}%`}
+          domain={[0, 100]} // Set the Y-axis range from 0 to 100
+        />
         <Tooltip />
-          <Area type="monotone" dataKey="using_rate" stroke="#397EFF" activeDot={{ r: 5 }} />
-        </AreaChart>
+        <Area type="monotone" dataKey="上個月" fill="#C9DCFF" stroke="#A5C4FF" activeDot={{ r: 5 }} />
+        <Area type="monotone" dataKey="本月" fill="#6CA0FF" stroke="#397EFF" activeDot={{ r: 5 }} />
+      </ComposedChart>
     </ResponsiveContainer>
   );
 }
