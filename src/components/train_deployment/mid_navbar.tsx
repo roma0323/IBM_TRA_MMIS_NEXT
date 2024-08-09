@@ -40,31 +40,9 @@ const MidNavbar: React.FC = () => {
     }
 
     const handleSelect = (value: string) => {
-        let queryParam = '';
-        switch (value) {
-            case "overview_all":
-                queryParam = '?type=all';
-                break;
-            case "overview_power":
-                queryParam = '?type=power';
-                break;
-            case "overview_unusally_used":
-                queryParam = '?type=unusual';
-                break;
-            default:
-                break;
-        }
-
-        if (queryParam) {
-            router.push(`/navbarpages/train_deployment${queryParam}`);
-        }
+        router.push(`/navbarpages/train_deployment?type=${value}`);
     };
 
-    // Determine which SelectItem should be selected based on the URL type
-    const selectedValue = type === 'power' ? 'overview_power' :
-    type === 'unusual' ? 'overview_unusally_used' :
-    type === 'all' ? 'overview_all' :
-    'other';
 
     return (
         <div className="w-screen flex flex-col items-center sticky self-stretch">
@@ -93,14 +71,16 @@ const MidNavbar: React.FC = () => {
 
             <div className="flex flex-col items-center justify-center px-6 w-full">
                 <div className="flex items-start gap-1 w-full">
-                    <Select value={selectedValue} onValueChange={handleSelect}>
+                    <Select value={type} onValueChange={handleSelect}>
                         <SelectTrigger className="w-fit">
-                            <SelectValue placeholder={selectedValue === 'other' ? '總覽總覽' : ''} />
+                            {/* <SelectValue placeholder='總覽' /> */}
+                            <SelectValue placeholder={type === '' ? '總覽' : '非常態'} />
+
                         </SelectTrigger>
                             <SelectContent>
-                                <SelectItem value="overview_all">總覽</SelectItem>
-                                <SelectItem value="overview_power">動力車</SelectItem>
-                                <SelectItem value="overview_unusally_used">非常態車輛</SelectItem>
+                                <SelectItem value="all">總覽</SelectItem>
+                                <SelectItem value="power">動力車</SelectItem>
+                                <SelectItem value="unusual">非常態車輛</SelectItem>
                             </SelectContent>
                     </Select>
 
