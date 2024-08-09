@@ -39,7 +39,7 @@ const DataSection: React.FC<DataSectionProps> = ({ cntSum, readySum }) => (
       <div className="flex flex-col items-start justify-center p-2.5 w-full border-b border-[#646464]">
         城際列車 - 車種配置
       </div>
-      <div className="relative w-full flex items-start justify-center">
+      <div className="h-full relative w-full flex items-start justify-start">
         <BigPieChart />
       </div>
     </div>
