@@ -4,7 +4,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { OverviewCard } from "@/components/train_deployment/OverviewCard";
 import { BigOverviewCard } from "@/components/train_deployment/BigOverviewCard";
-import { useSearchParams } from "next/navigation"; // Import useSearchParams
+import { useSearchParams, useRouter } from "next/navigation";
 
 type ClientPageProps = {
   initialData: any[];
@@ -23,83 +23,101 @@ const ClientPage: React.FC<ClientPageProps> = ({ initialData }) => {
     current_cnt: 5,
   };
 
-  // State to track which card is clicked
-
-  const searchParams = useSearchParams(); // Use useSearchParams to access query parameters
+  const searchParams = useSearchParams();
   const type = searchParams ? searchParams.get("type") : null;
-  console.log(type)
-  // Determine which data to show based on the 'type' parameter
+  const router = useRouter();
+
+  const handleTypeChange = (newType: string) => {
+    router.push(`?type=${newType}`);
+  };
 
   return (
-    <div className="bg-gray-200 p-3">
-      <div>
-        <p>
-          Query Parameter <strong>type</strong>: {type || "None"}
-        </p>
-        <BigOverviewCard Data={initialData[8]} />
-
-        <div className="grid grid-cols-4 flex-grow relative bg-gray-200 overflow-hidden">
+    <div className="bg-gray-200 h-full p-3">
+      {/* Conditionally render based on the 'type' parameter */}
+      {type === "all" && (
+        <div className=" h-full flex  flex-col justify-around">
           <div>
-            <OverviewCard Data={POWER_TRAIN_DATA} />
+            <BigOverviewCard Data={initialData[8]} />
           </div>
-          <Link
-            href={{
-              pathname: `/navbarpages/train_deployment/certain_train/${initialData[0].carcatalog}`,
-            }}
-          >
-            <div>
+          <div className="grid grid-cols-4">
+            <div onClick={() => handleTypeChange("power")}>
+              <OverviewCard Data={POWER_TRAIN_DATA} />
+            </div>
+            <Link href={{ pathname: `/navbarpages/train_deployment/certain_train/${initialData[0].carcatalog}` }}>
               <OverviewCard Data={initialData[0]} />
-            </div>
-          </Link>
-          <Link
-            href={{
-              pathname: `/navbarpages/train_deployment/certain_train/${initialData[3].carcatalog}`,
-            }}
-          >
-            <div>
+            </Link>
+            <Link href={{ pathname: `/navbarpages/train_deployment/certain_train/${initialData[3].carcatalog}` }}>
               <OverviewCard Data={initialData[3]} />
-            </div>
-          </Link>
-          <Link
-            href={{
-              pathname: `/navbarpages/train_deployment/certain_train/${UNUSUALLY_USED_TRAIN_DATA.carcatalog}`,
-            }}
-          >
-            <div>
+            </Link>
+            <div onClick={() => handleTypeChange("unusual")}>
               <OverviewCard Data={UNUSUALLY_USED_TRAIN_DATA} />
             </div>
-          </Link>
+          </div>
         </div>
-      </div>
+      )}
 
-      {/* Second div - Only show this when a link is clicked */}
-      <div>
-        <BigOverviewCard Data={POWER_TRAIN_DATA} />
-        <div className="grid grid-cols-4 flex-grow relative bg-gray-200 overflow-hidden">
-          <Link
-            href={{
-              pathname: `/navbarpages/train_deployment/certain_train/${UNUSUALLY_USED_TRAIN_DATA.carcatalog}`,
-            }}
-          >
-            <OverviewCard Data={UNUSUALLY_USED_TRAIN_DATA} />
-          </Link>
+      {type === "power" && (
+        <div className=" h-full flex  flex-col justify-around">
+          <div>
+            <BigOverviewCard Data={POWER_TRAIN_DATA} />
+          </div>
+          <div className="grid grid-cols-3 flex-grow relative bg-gray-200 overflow-hidden">
+          <Link href={{ pathname: `/navbarpages/train_deployment/certain_train/${initialData[1].carcatalog}` }}>
+              <OverviewCard Data={initialData[1]} />
+            </Link>
+            <Link href={{ pathname: `/navbarpages/train_deployment/certain_train/${initialData[2].carcatalog}` }}>
+              <OverviewCard Data={initialData[2]} />
+            </Link>
+            <Link href={{ pathname: `/navbarpages/train_deployment/certain_train/${initialData[4].carcatalog}` }}>
+              <OverviewCard Data={initialData[4]} />
+            </Link>
+            <Link href={{ pathname: `/navbarpages/train_deployment/certain_train/${initialData[5].carcatalog}` }}>
+              <OverviewCard Data={initialData[5]} />
+            </Link>
+            <Link href={{ pathname: `/navbarpages/train_deployment/certain_train/${initialData[6].carcatalog}` }}>
+              <OverviewCard Data={initialData[6]} />
+            </Link>
+            <Link href={{ pathname: `/navbarpages/train_deployment/certain_train/${initialData[7].carcatalog}` }}>
+              <OverviewCard Data={initialData[7]} />
+            </Link>
+          </div>
         </div>
-      </div>
+      )}
 
-      {/* Third div - Only show this when a link is clicked */}
-      <div>
-        <BigOverviewCard Data={POWER_TRAIN_DATA} />
-
-        <div className="grid grid-cols-4 flex-grow relative bg-gray-200 overflow-hidden">
-          <Link
-            href={{
-              pathname: `/navbarpages/train_deployment/certain_train/${UNUSUALLY_USED_TRAIN_DATA.carcatalog}`,
-            }}
-          >
-            <OverviewCard Data={UNUSUALLY_USED_TRAIN_DATA} />
-          </Link>
+      {type === "unusual" && (
+        <div className=" h-full flex  flex-col justify-around">
+          <div>
+            <BigOverviewCard Data={UNUSUALLY_USED_TRAIN_DATA} />
+          </div>
+          以下數據不正確（外網沒有非常態資料api）
+          <div className="grid grid-cols-4">
+            <Link href={{ pathname: `/navbarpages/train_deployment/certain_train/${initialData[0].carcatalog}` }}>
+              <OverviewCard Data={initialData[0]} />
+            </Link>
+            <Link href={{ pathname: `/navbarpages/train_deployment/certain_train/${initialData[1].carcatalog}` }}>
+              <OverviewCard Data={initialData[1]} />
+            </Link>
+            <Link href={{ pathname: `/navbarpages/train_deployment/certain_train/${initialData[2].carcatalog}` }}>
+              <OverviewCard Data={initialData[2]} />
+            </Link>
+            <Link href={{ pathname: `/navbarpages/train_deployment/certain_train/${initialData[3].carcatalog}` }}>
+              <OverviewCard Data={initialData[3]} />
+            </Link>
+            <Link href={{ pathname: `/navbarpages/train_deployment/certain_train/${initialData[4].carcatalog}` }}>
+              <OverviewCard Data={initialData[4]} />
+            </Link>
+            <Link href={{ pathname: `/navbarpages/train_deployment/certain_train/${initialData[5].carcatalog}` }}>
+              <OverviewCard Data={initialData[5]} />
+            </Link>
+            <Link href={{ pathname: `/navbarpages/train_deployment/certain_train/${initialData[6].carcatalog}` }}>
+              <OverviewCard Data={initialData[6]} />
+            </Link>
+            <Link href={{ pathname: `/navbarpages/train_deployment/certain_train/${initialData[7].carcatalog}` }}>
+              <OverviewCard Data={initialData[7]} />
+            </Link>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

@@ -1,7 +1,7 @@
 'use client'
 import Link from 'next/link'
 import React, { Suspense } from "react";
-import { usePathname, useRouter } from 'next/navigation'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import {
     Select,
     SelectContent,
@@ -22,19 +22,28 @@ const trainTypes = [
 ];
 
 const MidNavbar: React.FC = () => {
-    const router = useRouter(); // Initialize useRouter
+    const router = useRouter(); 
     const pathname = usePathname() || '';
+    const searchParams = useSearchParams(); // Get search parameters from the URL
+
     let decodedLastPart = decodeURIComponent(pathname.split('/').pop() || '');
+    const type = searchParams?.get('type') || ''; // Safely get 'type' parameter from the query string
 
     if (decodedLastPart === 'train_deployment') {
         decodedLastPart = '總覽';
+        if(type==='unusual'){
+            decodedLastPart = '非常態車輛';
+        }
+        if(type==='power'){
+            decodedLastPart = '動力車';
+        }
     }
 
     const handleSelect = (value: string) => {
         let queryParam = '';
         switch (value) {
             case "overview_all":
-                router.push('/navbarpages/train_deployment'); // Navigate to the link
+                queryParam = '?type=all';
                 break;
             case "overview_power":
                 queryParam = '?type=power';
@@ -50,6 +59,12 @@ const MidNavbar: React.FC = () => {
             router.push(`/navbarpages/train_deployment${queryParam}`);
         }
     };
+
+    // Determine which SelectItem should be selected based on the URL type
+    const selectedValue = type === 'power' ? 'overview_power' :
+    type === 'unusual' ? 'overview_unusally_used' :
+    type === 'all' ? 'overview_all' :
+    'other';
 
     return (
         <div className="w-screen flex flex-col items-center sticky self-stretch">
@@ -77,16 +92,16 @@ const MidNavbar: React.FC = () => {
             </div>
 
             <div className="flex flex-col items-center justify-center px-6 w-full">
-                <div className="flex items-start gap-[5px] w-full">
-                    <Select onValueChange={handleSelect}>
+                <div className="flex items-start gap-1 w-full">
+                    <Select value={selectedValue} onValueChange={handleSelect}>
                         <SelectTrigger className="w-fit">
-                            <SelectValue placeholder="總覽" />
+                            <SelectValue placeholder={selectedValue === 'other' ? '總覽總覽' : ''} />
                         </SelectTrigger>
-                        <SelectContent>
-                            <SelectItem value="overview_all">總覽</SelectItem>
-                            <SelectItem value="overview_power">動力車</SelectItem>
-                            <SelectItem value="overview_unusally_used">非常態車輛</SelectItem>
-                        </SelectContent>
+                            <SelectContent>
+                                <SelectItem value="overview_all">總覽</SelectItem>
+                                <SelectItem value="overview_power">動力車</SelectItem>
+                                <SelectItem value="overview_unusally_used">非常態車輛</SelectItem>
+                            </SelectContent>
                     </Select>
 
                     {trainTypes.map(train => (

@@ -12,7 +12,7 @@ import Link from 'next/link'
 
 const navigationData = [
   {
-    href: "/navbarpages/train_deployment",
+    href: "/navbarpages/train_deployment?type=all",
     logoClassName: "bg-[url(/icon-train-deployment.png)]",
     text: "車輛配置資訊",
     text1: "各區段、車型資料、可用率儀表板"

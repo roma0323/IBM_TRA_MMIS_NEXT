@@ -11,14 +11,14 @@
 車種層級分析：各車型比例
    <BigPieChart />
 
-車種層級分析：30使用率
-   <BigPieChart />   
-疊圖 平均值 曲線平緩
+車種層級分析：30使用率（包含前30~60天）
+   <UseRateAreaChart />   
 
 
+
+內網不知道有沒有：
+非常態資料
+
+
+改善：
 rowbytrain 是否全部都可以點
-
-
-客車：
-http://tra.webtw.xyz:8888/maximo/zz_data?method=getSumStatusList&qdate=2024-08-04&carcatalog=客車&cartype=PPH
-貨車無假資料

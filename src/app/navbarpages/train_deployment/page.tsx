@@ -46,8 +46,8 @@ export default async function Page() {
   // Await the promise to get the data
   const fetchedData = await getData();
   return (
-    <main>
-      <ClientPage initialData={fetchedData.data} />
+    <main className="flex flex-col h-full">
+      <ClientPage  initialData={fetchedData.data} />
     </main>
   );
 }

@@ -23,7 +23,7 @@ const Navbar: React.FC = () => {
                 <div className="relative flex-1 grow" />
                 <Link
                     className={`link ${pathname?.startsWith('/navbarpages/train_deployment') ? 'active' : ''}`}
-                    href="/navbarpages/train_deployment"
+                    href="/navbarpages/train_deployment?type=all"
                 >
                     <div className="inline-flex items-center justify-center gap-2.5 px-3 py-2 relative flex-[0_0_auto] rounded overflow-hidden">
                         車輛配置資訊
