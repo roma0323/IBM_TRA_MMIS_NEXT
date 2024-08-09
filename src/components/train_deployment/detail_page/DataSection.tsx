@@ -31,7 +31,7 @@ const DataSection: React.FC<DataSectionProps> = ({ cntSum, readySum }) => (
 
     <div className="w-full self-stretch flex-[0_0_auto] rounded-lg flex flex-col items-center relative bg-white overflow-hidden">
       <div className="flex flex-col items-start justify-center p-2.5 w-full border-b border-[#646464]">
-        近30 天使用率
+        30 天使用率
       </div>
       <UseRateAreaChart />
     </div>

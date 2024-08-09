@@ -33,7 +33,6 @@ export const BigOverviewCard = ({ Data }: ClientPageProps): JSX.Element => {
                 </div>
                 <div className="flex flex-col items-center mt-2 justify-start">
                     <p className="text-center">
-                        <span className="block">近</span>
                         <span className="block">30</span>
                         <span className="block">日</span>
                         <span className="block">使</span>
