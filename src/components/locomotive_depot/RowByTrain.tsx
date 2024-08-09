@@ -23,7 +23,6 @@ export const RowByTrain = ({
       <div className="m-2 flex items-center justify-center ">
         <LabelChip
           text={trainData.carcatalog}
-          className={`bg-[#fffffff2] ${trainData.className}`}
           property1="default"
         />
       </div>

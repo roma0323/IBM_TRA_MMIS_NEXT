@@ -3,42 +3,45 @@ import React from "react";
 
 interface Props {
   property1: "default";
-  className?: string;
   text: string;
 }
 
-export const LabelChip = ({ property1, className = "", text = "ALL" }: Props): JSX.Element => {
+export const LabelChip = ({ property1,  text = "ALL" }: Props): JSX.Element => {
   let style_template = "";
 
   switch (text) {
-    case "通勤列車":
-      style_template = "text-[#FFBB54]";
-      break;
     case "城際列車":
-      style_template = "text-[#D9730D]";
+      style_template = `text-[#538164]`;
       break;
-    case "電力列車":
-      style_template = "text-[#8F65AF]";
+    case "電力機車":
+      style_template = `text-[#FFBB54]`;
+      break;
+    case "柴電機車":
+      style_template = `text-[#D9730D]`;
       break;
     case "柴液機車":
-      style_template = "text-[#28BF02]";
+      style_template = `text-[#C3554E]`;
       break;
     case "客車":
-      style_template = "text-[#00BBC7]";
+      style_template = `text-[#00BBC7]`;
       break;
     case "柴油客車":
-      style_template = "text-[#538164]";
+      style_template = `text-[#9F8170]`;
       break;
     case "貨車":
-      style_template = "text-[#C3554E]";
+      style_template = `text-[#8F65AF]`;
+      break;
+    case "通勤列車":
+      style_template = `text-[#28BF02]`;
       break;
     default:
       style_template = "text-[#397EFF]";
   }
+  
 
   return (
     <div
-      className={` items-center justify-center  p-1 relative bg-[#fffffff2] ${style_template} rounded-[5px] ${className}`}>
+      className={` items-center justify-center  p-1 relative  ${style_template} rounded-[5px]`}>
       {text}
     </div>
   );

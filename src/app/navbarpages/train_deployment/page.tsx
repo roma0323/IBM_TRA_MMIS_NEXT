@@ -1,4 +1,4 @@
-// import  ClientPage  from "./clientCom";
+import React, { Suspense } from 'react';
 import ClientPage from "@/components/train_deployment/ClientPage";
 
 // Define the data type for better TypeScript support
@@ -45,9 +45,12 @@ async function getData(): Promise<FetchedData> {
 export default async function Page() {
   // Await the promise to get the data
   const fetchedData = await getData();
+  
   return (
     <main className="flex flex-col h-full">
-      <ClientPage  initialData={fetchedData.data} />
+      <Suspense fallback={<div>Loading...</div>}>
+        <ClientPage initialData={fetchedData.data} />
+      </Suspense>
     </main>
   );
 }
