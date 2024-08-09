@@ -57,9 +57,10 @@ export default function UseRateChart() {
         >
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="name" />
-        <YAxis
-          tickFormatter={(value) => `${value}%`}
-        />
+          <YAxis
+      tickFormatter={(value) => `${value}%`}
+      domain={[0, 100]} // Set the Y-axis range from 0 to 100
+    />
         <Tooltip />
           <Area type="monotone" dataKey="using_rate" stroke="#397EFF" activeDot={{ r: 5 }} />
         </AreaChart>

@@ -13,6 +13,7 @@
 
 車種層級分析：30使用率
    <BigPieChart />   
+疊圖 平均值 曲線平緩
 
 
 rowbytrain 是否全部都可以點
