@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { PieChart, Pie, Sector, ResponsiveContainer, SectorProps } from 'recharts';
+import { PieChart, Pie, Sector, ResponsiveContainer } from 'recharts';
 
 const data = [
   { name: '太魯閣 - TEMU1000', value: 100 },
@@ -70,9 +70,11 @@ const renderActiveShape = (props: CustomSectorProps) => {
   );
 };
 
-export default class Example extends PureComponent {
-  static demoUrl = 'https://codesandbox.io/s/pie-chart-with-customized-active-shape-y93si';
+type BigPieChartProps = {
+  styleTemplate: string;
+};
 
+export default class BigPieChart extends PureComponent<BigPieChartProps> {
   state = {
     activeIndex: 0,
   };
@@ -83,7 +85,34 @@ export default class Example extends PureComponent {
     });
   };
 
+  getColor = () => {
+    const { styleTemplate } = this.props;
+
+    switch (styleTemplate) {
+      case "城際列車":
+        return `#538164`;
+      case "電力機車":
+        return `#FFBB54`;
+      case "柴電機車":
+        return `#D9730D`;
+      case "柴液機車":
+        return `#C3554E`;
+      case "客車":
+        return `#00BBC7`;
+      case "柴油客車":
+        return `#9F8170`;
+      case "貨車":
+        return `#8F65AF`;
+      case "通勤列車":
+        return `#28BF02`;
+      default:
+        return "#397EFF";
+    }
+  };
+
   render() {
+    const color = this.getColor();
+
     return (
       <ResponsiveContainer width="100%" aspect={1.5}>
         <PieChart>
@@ -95,7 +124,7 @@ export default class Example extends PureComponent {
             cy="50%"
             innerRadius={30}
             outerRadius={55}
-            fill="#397EFF"
+            fill={color}
             dataKey="value"
             onMouseEnter={this.onPieEnter}
           />

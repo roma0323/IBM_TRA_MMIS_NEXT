@@ -42,15 +42,45 @@ const using_rate_data = [
   { name: '30號', 本月: 34, 上個月: 40 }
 ];
 
+type UseRateAreaChartProps = {
+  styleTemplate: string;
+};
 
 
+export default function UseRateAreaChart({ styleTemplate }: UseRateAreaChartProps) {
+  let color = "";
 
-export default function UseRateChart() {
-
+  switch (styleTemplate) {
+    case "城際列車":
+      color = `#538164`;
+      break;
+    case "電力機車":
+      color = `#FFBB54`;
+      break;
+    case "柴電機車":
+      color = `#D9730D`;
+      break;
+    case "柴液機車":
+      color = `#C3554E`;
+      break;
+    case "客車":
+      color = `#00BBC7`;
+      break;
+    case "柴油客車":
+      color = `#9F8170`;
+      break;
+    case "貨車":
+      color = `#8F65AF`;
+      break;
+    case "通勤列車":
+      color = `#28BF02`;
+      break;
+    default:
+      color = "#397EFF";
+  }
 
   return (
     <ResponsiveContainer width="100%" aspect={4}>
-
       <ComposedChart
         data={using_rate_data}
         margin={{
@@ -65,8 +95,8 @@ export default function UseRateChart() {
           domain={[0, 100]} // Set the Y-axis range from 0 to 100
         />
         <Tooltip />
-        <Area type="monotone" dataKey="上個月" fill="#C9DCFF" stroke="#A5C4FF" activeDot={{ r: 5 }} />
-        <Area type="monotone" dataKey="本月" fill="#6CA0FF" stroke="#397EFF" activeDot={{ r: 5 }} />
+        <Area type="monotone" dataKey="上個月" fill="#E8E8E8" stroke="#D1D1D1" activeDot={{ r: 5 }} />
+        <Area type="monotone" dataKey="本月" fill={`${color}8d`} stroke={color} activeDot={{ r: 5 }} />
       </ComposedChart>
     </ResponsiveContainer>
   );

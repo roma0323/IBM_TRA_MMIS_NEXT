@@ -62,24 +62,25 @@ const ClientPage: React.FC<ClientPageProps> = ({ initialData }) => {
             <BigOverviewCard Data={POWER_TRAIN_DATA} />
           </div>
           <div className="grid grid-cols-3 flex-grow relative bg-gray-200 overflow-hidden">
-          <Link href={{ pathname: `/navbarpages/train_deployment/certain_train/${initialData[1].carcatalog}` }}>
+            <Link href={{ pathname: `/navbarpages/train_deployment/certain_train/${initialData[1].carcatalog}` }}>
               <OverviewCard Data={initialData[1]} />
-            </Link>
-            <Link href={{ pathname: `/navbarpages/train_deployment/certain_train/${initialData[2].carcatalog}` }}>
-              <OverviewCard Data={initialData[2]} />
-            </Link>
-            <Link href={{ pathname: `/navbarpages/train_deployment/certain_train/${initialData[4].carcatalog}` }}>
-              <OverviewCard Data={initialData[4]} />
-            </Link>
-            <Link href={{ pathname: `/navbarpages/train_deployment/certain_train/${initialData[5].carcatalog}` }}>
-              <OverviewCard Data={initialData[5]} />
-            </Link>
-            <Link href={{ pathname: `/navbarpages/train_deployment/certain_train/${initialData[6].carcatalog}` }}>
-              <OverviewCard Data={initialData[6]} />
             </Link>
             <Link href={{ pathname: `/navbarpages/train_deployment/certain_train/${initialData[7].carcatalog}` }}>
               <OverviewCard Data={initialData[7]} />
             </Link>
+            <Link href={{ pathname: `/navbarpages/train_deployment/certain_train/${initialData[2].carcatalog}` }}>
+              <OverviewCard Data={initialData[2]} />
+            </Link>
+            <Link href={{ pathname: `/navbarpages/train_deployment/certain_train/${initialData[5].carcatalog}` }}>
+              <OverviewCard Data={initialData[5]} />
+            </Link>
+            <Link href={{ pathname: `/navbarpages/train_deployment/certain_train/${initialData[4].carcatalog}` }}>
+              <OverviewCard Data={initialData[4]} />
+            </Link>
+            <Link href={{ pathname: `/navbarpages/train_deployment/certain_train/${initialData[6].carcatalog}` }}>
+              <OverviewCard Data={initialData[6]} />
+            </Link>
+
           </div>
         </div>
       )}

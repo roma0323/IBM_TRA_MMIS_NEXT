@@ -8,13 +8,16 @@ type TrainCategorySectionProps = {
   selectedTrainName: string;
   isDetailVisible: boolean;
   handleTrainClick: (trainName: string) => void;
+  carcatalog: string; // Add the carcatalog prop
+
 };
 
 const TrainCategorySection: React.FC<TrainCategorySectionProps> = ({
   initialData,
   trainData,
   selectedTrainName,
-  handleTrainClick
+  handleTrainClick,
+  carcatalog
 }) => (
   <BoardTitleSection
     title={`${initialData[0].carcatalog} - 車種分配資訊`}
@@ -27,6 +30,7 @@ const TrainCategorySection: React.FC<TrainCategorySectionProps> = ({
             trainCount={train.trainCount}
             onClick={() => handleTrainClick(train.trainName)} // Pass trainName on click
             isActive={selectedTrainName === train.trainName}
+            carcatalog={carcatalog}
           />
         ))}
       </div>

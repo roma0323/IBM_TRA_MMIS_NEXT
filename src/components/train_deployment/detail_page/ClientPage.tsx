@@ -21,6 +21,7 @@ const DetailClientPage: React.FC<ClientPageProps> = ({ initialData }) => {
   useEffect(() => {
     const fetchTrainData = async () => {
       try {
+        console.log(initialData[0].carcatalog,"initialData[0].carcataloginitialData[0].carcatalog")
         const response = await fetch(`http://tra.webtw.xyz:8888/maximo/zz_data?method=getCarTypeList&carcatalog=${initialData[0].carcatalog}`, {
           method: 'POST',
           headers: {
@@ -113,7 +114,7 @@ const DetailClientPage: React.FC<ClientPageProps> = ({ initialData }) => {
 
         {/* first Div */}
         <div className="min-w-[25%] h-full flex items-center justify-center">
-          <DataSection cntSum={cntSum} readySum={readySum} />
+          <DataSection cntSum={cntSum} readySum={readySum} carcatalog={initialData[0].carcatalog} />
         </div>
 
         {/* second Div */}
@@ -123,6 +124,7 @@ const DetailClientPage: React.FC<ClientPageProps> = ({ initialData }) => {
             trainData={trainData}
             selectedTrainName={selectedTrainName}
             isDetailVisible={isTrainDetailVisible}
+            carcatalog={initialData[0].carcatalog}
             handleTrainClick={handleTrainTypeClick} // Pass the handleTrainClick function
           />
         </div>

@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
 import React from "react";
-import { DataCard } from "@/components/train_deployment/DataCard";
 // import UseRateLineChart from "@/components/train_deployment/UseRateLineChart";
 import UseRateAreaChart from "@/components/train_deployment/UseRateAreaChart";
 
@@ -40,8 +39,8 @@ export const BigOverviewCard = ({ Data }: ClientPageProps): JSX.Element => {
                         <span className="block">率</span>
                     </p>
                 </div>
-                <UseRateAreaChart />
-            </div>
+                <UseRateAreaChart styleTemplate="" />
+                </div>
         </div>
     );
 };
