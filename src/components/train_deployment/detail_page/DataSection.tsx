@@ -1,7 +1,7 @@
 import React from 'react';
 import { DataCard } from "@/components/train_deployment/DataCard";
 import UseRateAreaChart from "@/components/train_deployment/UseRateAreaChart";
-import BigPieChart from "@/components/train_deployment/BigPieChart";
+import BigPieChart from "@/components/train_deployment/detail_page/BigPieChart";
 
 type DataSectionProps = {
   cntSum: number;
