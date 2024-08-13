@@ -44,7 +44,7 @@ export const TrainInFactoryCard = ({
           <div className="text-[#4e4e4e]">在廠車輛</div>
         </div>
         {(isHovered || isActive) && (
-          <div className="self-stretch mb-4 py-2 rounded-[5px] justify-between items-center inline-flex">
+          <div className="self-stretch  py-2 rounded-[5px] justify-between items-center inline-flex">
             <DataCard text={`${cumulativeAchievementRate}%`} text1="累積達成率" />
             <DataCard text={`${cumulativeRepairedVehicles}`} text1="累積修車輛數" />
             <DataCard text={`${cumulativeTargetRate}`} text1="累積目標輛數" />

@@ -22,7 +22,7 @@ const trainTypes = [
 ];
 
 const MidNavbar: React.FC = () => {
-    const router = useRouter(); 
+    const router = useRouter();
     const pathname = usePathname() || '';
     const searchParams = useSearchParams(); // Get search parameters from the URL
 
@@ -31,10 +31,10 @@ const MidNavbar: React.FC = () => {
 
     if (decodedLastPart === 'train_deployment') {
         decodedLastPart = '總覽';
-        if(type==='unusual'){
+        if (type === 'unusual') {
             decodedLastPart = '非常態車輛';
         }
-        if(type==='power'){
+        if (type === 'power') {
             decodedLastPart = '動力車';
         }
     }
@@ -45,8 +45,8 @@ const MidNavbar: React.FC = () => {
 
 
     return (
-        <div className="w-screen flex flex-col items-center sticky self-stretch">
-            <div className="h-[10vh] w-full flex items-center gap-5 px-6 relative">
+        <div className="w-screen flex flex-col px-6 sticky">
+            <div className="h-[10vh]  flex items-center   relative">
                 <div className="flex items-center">
                     <span className="text-3xl">
                         車輛配置資訊/
@@ -57,47 +57,40 @@ const MidNavbar: React.FC = () => {
                 </div>
                 <div className="flex-1" />
 
-                <div className="flex items-center gap-2.5 p-[5px]">
-                    <div className="flex flex-col items-end justify-center gap-[5px] p-2.5 rounded-[5px] overflow-hidden">
-                        <span className="relative w-fit mt-[-1.00px] font-label-label-medium-dem font-[number:var(--label-label-medium-dem-font-weight)]  text-[length:var(--label-label-medium-dem-font-size)] tracking-[var(--label-label-medium-dem-letter-spacing)] leading-[var(--label-label-medium-dem-line-height)] [font-style:var(--label-label-medium-dem-font-style)]">
-                            上次更新時間
-                        </span>
-                        <p className="font-title-title-medium-semi font-[number:var(--title-title-medium-semi-font-weight)]  text-[length:var(--title-title-medium-semi-font-size)] relative w-fit tracking-[var(--title-title-medium-semi-letter-spacing)] leading-[var(--title-title-medium-semi-line-height)] [font-style:var(--title-title-medium-semi-font-style)]">
-                            113 / 5 / 8&nbsp;&nbsp;(三) 12:20
-                        </p>
-                    </div>
+                <div className="flex flex-col items-end just">
+                    <span >
+                        上次更新時間
+                    </span>
+                    <p>
+                        113 / 5 / 8&nbsp;&nbsp;(三) 12:20
+                    </p>
                 </div>
             </div>
 
-            <div className="flex flex-col items-center justify-center px-6 w-full">
-                <div className="flex items-start gap-1 w-full">
-                    <Select value={type} onValueChange={handleSelect}>
-                        <SelectTrigger className="w-fit">
-                            {/* <SelectValue placeholder='總覽' /> */}
-                            <SelectValue placeholder={type === '' ? '總覽' : '非常態'} />
-
-                        </SelectTrigger>
-                            <SelectContent>
-                                <SelectItem value="all">總覽</SelectItem>
-                                <SelectItem value="power">動力車</SelectItem>
-                                <SelectItem value="unusual">非常態車輛</SelectItem>
-                            </SelectContent>
-                    </Select>
-
-                    {trainTypes.map(train => (
-                        <Link
-                            href={{
-                                pathname: `/navbarpages/train_deployment/certain_train/${train.name}`,
-                            }}
-                            className={`link ${decodedLastPart === train.name ? 'mid_nav_active' : 'mid_nav_unactive'}`}
-                            key={train.id}
-                        >
-                            <div className="inline-flex h-10 items-center px-4 py-0">
-                                {train.name}
-                            </div>
-                        </Link>
-                    ))}
-                </div>
+            <div className="flex items-start gap-1">
+                <Select value={type} onValueChange={handleSelect}>
+                    <SelectTrigger className="w-fit">
+                        <SelectValue placeholder={type === '' ? '總覽' : '非常態'} />
+                    </SelectTrigger>
+                    <SelectContent>
+                        <SelectItem value="all">總覽</SelectItem>
+                        <SelectItem value="power">動力車</SelectItem>
+                        <SelectItem value="unusual">非常態車輛</SelectItem>
+                    </SelectContent>
+                </Select>
+                {trainTypes.map(train => (
+                    <Link
+                        href={{
+                            pathname: `/navbarpages/train_deployment/certain_train/${train.name}`,
+                        }}
+                        className={`link ${decodedLastPart === train.name ? 'mid_nav_active' : 'mid_nav_unactive'}`}
+                        key={train.id}
+                    >
+                        <div className="inline-flex h-10 items-center px-4">
+                            {train.name}
+                        </div>
+                    </Link>
+                ))}
             </div>
         </div>
     );

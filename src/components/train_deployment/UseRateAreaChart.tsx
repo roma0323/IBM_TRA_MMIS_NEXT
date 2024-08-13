@@ -44,12 +44,8 @@ const using_rate_data = [
   null
 ];
 
-type UseRateAreaChartProps = {
-  styleTemplate: string;
-};
 
-
-export default function UseRateAreaChart({ styleTemplate }: UseRateAreaChartProps) {
+export default function UseRateAreaChart(styleTemplate: any) {
   let color = "";
 
   switch (styleTemplate) {

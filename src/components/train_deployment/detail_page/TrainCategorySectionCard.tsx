@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import SingleBar from "@/components/train_deployment/detail_page/SingleBar";
-import SmallPieChart from "@/components/train_deployment/detail_page/SmallPieChart";
+import { DataCard } from "@/components/train_deployment/DataCard";
 
 type MyComponentProps = {
   trainName: string;
@@ -51,7 +50,7 @@ const DeploymentByTrainCategory: React.FC<MyComponentProps> = ({ trainName, trai
 
   return (
     <div
-      className={`flex items-start gap-3 p-4 self-stretch w-full flex-[0_0_auto] bg-[#3034380d] rounded overflow-hidden cursor-pointer transition-transform duration-300 ease-in-out transform hover:shadow-lg
+      className={`p-4 self-stretch   bg-[#3034380d] rounded-lg  cursor-pointer hover:shadow-lg
         ${isActive ? 'border-l-4' : ''} flex-col justify-center relative`}
       style={{ borderColor: isActive ? color : 'transparent' }}  // Apply dynamic border color here
       onClick={handleToggle}
@@ -61,13 +60,10 @@ const DeploymentByTrainCategory: React.FC<MyComponentProps> = ({ trainName, trai
       <div className="text-lg">
         {trainName}
       </div>
-      <div className="flex items-center justify-between relative self-stretch w-full">
-        <div className="ml-2 inline-flex flex-col items-start relative flex relative">
-          <div className="text-4xl">
-            {trainCount}
-          </div>
-          <div className="text-md">車輛數</div>
-        </div>
+      <div className="flex w-full">
+        <DataCard text="22" text1="可用數" />
+        <DataCard text="22" text1="總輛數" />
+        <DataCard text="22" text1="可用率" />
       </div>
     </div>
   );
