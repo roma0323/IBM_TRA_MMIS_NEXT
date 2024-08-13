@@ -44,7 +44,7 @@ const DetailClientPage: React.FC<ClientPageProps> = ({ initialData }) => {
     };
 
     fetchTrainData();
-  }, []);
+  },);
 
   // Function to handle train click and fetch dynamic data
   const handleTrainTypeClick = async (trainName: string) => {
