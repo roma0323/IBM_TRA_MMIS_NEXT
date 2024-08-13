@@ -2,31 +2,22 @@
 
 'use client';
 
-import React, { useState, useEffect, Suspense } from "react";
+import React, { useState } from "react";
 import { LabelAndNumberByArea } from "@/components/locomotive_depot/LabelAndNumberByArea";
-import SlideNavigation from '@/components/SlideNavigation'; 
-import BoardTitleSection from '@/components/BoardTitleSection'; 
-import TrainOverviewSection from "@/components/locomotive_depot/TrainOverviewSection"; 
-import MaintenanceDetailSection from "@/components/locomotive_depot/MaintenanceDetailSection"; 
+import SlideNavigation from '@/components/SlideNavigation';
+import BoardTitleSection from '@/components/BoardTitleSection';
+import TrainOverviewSection from "@/components/locomotive_depot/TrainOverviewSection";
+import MaintenanceDetailSection from "@/components/locomotive_depot/MaintenanceDetailSection";
 import { getSumStatusDetailListMultiplierZeorDeptParamCartypeParamQtypeParam } from "@/api/api";
+import { FetcheGetSumStatusListData } from "@/types/type"; // Update the import path as needed
 
-type TrainData = { dept: string; deptdesc: string; cartype: string; carcatalog: string; belongto: number; borrowin: number; borrowout: number; current_cnt: number; current_use: number; current_temp: number; current_ready: number; maintain_w: number; maintain_sec: number; maintain_fac: number; oth_waitrep: number; oth_return: number; oth_stop: number; availability: number; };
-type TrainDataArray = TrainData[];
-interface ClientComponentProps {
-  initialData: TrainDataArray;
-}
-
-const TrainPageContent: React.FC<ClientComponentProps> = ({ initialData }) => {
-  const [trainData, setTrainData] = useState<TrainData[]>([]);
+const TrainPageContent: React.FC<FetcheGetSumStatusListData> = ({ Data }) => {
   const [selectedLabel, setSelectedLabel] = useState<string | null>(null);
   const [selectedArea, setSelectedArea] = useState<string | null>(null);
   const [maintenanceData, setMaintenanceData] = useState<any[]>([]); // New state for maintenance data
   const areas = [
     "全部機務段", "七堵機務段", "臺北機務段", "新竹機務段", "彰化機務段", "嘉義機務段", "高雄機務段", "花蓮機務段", "臺東機務段", "宜蘭機務分段"
   ];
-  useEffect(() => {
-    setTrainData(initialData);
-  }, [initialData]);
 
   const handleLabelClick = (label: string, area: string) => {
     setSelectedLabel((prevLabel) =>
@@ -38,24 +29,22 @@ const TrainPageContent: React.FC<ClientComponentProps> = ({ initialData }) => {
   };
 
   const handleTrainClick = async (dept: string, cartype: string, divData: string) => {
-    const data = await getSumStatusDetailListMultiplierZeorDeptParamCartypeParamQtypeParam(dept,cartype,divData)
+    const data = await getSumStatusDetailListMultiplierZeorDeptParamCartypeParamQtypeParam(dept, cartype, divData)
     setMaintenanceData(data);
   };
 
-  const filteredTrainData = trainData.filter((train) => {
+  const filteredTrainData = Data.filter((train) => {
     const areaMatches =
       selectedArea === "全部機務段" ||
       !selectedArea ||
       train.deptdesc.includes(selectedArea.replace("車輛配置", ""));
     const labelMatches =
       selectedLabel === "All" || !selectedLabel || train.carcatalog === selectedLabel;
-      
+
     return areaMatches && labelMatches;
   });
 
-  
 
-  
   //handleMouseEnter and slide
   const [currentIndex, setCurrentIndex] = useState(0);
   const totalSlides = 3; // Adjust if you have more or less than 3 divs
@@ -90,7 +79,7 @@ const TrainPageContent: React.FC<ClientComponentProps> = ({ initialData }) => {
                   <LabelAndNumberByArea
                     key={area}
                     area_name={area}
-                    onLabelClick={(label) => handleLabelClick(label, area)}/>))}
+                    onLabelClick={(label) => handleLabelClick(label, area)} />))}
               </div>
             }
           />
@@ -116,14 +105,5 @@ const TrainPageContent: React.FC<ClientComponentProps> = ({ initialData }) => {
   );
 };
 
-const ClientPage: React.FC<ClientComponentProps> = ({ initialData }) => {
-  const [data, setData] = useState(initialData);
 
-  return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <TrainPageContent initialData={data} />
-    </Suspense>
-  );
-};
-
-export default ClientPage;
+export default TrainPageContent;

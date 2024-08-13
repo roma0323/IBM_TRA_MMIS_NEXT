@@ -1,4 +1,5 @@
 import { FetcheGetSumStatusList } from "@/types/type"; // Update the import path as needed
+//import { FetcheGetSumStatusListData } from "@/types/type";
 
 export async function getSumStatusListAndsumtotalEqualone(): Promise<FetcheGetSumStatusList> {
   const res = await fetch(
