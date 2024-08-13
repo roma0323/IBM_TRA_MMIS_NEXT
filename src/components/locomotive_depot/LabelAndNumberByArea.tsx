@@ -15,8 +15,8 @@ export const LabelAndNumberByArea = ({ area_name = "臺北機務段車輛配置"
   };
 
   return (
-    <div className="flex flex-col items-start justify-center pt-5 px-5 relative self-stretch w-full flex-[0_0_auto]">
-      <div onClick={handleToggleVisibility} className="w-full p-2 cursor-pointer transition-transform rounded-xl duration-300 ease-in-out transform hover:scale-105 hover:border hover:border-gray-200"> -{area_name}</div>
+    <div className="flex flex-col  pt-4 px-5 relative self-stretch">
+      <div onClick={handleToggleVisibility} className="w-full p-2 cursor-pointer rounded-xl  cursor-pointer transition-transform rounded-xl duration-300 ease-in-out transform hover:scale-105 hover:bg-slate-100"> -{area_name}</div>
       {isVisible && (
         <>
           <LabelChipAndNumber onClick={onLabelClick} text="All"  />

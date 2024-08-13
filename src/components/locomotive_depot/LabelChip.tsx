@@ -1,12 +1,10 @@
-import PropTypes from "prop-types";
 import React from "react";
 
 interface Props {
-  property1: "default";
   text: string;
 }
 
-export const LabelChip = ({ property1,  text = "ALL" }: Props): JSX.Element => {
+export const LabelChip = ({  text = "ALL" }: Props): JSX.Element => {
   let style_template = "";
 
   switch (text) {
@@ -47,9 +45,5 @@ export const LabelChip = ({ property1,  text = "ALL" }: Props): JSX.Element => {
   );
 };
 
-LabelChip.propTypes = {
-  property1: PropTypes.oneOf(["default"]),
-  text: PropTypes.string.isRequired,
-};
 
 export default LabelChip;

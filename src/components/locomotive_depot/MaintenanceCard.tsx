@@ -20,18 +20,18 @@ const MaintenanceCard: React.FC<MaintenanceCardProps> = ({
   ];
 
   return (
-    <div className="flex items-start gap-3 p-4 mx-3 mt-3 self-stretch flex-[0_0_auto] bg-[#3034380d] rounded-xl overflow-hidden border-l-4 flex-col justify-center relative">
+    <div className="p-4 mx-3 m-3  bg-[#3034380d] rounded-xl  border-l-4">
       {maintenanceData.deptdesc} - {maintenanceData.cartype}
       {maintenanceData ? (
-        <div className="flex inline-flex flex-col items-start w-full items-center justify-between relative self-stretch w-full">
+        <div className="flex flex-col py-2 self-stretch">
           {attributes.map((attr, index) => (
-            <div key={index} className="w-full py-1 px-6 flex items-center justify-between">
+            <div key={index} className="w-full pt-1 px-6 flex  justify-between">
               <p>{attr.label}:</p>
               <p>{attr.value}</p>
             </div>
           ))}
           {maintenanceData.url ? (
-          <div className="w-full py-1 px-6 flex items-center justify-between">
+          <div className="w-full pt-1 px-6 flex  justify-between">
             <a href={maintenanceData.url} target="_blank" rel="noopener noreferrer">View Details</a>
           </div>
           ):(<div></div>)}

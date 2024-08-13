@@ -23,7 +23,6 @@ export const RowByTrain = ({
       <div className="m-2 flex items-center justify-center ">
         <LabelChip
           text={trainData.carcatalog}
-          property1="default"
         />
       </div>
       <div className="my-1 flex items-center justify-center ">{trainData.deptdesc}</div>

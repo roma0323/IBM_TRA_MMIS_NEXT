@@ -1,4 +1,3 @@
-// TrainOverviewSection.tsx
 
 import React from 'react';
 import { RowByTrain } from "@/components/locomotive_depot/RowByTrain";
