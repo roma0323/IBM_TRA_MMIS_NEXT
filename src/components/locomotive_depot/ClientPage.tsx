@@ -1,4 +1,3 @@
-// ClientPage.tsx
 
 'use client';
 

@@ -79,3 +79,19 @@ export async function getSumStatusDetailListMultiplierZeor(): Promise<FetcheGetS
   return res.json();
 
 }
+
+export async function getFacRepairYearPlan() {
+
+  const res = await fetch(`http://tra.webtw.xyz:8888/maximo/zz_data?method=getFacRepairYearPlan&year=2022`, {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json, text/plain, */*',
+      'Content-Type': 'application/json',
+    },
+  });
+  return res.json();
+
+}
+
+
+

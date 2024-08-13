@@ -1,38 +1,18 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, {useState } from "react";
 import { TrainInFactoryCard } from "@/components/factory_maintenance/TrainInFactoryCard";
 import ComposedChartMonthly from "@/components/factory_maintenance/ComposedChartMonthly";
 import ComposedChartAccmulate from "@/components/factory_maintenance/ComposedChartAccmulate";
+import { factoryMaintenanceOverall } from "@/types/type";
 
-interface MonthData {
-    name: string;
-    '當月預計': number;
-    '當月達成': number;
-    '累積預計': number;
-    '累積達成': number;
-    '當月差距': number; // Add the missing property
-    '累積差距': number; // Add the missing property
-}
-
-interface TransformedData {
-    deptid: string;
-    year: string;
-    departmentName: string,
-    infaccnt: number;
-    monthData: MonthData[];
-}
-
-interface ClientPageProps {
-    fetchData: TransformedData[];
-}
 
 const getCurrentMonthIndex = (): number => {
     const date = new Date();
     return date.getMonth(); // January is 0, February is 1, etc.
   }
 
-const ClientPage: React.FC<ClientPageProps> = ({ fetchData }) => {
+const ClientPage: React.FC<factoryMaintenanceOverall> = ({ Data }) => {
     const [activeCardIndex, setActiveCardIndex] = useState<number | null>(null);
 
     const currentMonthIndex = getCurrentMonthIndex();
@@ -47,10 +27,7 @@ const ClientPage: React.FC<ClientPageProps> = ({ fetchData }) => {
                 <div className="flex flex-col items-start justify-center p-2.5 relative self-stretch w-full flex-[0_0_auto] border-b [border-bottom-style:solid] border-[#646464]">
                     機廠檢修預覽
                 </div>
-
-                 
-
-                {fetchData.map((factory, index) => (
+                {Data.map((factory, index) => (
                     <TrainInFactoryCard
                         key={index}
                         factoryLocation={factory.departmentName} // Note the typo fix
@@ -63,14 +40,13 @@ const ClientPage: React.FC<ClientPageProps> = ({ fetchData }) => {
                         onToggle={() => handleToggle(index)}
                     />
                 ))}
-
             </div>
 
             <div className="col-span-5 bg-white flex flex-col items-center relative rounded-lg">
                 <div className="items-start justify-center p-2.5 relative self-stretch w-full flex-[0_0_auto] border-b [border-bottom-style:solid] border-[#646464]">
                     機廠檢修走勢
                 </div>
-                {fetchData.map((chartData, index) => (
+                {Data.map((chartData, index) => (
                     activeCardIndex === index && (
                         <div key={index} className="flex-grow w-full flex flex-col my-8 items-center justify-start">
                             <ComposedChartMonthly data={chartData.monthData} />

@@ -1,41 +1,23 @@
 import ClientPage from "@/components/factory_maintenance/ClientPage";
-
-interface DataSet {
-  deptid: string;
-  year: string;
-  infaccnt: number;
-  departmentName: string,
-
-  [key: string]: number | string;
-}
+import { getFacRepairYearPlan } from "@/api/api";
+import { factoryMaintenanceDataSetByfactory } from "@/types/type"; // Update the import path as needed
 
 const departmentNames: { [key: string]: string } = {
   "MXY00": "潮州",
   "MZY00": "花蓮",
   "WAY00": "富岡"
 };
+const monthNames = [
+  "January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+];
 
 async function getData() {
   try {
-    const response = await fetch('http://tra.webtw.xyz:8888/maximo/zz_data?method=getFacRepairYearPlan&year=2022', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json, text/plain, */*',
-        'Content-Type': 'application/json',
-      },
-    });
-
-    // Assuming response is fetched successfully
-    const data = await response.json();
-
-    // Array of month names for better readability
-    const monthNames = [
-      "January", "February", "March", "April", "May", "June",
-      "July", "August", "September", "October", "November", "December"
-    ];
+    const data = await getFacRepairYearPlan()    
 
     // Function to transform the dataset for better readability
-    const transformData = (dataset: DataSet) => {
+    const transformData = (dataset: factoryMaintenanceDataSetByfactory) => {
       // Create an array of objects for each month
       const monthData = monthNames.map((month, index) => {
         const monthIndex = (index + 1).toString().padStart(2, '0');
@@ -65,7 +47,6 @@ async function getData() {
     const transformedData = data.slice(0, 4).map(transformData);
 
     return transformedData;
-
   } catch (error) {
     console.error("Error fetching or processing data:", error);
     return [];
@@ -75,6 +56,6 @@ async function getData() {
 export default async function Page() {
   const data = await getData();
   return (
-      <ClientPage fetchData={data} />
+      <ClientPage Data={data} />
   );
 }
