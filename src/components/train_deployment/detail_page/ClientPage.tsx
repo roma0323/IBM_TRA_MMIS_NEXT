@@ -5,92 +5,49 @@ import TrainCategorySection from '@/components/train_deployment/detail_page/Trai
 import SlideNavigation from '@/components//SlideNavigation'; 
 import TrainOverviewSection from "@/components/locomotive_depot/TrainOverviewSection";
 import MaintenanceDetailSection from "@/components/locomotive_depot/MaintenanceDetailSection";
+import { getCarTypeListAndCarcatalogEqualParam } from "@/api/api";
+import { getSumStatusListAndMultiplierEqualZeorCarcatalogEqualParamCartypeEqualTrainname } from "@/api/api";
+import { getSumStatusDetailListMultiplierZeorDeptParamCartypeParamQtypeParam } from "@/api/api";
+import { FetcheGetSumStatusListData } from "@/types/type"; // Update the import path as needed
 
-type ClientPageProps = {
-  initialData: any[];
-};
 
-const DetailClientPage: React.FC<ClientPageProps> = ({ initialData }) => {
+const DetailClientPage: React.FC<FetcheGetSumStatusListData> = ({ Data }) => {
   const [selectedTrainName, setSelectedTrainName] = useState('');
   const [isTrainDetailVisible, setIsTrainDetailVisible] = useState(false);
   const [maintenanceData, setMaintenanceData] = useState<any[]>([]);
-  const [filteredTrainData, setFilteredTrainData] = useState<any[]>([]); // New state for filtered train data
-
+  const [filteredTrainData, setFilteredTrainData] = useState<any[]>([]);
   const [trainData, setTrainData] = useState<{ trainName: string, trainCount: number }[]>([]);
 
+///////////////////////////Have to be fix after backend refactor///////////////////////
   useEffect(() => {
     const fetchTrainData = async () => {
-      try {
-        console.log(initialData[0].carcatalog,"initialData[0].carcataloginitialData[0].carcatalog")
-        const response = await fetch(`http://tra.webtw.xyz:8888/maximo/zz_data?method=getCarTypeList&carcatalog=${initialData[0].carcatalog}`, {
-          method: 'POST',
-          headers: {
-            'Accept': 'application/json, text/plain, */*',
-            'Content-Type': 'application/json',
-          },
-        });
-        const data = await response.json();
-
-        const dynamicTrainData = data.map((item: { kpi_oprtype: string; cardesc: string; }) => ({
-          trainName: item.cardesc,
-          trainCount: null
-          // trainCount: Math.floor(Math.random() * 100) + 50 
-        }));
-
-        setTrainData(dynamicTrainData);
-      } catch (error) {
-        console.error('Error fetching train data:', error);
-      }
+      const fetchedData = await getCarTypeListAndCarcatalogEqualParam(Data[0].carcatalog);
+      const dynamicTrainData = fetchedData.map((item: { kpi_oprtype: string; cardesc: string; }) => ({
+        trainName: item.cardesc,
+        trainCount: null
+        // trainCount: Math.floor(Math.random() * 100) + 50 
+      }));
+      setTrainData(dynamicTrainData);
     };
-
     fetchTrainData();
   },);
-
-  // Function to handle train click and fetch dynamic data
+///////////////////////////Have to be fix after backend refactor///////////////////////
   const handleTrainTypeClick = async (trainName: string) => {
-    if(!canMoveLeft){
-      handleMouseEnter('right');
-    }
+    if(!canMoveLeft){handleMouseEnter('right');}
     setSelectedTrainName(trainName);
     setIsTrainDetailVisible(!isTrainDetailVisible);
-    try {
-      const response = await fetch(`http://tra.webtw.xyz:8888/maximo/zz_data?method=getSumStatusList&multiplier=0&qdate=2024-08-04&carcatalog=${initialData[0].carcatalog}&cartype=${trainName}`, {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json, text/plain, */*',
-          'Content-Type': 'application/json',
-        },
-      });
-      const data = await response.json();
-      console.log("Fetched Data: ", data);
-
-      setFilteredTrainData(data.data); // Set fetched data to state
-    } catch (error) {
-      console.error("Error fetching train details: ", error);
-    }
+    const fetchedData = await getSumStatusListAndMultiplierEqualZeorCarcatalogEqualParamCartypeEqualTrainname(Data[0].carcatalog,trainName);
+    setFilteredTrainData(fetchedData.data);
   };
 
   const handleTrainClick = async (dept: string, cartype: string, divData: string) => {
-    try {
-      const response = await fetch(`http://tra.webtw.xyz:8888/maximo/zz_data?method=getSumStatusDetailList&multiplier=0&dept=${dept}&cartype=${cartype}&qtype=${divData}&qdate=2024-08-04`, {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json, text/plain, */*',
-          'Content-Type': 'application/json',
-        },
-      });
-      const data = await response.json();
-      // console.log(data,"dataaa")
-      setMaintenanceData(data);
-    } catch (error) {
-      console.error("Error fetching maintenance data:", error);
-    }
+    const data = await getSumStatusDetailListMultiplierZeorDeptParamCartypeParamQtypeParam(dept,cartype,divData)
+    setMaintenanceData(data);
   };
 
 //mouse slide
-
-  const cntSum = initialData.reduce((acc, item) => acc + item.current_cnt, 0);
-  const readySum = initialData.reduce((acc, item) => acc + item.current_ready, 0);
+  const cntSum = Data.reduce((acc, item) => acc + item.current_cnt, 0);
+  const readySum = Data.reduce((acc, item) => acc + item.current_ready, 0);
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const totalSlides = 5;
@@ -115,17 +72,17 @@ const DetailClientPage: React.FC<ClientPageProps> = ({ initialData }) => {
 
         {/* first Div */}
         <div className="min-w-[25%] h-full flex items-center justify-center">
-          <DataSection cntSum={cntSum} readySum={readySum} carcatalog={initialData[0].carcatalog} />
+          <DataSection cntSum={cntSum} readySum={readySum} carcatalog={Data[0].carcatalog} />
         </div>
 
         {/* second Div */}
         <div className="min-w-[25%] h-full flex items-center justify-center">
           <TrainCategorySection
-            initialData={initialData}
+            initialData={Data}
             trainData={trainData}
             selectedTrainName={selectedTrainName}
             isDetailVisible={isTrainDetailVisible}
-            carcatalog={initialData[0].carcatalog}
+            carcatalog={Data[0].carcatalog}
             handleTrainClick={handleTrainTypeClick} // Pass the handleTrainClick function
           />
         </div>
@@ -133,7 +90,7 @@ const DetailClientPage: React.FC<ClientPageProps> = ({ initialData }) => {
         {/* Third Div */}
         <TrainOverviewSection
           filteredTrainData={filteredTrainData} // Pass fetched data to TrainOverviewSection
-          selectedArea={initialData[0].carcatalog}
+          selectedArea={Data[0].carcatalog}
           selectedLabel={selectedTrainName}
           handleTrainClick={handleTrainClick}
           handleMouseEnter={handleMouseEnter}

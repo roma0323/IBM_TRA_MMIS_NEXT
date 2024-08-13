@@ -3,6 +3,8 @@
 rowbytrain 只有部分可以點可以點
 改為外網沒有就沒有
 車種層級分析：各車型比例 數量 使用率
+/Users/ray/Documents/code_file/ibm_tra_mmis_next/src/components/train_deployment/detail_page/ClientPage.tsx
+查城際列車：
 const data = [
   { name: '太魯閣 - TEMU1000', value: 100 ,use_rate:23},
   { name: '普悠瑪 - TEMU2000', value: 100 ,use_rate:45},

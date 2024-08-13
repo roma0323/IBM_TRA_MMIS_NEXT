@@ -4,10 +4,11 @@
 
 import React, { useState, useEffect, Suspense } from "react";
 import { LabelAndNumberByArea } from "@/components/locomotive_depot/LabelAndNumberByArea";
-import SlideNavigation from '@/components/SlideNavigation'; // Import SlideNavigation component
-import BoardTitleSection from '@/components/BoardTitleSection'; // Import the Section component
-import TrainOverviewSection from "@/components/locomotive_depot/TrainOverviewSection"; // Import the new TrainOverviewSection component
-import MaintenanceDetailSection from "@/components/locomotive_depot/MaintenanceDetailSection"; // Import the new MaintenanceDetailSection component
+import SlideNavigation from '@/components/SlideNavigation'; 
+import BoardTitleSection from '@/components/BoardTitleSection'; 
+import TrainOverviewSection from "@/components/locomotive_depot/TrainOverviewSection"; 
+import MaintenanceDetailSection from "@/components/locomotive_depot/MaintenanceDetailSection"; 
+import { getSumStatusDetailListMultiplierZeorDeptParamCartypeParamQtypeParam } from "@/api/api";
 
 type TrainData = { dept: string; deptdesc: string; cartype: string; carcatalog: string; belongto: number; borrowin: number; borrowout: number; current_cnt: number; current_use: number; current_temp: number; current_ready: number; maintain_w: number; maintain_sec: number; maintain_fac: number; oth_waitrep: number; oth_return: number; oth_stop: number; availability: number; };
 type TrainDataArray = TrainData[];
@@ -20,7 +21,9 @@ const TrainPageContent: React.FC<ClientComponentProps> = ({ initialData }) => {
   const [selectedLabel, setSelectedLabel] = useState<string | null>(null);
   const [selectedArea, setSelectedArea] = useState<string | null>(null);
   const [maintenanceData, setMaintenanceData] = useState<any[]>([]); // New state for maintenance data
-
+  const areas = [
+    "全部機務段", "七堵機務段", "臺北機務段", "新竹機務段", "彰化機務段", "嘉義機務段", "高雄機務段", "花蓮機務段", "臺東機務段", "宜蘭機務分段"
+  ];
   useEffect(() => {
     setTrainData(initialData);
   }, [initialData]);
@@ -35,20 +38,8 @@ const TrainPageContent: React.FC<ClientComponentProps> = ({ initialData }) => {
   };
 
   const handleTrainClick = async (dept: string, cartype: string, divData: string) => {
-    console.log(`Dept: ${dept}, Cartype: ${cartype}, DivData: ${divData}`);
-    try {
-      const response = await fetch(`http://tra.webtw.xyz:8888/maximo/zz_data?method=getSumStatusDetailList&dept=${dept}&cartype=${cartype}&qtype=${divData}&qdate=2024-08-04`, {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json, text/plain, */*',
-          'Content-Type': 'application/json',
-        },
-      });
-      const data = await response.json();
-      setMaintenanceData(data);
-    } catch (error) {
-      console.error("Error fetching maintenance data:", error);
-    }
+    const data = await getSumStatusDetailListMultiplierZeorDeptParamCartypeParamQtypeParam(dept,cartype,divData)
+    setMaintenanceData(data);
   };
 
   const filteredTrainData = trainData.filter((train) => {
@@ -59,15 +50,10 @@ const TrainPageContent: React.FC<ClientComponentProps> = ({ initialData }) => {
     const labelMatches =
       selectedLabel === "All" || !selectedLabel || train.carcatalog === selectedLabel;
       
-    // console.log("filteredTrainData",filteredTrainData)
-    // console.log("selectedLabel",selectedLabel)
-    // console.log("selectedArea",filteredTrainData)  
     return areaMatches && labelMatches;
   });
 
-  const areas = [
-    "全部機務段", "七堵機務段", "臺北機務段", "新竹機務段", "彰化機務段", "嘉義機務段", "高雄機務段", "花蓮機務段", "臺東機務段", "宜蘭機務分段"
-  ];
+  
 
   
   //handleMouseEnter and slide
