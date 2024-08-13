@@ -92,30 +92,14 @@ const ClientPage: React.FC<ClientPageProps> = ({ initialData }) => {
           </div>
           以下數據不正確（外網沒有非常態資料api）
           <div className="grid grid-cols-4">
-            <Link href={{ pathname: `/navbarpages/train_deployment/certain_train/${initialData[0].carcatalog}` }}>
               <OverviewCard Data={initialData[0]} />
-            </Link>
-            <Link href={{ pathname: `/navbarpages/train_deployment/certain_train/${initialData[1].carcatalog}` }}>
               <OverviewCard Data={initialData[1]} />
-            </Link>
-            <Link href={{ pathname: `/navbarpages/train_deployment/certain_train/${initialData[2].carcatalog}` }}>
               <OverviewCard Data={initialData[2]} />
-            </Link>
-            <Link href={{ pathname: `/navbarpages/train_deployment/certain_train/${initialData[3].carcatalog}` }}>
               <OverviewCard Data={initialData[3]} />
-            </Link>
-            <Link href={{ pathname: `/navbarpages/train_deployment/certain_train/${initialData[4].carcatalog}` }}>
               <OverviewCard Data={initialData[4]} />
-            </Link>
-            <Link href={{ pathname: `/navbarpages/train_deployment/certain_train/${initialData[5].carcatalog}` }}>
               <OverviewCard Data={initialData[5]} />
-            </Link>
-            <Link href={{ pathname: `/navbarpages/train_deployment/certain_train/${initialData[6].carcatalog}` }}>
               <OverviewCard Data={initialData[6]} />
-            </Link>
-            <Link href={{ pathname: `/navbarpages/train_deployment/certain_train/${initialData[7].carcatalog}` }}>
               <OverviewCard Data={initialData[7]} />
-            </Link>
           </div>
         </div>
       )}

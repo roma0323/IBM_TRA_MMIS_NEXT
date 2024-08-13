@@ -33,7 +33,8 @@ const DetailClientPage: React.FC<ClientPageProps> = ({ initialData }) => {
 
         const dynamicTrainData = data.map((item: { kpi_oprtype: string; cardesc: string; }) => ({
           trainName: item.cardesc,
-          trainCount: Math.floor(Math.random() * 100) + 50 
+          trainCount: null
+          // trainCount: Math.floor(Math.random() * 100) + 50 
         }));
 
         setTrainData(dynamicTrainData);

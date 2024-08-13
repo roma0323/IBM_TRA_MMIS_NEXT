@@ -1,5 +1,7 @@
 後端ＡＰＩ重寫
 
+rowbytrain 只有部分可以點可以點
+改為外網沒有就沒有
 車種層級分析：各車型比例 數量 使用率
 const data = [
   { name: '太魯閣 - TEMU1000', value: 100 ,use_rate:23},
@@ -64,49 +66,3 @@ http://tra.webtw.xyz:8888/maximo/zz_data?method=getSumStatusList&qdate=2024-08-0
             "oth_stop": 4.0,
             "availability": 0.8543103448275862
         },
-
-TrainByRow沒有區分常態非常態        
-http://tra.webtw.xyz:8888/maximo/zz_data?method=getSumStatusList&multiplier=0&dept=&qdate=2024-08-04
-{
-            "index": 0,
-            "dept": "MYY00",
-            "deptdesc": "花蓮機務段",
-            "cartype": "R190",
-            "carcatalog": "柴電機車",
-            "belongto": 6.0,
-            "borrowin": 0.0,
-            "borrowout": 0.0,
-            "current_cnt": 6.0,
-            "current_use": 0.0,
-            "current_temp": 0.0,
-            "current_ready": 6.0,
-            "maintain_w": 0.0,
-            "maintain_sec": 0.0,
-            "maintain_fac": 0.0,
-            "oth_waitrep": 0.0,
-            "oth_return": 0.0,
-            "oth_stop": 0.0,
-            "availability": 1.0
-        },
-
-維修詳情沒有區分常態非常態
-http://192.168.36.21/maximo/zz_data?method=getSumStatusDetailList&dept=MGY00&cartype=PC&qtype=maintain_sec&qdate=2024-08-08
-{        "dept": "MGY00",
-        "deptdesc": "七堵機務段",
-        "cartype": "35PPH1300",
-        "assetnum": "35PPH1316",
-        "worktype": "",
-        "actstart": "2024/03/20",
-        "actfinish": "",
-        "type": "62",
-        "typedesc": "在段試駛",
-        "borrowdept": "",
-        "statementdesc": "",
-        "statement": "試車",
-        "current_use_type": "",
-        "current_use_typedesc": "",
-        "url": ""
-    },
-
-改善：
-rowbytrain 是否全部都可以點
