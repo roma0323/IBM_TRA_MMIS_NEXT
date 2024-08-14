@@ -44,10 +44,10 @@ const ClientPage: React.FC<FetcheGetSumStatusListData> = ({ Data }) => {
             <div onClick={() => handleTypeChange("power")}>
               <OverviewCard Data={POWER_TRAIN_DATA} />
             </div>
-            <Link href={{ pathname: `/navbarpages/train_deployment/certain_train/${Data[0].carcatalog}` }}>
+            <Link href={{ pathname: `/navbarpages/train_deployment/certain_train/客車` }}>
               <OverviewCard Data={Data[0]} />
             </Link>
-            <Link href={{ pathname: `/navbarpages/train_deployment/certain_train/${Data[3].carcatalog}` }}>
+            <Link href={{ pathname: `/navbarpages/train_deployment/certain_train/貨車` }}>
               <OverviewCard Data={Data[3]} />
             </Link>
             <div onClick={() => handleTypeChange("unusual")}>
@@ -63,22 +63,22 @@ const ClientPage: React.FC<FetcheGetSumStatusListData> = ({ Data }) => {
             <BigOverviewCard Data={POWER_TRAIN_DATA} />
           </div>
           <div className="grid grid-cols-3 flex-grow relative bg-gray-200 overflow-hidden">
-            <Link href={{ pathname: `/navbarpages/train_deployment/certain_train/${Data[1].carcatalog}` }}>
+            <Link href={{ pathname: `/navbarpages/train_deployment/certain_train/城際列車` }}>
               <OverviewCard Data={Data[1]} />
             </Link>
-            <Link href={{ pathname: `/navbarpages/train_deployment/certain_train/${Data[7].carcatalog}` }}>
+            <Link href={{ pathname: `/navbarpages/train_deployment/certain_train/通勤列車` }}>
               <OverviewCard Data={Data[7]} />
             </Link>
-            <Link href={{ pathname: `/navbarpages/train_deployment/certain_train/${Data[2].carcatalog}` }}>
+            <Link href={{ pathname: `/navbarpages/train_deployment/certain_train/電力列車` }}>
               <OverviewCard Data={Data[2]} />
             </Link>
-            <Link href={{ pathname: `/navbarpages/train_deployment/certain_train/${Data[5].carcatalog}` }}>
+            <Link href={{ pathname: `/navbarpages/train_deployment/certain_train/柴油客車` }}>
               <OverviewCard Data={Data[5]} />
             </Link>
-            <Link href={{ pathname: `/navbarpages/train_deployment/certain_train/${Data[4].carcatalog}` }}>
+            <Link href={{ pathname: `/navbarpages/train_deployment/certain_train/柴液機車` }}>
               <OverviewCard Data={Data[4]} />
             </Link>
-            <Link href={{ pathname: `/navbarpages/train_deployment/certain_train/${Data[6].carcatalog}` }}>
+            <Link href={{ pathname: `/navbarpages/train_deployment/certain_train/柴電機車` }}>
               <OverviewCard Data={Data[6]} />
             </Link>
 

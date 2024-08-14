@@ -5,16 +5,18 @@ import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { ModeToggle } from "@/components/ui/mode_toggle";
 import Image from 'next/image';
+import { format } from 'date-fns';
 
 const Navbar: React.FC = () => {
     const pathname = usePathname();
+    const currentDate = format(new Date(), 'yyyy-MM-dd');
 
     const navLinks = [
-        { href: "/navbarpages/train_deployment?type=all", label: "車輛配置資訊", startsWith: "/navbarpages/train_deployment" },
-        { href: "/navbarpages/locomotive_depot", label: "機務段配置資訊", startsWith: "/navbarpages/locomotive_depot" },
-        { href: "/navbarpages/factory_maintenance", label: "機廠檢修資訊", startsWith: "/navbarpages/factory_maintenance" },
-        { href: "/navbarpages/fault_notification", label: "故障通報", startsWith: "/navbarpages/fault_notification" },
-        { href: "/navbarpages/inventory_performance", label: "庫存績效", startsWith: "/navbarpages/inventory_performance" },
+        { href: `/navbarpages/train_deployment?type=all&date=${currentDate}`, label: "車輛配置資訊", startsWith: "/navbarpages/train_deployment" },
+        { href:`/navbarpages/locomotive_depot?date=${currentDate}`, label: "機務段配置資訊", startsWith: "/navbarpages/locomotive_depot" },
+        { href: `/navbarpages/factory_maintenance?date=${currentDate}`, label: "機廠檢修資訊", startsWith: "/navbarpages/factory_maintenance" },
+        { href: `/navbarpages/fault_notification?date=${currentDate}`, label: "故障通報", startsWith: "/navbarpages/fault_notification" },
+        { href: `/navbarpages/maintenance_materials?date=${currentDate}`, label: "庫存績效", startsWith: "/navbarpages/inventory_performance" },
     ];
 
     return (

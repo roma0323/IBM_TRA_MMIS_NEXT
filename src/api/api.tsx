@@ -1,9 +1,17 @@
 import { FetcheGetSumStatusList } from "@/types/type"; // Update the import path as needed
-//import { FetcheGetSumStatusListData } from "@/types/type";
 
-export async function getSumStatusListAndsumtotalEqualone(): Promise<FetcheGetSumStatusList> {
+export async function getSumStatusListAndsumtotalEqualone(date?: string): Promise<FetcheGetSumStatusList> {
+  // If no date is provided, use the current date
+  let qdate = date ? new Date(date) : new Date();
+
+  // Subtract one day from the date
+  qdate.setDate(qdate.getDate() - 1);
+
+  // Format the date as YYYY-MM-DD
+  const formattedDate = qdate.toISOString().split('T')[0];
+
   const res = await fetch(
-    `http://tra.webtw.xyz:8888/maximo/zz_data?method=getSumStatusList&qdate=2024-08-04&sumtotal=1`,
+    `http://tra.webtw.xyz:8888/maximo/zz_data?method=getSumStatusList&qdate=${formattedDate}&sumtotal=1`,
     {
       method: "POST",
       headers: {
@@ -12,8 +20,11 @@ export async function getSumStatusListAndsumtotalEqualone(): Promise<FetcheGetSu
       },
     }
   );
+  
   return res.json();
 }
+
+
 
 export async function getSumStatusListAndCarcatalogEqualParam(id:String) {
 

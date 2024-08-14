@@ -1,37 +1,40 @@
 // "use client";
-
 import React from "react";
 import { NavigationCard } from "../components/homepage/NavigationCard";
 import Image from 'next/image';
 import Link from 'next/link'
+import { format } from 'date-fns';
+
+// Get the current date in YYYY-MM-DD format
+const currentDate = format(new Date(), 'yyyy-MM-dd');
 
 const navigationData = [
   {
-    href: "/navbarpages/train_deployment?type=all",
+    href: `/navbarpages/train_deployment?type=all&date=${currentDate}`,
     logoClassName: "/icon-train-deployment.png",
     text: "車輛配置資訊",
     text1: "各區段、車型資料、可用率儀表板"
   },
   {
-    href: "/navbarpages/locomotive_depot",
+    href: `/navbarpages/locomotive_depot?date=${currentDate}`,
     logoClassName: "/icon-locomotive-depot.svg",
     text: "機務段車輛配置",
     text1: "各機務段、車型配置資料、可用率查看"
   },
   {
-    href: "/navbarpages/factory_maintenance",
+    href: `/navbarpages/factory_maintenance?date=${currentDate}`,
     logoClassName: "/icon-locomotive-depot.svg",
     text: "機廠檢修動態",
     text1: "各機廠檢修動態"
   },
   {
-    href: "/navbarpages/fault_notification",
+    href: `/navbarpages/fault_notification?date=${currentDate}`,
     logoClassName: "/icon-fault-notification.svg",
     text: "故障通報狀態",
     text1: "每日故障報表、ATP 故障分析、年度故障報表"
   },
   {
-    href: "/navbarpages/maintenance_materials",
+    href: `/navbarpages/maintenance_materials?date=${currentDate}`,
     logoClassName: "/icon-maintenance-materials.svg",
     text: "車輛維修用料",
     text1: "各區段、車型維修資料儀表板"
