@@ -180,8 +180,8 @@ const Chatbot = () => {
   className="relative"
   alt="Vuesax linear send-icon"
   src="/send-icon.svg"
-  width={19.84}
-  height={19.84}
+  width={19}
+  height={19}
 />              </div>
             </div>
           </div>

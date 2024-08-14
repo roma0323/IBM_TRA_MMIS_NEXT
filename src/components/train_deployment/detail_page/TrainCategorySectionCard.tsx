@@ -61,9 +61,9 @@ const DeploymentByTrainCategory: React.FC<MyComponentProps> = ({ trainName, trai
         {trainName}
       </div>
       <div className="flex w-full">
-        <DataCard text="22" text1="可用數" />
-        <DataCard text="22" text1="總輛數" />
-        <DataCard text="22" text1="可用率" />
+        <DataCard text="" text1="可用數" />
+        <DataCard text="" text1="總輛數" />
+        <DataCard text="" text1="可用率" />
       </div>
     </div>
   );
