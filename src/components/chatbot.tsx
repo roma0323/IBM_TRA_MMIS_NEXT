@@ -65,12 +65,12 @@ const Chatbot = () => {
                     </p>
                   </div>
                   <Image
-  className="absolute w-[37px] h-7 top-[75px] left-[202px]"
-  alt="Rectangle"
-  src="/profile.png"
-  width={37}
-  height={28}  // Assuming height of 7rem translates to 28px
-/>                </div>
+                    className="absolute w-[37px] h-7 top-[75px] left-[202px]"
+                    alt="Rectangle"
+                    src="/profile.png"
+                    width={37}
+                    height={28}  // Assuming height of 7rem translates to 28px
+                  />                </div>
                 <div className="inline-flex items-end absolute top-[77px] left-[55px]">
                   <div className="relative w-[16.53px] h-[5.79px]">
                     <div className="absolute -top-px left-0 [font-family:'Inter-Regular',Helvetica] font-normal text-[#888888] text-[8.3px] tracking-[0] leading-[normal] whitespace-nowrap">
@@ -99,35 +99,35 @@ const Chatbot = () => {
                 </div>
                 <div className="inline-flex items-start gap-[5.79px] px-[16.53px] py-0 absolute top-[104px] left-[185px]">
                   <div className="inline-flex items-start gap-[6.61px] p-[3.31px] relative flex-[0_0_auto] mt-[-1.00px] mb-[-1.00px] ml-[-1.00px] mr-[-1.00px] bg-[#397eff] rounded-[6.61px] border border-solid border-white">
-                  <Image
-  className="relative"
-  alt="Vuesax outline"
-  src="/clipboard-text.svg"
-  width={13.23}
-  height={13.23}
-/>                  <Image
-  className="relative"
-  alt="Vuesax linear like"
-  src="/like.svg"
-  width={13.23}
-  height={13.23}
-/>
-<Image
-  className="relative"
-  alt="Vuesax linear"
-  src="/dislike.svg"
-  width={13.23}
-  height={13.23}
-/>                  </div>
+                    <Image
+                      className="relative"
+                      alt="Vuesax outline"
+                      src="/clipboard-text.svg"
+                      width={13.23}
+                      height={13.23}
+                    />                  <Image
+                      className="relative"
+                      alt="Vuesax linear like"
+                      src="/like.svg"
+                      width={13.23}
+                      height={13.23}
+                    />
+                    <Image
+                      className="relative"
+                      alt="Vuesax linear"
+                      src="/dislike.svg"
+                      width={13.23}
+                      height={13.23}
+                    />                  </div>
                 </div>
                 <div className="absolute w-10 h-10 top-[115px] left-0 bg-[#397eff] rounded-[82.67px]">
-                <Image
-  className="absolute top-1.5 left-[7px]"
-  alt="Wapp GPT logo"
-  src="/chatbot-icon.png"
-  width={27}
-  height={27}
-/>
+                  <Image
+                    className="absolute top-1.5 left-[7px]"
+                    alt="Wapp GPT logo"
+                    src="/chatbot-icon.png"
+                    width={27}
+                    height={27}
+                  />
                 </div>
               </div>
               <div className="flex flex-col items-end justify-end gap-[5.79px] pl-[16.53px] pr-[9.92px] pt-0 pb-[33.07px] relative self-stretch w-full flex-[0_0_auto]">
@@ -138,12 +138,12 @@ const Chatbot = () => {
                     </p>
                   </div>
                   <Image
-  className="absolute w-[37px] h-7 top-[75px] left-[202px]"
-  alt="Rectangle"
-  src="/profile.png"
-  width={37}
-  height={28}  // Assuming height of 7rem translates to 28px
-/>                </div>
+                    className="absolute w-[37px] h-7 top-[75px] left-[202px]"
+                    alt="Rectangle"
+                    src="/profile.png"
+                    width={37}
+                    height={28}  // Assuming height of 7rem translates to 28px
+                  />                </div>
                 <div className="top-[93px] left-[55px] inline-flex items-end absolute">
                   <div className="relative w-[16.53px] h-[5.79px]">
                     <div className="absolute -top-px left-0 [font-family:'Inter-Regular',Helvetica] font-normal text-[#888888] text-[8.3px] tracking-[0] leading-[normal] whitespace-nowrap">
@@ -177,12 +177,12 @@ const Chatbot = () => {
                   Type your message here...
                 </div>
                 <Image
-  className="relative"
-  alt="Vuesax linear send-icon"
-  src="/send-icon.svg"
-  width={19}
-  height={19}
-/>              </div>
+                  className="relative"
+                  alt="Vuesax linear send-icon"
+                  src="/send-icon.svg"
+                  width={19}
+                  height={19}
+                />              </div>
             </div>
           </div>
         </div>
