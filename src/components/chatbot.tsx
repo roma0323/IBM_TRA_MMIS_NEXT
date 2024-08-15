@@ -18,7 +18,7 @@ const Chatbot = () => {
         onClick={toggleChatbot}
         className="fixed bottom-4 right-4 hover:scale-105">
         <Image
-          src="/chatbot-icon.png"
+          src={`${process.env.BASEPATH}/chatbot-icon.png`}
           alt="Chatbot Icon"
           width={64}
           height={64}
@@ -35,8 +35,15 @@ const Chatbot = () => {
             <header className="flex flex-col w-[330.67px] items-start gap-[8.27px] bg-transparent h-[72.75px] relative">
               <div className="self-stretch w-full bg-[#397eff] rounded-[16.53px_16.53px_0px_0px] shadow-[0px_19.84px_28.11px_#ae090973] h-[72.75px] relative" />
               <div className="flex w-[291px] h-[35px] items-center justify-between absolute top-5 left-5">
-                <div className="inline-flex items-center gap-[7.44px] relative flex-[0_0_auto] mt-[-2.48px] mb-[-2.48px]">
-                  <div className="relative w-[39.69px] h-[39.68px] rounded-[44.09px] bg-[url(/chatbot-icon.png)] bg-[100%_100%]" />
+                <div className="inline-flex items-center gap-[7.44px] relative flex-[0_0_auto] mt-[-2.48px] mb-[-2.48px]">            
+                  <div style={{
+                    backgroundImage: `url(/static/chatbot-icon.png)`,
+                    backgroundSize: '100%, 100%',
+                    position: 'relative',
+                    width: '39.69px',
+                    height: '39.68px',
+                    borderRadius: '44.09px'
+                  }}/>
 
                   <div className="inline-flex flex-col items-start justify-center relative flex-[0_0_auto]">
                     <div className="relative w-[97.55px] h-[23.97px]">
@@ -66,8 +73,9 @@ const Chatbot = () => {
                   </div>
                   <Image
                     className="absolute w-[37px] h-7 top-[75px] left-[202px]"
-                    alt="Rectangle"
-                    src="/profile.png"
+                    alt="Rectangle"                    
+                    src={`${process.env.BASEPATH}/profile.png`}
+
                     width={37}
                     height={28}  // Assuming height of 7rem translates to 28px
                   />                </div>
@@ -101,21 +109,24 @@ const Chatbot = () => {
                   <div className="inline-flex items-start gap-[6.61px] p-[3.31px] relative flex-[0_0_auto] mt-[-1.00px] mb-[-1.00px] ml-[-1.00px] mr-[-1.00px] bg-[#397eff] rounded-[6.61px] border border-solid border-white">
                     <Image
                       className="relative"
-                      alt="Vuesax outline"
-                      src="/clipboard-text.svg"
+                      alt="Vuesax outline"                      
+                      src={`${process.env.BASEPATH}/clipboard-text.svg`}
+
                       width={13.23}
                       height={13.23}
                     />                  <Image
                       className="relative"
-                      alt="Vuesax linear like"
-                      src="/like.svg"
+                      alt="Vuesax linear like"                      
+                      src={`${process.env.BASEPATH}/like.svg`}
+
                       width={13.23}
                       height={13.23}
                     />
                     <Image
                       className="relative"
-                      alt="Vuesax linear"
-                      src="/dislike.svg"
+                      alt="Vuesax linear"                      
+                      src={`${process.env.BASEPATH}/dislike.svg`}
+
                       width={13.23}
                       height={13.23}
                     />                  </div>
@@ -124,7 +135,7 @@ const Chatbot = () => {
                   <Image
                     className="absolute top-1.5 left-[7px]"
                     alt="Wapp GPT logo"
-                    src="/chatbot-icon.png"
+                    src={`${process.env.BASEPATH}/chatbot-icon.png`}
                     width={27}
                     height={27}
                   />
@@ -139,8 +150,8 @@ const Chatbot = () => {
                   </div>
                   <Image
                     className="absolute w-[37px] h-7 top-[75px] left-[202px]"
-                    alt="Rectangle"
-                    src="/profile.png"
+                    alt="Rectangle"                    
+                    src={`${process.env.BASEPATH}/profile.png`}
                     width={37}
                     height={28}  // Assuming height of 7rem translates to 28px
                   />                </div>
@@ -179,7 +190,7 @@ const Chatbot = () => {
                 <Image
                   className="relative"
                   alt="Vuesax linear send-icon"
-                  src="/send-icon.svg"
+                  src={`${process.env.BASEPATH}/send-icon.svg`}
                   width={19}
                   height={19}
                 />              </div>
