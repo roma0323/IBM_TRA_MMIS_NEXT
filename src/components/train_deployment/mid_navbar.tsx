@@ -10,6 +10,8 @@ import {
     SelectValue,
 } from "@/components/ui/select"
 
+import {DatePickerForm} from "@/components/ui/date_picker"
+
 const trainTypes = [
     { id: "城際列車", name: "城際列車" },
     { id: "通勤列車", name: "通勤列車" },
@@ -28,6 +30,7 @@ const MidNavbar: React.FC = () => {
 
     let decodedLastPart = decodeURIComponent(pathname.split('/').pop() || '');
     const type = searchParams?.get('type') || ''; // Safely get 'type' parameter from the query string
+    const date = searchParams?.get('date') || ''; // Safely get 'type' parameter from the query string
 
     if (decodedLastPart === 'train_deployment') {
         decodedLastPart = '總覽';
@@ -40,13 +43,13 @@ const MidNavbar: React.FC = () => {
     }
 
     const handleSelect = (value: string) => {
-        router.push(`/navbarpages/train_deployment?type=${value}`);
+        router.push(`/navbarpages/train_deployment?type=${value}&date=${date}`);
     };
 
 
     return (
         <div className="w-screen flex flex-col px-6 sticky">
-            <div className="h-[10vh]  flex items-center   relative">
+            <div className="h-[10vh]  flex items-center  justify-between  relative">
                 <div className="flex items-center">
                     <span className="text-3xl">
                         車輛配置資訊/
@@ -55,16 +58,8 @@ const MidNavbar: React.FC = () => {
                         {decodedLastPart}
                     </span>
                 </div>
-                <div className="flex-1" />
+                <DatePickerForm />
 
-                <div className="flex flex-col items-end just">
-                    <span >
-                        上次更新時間
-                    </span>
-                    <p>
-                        113 / 5 / 8&nbsp;&nbsp;(三) 12:20
-                    </p>
-                </div>
             </div>
 
             <div className="flex items-start gap-1">

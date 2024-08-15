@@ -1,9 +1,12 @@
 // "use client";
-
 import React from "react";
 import { NavigationCard } from "../components/homepage/NavigationCard";
 import Image from 'next/image';
 import Link from 'next/link'
+import { format } from 'date-fns';
+
+// Get the current date in YYYY-MM-DD format
+const currentDate = format(new Date(), 'yyyy-MM-dd');
 
 const navigationData = [
   {
@@ -21,6 +24,7 @@ const navigationData = [
   {
     href: "/navbarpages/factory_maintenance",
     logoClassName: `${process.env.BASEPATH}/icon-locomotive-depot.svg`,
+
     text: "機廠檢修動態",
     text1: "各機廠檢修動態"
   },

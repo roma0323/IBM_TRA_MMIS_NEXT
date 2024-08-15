@@ -75,6 +75,7 @@ const Chatbot = () => {
                     className="absolute w-[37px] h-7 top-[75px] left-[202px]"
                     alt="Rectangle"                    
                     src={`${process.env.BASEPATH}/profile.png`}
+
                     width={37}
                     height={28}  // Assuming height of 7rem translates to 28px
                   />                </div>
@@ -110,12 +111,14 @@ const Chatbot = () => {
                       className="relative"
                       alt="Vuesax outline"                      
                       src={`${process.env.BASEPATH}/clipboard-text.svg`}
+
                       width={13.23}
                       height={13.23}
                     />                  <Image
                       className="relative"
                       alt="Vuesax linear like"                      
                       src={`${process.env.BASEPATH}/like.svg`}
+
                       width={13.23}
                       height={13.23}
                     />
@@ -123,6 +126,7 @@ const Chatbot = () => {
                       className="relative"
                       alt="Vuesax linear"                      
                       src={`${process.env.BASEPATH}/dislike.svg`}
+
                       width={13.23}
                       height={13.23}
                     />                  </div>

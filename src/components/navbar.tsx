@@ -1,80 +1,53 @@
 'use client'
+
 import React, { Suspense } from "react";
-import { usePathname } from 'next/navigation'
-import Link from 'next/link'
-import { ModeToggle } from "@/components/ui/mode_toggle"
-import "@/styles/globals.css"
+import { usePathname } from 'next/navigation';
+import Link from 'next/link';
+import { ModeToggle } from "@/components/ui/mode_toggle";
+import Image from 'next/image';
+import { format } from 'date-fns';
 
 const Navbar: React.FC = () => {
+    const pathname = usePathname();
+    const currentDate = format(new Date(), 'yyyy-MM-dd');
 
-    const pathname = usePathname()
+    const navLinks = [
+        { href: `/navbarpages/train_deployment?type=all&date=${currentDate}`, label: "車輛配置資訊", startsWith: "/navbarpages/train_deployment" },
+        { href:`/navbarpages/locomotive_depot?date=${currentDate}`, label: "機務段配置資訊", startsWith: "/navbarpages/locomotive_depot" },
+        { href: `/navbarpages/factory_maintenance?date=${currentDate}`, label: "機廠檢修資訊", startsWith: "/navbarpages/factory_maintenance" },
+        { href: `/navbarpages/fault_notification?date=${currentDate}`, label: "故障通報", startsWith: "/navbarpages/fault_notification" },
+        { href: `/navbarpages/maintenance_materials?date=${currentDate}`, label: "庫存績效", startsWith: "/navbarpages/inventory_performance" },
+    ];
 
     return (
-        <div>
-            <div className="flex h-[8vh] w-screen  items-center gap-3 px-5 py-3  self-stretch inline-flex  flex-[0_0_auto]">
-                <div className="relative  w-8 h-8 bg-[url(/icon-menu.svg)] bg-cover bg-[50%_50%]" />
-
-
-                <div className="inline-flex items-center gap-3 px-1 py-0 relative flex-[0_0_auto]">
-                    <Link href="/">
-                        <div className="relative w-20 h-16 bg-[url(/ibm-logo-frame.svg)] bg-cover bg-[50%_50%]" />
-                    </Link>
-                </div>
-                <div className="relative flex-1 grow" />
+        <div className="flex h-[8vh] w-screen items-center gap-3 px-5 py-3">
+            <Link href="/">
+                <Image
+                    className="relative hover:scale-110"
+                    alt="IBM Logo"
+                    src="/ibm-logo-frame.svg"
+                    width={64}
+                    height={64}
+                />
+            </Link>
+            <div className="flex-1" />
+            {navLinks.map((link) => (
                 <Link
-                    className={`link ${pathname?.startsWith('/navbarpages/train_deployment') ? 'active' : ''}`}
-                    href="/navbarpages/train_deployment?type=all"
+                    key={link.href}
+                    href={link.href}
+                    className={`link ${pathname?.startsWith(link.startsWith) ? 'active' : ''}`}
                 >
-                    <div className="inline-flex items-center justify-center gap-2.5 px-3 py-2 relative flex-[0_0_auto] rounded overflow-hidden">
-                        車輛配置資訊
+                    <div className="inline-flex items-center justify-center gap-2.5 px-3 py-2 rounded-[30px]">
+                        {link.label}
                     </div>
                 </Link>
-
-                <Link
-                    className={`link ${pathname?.startsWith('/navbarpages/locomotive_depot') ? 'active' : ''}`}
-                    href="/navbarpages/locomotive_depot"
-                >
-                    <div className="inline-flex items-center justify-center gap-2.5 px-3 py-2 relative flex-[0_0_auto] rounded-[30px] overflow-hidden">
-                        機務段配置資訊
-                    </div>
-                </Link>
-
-                <Link
-                    className={`link ${pathname?.startsWith('/navbarpages/factory_maintenance') ? 'active' : ''}`}
-                    href="/navbarpages/factory_maintenance"
-                >
-                    <div className="inline-flex items-center justify-center gap-2.5 px-3 py-2 relative flex-[0_0_auto] rounded-[30px] overflow-hidden">
-                        機廠檢修資訊
-                    </div>
-                </Link>
-
-                <Link
-                    className={`link ${pathname?.startsWith('/navbarpages/fault_notification') ? 'active' : ''}`}
-                    href="/navbarpages/fault_notification"
-                >
-                    <div className="inline-flex items-center justify-center gap-2.5 px-3 py-2 relative flex-[0_0_auto] rounded-[30px] overflow-hidden">
-                        故障通報
-                    </div>
-                </Link>
-
-                <Link
-                    className={`link ${pathname?.startsWith('/navbarpages/inventory_performance') ? 'active' : ''}`}
-                    href="/navbarpages/inventory_performance"
-                >
-                    <div className="inline-flex items-center justify-center gap-2.5 px-3 py-2 relative flex-[0_0_auto] rounded-[30px] overflow-hidden">
-                        庫存績效
-                    </div>
-                </Link>
-
-                <div className="flex w-[54px] items-center justify-center gap-2.5 p-1 relative bg-neutral-100 rounded-2xl overflow-hidden">
-                    <ModeToggle />
-                </div>
+            ))}
+            <div className="flex w-[54px] items-center justify-center p-1 bg-neutral-100 rounded-2xl">
+                <ModeToggle />
             </div>
         </div>
-
-    )
-
-}
+    );
+};
 
 export default function Page() {
     return (
