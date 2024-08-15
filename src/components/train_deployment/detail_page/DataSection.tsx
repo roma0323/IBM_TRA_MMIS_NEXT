@@ -3,14 +3,16 @@ import { DataCard } from "@/components/train_deployment/DataCard";
 import UseRateAreaChart from "@/components/train_deployment/UseRateAreaChart";
 import BigPieChart from "@/components/train_deployment/detail_page/BigPieChart";
 
-type DataSectionProps = {
-  cntSum: number;
-  readySum: number;
-  carcatalog: string; // Add the carcatalog prop
 
-};
-
-const DataSection: React.FC<DataSectionProps> = ({ cntSum, readySum, carcatalog }) => (
+const DataSection = ({
+  cntSum=0, 
+  readySum=0,  
+  carcatalog="Unknown"
+}: {
+  cntSum?: number;  
+  readySum?: number; 
+  carcatalog? :string; 
+})   => (
   <div className="h-full w-full inline-flex flex-col items-start gap-4 relative ">
 
 
@@ -31,7 +33,7 @@ const DataSection: React.FC<DataSectionProps> = ({ cntSum, readySum, carcatalog 
       <div className=" p-2.5  border-b border-[#646464]">
         30 天使用率
       </div>
-      <UseRateAreaChart styleTemplate={carcatalog} /> {/* Pass the carcatalog as styleTemplate */}
+      <UseRateAreaChart styleTemplate={carcatalog} /> 
     </div>
 
     <div className="w-full flex-[0_0_auto] rounded-lg flex flex-col  relative bg-white ">
