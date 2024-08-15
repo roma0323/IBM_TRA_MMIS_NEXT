@@ -73,3 +73,4 @@ http://tra.webtw.xyz:8888/maximo/zz_data?method=getSumStatusList&qdate=2024-08-0
         link要對應車種無誤
 
         depot default all
+        deploy 要loaading 畫面

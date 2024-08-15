@@ -1,12 +1,40 @@
 import React from "react";
 import UseRateAreaChart from "@/components/train_deployment/UseRateAreaChart";
+import { FetcheGetSumStatusListDataInArray } from "@/types/type";
 
-export const BigOverviewCard = ({ Data }: {Data: any;}): JSX.Element => {
+const DEFAULT_TRAIN_DATA: FetcheGetSumStatusListDataInArray = {
+    carcatalog: "Unknown",
+    current_ready: 0,
+    current_cnt: 0,
+    index: 0,
+    dept: "total",
+    deptdesc: "total",
+    cartype: "total",
+    belongto: 0.0,
+    borrowin: 0.0,
+    borrowout: 0.0,
+    current_use: 0.0,
+    current_temp: 0.0,
+    maintain_w: 0.0,
+    maintain_sec: 0.0,
+    maintain_fac: 0.0,
+    oth_waitrep: 0.0,
+    oth_return: 0.0,
+    oth_stop: 0.0,
+    availability: 1.0,
+  };
+export const BigOverviewCard = ({
+    Name = "Unknown Train",  // Set the default value for Name
+    Data = DEFAULT_TRAIN_DATA,  // Set the default value for Data
+  }: {
+    Name?: string;  // Make Name optional and allow it to have a default value
+    Data?: FetcheGetSumStatusListDataInArray;  // Make Data optional and allow it to have a default value
+  }): JSX.Element => {
     return (
 
         <div className=" bg-white  m-3  relative rounded-lg  hover:shadow-lg">
             <div className=" text-[#397EFF] p-2.5  border-b  border-[#646464]">
-                {Data.carcatalog}
+                {Name}
             </div>
             
             <div className="flex  py-6  px-10 w-full h-full">

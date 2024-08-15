@@ -22,11 +22,11 @@ export const NavigationCard = ({
         width={48}
         height={48}
       />
-      <div className={`inline-flex flex-col  relative`}>
+      <div className={`inline-flex text-primary/90 flex-col  relative`}>
         <div className="text-lg">
           {text}
         </div>
-        <div className="text-sm">
+        <div className="text-xs text-primary/50">
           {text1}
         </div>
       </div>

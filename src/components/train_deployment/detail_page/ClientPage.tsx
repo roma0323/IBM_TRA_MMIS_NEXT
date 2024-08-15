@@ -25,7 +25,6 @@ const DetailClientPage: React.FC<FetcheGetSumStatusListData> = ({ Data }) => {
       const dynamicTrainData = fetchedData.map((item: { kpi_oprtype: string; cardesc: string; }) => ({
         trainName: item.cardesc,
         trainCount: null
-        // trainCount: Math.floor(Math.random() * 100) + 50 
       }));
       setTrainData(dynamicTrainData);
     };

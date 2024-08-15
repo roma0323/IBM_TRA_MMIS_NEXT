@@ -93,7 +93,7 @@ export async function getSumStatusDetailListMultiplierZeor(): Promise<FetcheGetS
 
 export async function getFacRepairYearPlan() {
 
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getFacRepairYearPlan&year=2024`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getFacRepairYearPlan&year=2023`, {
     method: 'POST',
     headers: {
       'Accept': 'application/json, text/plain, */*',
