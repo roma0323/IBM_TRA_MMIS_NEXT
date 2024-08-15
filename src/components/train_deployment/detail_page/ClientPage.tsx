@@ -19,23 +19,28 @@ const DetailClientPage: React.FC<FetcheGetSumStatusListData> = ({ Data }) => {
   const [trainData, setTrainData] = useState<{ trainName: string, trainCount: number }[]>([]);
 
 ///////////////////////////Have to be fix after backend refactor///////////////////////
-  useEffect(() => {
-    const fetchTrainData = async () => {
-      const fetchedData = await getCarTypeListAndCarcatalogEqualParam(Data[0].carcatalog);
-      const dynamicTrainData = fetchedData.map((item: { kpi_oprtype: string; cardesc: string; }) => ({
-        trainName: item.cardesc,
-        trainCount: null
-      }));
-      setTrainData(dynamicTrainData);
-    };
-    fetchTrainData();
-  },);
+useEffect(() => {
+  const fetchTrainData = async () => {
+    const fetchedData = await getCarTypeListAndCarcatalogEqualParam(Data[0].carcatalog);
+    const dynamicTrainData = fetchedData.map((item: { kpi_oprtype: string; cardesc: string; }) => ({
+      trainName: item.cardesc,
+      trainCount: null
+    }));
+    setTrainData(dynamicTrainData);
+  };
+  fetchTrainData();
+}, [Data]); // Add an empty dependency array here
+
 ///////////////////////////Have to be fix after backend refactor///////////////////////
   const handleTrainTypeClick = async (trainName: string) => {
+    console.log(trainName,'trainName')
+    console.log(Data[0].carcatalog,'Data[0].carcatalog')
     if(!canMoveLeft){handleMouseEnter('right');}
     setSelectedTrainName(trainName);
     setIsTrainDetailVisible(!isTrainDetailVisible);
     const fetchedData = await getSumStatusListAndMultiplierEqualZeorCarcatalogEqualParamCartypeEqualTrainname(Data[0].carcatalog,trainName);
+    console.log(fetchedData,'fetchedData')
+
     setFilteredTrainData(fetchedData.data);
   };
 
