@@ -68,3 +68,8 @@ http://tra.webtw.xyz:8888/maximo/zz_data?method=getSumStatusList&qdate=2024-08-0
             "oth_stop": 4.0,
             "availability": 0.8543103448275862
         },
+
+        overview card 缺空就不見 或是補上title
+        link要對應車種無誤
+
+        depot default all

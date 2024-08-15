@@ -11,7 +11,7 @@ export async function getSumStatusListAndsumtotalEqualone(date?: string): Promis
   const formattedDate = qdate.toISOString().split('T')[0];
 
   const res = await fetch(
-    `http://tra.webtw.xyz:8888/maximo/zz_data?method=getSumStatusList&qdate=${formattedDate}&sumtotal=1`,
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getSumStatusList&qdate=${formattedDate}&sumtotal=1`,
     {
       method: "POST",
       headers: {
@@ -28,7 +28,7 @@ export async function getSumStatusListAndsumtotalEqualone(date?: string): Promis
 
 export async function getSumStatusListAndCarcatalogEqualParam(id:String) {
 
-  const res = await fetch(`http://tra.webtw.xyz:8888/maximo/zz_data?method=getSumStatusList&qdate=2024-08-04&carcatalog=${id}`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getSumStatusList&qdate=2024-08-04&carcatalog=${id}`, {
     method: 'POST',
     headers: {
       'Accept': 'application/json, text/plain, */*',
@@ -41,7 +41,7 @@ export async function getSumStatusListAndCarcatalogEqualParam(id:String) {
 
 export async function getCarTypeListAndCarcatalogEqualParam(id:String) {
 
-  const res = await fetch(`http://tra.webtw.xyz:8888/maximo/zz_data?method=getCarTypeList&carcatalog=${id}`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getCarTypeList&carcatalog=${id}`, {
     method: 'POST',
     headers: {
       'Accept': 'application/json, text/plain, */*',
@@ -55,7 +55,7 @@ export async function getCarTypeListAndCarcatalogEqualParam(id:String) {
 
 export async function getSumStatusListAndMultiplierEqualZeorCarcatalogEqualParamCartypeEqualTrainname(id:String,trainName:String) {
 
-  const res = await fetch(`http://tra.webtw.xyz:8888/maximo/zz_data?method=getSumStatusList&multiplier=0&qdate=2024-08-04&carcatalog=${id}&cartype=${trainName}`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getSumStatusList&multiplier=0&qdate=2024-08-04&carcatalog=${id}&cartype=${trainName}`, {
     method: 'POST',
     headers: {
       'Accept': 'application/json, text/plain, */*',
@@ -68,7 +68,7 @@ export async function getSumStatusListAndMultiplierEqualZeorCarcatalogEqualParam
 
 export async function getSumStatusDetailListMultiplierZeorDeptParamCartypeParamQtypeParam(dept:String,cartype:String,qtype:string) {
 
-  const res = await fetch(`http://tra.webtw.xyz:8888/maximo/zz_data?method=getSumStatusDetailList&multiplier=0&dept=${dept}&cartype=${cartype}&qtype=${qtype}&qdate=2024-08-04`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getSumStatusDetailList&multiplier=0&dept=${dept}&cartype=${cartype}&qtype=${qtype}&qdate=2024-08-04`, {
     method: 'POST',
     headers: {
       'Accept': 'application/json, text/plain, */*',
@@ -80,7 +80,7 @@ export async function getSumStatusDetailListMultiplierZeorDeptParamCartypeParamQ
 }
 export async function getSumStatusDetailListMultiplierZeor(): Promise<FetcheGetSumStatusList> {
 
-  const res = await fetch(`http://tra.webtw.xyz:8888/maximo/zz_data?method=getSumStatusList&multiplier=0&dept=&qdate=2024-08-04`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getSumStatusList&multiplier=0&dept=&qdate=2024-08-04`, {
     method: 'POST',
     headers: {
       'Accept': 'application/json, text/plain, */*',
@@ -93,7 +93,7 @@ export async function getSumStatusDetailListMultiplierZeor(): Promise<FetcheGetS
 
 export async function getFacRepairYearPlan() {
 
-  const res = await fetch(`http://tra.webtw.xyz:8888/maximo/zz_data?method=getFacRepairYearPlan&year=2022`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getFacRepairYearPlan&year=2024`, {
     method: 'POST',
     headers: {
       'Accept': 'application/json, text/plain, */*',
