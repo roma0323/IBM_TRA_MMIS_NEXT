@@ -12,9 +12,15 @@ export default async function Page({ searchParams }: { searchParams: { date?: st
   console.log('after fetch');
   
   return (
-    <main className="flex flex-col h-full">
+    <main className=" grow bg-neutral-100 overflow-hidden relative">
       <Suspense fallback={<Loading />}>
-        {/* Assign a unique key based on the date */}
+      {/* <div className=" h-full p-3 overflow-auto">
+
+      <div className='h-64 bg-red-100'>sax</div>
+      <div className='h-64 bg-red-100'>sax</div>
+      <div className='h-64 bg-red-100'>sax</div>
+      <div className='h-64 bg-red-100'>sax</div>
+      </div> */}
         <ClientPage key={date} Data={fetchedData.data} />
       </Suspense>
     </main>

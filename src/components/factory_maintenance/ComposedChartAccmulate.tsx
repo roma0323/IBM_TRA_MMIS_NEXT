@@ -29,8 +29,7 @@ export default class Example extends PureComponent<ExampleProps> {
     const { data } = this.props;
     const dataWithDifference = data.map(entry => ({
       ...entry,
-      累積達成: entry.累積達成 + 20,
-      累積差距: entry.累積達成 + 20 - entry.累積預計,
+      累積差距: entry.累積達成 - entry.累積預計,
     }));
 
     return (

@@ -33,8 +33,7 @@ const ClientPage: React.FC<factoryMaintenanceOverall> = ({ Data }) => {
                                 key={index}
                                 factoryLocation={factory.departmentName} // Note the typo fix
                                 totalVehicles={factory.infaccnt}
-                                cumulativeAchievementRate={factory.monthData[currentMonthIndex]['累積達成'] / factory.monthData[currentMonthIndex]['累積預計']}
-                                cumulativeRepairedVehicles={factory.monthData[currentMonthIndex]['累積達成']}
+                                cumulativeAchievementRate={Math.round((factory.monthData[currentMonthIndex]['累積達成'] / factory.monthData[currentMonthIndex]['累積預計']) * 100)}                                cumulativeRepairedVehicles={factory.monthData[currentMonthIndex]['累積達成']}
                                 cumulativeTargetRate={factory.monthData[currentMonthIndex]['累積預計']}
                                 annualTargetNumber={factory.monthData[factory.monthData.length - 1]['累積預計']}
                                 isActive={activeCardIndex === index}

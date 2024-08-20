@@ -6,5 +6,7 @@ export default function DashboardLayout({
   }: {
     children: React.ReactNode
   }) {
-    return <section className="flex flex-col h-full"><Navbar />{children}</section>
+    return <section className=" h-full overflow-hidden relative flex flex-col">
+    <Navbar />{children}</section>
   }
+

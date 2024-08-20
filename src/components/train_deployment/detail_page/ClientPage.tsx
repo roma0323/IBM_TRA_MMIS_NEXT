@@ -8,6 +8,7 @@ import MaintenanceDetailSection from "@/components/locomotive_depot/MaintenanceD
 import { getCarTypeListAndCarcatalogEqualParam } from "@/api/api";
 import { getSumStatusListAndMultiplierEqualZeorCarcatalogEqualParamCartypeEqualTrainname } from "@/api/api";
 import { getSumStatusDetailListMultiplierZeorDeptParamCartypeParamQtypeParam } from "@/api/api";
+import { getSumStatusListEq3Param } from "@/api/api";
 import { FetcheGetSumStatusListData } from "@/types/type"; // Update the import path as needed
 
 
@@ -33,14 +34,16 @@ useEffect(() => {
 
 ///////////////////////////Have to be fix after backend refactor///////////////////////
   const handleTrainTypeClick = async (trainName: string) => {
-    console.log(trainName,'trainName')
-    console.log(Data[0].carcatalog,'Data[0].carcatalog')
     if(!canMoveLeft){handleMouseEnter('right');}
     setSelectedTrainName(trainName);
     setIsTrainDetailVisible(!isTrainDetailVisible);
-    const fetchedData = await getSumStatusListAndMultiplierEqualZeorCarcatalogEqualParamCartypeEqualTrainname(Data[0].carcatalog,trainName);
-    console.log(fetchedData,'fetchedData')
-
+    let fetchedData
+    if(Data[0].carcatalog==="客車"){
+       fetchedData = await getSumStatusListEq3Param(trainName);
+    }
+    else{
+       fetchedData = await getSumStatusListAndMultiplierEqualZeorCarcatalogEqualParamCartypeEqualTrainname(Data[0].carcatalog,trainName);
+    }
     setFilteredTrainData(fetchedData.data);
   };
 

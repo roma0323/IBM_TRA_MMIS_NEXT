@@ -20,7 +20,7 @@ const Navbar: React.FC = () => {
     ];
 
     return (
-        <div className="flex h-[8vh] w-screen items-center gap-3 px-5 py-3">
+        <div className="flex h-[8dvh] w-full items-center gap-3 px-5 py-3">
             <Link href="/">
                 <Image
                     className="relative hover:scale-110"

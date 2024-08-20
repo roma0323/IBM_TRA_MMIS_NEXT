@@ -29,8 +29,7 @@ export default class Example extends PureComponent<ExampleProps> {
     const { data } = this.props;
     const dataWithDifference = data.map(entry => ({
       ...entry,
-      當月達成: entry.當月達成 + 20,
-      當月差距: entry.當月達成 + 20 - entry.當月預計,
+      當月差距: entry.當月達成  - entry.當月預計,
     }));
 
     return (

@@ -29,12 +29,13 @@ const ClientPage: React.FC<FetcheGetSumStatusListData> = ({ Data }) => {
   };
 
   return (
-    <div className="bg-gray-200 h-full p-3">
+    <div className=" h-full p-3 overflow-auto">
       {type === "all" && (
-        <div className="h-full flex flex-col justify-around">
+        <div className="flex flex-col justify-around">
           <div>
             <BigOverviewCard Name="全局" Data={dataByCarCatalog["全局"]} />
           </div>
+          
           <div className="grid grid-cols-4">
             <div onClick={() => handleTypeChange("power")}>
               <OverviewCard  Name="動力車" Data={dataByCarCatalog["動力車"]} />
@@ -53,11 +54,11 @@ const ClientPage: React.FC<FetcheGetSumStatusListData> = ({ Data }) => {
       )}
 
       {type === "power" && (
-        <div className="h-full flex flex-col justify-around">
+        <div className=" flex flex-col justify-around">
           <div>
             <BigOverviewCard Name="動力車" Data={dataByCarCatalog["動力車"]} />
           </div>
-          <div className="grid grid-cols-3 flex-grow relative bg-gray-200 overflow-hidden">
+          <div className="grid grid-cols-3  relative ">
               <Link href={{ pathname: `/navbarpages/train_deployment/certain_train/城際列車` }}>
                 <OverviewCard Name="城際列車" Data={dataByCarCatalog["城際列車"]} />
               </Link>
@@ -81,7 +82,7 @@ const ClientPage: React.FC<FetcheGetSumStatusListData> = ({ Data }) => {
       )}
 
       {type === "unusual" && (
-        <div className="h-full flex flex-col justify-around">
+        <div className=" flex flex-col justify-around">
           <div>
             <BigOverviewCard Name="非常態列車" Data={dataByCarCatalog["非常態列車"]} />
           </div>

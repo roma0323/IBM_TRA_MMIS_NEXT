@@ -70,25 +70,17 @@ http://tra.webtw.xyz:8888/maximo/zz_data?method=getSumStatusList&qdate=2024-08-0
         },
 
 
-
-
-
-        
-
-
-
-
-        客車 cartype 規則？？
+        客車 cartype 規則
         http://tra.webtw.xyz:8888/maximo/zz_data?method=getSumStatusList&multiplier=0&qdate=2024-08-04&carcatalog=客車
         http://tra.webtw.xyz:8888/maximo/zz_data?method=getSumStatusList&multiplier=0&qdate=2024-08-04
         拿到的客車參數不同...
-        學外網api 特製抓客車
-        記下來給後端
 
-        multiplier=0意義？
+        http://tra.webtw.xyz:8888/maximo/zz_data?method=getSumStatusList&eq3=PP&qdate=2024-08-19        
+        學外網api 特製抓客車(貨車似乎也是)
+
 
 
 
 
         這週進度：
-        deploy 要loaading 畫面
+        deploy 要loaading 畫面：卡關

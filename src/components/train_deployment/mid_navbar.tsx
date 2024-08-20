@@ -48,8 +48,8 @@ const MidNavbar: React.FC = () => {
 
 
     return (
-        <div className="w-screen flex flex-col px-6 sticky">
-            <div className="h-[10vh]  flex items-center  justify-between  relative">
+        <div className="w-full flex flex-col px-6   sticky">
+            <div className="h-[8dvh]  flex items-center  justify-between  relative">
                 <div className="flex items-center">
                     <span className="text-3xl">
                         車輛配置資訊/
