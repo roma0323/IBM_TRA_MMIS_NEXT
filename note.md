@@ -70,10 +70,26 @@ http://tra.webtw.xyz:8888/maximo/zz_data?method=getSumStatusList&qdate=2024-08-0
         },
 
 
-        depot default all
-        deploy 要loaading 畫面
+
+
+
+        
+
+
+
 
         客車 cartype 規則？？
         http://tra.webtw.xyz:8888/maximo/zz_data?method=getSumStatusList&multiplier=0&qdate=2024-08-04&carcatalog=客車
         http://tra.webtw.xyz:8888/maximo/zz_data?method=getSumStatusList&multiplier=0&qdate=2024-08-04
         拿到的客車參數不同...
+        學外網api 特製抓客車
+        記下來給後端
+
+        multiplier=0意義？
+
+
+
+
+        這週進度：
+        depot default all
+        deploy 要loaading 畫面
