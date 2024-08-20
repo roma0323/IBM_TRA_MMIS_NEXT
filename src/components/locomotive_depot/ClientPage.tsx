@@ -11,8 +11,8 @@ import { getSumStatusDetailListMultiplierZeorDeptParamCartypeParamQtypeParam } f
 import { FetcheGetSumStatusListData } from "@/types/type"; // Update the import path as needed
 
 const TrainPageContent: React.FC<FetcheGetSumStatusListData> = ({ Data }) => {
-  const [selectedLabel, setSelectedLabel] = useState<string | null>(null);
-  const [selectedArea, setSelectedArea] = useState<string | null>(null);
+  const [selectedLabel, setSelectedLabel] = useState<string | null>("All");
+  const [selectedArea, setSelectedArea] = useState<string | null>("全部機務段");
   const [maintenanceData, setMaintenanceData] = useState<any[]>([]); // New state for maintenance data
   const areas = [
     "全部機務段", "七堵機務段", "臺北機務段", "新竹機務段", "彰化機務段", "嘉義機務段", "高雄機務段", "花蓮機務段", "臺東機務段", "宜蘭機務分段"
