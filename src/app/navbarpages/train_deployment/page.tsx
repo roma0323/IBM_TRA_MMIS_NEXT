@@ -5,12 +5,17 @@ import Loading from "@/components/Loading"; // Import your custom Loading compon
 
 export default async function Page({ searchParams }: { searchParams: { date?: string } }) {
   const date = searchParams.date || ''; // Get the 'date' parameter from the URL or set a default
+  console.log('before fetch');
+  
+  // Fetch data based on the current date
   const fetchedData = await getSumStatusListAndsumtotalEqualone(date);
-
+  console.log('after fetch');
+  
   return (
     <main className="flex flex-col h-full">
       <Suspense fallback={<Loading />}>
-        <ClientPage Data={fetchedData.data} />
+        {/* Assign a unique key based on the date */}
+        <ClientPage key={date} Data={fetchedData.data} />
       </Suspense>
     </main>
   );

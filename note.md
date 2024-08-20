@@ -91,5 +91,4 @@ http://tra.webtw.xyz:8888/maximo/zz_data?method=getSumStatusList&qdate=2024-08-0
 
 
         這週進度：
-        depot default all
         deploy 要loaading 畫面

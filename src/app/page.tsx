@@ -70,7 +70,7 @@ export default function Page() {
           />
         </div>
 
-        <div className="text-2xl  text-primary mb-4">
+        <div className="text-2xl text-sky-800 mb-4">
           新 MMIS 績效管理指標
         </div>
 
