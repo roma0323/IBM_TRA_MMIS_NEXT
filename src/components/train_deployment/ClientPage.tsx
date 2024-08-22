@@ -29,14 +29,14 @@ const ClientPage: React.FC<FetcheGetSumStatusListData> = ({ Data }) => {
   };
 
   return (
-    <div className=" h-full p-3 overflow-auto">
+    <div className=" h-full p-3 relative overflow-auto">
       {type === "all" && (
-        <div className="flex flex-col justify-around">
-          <div>
+        <div className="flex flex-col h-full  justify-around">
+          <div className="h-1/2 w-full bg-red-100">
             <BigOverviewCard Name="全局" Data={dataByCarCatalog["全局"]} />
           </div>
           
-          <div className="grid grid-cols-4">
+          <div className="grid grid-cols-4  gap-4 h-2/5 relative">
             <div onClick={() => handleTypeChange("power")}>
               <OverviewCard  Name="動力車" Data={dataByCarCatalog["動力車"]} />
             </div>
@@ -54,11 +54,11 @@ const ClientPage: React.FC<FetcheGetSumStatusListData> = ({ Data }) => {
       )}
 
       {type === "power" && (
-        <div className=" flex flex-col justify-around">
-          <div>
-            <BigOverviewCard Name="動力車" Data={dataByCarCatalog["動力車"]} />
+        <div className="flex flex-col gap-4">
+          <div className="h-1/2 ">
+          <BigOverviewCard Name="動力車" Data={dataByCarCatalog["動力車"]} />
           </div>
-          <div className="grid grid-cols-3  relative ">
+          <div className="grid grid-cols-3  h-2/5 gap-4 relative">
               <Link href={{ pathname: `/navbarpages/train_deployment/certain_train/城際列車` }}>
                 <OverviewCard Name="城際列車" Data={dataByCarCatalog["城際列車"]} />
               </Link>
@@ -82,12 +82,12 @@ const ClientPage: React.FC<FetcheGetSumStatusListData> = ({ Data }) => {
       )}
 
       {type === "unusual" && (
-        <div className=" flex flex-col justify-around">
-          <div>
-            <BigOverviewCard Name="非常態列車" Data={dataByCarCatalog["非常態列車"]} />
+        <div className="flex flex-col gap-4">
+          <div className="h-1/2 ">
+          <BigOverviewCard Name="非常態列車" Data={dataByCarCatalog["非常態列車"]} />
           </div>
           以下數據不正確,外網沒有非常態資料api
-          <div className="grid grid-cols-4">
+          <div className="grid grid-cols-4  h-2/5 gap-4 relative">
               <OverviewCard Name="客車" Data={dataByCarCatalog["客車"]} />
                 <OverviewCard Name="城際列車" Data={dataByCarCatalog["城際列車"]} />
                 <OverviewCard Name="貨車" Data={dataByCarCatalog["貨車"]} />

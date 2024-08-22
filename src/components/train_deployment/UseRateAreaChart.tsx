@@ -78,7 +78,7 @@ export default function UseRateAreaChart(styleTemplate: any) {
   }
 
   return (
-    <ResponsiveContainer width="100%"  height="100%"  className="bg-red-200">
+    <ResponsiveContainer width="100%"  height="100%">
     <ComposedChart
       data={using_rate_data}
       margin={{

@@ -22,22 +22,22 @@ const DEFAULT_TRAIN_DATA: FetcheGetSumStatusListDataInArray = {
     oth_return: 0.0,
     oth_stop: 0.0,
     availability: 1.0,
-  };
+};
 export const BigOverviewCard = ({
     Name = "Unknown Train",  // Set the default value for Name
     Data = DEFAULT_TRAIN_DATA,  // Set the default value for Data
-  }: {
+}: {
     Name?: string;  // Make Name optional and allow it to have a default value
     Data?: FetcheGetSumStatusListDataInArray;  // Make Data optional and allow it to have a default value
-  }): JSX.Element => {
+}): JSX.Element => {
     return (
 
-        <div className=" bg-white  m-3  relative rounded-lg  hover:shadow-lg">
+        <div className=" relative size-full  bg-white flex flex-col rounded-lg  hover:shadow-lg">
             <div className=" text-[#397EFF] p-2.5  border-b  border-[#646464]">
                 {Name}
             </div>
-            
-            <div className="flex  py-6  px-10 w-full h-full">
+
+            <div className="flex flex-grow overflow-auto py-6  px-10 relative ">
                 <div className="flex-col flex  justify-around w-1/4 ">
                     <div >
                         <div className="text-6xl">{Data.current_ready}</div>
@@ -48,7 +48,7 @@ export const BigOverviewCard = ({
                         <div> 總輛數</div>
                     </div>
                     <div>
-                        <div className="text-6xl"> {`${Math.round(Data.current_ready/Data.current_cnt * 100).toString()}%`}</div>
+                        <div className="text-6xl"> {`${Math.round(Data.current_ready / Data.current_cnt * 100).toString()}%`}</div>
                         <div> 可用率</div>
                     </div>
                 </div>
@@ -61,8 +61,10 @@ export const BigOverviewCard = ({
                         <span className="block">率</span>
                     </p>
                 </div>
-                <UseRateAreaChart styleTemplate="" />
+                <div className="w-3/4" >
+                    <UseRateAreaChart styleTemplate="" />
                 </div>
+            </div>
         </div>
     );
 };

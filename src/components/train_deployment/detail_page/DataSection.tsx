@@ -32,7 +32,7 @@ const DataSection = ({
     <BoardTitleSection
       title={`30 天使用率`}
       content={
-        <div className="size-full flex relative justify-end items-center bg-red-100 p-3">
+        <div className="size-full flex relative justify-end items-center px-3">
           <UseRateAreaChart styleTemplate={carcatalog} />
         </div>
       }
