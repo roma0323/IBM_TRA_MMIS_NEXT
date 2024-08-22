@@ -79,7 +79,7 @@ useEffect(() => {
       >
 
         {/* first Div */}
-        <div className="min-w-[25%] h-full flex items-center justify-center">
+        <div className="min-w-[25%] h-full  flex items-center justify-center">
           <DataSection cntSum={cntSum} readySum={readySum} carcatalog={Data[0].carcatalog} />
         </div>
 
