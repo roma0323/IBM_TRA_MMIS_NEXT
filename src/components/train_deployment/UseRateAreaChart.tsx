@@ -46,6 +46,7 @@ const using_rate_data = [
 
 
 export default function UseRateAreaChart(styleTemplate: any) {
+  console.log(styleTemplate)
   let color = "";
 
   switch (styleTemplate) {
@@ -76,6 +77,7 @@ export default function UseRateAreaChart(styleTemplate: any) {
     default:
       color = "#397EFF";
   }
+  console.log(color)
 
   return (
     <ResponsiveContainer width="100%"  height="100%">

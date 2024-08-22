@@ -5,7 +5,11 @@ type SectionProps = {
     content: React.ReactNode;
 };
 
+
+
 const BoardTitleSection: React.FC<SectionProps> = ({ title="", content }) => (
+
+  
     <div className="size-full overflow-hidden flex flex-col items-start bg-white relative  rounded-lg ">
       <div className="w-full p-2.5 border-b border-gray-400">
         {title}
