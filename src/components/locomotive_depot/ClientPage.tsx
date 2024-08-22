@@ -63,10 +63,10 @@ const TrainPageContent: React.FC<FetcheGetSumStatusListData> = ({ Data }) => {
   //handleMouseEnter and slide
 
   return (
-    <div className="flex w-full p-6 relative overflow-hidden bg-neutral-100">
+    <div className=" h-full  p-6 overflow-hidden">
       <div
-        className="flex w-full gap-10 transition-transform duration-500 ease-in-out"
-        style={{ transform: `translateX(-${currentIndex * 26}%)` }} // Adjusted to slide the divs
+        className="flex h-full gap-6 transition-transform duration-500 ease-in-out"
+        style={{ transform: `translateX(-${currentIndex * 26}%)` }}
       >
         {/* First Div */}
         <div className="min-w-[25%] flex items-center justify-center">

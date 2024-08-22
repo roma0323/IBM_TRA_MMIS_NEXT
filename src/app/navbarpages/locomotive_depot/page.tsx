@@ -7,7 +7,8 @@ import { getSumStatusDetailListMultiplierZeor } from "@/api/api";
 
 export default async function Page() {
   const data = await getSumStatusDetailListMultiplierZeor();
-  return <main className="flex flex-col h-full">
+  return <main className=" grow bg-neutral-100 overflow-hidden relative">
+
     <Suspense fallback={<Loading />}>
       <ClientPage Data={data.data} />
     </Suspense>
