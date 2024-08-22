@@ -42,7 +42,7 @@ export default async function Page({ params }: PageProps) {
 
 
   return (
-    <main>
+    <main className=" grow bg-neutral-100 overflow-hidden relative">
       <Suspense fallback={<Loading />}>
         <ClientPage Data={data.data} />
       </Suspense>

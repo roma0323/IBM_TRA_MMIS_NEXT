@@ -14,13 +14,6 @@ export default async function Page({ searchParams }: { searchParams: { date?: st
   return (
     <main className=" grow bg-neutral-100 overflow-hidden relative">
       <Suspense fallback={<Loading />}>
-      {/* <div className=" h-full p-3 overflow-auto">
-
-      <div className='h-64 bg-red-100'>sax</div>
-      <div className='h-64 bg-red-100'>sax</div>
-      <div className='h-64 bg-red-100'>sax</div>
-      <div className='h-64 bg-red-100'>sax</div>
-      </div> */}
         <ClientPage key={date} Data={fetchedData.data} />
       </Suspense>
     </main>

@@ -6,11 +6,11 @@ type SectionProps = {
 };
 
 const BoardTitleSection: React.FC<SectionProps> = ({ title="", content }) => (
-    <div className="flex-col items-start  relative bg-white rounded-lg flex-grow ">
+    <div className="size-full overflow-hidden flex-col items-start bg-white relative  rounded-lg ">
       <div className="p-2.5 border-b border-gray-400">
         {title}
       </div>
-      <div className="w-full h-[67vh] relative overflow-auto">
+      <div className=" size-full  overflow-scroll">
         {content}
       </div>
   </div>

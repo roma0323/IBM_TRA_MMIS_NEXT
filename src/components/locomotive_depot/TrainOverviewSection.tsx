@@ -27,22 +27,22 @@ const TrainOverviewSection: React.FC<TrainOverviewSectionProps> = ({
   ];
 
   return (
-    <div className="min-w-[72%] flex items-center justify-center">
+
+    <div className="min-w-[72%]  h-full  relative ">
       <BoardTitleSection
         title={`${selectedArea} - ${selectedLabel}`}
         content={
-          <div
-            className="flex flex-col bg-white w-full items-start relative flex-shrink-0 p-5 bg-gray-100 rounded-lg overflow-hidden"
-            onClick={() => handleMouseEnter("right")}
-          >
-            <div className="grid grid-cols-17 gap-4 bg-zinc-100 border-b-2 border-gray-200 rounded-lg text-left">
+          <div className="flex flex-col  p-3  relative "
+            onClick={() => handleMouseEnter("right")}>
+
+            <div className="grid grid-cols-17 gap-4 bg-zinc-100 border-b-2 border-gray-200 rounded-lg text-left ">
               {headers.map((header, index) => (
                 <div key={index} className="m-2 flex items-center justify-center">
                   {header}
                 </div>
               ))}
             </div>
-            <div className="w-full">
+            <div>
               {selectedLabel &&
                 filteredTrainData.map((train, index) => (
                   <RowByTrain

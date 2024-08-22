@@ -71,9 +71,10 @@ useEffect(() => {
 //mouse slide
 
   return (
-    <div className="flex w-full p-6 relative overflow-hidden bg-neutral-100">
+
+    <div className=" h-full  p-6 overflow-hidden">
       <div
-        className="flex w-full gap-8 transition-transform duration-500 ease-in-out"
+        className="flex h-full gap-6 transition-transform duration-500 ease-in-out"
         style={{ transform: `translateX(-${currentIndex * 26}%)` }}
       >
 
@@ -83,7 +84,7 @@ useEffect(() => {
         </div>
 
         {/* second Div */}
-        <div className="min-w-[25%] h-full flex items-center justify-center">
+        <div className="min-w-[25%] overflow-hidden relative  ">
           <TrainCategorySection
             initialData={Data}
             trainData={trainData}
@@ -95,6 +96,7 @@ useEffect(() => {
         </div>
         
         {/* Third Div */}
+
         <TrainOverviewSection
           filteredTrainData={filteredTrainData} // Pass fetched data to TrainOverviewSection
           selectedArea={Data[0].carcatalog}
