@@ -84,3 +84,4 @@ http://tra.webtw.xyz:8888/maximo/zz_data?method=getSumStatusList&qdate=2024-08-0
 
         這週進度：
         deploy 要loaading 畫面：卡關
+        改detail  data section  height

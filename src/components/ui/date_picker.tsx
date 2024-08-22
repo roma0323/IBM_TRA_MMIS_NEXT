@@ -40,8 +40,9 @@ export function DatePickerForm() {
       const currentParams = new URLSearchParams(searchParams?.toString() || '');
       currentParams.set("date", formattedDate);
   
-      // This will change the URL and force the page to refresh
       router.replace(`${window.location.pathname}?${currentParams.toString()}`);
+      window.location.reload();
+
     }
   };
 
