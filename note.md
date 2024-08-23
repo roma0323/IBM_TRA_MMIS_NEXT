@@ -9,40 +9,40 @@ const data = [
 { name: '太魯閣 - TEMU1000', value: 100 ,use_rate:23},
 { name: '普悠瑪 - TEMU2000', value: 100 ,use_rate:45},
 { name: '新自強號 - MEU3000', value: 150,use_rate:12 },
-{ name: 'PP電力機車 - E1000', value: 90 ,use_rate:48},
+{ name: 'PP 電力機車 - E1000', value: 90 ,use_rate:48},
 ];
-車種層級分析：30使用率（包含前30~60天）（包含非常態車輛 動力車）
+車種層級分析：30 使用率（包含前 30~60 天）（包含非常態車輛 動力車）
 const using_rate_data = [
-{ name: '1號', 本月: 45, 上個月: 50 },
-{ name: '2號', 本月: 30, 上個月: 32 },
-{ name: '3號', 本月: 35, 上個月: 44 },
-{ name: '4號', 本月: 34, 上個月: 39 },
-{ name: '5號', 本月: 31, 上個月: 44 },
-{ name: '6號', 本月: 47, 上個月: 52 },
-{ name: '7號', 本月: 34, 上個月: 34 },
-{ name: '8號', 本月: 39, 上個月: 44 },
-{ name: '9號', 本月: 31, 上個月: 36 },
-{ name: '10號', 本月: 50, 上個月: 55 },
-{ name: '11號', 本月: 48, 上個月: 33 },
-{ name: '12號', 本月: 32, 上個月: 37 },
-{ name: '13號', 本月: 45, 上個月: 30 },
-{ name: '14號', 本月: 43, 上個月: 48 },
-{ name: '15號', 本月: 42, 上個月: 47 },
-{ name: '16號', 本月: 44, 上個月: 39 },
-{ name: '17號', 本月: 44, 上個月: 49 },
-{ name: '18號', 本月: 33, 上個月: 38 },
-{ name: '19號', 本月: 36, 上個月: 31 },
-{ name: '20號', 本月: 46, 上個月: 31 },
-{ name: '21號', 本月: 45, 上個月: 50 },
-{ name: '22號', 本月: 32, 上個月: 57 },
-{ name: '23號', 本月: 46, 上個月: 51 },
-{ name: '24號', 本月: 44, 上個月: 49 },
-{ name: '25號', 本月: 32, 上個月: 37 },
-{ name: '26號', 本月: 47, 上個月: 52 },
-{ name: '27號', 本月: 44, 上個月: 49 },
-{ name: '28號', 本月: 38, 上個月: 43 },
-{ name: '29號', 本月: 36, 上個月: 41 },
-{ name: '30號', 本月: 34, 上個月: 40 }
+{ name: '1 號', 本月: 45, 上個月: 50 },
+{ name: '2 號', 本月: 30, 上個月: 32 },
+{ name: '3 號', 本月: 35, 上個月: 44 },
+{ name: '4 號', 本月: 34, 上個月: 39 },
+{ name: '5 號', 本月: 31, 上個月: 44 },
+{ name: '6 號', 本月: 47, 上個月: 52 },
+{ name: '7 號', 本月: 34, 上個月: 34 },
+{ name: '8 號', 本月: 39, 上個月: 44 },
+{ name: '9 號', 本月: 31, 上個月: 36 },
+{ name: '10 號', 本月: 50, 上個月: 55 },
+{ name: '11 號', 本月: 48, 上個月: 33 },
+{ name: '12 號', 本月: 32, 上個月: 37 },
+{ name: '13 號', 本月: 45, 上個月: 30 },
+{ name: '14 號', 本月: 43, 上個月: 48 },
+{ name: '15 號', 本月: 42, 上個月: 47 },
+{ name: '16 號', 本月: 44, 上個月: 39 },
+{ name: '17 號', 本月: 44, 上個月: 49 },
+{ name: '18 號', 本月: 33, 上個月: 38 },
+{ name: '19 號', 本月: 36, 上個月: 31 },
+{ name: '20 號', 本月: 46, 上個月: 31 },
+{ name: '21 號', 本月: 45, 上個月: 50 },
+{ name: '22 號', 本月: 32, 上個月: 57 },
+{ name: '23 號', 本月: 46, 上個月: 51 },
+{ name: '24 號', 本月: 44, 上個月: 49 },
+{ name: '25 號', 本月: 32, 上個月: 37 },
+{ name: '26 號', 本月: 47, 上個月: 52 },
+{ name: '27 號', 本月: 44, 上個月: 49 },
+{ name: '28 號', 本月: 38, 上個月: 43 },
+{ name: '29 號', 本月: 36, 上個月: 41 },
+{ name: '30 號', 本月: 34, 上個月: 40 }
 ];
 
 http://tra.webtw.xyz:8888/maximo/zz_data?method=getSumStatusList&qdate=2024-08-05&sumtotal=1
@@ -82,10 +82,26 @@ http://tra.webtw.xyz:8888/maximo/zz_data?method=getSumStatusList&qdate=2024-08-0
 
 
         這週進度：
-        deploy 要loaading 畫面：重整
-        改detail data section  height
+        deploy 要loaading 畫面：ok
+                server render  重新unmount 換use route replace
+                改detail data section  height RWD:ok
+                即便從server 重新搞refresh
+        RWD
 
+        重組簡化程式
         use context for color color align
+        unnessary client component to server
+        can detch same data different plaec, dont pass to many layers(autually onyl fetch once)
+        use promise : if fetch two source seqenail  would cause waterfall
+        deploymeny use searchparams or params
+        suspense right place : suspense must one layer higher then it work
+        suspense with key={searchParams}!!!!!
+
+        ○ (Static) prerendered as static content (dont need rerender afterward)
+        ● (SSG) prerendered as static HTML (uses getStaticProps)
+        ƒ (Dynamic) server-rendered on demand: use pamaras (not effcient)
+
+
         how shadcn use color
         cn()  to resue the board title
         try align css color (theme)
