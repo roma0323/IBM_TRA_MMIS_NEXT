@@ -45,38 +45,30 @@ const using_rate_data = [
 // ];
 
 
-export default function UseRateAreaChart(styleTemplate: any) {
+export default function UseRateAreaChart({ styleTemplate }: { styleTemplate: string }) {
   console.log(styleTemplate)
   let color = "";
 
-  switch (styleTemplate) {
-    case "城際列車":
-      color = `#538164`;
-      break;
-    case "電力機車":
-      color = `#FFBB54`;
-      break;
-    case "柴電機車":
-      color = `#D9730D`;
-      break;
-    case "柴液機車":
-      color = `#C3554E`;
-      break;
-    case "客車":
-      color = `#00BBC7`;
-      break;
-    case "柴油客車":
-      color = `#9F8170`;
-      break;
-    case "貨車":
-      color = `#8F65AF`;
-      break;
-    case "通勤列車":
-      color = `#28BF02`;
-      break;
-    default:
-      color = "#397EFF";
+  if (styleTemplate === '城際列車') {
+    color = `#538164`;
+  } else if (styleTemplate === "電力機車") {
+    color = `#FFBB54`;
+  } else if (styleTemplate === "柴電機車") {
+    color = `#D9730D`;
+  } else if (styleTemplate === "柴液機車") {
+    color = `#C3554E`;
+  } else if (styleTemplate === "客車") {
+    color = `#00BBC7`;
+  } else if (styleTemplate === "柴油客車") {
+    color = `#9F8170`;
+  } else if (styleTemplate === "貨車") {
+    color = `#8F65AF`;
+  } else if (styleTemplate === "通勤列車") {
+    color = `#28BF02`;
+  } else {
+    color = "#397EFF";
   }
+  
   console.log(color)
 
   return (
