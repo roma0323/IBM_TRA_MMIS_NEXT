@@ -1,27 +1,27 @@
-
-import "@/styles/globals.css"
-import { Inter as FontSans } from "next/font/google"
-import { ThemeProvider } from "@/components/theme-provider"
-import { cn } from "@/lib/utils"
+import "@/styles/globals.css";
+import { Inter as FontSans } from "next/font/google";
+import { ThemeProvider } from "@/components/theme-provider";
+import { cn } from "@/lib/utils";
 import Chatbot from "@/components/chatbot"; // Adjust this import according to your project structure
 
 const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
-})
-
+});
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
-      <body className={cn(
-        "h-dvh w-dvw bg-background font-sans antialiased",
-        fontSans.variable
-      )}>
+      <body
+        className={cn(
+          "h-dvh w-dvw bg-background font-sans antialiased",
+          fontSans.variable,
+        )}
+      >
         <ThemeProvider
           attribute="class"
           defaultTheme="light"
@@ -29,11 +29,9 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <main className="size-full">{children}</main>
-
         </ThemeProvider>
         <Chatbot />
-
       </body>
     </html>
-  )
+  );
 }

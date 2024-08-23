@@ -31,10 +31,18 @@ const MaintenanceCard: React.FC<MaintenanceCardProps> = ({
             </div>
           ))}
           {maintenanceData.url ? (
-          <div className="w-full pt-1 px-6 flex  justify-between">
-            <a href={maintenanceData.url} target="_blank" rel="noopener noreferrer">View Details</a>
-          </div>
-          ):(<div></div>)}
+            <div className="w-full pt-1 px-6 flex  justify-between">
+              <a
+                href={maintenanceData.url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Details
+              </a>
+            </div>
+          ) : (
+            <div></div>
+          )}
         </div>
       ) : (
         <div>No maintenance data available.</div>

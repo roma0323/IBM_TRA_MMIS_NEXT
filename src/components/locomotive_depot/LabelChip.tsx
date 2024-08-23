@@ -4,7 +4,7 @@ interface Props {
   text: string;
 }
 
-export const LabelChip = ({  text = "ALL" }: Props): JSX.Element => {
+export const LabelChip = ({ text = "ALL" }: Props): JSX.Element => {
   let style_template = "";
 
   switch (text) {
@@ -35,15 +35,14 @@ export const LabelChip = ({  text = "ALL" }: Props): JSX.Element => {
     default:
       style_template = "text-[#397EFF]";
   }
-  
 
   return (
     <div
-      className={` items-center justify-center  p-1 relative  ${style_template} rounded-[5px]`}>
+      className={` items-center justify-center  p-1 relative  ${style_template} rounded-[5px]`}
+    >
       {text}
     </div>
   );
 };
-
 
 export default LabelChip;

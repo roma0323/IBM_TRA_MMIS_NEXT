@@ -2,7 +2,7 @@ import React from "react";
 import { DataCard } from "@/components/train_deployment/DataCard";
 import UseRateAreaChart from "@/components/train_deployment/UseRateAreaChart";
 import { FetcheGetSumStatusListDataInArray } from "@/types/type";
-import BoardTitleSection from '@/components/BoardTitleSection'; // Import the Section component
+import BoardTitleSection from "@/components/BoardTitleSection"; // Import the Section component
 
 const DEFAULT_TRAIN_DATA: FetcheGetSumStatusListDataInArray = {
   carcatalog: "Unknown",
@@ -27,16 +27,13 @@ const DEFAULT_TRAIN_DATA: FetcheGetSumStatusListDataInArray = {
 };
 
 export const OverviewCard = ({
-  Name = "Unknown Train",  // Set the default value for Name
-  Data = DEFAULT_TRAIN_DATA,  // Set the default value for Data
+  Name = "Unknown Train", // Set the default value for Name
+  Data = DEFAULT_TRAIN_DATA, // Set the default value for Data
 }: {
-  Name?: string;  // Make Name optional and allow it to have a default value
-  Data?: FetcheGetSumStatusListDataInArray;  // Make Data optional and allow it to have a default value
+  Name?: string; // Make Name optional and allow it to have a default value
+  Data?: FetcheGetSumStatusListDataInArray; // Make Data optional and allow it to have a default value
 }): JSX.Element => {
-
-
   return (
-
     <div className="">
       <BoardTitleSection
         title={`${Name}`}
@@ -45,7 +42,10 @@ export const OverviewCard = ({
             <div className="flex w-full py-2 ">
               <DataCard text={Data.current_ready.toString()} text1="可用數" />
               <DataCard text={Data.current_cnt.toString()} text1="總輛數" />
-              <DataCard text={`${Math.round(Data.current_ready / Data.current_cnt * 100).toString()}%`} text1="可用率" />
+              <DataCard
+                text={`${Math.round((Data.current_ready / Data.current_cnt) * 100).toString()}%`}
+                text1="可用率"
+              />
             </div>
             <div className="w-full h-32 ">
               <UseRateAreaChart styleTemplate={Name} />
@@ -54,6 +54,5 @@ export const OverviewCard = ({
         }
       />
     </div>
-
   );
 };

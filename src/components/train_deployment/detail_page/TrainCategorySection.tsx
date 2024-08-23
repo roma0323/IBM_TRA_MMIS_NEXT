@@ -1,15 +1,14 @@
-import React from 'react';
+import React from "react";
 import TrainCategorySectionCard from "@/components/train_deployment/detail_page/TrainCategorySectionCard";
 import BoardTitleSection from "@/components/BoardTitleSection";
 
 type TrainCategorySectionProps = {
   initialData: any[];
-  trainData: { trainName: string, trainCount: number }[];
+  trainData: { trainName: string; trainCount: number }[];
   selectedTrainName: string;
   isDetailVisible: boolean;
   handleTrainClick: (trainName: string) => void;
   carcatalog: string; // Add the carcatalog prop
-
 };
 
 const TrainCategorySection: React.FC<TrainCategorySectionProps> = ({
@@ -17,7 +16,7 @@ const TrainCategorySection: React.FC<TrainCategorySectionProps> = ({
   trainData,
   selectedTrainName,
   handleTrainClick,
-  carcatalog
+  carcatalog,
 }) => (
   <div className="size-full relative  ">
     <BoardTitleSection
@@ -37,9 +36,7 @@ const TrainCategorySection: React.FC<TrainCategorySectionProps> = ({
         </div>
       }
     />
-
   </div>
-
 );
 
 export default TrainCategorySection;

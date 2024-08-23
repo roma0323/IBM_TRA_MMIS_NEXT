@@ -1,7 +1,7 @@
 // MaintenanceDetailSection.tsx
 
-import React from 'react';
-import BoardTitleSection from '@/components/BoardTitleSection'; // Import the Section component
+import React from "react";
+import BoardTitleSection from "@/components/BoardTitleSection"; // Import the Section component
 import MaintenanceCard from "@/components/locomotive_depot/MaintenanceCard";
 
 interface MaintenanceDetailSectionProps {

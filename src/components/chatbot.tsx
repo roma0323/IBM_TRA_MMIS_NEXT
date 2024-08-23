@@ -1,10 +1,16 @@
 // @/components/Chatbot.tsx
-'use client'
-import { useState } from 'react';
+"use client";
+import { useState } from "react";
 import React from "react";
 import { Check } from "lucide-react";
-import Image from 'next/image';
-
+import Image from "next/image";
+//FIXME: Add Chatbot Icon
+//BUG: Add Chatbot Icon
+//XXXX: Add Chatbot Icon
+//[ ]: Add Chatbot Icon
+// [x]: Add Chatbot Icon
+//HACK: Add Chatbot Icon
+//TODO: Add Chatbot Icon
 const Chatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -16,14 +22,15 @@ const Chatbot = () => {
     <div>
       <button
         onClick={toggleChatbot}
-        className="fixed bottom-4 right-4 hover:scale-105">
+        className="fixed bottom-4 right-4 hover:scale-105"
+      >
         <Image
           src={`${process.env.BASEPATH}/chatbot-icon.png`}
           alt="Chatbot Icon"
           width={64}
           height={64}
-        />      </button>
-
+        />{" "}
+      </button>
 
       {/* <button onClick={toggleChatbot} className="absolute top-2 right-2 text-gray-500">
             ✕
@@ -35,15 +42,17 @@ const Chatbot = () => {
             <header className="flex flex-col w-[330.67px] items-start gap-[8.27px] bg-transparent h-[72.75px] relative">
               <div className="self-stretch w-full bg-[#397eff] rounded-[16.53px_16.53px_0px_0px] shadow-[0px_19.84px_28.11px_#ae090973] h-[72.75px] relative" />
               <div className="flex w-[291px] h-[35px] items-center justify-between absolute top-5 left-5">
-                <div className="inline-flex items-center gap-[7.44px] relative flex-[0_0_auto] mt-[-2.48px] mb-[-2.48px]">            
-                  <div style={{
-                    backgroundImage: `url(/static/chatbot-icon.png)`,
-                    backgroundSize: '100%, 100%',
-                    position: 'relative',
-                    width: '39.69px',
-                    height: '39.68px',
-                    borderRadius: '44.09px'
-                  }}/>
+                <div className="inline-flex items-center gap-[7.44px] relative flex-[0_0_auto] mt-[-2.48px] mb-[-2.48px]">
+                  <div
+                    style={{
+                      backgroundImage: `url(/static/chatbot-icon.png)`,
+                      backgroundSize: "100%, 100%",
+                      position: "relative",
+                      width: "39.69px",
+                      height: "39.68px",
+                      borderRadius: "44.09px",
+                    }}
+                  />
 
                   <div className="inline-flex flex-col items-start justify-center relative flex-[0_0_auto]">
                     <div className="relative w-[97.55px] h-[23.97px]">
@@ -59,8 +68,12 @@ const Chatbot = () => {
                     </div>
                   </div>
                 </div>
-                <button onClick={toggleChatbot} className="relative w-[19.84px] h-[19.84px  ">x</button>
-
+                <button
+                  onClick={toggleChatbot}
+                  className="relative w-[19.84px] h-[19.84px  "
+                >
+                  x
+                </button>
               </div>
             </header>
             <div className="flex flex-col w-[330.67px] items-center justify-end gap-[19.84px] p-[19.84px] relative flex-1 grow bg-[#f8f9fa] overflow-y-scroll">
@@ -73,12 +86,12 @@ const Chatbot = () => {
                   </div>
                   <Image
                     className="absolute w-[37px] h-7 top-[75px] left-[202px]"
-                    alt="Rectangle"                    
+                    alt="Rectangle"
                     src={`${process.env.BASEPATH}/profile.png`}
-
                     width={37}
-                    height={28}  // Assuming height of 7rem translates to 28px
-                  />                </div>
+                    height={28} // Assuming height of 7rem translates to 28px
+                  />{" "}
+                </div>
                 <div className="inline-flex items-end absolute top-[77px] left-[55px]">
                   <div className="relative w-[16.53px] h-[5.79px]">
                     <div className="absolute -top-px left-0 [font-family:'Inter-Regular',Helvetica] font-normal text-[#888888] text-[8.3px] tracking-[0] leading-[normal] whitespace-nowrap">
@@ -94,7 +107,8 @@ const Chatbot = () => {
                     <p className="relative flex-1 mt-[-0.83px] [font-family:'Inter-Regular',Helvetica] font-normal text-white text-[12.4px] tracking-[0] leading-[normal]">
                       Rapidly build stunning Web Apps with Frest 🚀
                       <br />
-                      Developer friendly, Highly customizable &amp; Carefully crafted HTML Admin Dashboard Template.
+                      Developer friendly, Highly customizable &amp; Carefully
+                      crafted HTML Admin Dashboard Template.
                     </p>
                   </div>
                   <div className="gap-[8.27px] top-[124px] left-[26px] inline-flex items-end absolute">
@@ -109,27 +123,26 @@ const Chatbot = () => {
                   <div className="inline-flex items-start gap-[6.61px] p-[3.31px] relative flex-[0_0_auto] mt-[-1.00px] mb-[-1.00px] ml-[-1.00px] mr-[-1.00px] bg-[#397eff] rounded-[6.61px] border border-solid border-white">
                     <Image
                       className="relative"
-                      alt="Vuesax outline"                      
+                      alt="Vuesax outline"
                       src={`${process.env.BASEPATH}/clipboard-text.svg`}
-
                       width={13.23}
                       height={13.23}
-                    />                  <Image
+                    />{" "}
+                    <Image
                       className="relative"
-                      alt="Vuesax linear like"                      
+                      alt="Vuesax linear like"
                       src={`${process.env.BASEPATH}/like.svg`}
-
                       width={13.23}
                       height={13.23}
                     />
                     <Image
                       className="relative"
-                      alt="Vuesax linear"                      
+                      alt="Vuesax linear"
                       src={`${process.env.BASEPATH}/dislike.svg`}
-
                       width={13.23}
                       height={13.23}
-                    />                  </div>
+                    />{" "}
+                  </div>
                 </div>
                 <div className="absolute w-10 h-10 top-[115px] left-0 bg-[#397eff] rounded-[82.67px]">
                   <Image
@@ -145,16 +158,18 @@ const Chatbot = () => {
                 <div className="flex w-[238.91px] items-start justify-end gap-[8.27px] pl-[16.53px] pr-[13.23px] pt-[13.23px] pb-[26.45px] relative flex-[0_0_auto] bg-[#dee2e6] rounded-[9.92px_9.92px_0px_9.92px] shadow-[0px_0.83px_0.83px_#00000033]">
                   <div className="flex items-end justify-end gap-[8.27px] relative flex-1 grow">
                     <p className="relative flex-1 mt-[-0.83px] [font-family:'Inter-Regular',Helvetica] font-normal text-[#444444] text-[12.4px] tracking-[0] leading-[normal]">
-                      More no. of lines text and showing complete list of features like time stamp + check icon READ
+                      More no. of lines text and showing complete list of
+                      features like time stamp + check icon READ
                     </p>
                   </div>
                   <Image
                     className="absolute w-[37px] h-7 top-[75px] left-[202px]"
-                    alt="Rectangle"                    
+                    alt="Rectangle"
                     src={`${process.env.BASEPATH}/profile.png`}
                     width={37}
-                    height={28}  // Assuming height of 7rem translates to 28px
-                  />                </div>
+                    height={28} // Assuming height of 7rem translates to 28px
+                  />{" "}
+                </div>
                 <div className="top-[93px] left-[55px] inline-flex items-end absolute">
                   <div className="relative w-[16.53px] h-[5.79px]">
                     <div className="absolute -top-px left-0 [font-family:'Inter-Regular',Helvetica] font-normal text-[#888888] text-[8.3px] tracking-[0] leading-[normal] whitespace-nowrap">
@@ -193,7 +208,8 @@ const Chatbot = () => {
                   src={`${process.env.BASEPATH}/send-icon.svg`}
                   width={19}
                   height={19}
-                />              </div>
+                />{" "}
+              </div>
             </div>
           </div>
         </div>
@@ -203,4 +219,3 @@ const Chatbot = () => {
 };
 
 export default Chatbot;
-

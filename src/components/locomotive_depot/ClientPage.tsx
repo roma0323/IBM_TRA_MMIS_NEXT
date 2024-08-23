@@ -1,10 +1,9 @@
-
-'use client';
+"use client";
 
 import React, { useState } from "react";
 import { LabelAndNumberByArea } from "@/components/locomotive_depot/LabelAndNumberByArea";
-import SlideNavigation from '@/components/SlideNavigation';
-import BoardTitleSection from '@/components/BoardTitleSection';
+import SlideNavigation from "@/components/SlideNavigation";
+import BoardTitleSection from "@/components/BoardTitleSection";
 import TrainOverviewSection from "@/components/locomotive_depot/TrainOverviewSection";
 import MaintenanceDetailSection from "@/components/locomotive_depot/MaintenanceDetailSection";
 import { getSumStatusDetailListMultiplierZeorDeptParamCartypeParamQtypeParam } from "@/api/api";
@@ -15,20 +14,38 @@ const TrainPageContent: React.FC<FetcheGetSumStatusListData> = ({ Data }) => {
   const [selectedArea, setSelectedArea] = useState<string | null>("全部機務段");
   const [maintenanceData, setMaintenanceData] = useState<any[]>([]); // New state for maintenance data
   const areas = [
-    "全部機務段", "七堵機務段", "臺北機務段", "新竹機務段", "彰化機務段", "嘉義機務段", "高雄機務段", "花蓮機務段", "臺東機務段", "宜蘭機務分段"
+    "全部機務段",
+    "七堵機務段",
+    "臺北機務段",
+    "新竹機務段",
+    "彰化機務段",
+    "嘉義機務段",
+    "高雄機務段",
+    "花蓮機務段",
+    "臺東機務段",
+    "宜蘭機務分段",
   ];
 
   const handleLabelClick = (label: string, area: string) => {
     setSelectedLabel((prevLabel) =>
-      prevLabel === label && selectedArea === area ? null : label
+      prevLabel === label && selectedArea === area ? null : label,
     );
     setSelectedArea((prevArea) =>
-      prevArea === area && selectedLabel === label ? null : area
+      prevArea === area && selectedLabel === label ? null : area,
     );
   };
 
-  const handleTrainClick = async (dept: string, cartype: string, divData: string) => {
-    const data = await getSumStatusDetailListMultiplierZeorDeptParamCartypeParamQtypeParam(dept, cartype, divData)
+  const handleTrainClick = async (
+    dept: string,
+    cartype: string,
+    divData: string,
+  ) => {
+    const data =
+      await getSumStatusDetailListMultiplierZeorDeptParamCartypeParamQtypeParam(
+        dept,
+        cartype,
+        divData,
+      );
     setMaintenanceData(data);
   };
 
@@ -38,11 +55,12 @@ const TrainPageContent: React.FC<FetcheGetSumStatusListData> = ({ Data }) => {
       !selectedArea ||
       train.deptdesc.includes(selectedArea.replace("車輛配置", ""));
     const labelMatches =
-      selectedLabel === "All" || !selectedLabel || train.carcatalog === selectedLabel;
+      selectedLabel === "All" ||
+      !selectedLabel ||
+      train.carcatalog === selectedLabel;
 
     return areaMatches && labelMatches;
   });
-
 
   //handleMouseEnter and slide
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -53,7 +71,9 @@ const TrainPageContent: React.FC<FetcheGetSumStatusListData> = ({ Data }) => {
       if (direction === "left") {
         return prevIndex === 0 ? 0 : prevIndex - 1;
       } else if (direction === "right") {
-        return prevIndex >= totalSlides - visibleSlides ? prevIndex : prevIndex + 1;
+        return prevIndex >= totalSlides - visibleSlides
+          ? prevIndex
+          : prevIndex + 1;
       }
       return prevIndex;
     });
@@ -78,7 +98,9 @@ const TrainPageContent: React.FC<FetcheGetSumStatusListData> = ({ Data }) => {
                   <LabelAndNumberByArea
                     key={area}
                     area_name={area}
-                    onLabelClick={(label) => handleLabelClick(label, area)} />))}
+                    onLabelClick={(label) => handleLabelClick(label, area)}
+                  />
+                ))}
               </div>
             }
           />
@@ -94,15 +116,20 @@ const TrainPageContent: React.FC<FetcheGetSumStatusListData> = ({ Data }) => {
         />
 
         {/* Third Div */}
-        <MaintenanceDetailSection
-          maintenanceData={maintenanceData}
-        />
+        <MaintenanceDetailSection maintenanceData={maintenanceData} />
       </div>
-      <SlideNavigation direction="left" onHover={handleMouseEnter} isVisible={canMoveLeft} />
-      <SlideNavigation direction="right" onHover={handleMouseEnter} isVisible={canMoveRight} />
+      <SlideNavigation
+        direction="left"
+        onHover={handleMouseEnter}
+        isVisible={canMoveLeft}
+      />
+      <SlideNavigation
+        direction="right"
+        onHover={handleMouseEnter}
+        isVisible={canMoveRight}
+      />
     </div>
   );
 };
-
 
 export default TrainPageContent;

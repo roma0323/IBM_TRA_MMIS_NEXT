@@ -1,15 +1,15 @@
-import type { Config } from "tailwindcss"
-const { fontFamily } = require("tailwindcss/defaultTheme")
+import type { Config } from "tailwindcss";
+const { fontFamily } = require("tailwindcss/defaultTheme");
 
 const config = {
   darkMode: ["class"],
   content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
-    "./src/**/*.{html,js,ts,jsx,tsx}"
-	],
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
+    "./src/**/*.{html,js,ts,jsx,tsx}",
+  ],
   prefix: "",
   theme: {
     container: {
@@ -22,10 +22,9 @@ const config = {
     extend: {
       gridTemplateColumns: {
         // Custom 18 column grid
-        '17': 'repeat(17, minmax(0, 1fr))',
+        "17": "repeat(17, minmax(0, 1fr))",
       },
       colors: {
-        
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -123,6 +122,6 @@ const config = {
     },
   },
   plugins: [require("tailwindcss-animate")],
-} satisfies Config
+} satisfies Config;
 
-export default config
+export default config;

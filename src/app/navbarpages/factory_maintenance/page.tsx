@@ -3,30 +3,40 @@ import { getFacRepairYearPlan } from "@/api/api";
 import { factoryMaintenanceDataSetByfactory } from "@/types/type"; // Update the import path as needed
 
 const departmentNames: { [key: string]: string } = {
-  "MXY00": "潮州",
-  "MZY00": "花蓮",
-  "WAY00": "富岡"
+  MXY00: "潮州",
+  MZY00: "花蓮",
+  WAY00: "富岡",
 };
 const monthNames = [
-  "January", "February", "March", "April", "May", "June",
-  "July", "August", "September", "October", "November", "December"
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
 ];
 
 async function getData() {
   try {
-    const data = await getFacRepairYearPlan()    
+    const data = await getFacRepairYearPlan();
 
     // Function to transform the dataset for better readability
     const transformData = (dataset: factoryMaintenanceDataSetByfactory) => {
       // Create an array of objects for each month
       const monthData = monthNames.map((month, index) => {
-        const monthIndex = (index + 1).toString().padStart(2, '0');
+        const monthIndex = (index + 1).toString().padStart(2, "0");
         return {
           name: month,
           當月預計: dataset[`${monthIndex}_PLAN`],
           當月達成: dataset[`${monthIndex}_ACT`],
           累積預計: dataset[`${monthIndex}_YTD_SUM_PLAN`],
-          累積達成: dataset[`${monthIndex}_YTD_SUM_ACT`]
+          累積達成: dataset[`${monthIndex}_YTD_SUM_ACT`],
         };
       });
 
@@ -39,7 +49,7 @@ async function getData() {
         year: dataset.year,
         infaccnt: dataset.infaccnt,
         departmentName: departmentName,
-        monthData: monthData
+        monthData: monthData,
       };
     };
 
@@ -55,7 +65,5 @@ async function getData() {
 
 export default async function Page() {
   const data = await getData();
-  return (
-      <ClientPage Data={data} />
-  );
+  return <ClientPage Data={data} />;
 }

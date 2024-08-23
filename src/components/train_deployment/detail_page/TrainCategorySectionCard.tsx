@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import { DataCard } from "@/components/train_deployment/DataCard";
 
 type MyComponentProps = {
@@ -7,9 +7,15 @@ type MyComponentProps = {
   onClick: () => void;
   isActive: boolean;
   carcatalog: string; // Add the carcatalog prop
-}
+};
 
-const DeploymentByTrainCategory: React.FC<MyComponentProps> = ({ trainName, trainCount, onClick, isActive, carcatalog }) => {
+const DeploymentByTrainCategory: React.FC<MyComponentProps> = ({
+  trainName,
+  trainCount,
+  onClick,
+  isActive,
+  carcatalog,
+}) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const handleToggle = () => {
@@ -47,19 +53,16 @@ const DeploymentByTrainCategory: React.FC<MyComponentProps> = ({ trainName, trai
       color = "#397EFF";
   }
 
-
   return (
     <div
       className={`p-4 self-stretch   bg-[#3034380d] rounded-lg  cursor-pointer hover:shadow-lg
-        ${isActive ? 'border-l-4' : ''} flex-col justify-center relative`}
-      style={{ borderColor: isActive ? color : 'transparent' }}  // Apply dynamic border color here
+        ${isActive ? "border-l-4" : ""} flex-col justify-center relative`}
+      style={{ borderColor: isActive ? color : "transparent" }} // Apply dynamic border color here
       onClick={handleToggle}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="text-lg">
-        {trainName}
-      </div>
+      <div className="text-lg">{trainName}</div>
       <div className="flex w-full">
         <DataCard text="" text1="可用數" />
         <DataCard text="" text1="總輛數" />
