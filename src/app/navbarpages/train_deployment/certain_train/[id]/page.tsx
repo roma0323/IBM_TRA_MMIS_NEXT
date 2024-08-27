@@ -19,9 +19,9 @@ export function generateStaticParams() {
 }
 
 export default async function Page({ params }: PageProps) {
-  const decodedLastPart = decodeURIComponent(params.id);
+  const carcatalog = decodeURIComponent(params.id);
 
-  const data = await getSumStatusListAndCarcatalogEqualParam(decodedLastPart);
+  const data = await getSumStatusListAndCarcatalogEqualParam(carcatalog);
   if (data.data == null || data.data.length === 0) {
     data.data = [
       {

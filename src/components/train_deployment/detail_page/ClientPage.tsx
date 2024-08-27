@@ -71,10 +71,10 @@ const DetailClientPage: React.FC<FetcheGetSumStatusListData> = ({ Data }) => {
     setMaintenanceData(data);
   };
 
-  //mouse slide
   const cntSum = Data.reduce((acc, item) => acc + item.current_cnt, 0);
   const readySum = Data.reduce((acc, item) => acc + item.current_ready, 0);
-
+  
+  //mouse slide
   const [currentIndex, setCurrentIndex] = useState(0);
   const totalSlides = 5;
   const visibleSlides = 3;
