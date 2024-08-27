@@ -10,7 +10,7 @@ export default function DashboardLayout({
   return (
     <section className=" h-full overflow-hidden relative flex flex-col">
       <Navbar />
-      <Suspense fallback={<Loading />}>{children}</Suspense>
+      {children}
     </section>
   );
 }

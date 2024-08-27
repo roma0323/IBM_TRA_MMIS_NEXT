@@ -12,6 +12,12 @@ export async function getSumStatusListAndsumtotalEqualone(
   // Format the date as YYYY-MM-DD
   const formattedDate = qdate.toISOString().split("T")[0];
 
+  // Function to wait for a specified number of milliseconds
+  const wait = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+
+  // Wait for 2 seconds (2000 milliseconds) before proceeding
+  await wait(2000);
+
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getSumStatusList&qdate=${formattedDate}&sumtotal=1`,
     {

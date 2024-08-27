@@ -51,7 +51,6 @@ export function DatePickerForm() {
         window.location.pathname
       }?${currentParams.toString()}`;
 
-      // Navigate to the new URL
       window.location.href = newUrl;
     }
   };
