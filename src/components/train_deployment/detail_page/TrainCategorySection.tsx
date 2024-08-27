@@ -6,7 +6,6 @@ type TrainCategorySectionProps = {
   initialData: any[];
   trainData: { trainName: string; trainCount: number }[];
   selectedTrainName: string;
-  isDetailVisible: boolean;
   handleTrainClick: (trainName: string) => void;
   carcatalog: string; // Add the carcatalog prop
 };

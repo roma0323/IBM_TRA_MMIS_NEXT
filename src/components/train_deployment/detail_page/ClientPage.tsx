@@ -35,7 +35,7 @@ const DetailClientPage: React.FC<FetcheGetSumStatusListData> = ({ Data }) => {
       setTrainData(dynamicTrainData);
     };
     fetchTrainData();
-  }, [Data]); // Add an empty dependency array here
+  }, [Data]); 
 
   ///////////////////////////Have to be fix after backend refactor///////////////////////
   const handleTrainTypeClick = async (trainName: string) => {
@@ -112,7 +112,6 @@ const DetailClientPage: React.FC<FetcheGetSumStatusListData> = ({ Data }) => {
             initialData={Data}
             trainData={trainData}
             selectedTrainName={selectedTrainName}
-            isDetailVisible={isTrainDetailVisible}
             carcatalog={Data[0].carcatalog}
             handleTrainClick={handleTrainTypeClick} // Pass the handleTrainClick function
           />
