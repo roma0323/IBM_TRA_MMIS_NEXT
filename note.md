@@ -100,3 +100,9 @@ http://tra.webtw.xyz:8888/maximo/zz_data?method=getSumStatusList&qdate=2024-08-0
        
         css devide-y-2 or space-y-2 replace margin bottom
         cn()  to resue the board title
+
+        8/27週進度：    
+                color align
+                loading page
+                server component refacotr
+                deoplyment detail date function 
