@@ -1,4 +1,6 @@
 import React from "react";
+import { getCarColor } from "@/lib/getCarColor"; // Import the utility function
+
 import {
   CartesianGrid,
   XAxis,
@@ -8,68 +10,48 @@ import {
   ComposedChart,
   ResponsiveContainer,
 } from "recharts";
-const using_rate_data = [
-  { name: "1號", 本月: 45, 上個月: 50 },
-  { name: "2號", 本月: 30, 上個月: 32 },
-  { name: "3號", 本月: 35, 上個月: 44 },
-  { name: "4號", 本月: 34, 上個月: 39 },
-  { name: "5號", 本月: 31, 上個月: 44 },
-  { name: "6號", 本月: 47, 上個月: 52 },
-  { name: "7號", 本月: 34, 上個月: 34 },
-  { name: "8號", 本月: 39, 上個月: 44 },
-  { name: "9號", 本月: 31, 上個月: 36 },
-  { name: "10號", 本月: 50, 上個月: 55 },
-  { name: "11號", 本月: 48, 上個月: 33 },
-  { name: "12號", 本月: 32, 上個月: 37 },
-  { name: "13號", 本月: 45, 上個月: 30 },
-  { name: "14號", 本月: 43, 上個月: 48 },
-  { name: "15號", 本月: 42, 上個月: 47 },
-  { name: "16號", 本月: 44, 上個月: 39 },
-  { name: "17號", 本月: 44, 上個月: 49 },
-  { name: "18號", 本月: 33, 上個月: 38 },
-  { name: "19號", 本月: 36, 上個月: 31 },
-  { name: "20號", 本月: 46, 上個月: 31 },
-  { name: "21號", 本月: 45, 上個月: 50 },
-  { name: "22號", 本月: 32, 上個月: 57 },
-  { name: "23號", 本月: 46, 上個月: 51 },
-  { name: "24號", 本月: 44, 上個月: 49 },
-  { name: "25號", 本月: 32, 上個月: 37 },
-  { name: "26號", 本月: 47, 上個月: 52 },
-  { name: "27號", 本月: 44, 上個月: 49 },
-  { name: "28號", 本月: 38, 上個月: 43 },
-  { name: "29號", 本月: 36, 上個月: 41 },
-  { name: "30號", 本月: 34, 上個月: 40 },
-];
 // const using_rate_data = [
-//   null
+//   { name: "1號", 本月: 45, 上個月: 50 },
+//   { name: "2號", 本月: 30, 上個月: 32 },
+//   { name: "3號", 本月: 35, 上個月: 44 },
+//   { name: "4號", 本月: 34, 上個月: 39 },
+//   { name: "5號", 本月: 31, 上個月: 44 },
+//   { name: "6號", 本月: 47, 上個月: 52 },
+//   { name: "7號", 本月: 34, 上個月: 34 },
+//   { name: "8號", 本月: 39, 上個月: 44 },
+//   { name: "9號", 本月: 31, 上個月: 36 },
+//   { name: "10號", 本月: 50, 上個月: 55 },
+//   { name: "11號", 本月: 48, 上個月: 33 },
+//   { name: "12號", 本月: 32, 上個月: 37 },
+//   { name: "13號", 本月: 45, 上個月: 30 },
+//   { name: "14號", 本月: 43, 上個月: 48 },
+//   { name: "15號", 本月: 42, 上個月: 47 },
+//   { name: "16號", 本月: 44, 上個月: 39 },
+//   { name: "17號", 本月: 44, 上個月: 49 },
+//   { name: "18號", 本月: 33, 上個月: 38 },
+//   { name: "19號", 本月: 36, 上個月: 31 },
+//   { name: "20號", 本月: 46, 上個月: 31 },
+//   { name: "21號", 本月: 45, 上個月: 50 },
+//   { name: "22號", 本月: 32, 上個月: 57 },
+//   { name: "23號", 本月: 46, 上個月: 51 },
+//   { name: "24號", 本月: 44, 上個月: 49 },
+//   { name: "25號", 本月: 32, 上個月: 37 },
+//   { name: "26號", 本月: 47, 上個月: 52 },
+//   { name: "27號", 本月: 44, 上個月: 49 },
+//   { name: "28號", 本月: 38, 上個月: 43 },
+//   { name: "29號", 本月: 36, 上個月: 41 },
+//   { name: "30號", 本月: 34, 上個月: 40 },
 // ];
+const using_rate_data = [
+  null
+];
 
 export default function UseRateAreaChart({
   styleTemplate,
 }: {
   styleTemplate: string;
 }) {
-  let color = "";
-
-  if (styleTemplate === "城際列車") {
-    color = `#538164`;
-  } else if (styleTemplate === "電力機車") {
-    color = `#FFBB54`;
-  } else if (styleTemplate === "柴電機車") {
-    color = `#D9730D`;
-  } else if (styleTemplate === "柴液機車") {
-    color = `#C3554E`;
-  } else if (styleTemplate === "客車") {
-    color = `#00BBC7`;
-  } else if (styleTemplate === "柴油客車") {
-    color = `#9F8170`;
-  } else if (styleTemplate === "貨車") {
-    color = `#8F65AF`;
-  } else if (styleTemplate === "通勤列車") {
-    color = `#28BF02`;
-  } else {
-    color = "#397EFF";
-  }
+  let color = getCarColor(styleTemplate);
 
   return (
     <ResponsiveContainer width="100%" height="100%">

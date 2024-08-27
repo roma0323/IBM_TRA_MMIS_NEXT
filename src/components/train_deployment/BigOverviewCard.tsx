@@ -1,6 +1,7 @@
 import React from "react";
 import UseRateAreaChart from "@/components/train_deployment/UseRateAreaChart";
 import { FetcheGetSumStatusListDataInArray } from "@/types/type";
+import BoardTitleSection from "@/components/BoardTitleSection"; // Import the Section component
 
 const DEFAULT_TRAIN_DATA: FetcheGetSumStatusListDataInArray = {
   carcatalog: "Unknown",
@@ -32,41 +33,41 @@ export const BigOverviewCard = ({
 }): JSX.Element => {
   return (
     <div className=" relative size-full  bg-white flex flex-col rounded-lg  hover:shadow-lg">
-      <div className=" text-[#397EFF] p-2.5  border-b  border-[#646464]">
-        {Name}
-      </div>
-
-      <div className="flex flex-grow overflow-auto py-6  px-10 relative ">
-        <div className="flex-col flex  justify-around w-1/4 ">
-          <div>
-            <div className="text-6xl">{Data.current_ready}</div>
-            <div>可用數</div>
-          </div>
-          <div>
-            <div className="text-6xl">{Data.current_cnt}</div>
-            <div> 總輛數</div>
-          </div>
-          <div>
-            <div className="text-6xl">
-              {" "}
-              {`${Math.round((Data.current_ready / Data.current_cnt) * 100).toString()}%`}
+      <BoardTitleSection
+        title={`${Name}`}
+        content={
+          <div className="size-full flex  py-6  px-10">
+            <div className="flex-col flex  justify-around w-1/4  ">
+              <div>
+              <div className="text-5xl">{Data.current_ready}</div>
+              <div>可用數</div>
             </div>
-            <div> 可用率</div>
+            <div>
+              <div className="text-5xl">{Data.current_cnt}</div>
+              <div> 總輛數</div>
+            </div>
+            <div>
+              <div className="text-5xl">
+                {`${Math.round((Data.current_ready / Data.current_cnt) * 100).toString()}%`}
+              </div>
+              <div> 可用率</div>
+            </div>
+            </div>
+            <div className="flex flex-col items-center justify-start">
+              <p className="text-center">
+                <span className="block">30</span>
+                <span className="block">日</span>
+                <span className="block">使</span>
+                <span className="block">用</span>
+                <span className="block">率</span>
+              </p>
+            </div>
+            <div className="w-3/4">
+              <UseRateAreaChart styleTemplate={Name} />
+            </div>
           </div>
-        </div>
-        <div className="flex flex-col items-center justify-start">
-          <p className="text-center">
-            <span className="block">30</span>
-            <span className="block">日</span>
-            <span className="block">使</span>
-            <span className="block">用</span>
-            <span className="block">率</span>
-          </p>
-        </div>
-        <div className="w-3/4">
-          <UseRateAreaChart styleTemplate="" />
-        </div>
-      </div>
+        }
+      />
     </div>
   );
 };

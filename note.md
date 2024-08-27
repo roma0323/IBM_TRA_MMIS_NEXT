@@ -93,15 +93,10 @@ http://tra.webtw.xyz:8888/maximo/zz_data?method=getSumStatusList&qdate=2024-08-0
         unnessary client component to server
         can detch same data different plaec, dont pass to many layers(autually onyl fetch once)
         use promise : if fetch two source seqenail  would cause waterfall
-        deploymeny use searchparams or params
+        deployment use searchparams or params
         suspense right place : suspense must one layer higher then it work
         suspense with key={searchParams}!!!!!
 
-        ○ (Static) prerendered as static content (dont need rerender afterward)
-        ● (SSG) prerendered as static HTML (uses getStaticProps)
-        ƒ (Dynamic) server-rendered on demand: use pamaras (not effcient)
-
-
-        how shadcn use color
+       
+        css devide-y-2 or space-y-2 replace margin bottom
         cn()  to resue the board title
-        try align css color (theme)
