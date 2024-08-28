@@ -1,11 +1,11 @@
 "use client";
-import React, { useState, useEffect, Suspense } from "react";
+import React, { useState, } from "react";
+import { useSearchParams } from 'next/navigation';
 import DataSection from "@/components/train_deployment/detail_page/DataSection";
 import TrainCategorySection from "@/components/train_deployment/detail_page/TrainCategorySection";
 import SlideNavigation from "@/components//SlideNavigation";
 import TrainOverviewSection from "@/components/locomotive_depot/TrainOverviewSection";
 import MaintenanceDetailSection from "@/components/locomotive_depot/MaintenanceDetailSection";
-import Loading from "@/components/Loading";
 import { getSumStatusListAndMultiplierEqualZeorCarcatalogEqualParamCartypeEqualTrainname } from "@/api/api";
 import { getSumStatusDetailListMultiplierZeorDeptParamCartypeParamQtypeParam } from "@/api/api";
 import { getSumStatusListEq3Param } from "@/api/api";
@@ -15,6 +15,8 @@ const DetailClientPage: React.FC<FetcheGetSumStatusListData> = ({ Data }) => {
   const [selectedTrainName, setSelectedTrainName] = useState("");
   const [maintenanceData, setMaintenanceData] = useState<any[]>([]);
   const [filteredTrainData, setFilteredTrainData] = useState<any[]>([]);
+  const searchParams = useSearchParams()
+  const date = searchParams?.get('date') || '';
   const cntSum = Data.reduce((acc, item) => acc + item.current_cnt, 0);
   const readySum = Data.reduce((acc, item) => acc + item.current_ready, 0);
   const handleTrainTypeClick = async (trainName: string) => {
@@ -24,12 +26,13 @@ const DetailClientPage: React.FC<FetcheGetSumStatusListData> = ({ Data }) => {
     setSelectedTrainName(trainName);
     let fetchedData;
     if (Data[0].carcatalog === "客車") {
-      fetchedData = await getSumStatusListEq3Param(trainName);
+      fetchedData = await getSumStatusListEq3Param(trainName,date);
     } else {
       fetchedData =
         await getSumStatusListAndMultiplierEqualZeorCarcatalogEqualParamCartypeEqualTrainname(
           Data[0].carcatalog,
-          trainName
+          trainName,
+          date
         );
     }
     setFilteredTrainData(fetchedData.data);
@@ -44,7 +47,8 @@ const DetailClientPage: React.FC<FetcheGetSumStatusListData> = ({ Data }) => {
       await getSumStatusDetailListMultiplierZeorDeptParamCartypeParamQtypeParam(
         dept,
         cartype,
-        divData
+        divData,
+        date
       );
     setMaintenanceData(data);
   };

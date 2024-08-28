@@ -104,13 +104,12 @@ http://tra.webtw.xyz:8888/maximo/zz_data?method=getSumStatusList&qdate=2024-08-0
         </Suspense>
         );
         }
-
-       
         css devide-y-2 or space-y-2 replace margin bottom
         cn()  to resue the board title
+        make every waiting have loading 
 
         8/27週進度：    
                 color align
                 loading page
                 server component refacotr
-                deoplyment detail date function 
+                date function deoplyment detail /depot 

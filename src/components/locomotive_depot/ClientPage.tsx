@@ -8,11 +8,14 @@ import TrainOverviewSection from "@/components/locomotive_depot/TrainOverviewSec
 import MaintenanceDetailSection from "@/components/locomotive_depot/MaintenanceDetailSection";
 import { getSumStatusDetailListMultiplierZeorDeptParamCartypeParamQtypeParam } from "@/api/api";
 import { FetcheGetSumStatusListData } from "@/types/type"; // Update the import path as needed
+import { useSearchParams } from "next/navigation";
 
 const TrainPageContent: React.FC<FetcheGetSumStatusListData> = ({ Data }) => {
   const [selectedLabel, setSelectedLabel] = useState<string | null>("All");
   const [selectedArea, setSelectedArea] = useState<string | null>("全部機務段");
   const [maintenanceData, setMaintenanceData] = useState<any[]>([]); // New state for maintenance data
+  const searchParams = useSearchParams()
+  const date = searchParams?.get('date') || '';
   const areas = [
     "全部機務段",
     "七堵機務段",
@@ -45,6 +48,7 @@ const TrainPageContent: React.FC<FetcheGetSumStatusListData> = ({ Data }) => {
         dept,
         cartype,
         divData,
+        date
       );
     setMaintenanceData(data);
   };
