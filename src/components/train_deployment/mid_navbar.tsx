@@ -43,7 +43,13 @@ const MidNavbar: React.FC = () => {
   }
 
   const handleSelect = (value: string) => {
-    router.push(`/navbarpages/train_deployment?type=${value}&date=${date}`);
+    router.replace(`/navbarpages/train_deployment?type=${value}&date=${date}`);
+    // const newUrl = `${window.location.origin}${
+    //   window.location.pathname
+    // }?${currentParams.toString()}`;
+
+    // window.location.href = `/navbarpages/train_deployment?type=${value}&date=${date}`;
+
   };
 
   return (
@@ -69,11 +75,9 @@ const MidNavbar: React.FC = () => {
         </Select>
         {trainTypes.map((train) => (
           <Link
-            href={{
-              pathname: `/navbarpages/train_deployment/certain_train/${train.name}`,
-            }}
-            className={`link ${decodedLastPart === train.name ? "mid_nav_active" : "mid_nav_unactive"}`}
-            key={train.id}
+          href={`/navbarpages/train_deployment/certain_train/${train.name}?date=${date}`}
+          className={`link ${decodedLastPart === train.name ? "mid_nav_active" : "mid_nav_unactive"}`}
+          key={train.id}
           >
             <div className="inline-flex h-10 items-center px-4">
               {train.name}

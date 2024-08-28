@@ -22,7 +22,7 @@ export function DatePickerForm() {
   const dateFromURL = searchParams?.get("date");
   const initialDate = dateFromURL
     ? parse(dateFromURL, "yyyy-MM-dd", new Date())
-    : undefined;
+    : new Date();
 
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(
     initialDate

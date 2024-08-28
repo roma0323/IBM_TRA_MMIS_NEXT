@@ -13,6 +13,7 @@ export async function getSumStatusListAndsumtotalEqualone(
 ): Promise<FetcheGetSumStatusList> {
 
   let formattedDate =dateFormat(date)
+  console.log(formattedDate,'formattedDate')
 
   const wait = (ms: number) =>
     new Promise((resolve) => setTimeout(resolve, ms));
@@ -37,13 +38,14 @@ export async function getSumStatusListAndCarcatalogEqualParam(
   date?: string
 ) {
   let formattedDate =dateFormat(date)
+  console.log(formattedDate,'formattedDate')
 
 
   const wait = (ms: number) =>
     new Promise((resolve) => setTimeout(resolve, ms));
   await wait(2000);
 
-  
+
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getSumStatusList&qdate=${formattedDate}&carcatalog=${id}`,
     {
