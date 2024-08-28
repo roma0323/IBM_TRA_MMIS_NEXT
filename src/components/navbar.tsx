@@ -18,22 +18,22 @@ const Navbar: React.FC = () => {
       startsWith: "/navbarpages/train_deployment",
     },
     {
-      href: `/navbarpages/locomotive_depot?date=${currentDate}`,
+      href: `/navbarpages/locomotive_depot`,
       label: "機務段配置資訊",
       startsWith: "/navbarpages/locomotive_depot",
     },
     {
-      href: `/navbarpages/factory_maintenance?date=${currentDate}`,
+      href: `/navbarpages/factory_maintenance`,
       label: "機廠檢修資訊",
       startsWith: "/navbarpages/factory_maintenance",
     },
     {
-      href: `/navbarpages/fault_notification?date=${currentDate}`,
+      href: `/navbarpages/fault_notification`,
       label: "故障通報",
       startsWith: "/navbarpages/fault_notification",
     },
     {
-      href: `/navbarpages/maintenance_materials?date=${currentDate}`,
+      href: `/navbarpages/maintenance_materials`,
       label: "庫存績效",
       startsWith: "/navbarpages/inventory_performance",
     },
