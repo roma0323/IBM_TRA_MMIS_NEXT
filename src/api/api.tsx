@@ -1,21 +1,21 @@
 import { FetcheGetSumStatusList } from "@/types/type"; // Update the import path as needed
-
-export async function getSumStatusListAndsumtotalEqualone(
-  date?: string,
-): Promise<FetcheGetSumStatusList> {
-  // If no date is provided, use the current date
+function dateFormat(date?: string) {
   let qdate = date ? new Date(date) : new Date();
-
   // Subtract one day from the date
   qdate.setDate(qdate.getDate() - 1);
-
   // Format the date as YYYY-MM-DD
   const formattedDate = qdate.toISOString().split("T")[0];
+  return formattedDate;
+}
 
-  // Function to wait for a specified number of milliseconds
-  const wait = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+export async function getSumStatusListAndsumtotalEqualone(
+  date?: string
+): Promise<FetcheGetSumStatusList> {
 
-  // Wait for 2 seconds (2000 milliseconds) before proceeding
+  let formattedDate =dateFormat(date)
+
+  const wait = (ms: number) =>
+    new Promise((resolve) => setTimeout(resolve, ms));
   await wait(2000);
 
   const res = await fetch(
@@ -26,35 +26,42 @@ export async function getSumStatusListAndsumtotalEqualone(
         Accept: "application/json, text/plain, */*",
         "Content-Type": "application/json",
       },
-    },
+    }
   );
 
   return res.json();
 }
 
-export async function getSumStatusListAndCarcatalogEqualParam(id: String) {
-  const wait = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+export async function getSumStatusListAndCarcatalogEqualParam(
+  id: String,
+  date?: string
+) {
+  let formattedDate =dateFormat(date)
 
-  // Wait for 2 seconds (2000 milliseconds) before proceeding
+
+  const wait = (ms: number) =>
+    new Promise((resolve) => setTimeout(resolve, ms));
   await wait(2000);
+
+  
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getSumStatusList&qdate=2024-08-04&carcatalog=${id}`,
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getSumStatusList&qdate=${formattedDate}&carcatalog=${id}`,
     {
       method: "POST",
       headers: {
         Accept: "application/json, text/plain, */*",
         "Content-Type": "application/json",
       },
-    },
+    }
   );
   return res.json();
 }
 
 export async function getCarTypeListAndCarcatalogEqualParam(id: String) {
-  const wait = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+  // const wait = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
   // Wait for 2 seconds (2000 milliseconds) before proceeding
-  await wait(2000);
+  // await wait(2000);
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getCarTypeList&carcatalog=${id}`,
     {
@@ -63,19 +70,19 @@ export async function getCarTypeListAndCarcatalogEqualParam(id: String) {
         Accept: "application/json, text/plain, */*",
         "Content-Type": "application/json",
       },
-    },
+    }
   );
   return res.json();
 }
 
 export async function getSumStatusListAndMultiplierEqualZeorCarcatalogEqualParamCartypeEqualTrainname(
   id: String,
-  trainName: String,
+  trainName: String
 ) {
-  const wait = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+  // const wait = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
   // Wait for 2 seconds (2000 milliseconds) before proceeding
-  await wait(2000);
+  // await wait(2000);
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getSumStatusList&multiplier=0&qdate=2024-08-04&carcatalog=${id}&cartype=${trainName}`,
     {
@@ -84,7 +91,7 @@ export async function getSumStatusListAndMultiplierEqualZeorCarcatalogEqualParam
         Accept: "application/json, text/plain, */*",
         "Content-Type": "application/json",
       },
-    },
+    }
   );
   return res.json();
 }
@@ -92,12 +99,12 @@ export async function getSumStatusListAndMultiplierEqualZeorCarcatalogEqualParam
 export async function getSumStatusDetailListMultiplierZeorDeptParamCartypeParamQtypeParam(
   dept: String,
   cartype: String,
-  qtype: string,
+  qtype: string
 ) {
-  const wait = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+  // const wait = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
   // Wait for 2 seconds (2000 milliseconds) before proceeding
-  await wait(2000);
+  // await wait(2000);
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getSumStatusDetailList&multiplier=0&dept=${dept}&cartype=${cartype}&qtype=${qtype}&qdate=2024-08-04`,
     {
@@ -106,12 +113,13 @@ export async function getSumStatusDetailListMultiplierZeorDeptParamCartypeParamQ
         Accept: "application/json, text/plain, */*",
         "Content-Type": "application/json",
       },
-    },
+    }
   );
   return res.json();
 }
 export async function getSumStatusDetailListMultiplierZeor(): Promise<FetcheGetSumStatusList> {
-  const wait = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+  const wait = (ms: number) =>
+    new Promise((resolve) => setTimeout(resolve, ms));
 
   // Wait for 2 seconds (2000 milliseconds) before proceeding
   await wait(2000);
@@ -123,13 +131,14 @@ export async function getSumStatusDetailListMultiplierZeor(): Promise<FetcheGetS
         Accept: "application/json, text/plain, */*",
         "Content-Type": "application/json",
       },
-    },
+    }
   );
   return res.json();
 }
 
 export async function getFacRepairYearPlan() {
-  const wait = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+  const wait = (ms: number) =>
+    new Promise((resolve) => setTimeout(resolve, ms));
 
   // Wait for 2 seconds (2000 milliseconds) before proceeding
   await wait(2000);
@@ -141,13 +150,14 @@ export async function getFacRepairYearPlan() {
         Accept: "application/json, text/plain, */*",
         "Content-Type": "application/json",
       },
-    },
+    }
   );
   return res.json();
 }
 
 export async function getSumStatusListEq3Param(trainName: String) {
-  const wait = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+  const wait = (ms: number) =>
+    new Promise((resolve) => setTimeout(resolve, ms));
 
   // Wait for 2 seconds (2000 milliseconds) before proceeding
   await wait(2000);
@@ -160,7 +170,7 @@ export async function getSumStatusListEq3Param(trainName: String) {
         Accept: "application/json, text/plain, */*",
         "Content-Type": "application/json",
       },
-    },
+    }
   );
   return res.json();
 }

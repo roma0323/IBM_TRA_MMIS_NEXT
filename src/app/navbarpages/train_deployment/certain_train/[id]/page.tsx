@@ -4,6 +4,7 @@ import React, { Suspense } from "react";
 
 interface PageProps {
   params: any;
+  searchParams: any;
 }
 export function generateStaticParams() {
   return [
@@ -17,10 +18,11 @@ export function generateStaticParams() {
   ];
 }
 
-export default async function Page({ params }: PageProps) {
+export default async function Page({ params ,searchParams}: PageProps) {
   const carcatalog = decodeURIComponent(params.id);
+  const date = searchParams.date;
 
-  const data = await getSumStatusListAndCarcatalogEqualParam(carcatalog);
+  const data = await getSumStatusListAndCarcatalogEqualParam(carcatalog,date);
   if (data.data == null || data.data.length === 0) {
     data.data = [
       {
