@@ -96,6 +96,14 @@ http://tra.webtw.xyz:8888/maximo/zz_data?method=getSumStatusList&qdate=2024-08-0
         deployment use searchparams or params
         suspense right place : suspense must one layer higher then it work
         suspense with key={searchParams}!!!!!
+        單個檔案suspense包
+        export default function Page() {
+        return (
+        <Suspense fallback={<div>Loading...</div>}>
+        <MidNavbar />
+        </Suspense>
+        );
+        }
 
        
         css devide-y-2 or space-y-2 replace margin bottom

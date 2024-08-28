@@ -13,7 +13,6 @@ export async function getSumStatusListAndsumtotalEqualone(
 ): Promise<FetcheGetSumStatusList> {
 
   let formattedDate =dateFormat(date)
-  console.log(formattedDate,'formattedDate')
 
   const wait = (ms: number) =>
     new Promise((resolve) => setTimeout(resolve, ms));
@@ -38,7 +37,6 @@ export async function getSumStatusListAndCarcatalogEqualParam(
   date?: string
 ) {
   let formattedDate =dateFormat(date)
-  console.log(formattedDate,'formattedDate')
 
 
   const wait = (ms: number) =>
@@ -119,14 +117,16 @@ export async function getSumStatusDetailListMultiplierZeorDeptParamCartypeParamQ
   );
   return res.json();
 }
-export async function getSumStatusDetailListMultiplierZeor(): Promise<FetcheGetSumStatusList> {
+export async function getSumStatusDetailListMultiplierZeor(  date?: string): Promise<FetcheGetSumStatusList> {
+  let formattedDate =dateFormat(date)
+  console.log(formattedDate)
   const wait = (ms: number) =>
     new Promise((resolve) => setTimeout(resolve, ms));
 
   // Wait for 2 seconds (2000 milliseconds) before proceeding
   await wait(2000);
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getSumStatusList&multiplier=0&dept=&qdate=2024-08-04`,
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getSumStatusList&multiplier=0&dept=&qdate=${formattedDate}`,
     {
       method: "POST",
       headers: {
