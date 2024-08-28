@@ -1,5 +1,6 @@
 import MidNavbar from "@/components/locomotive_depot/mid_navbar";
-
+import React, { Suspense } from "react";
+import Loading from "@/components/Loading";
 export default function DashboardLayout({
   children,
 }: {
@@ -8,7 +9,7 @@ export default function DashboardLayout({
   return (
     <section className="grow overflow-hidden relative flex flex-col">
       <MidNavbar />
-      {children}
+      <Suspense fallback={<Loading />}>{children}</Suspense>
     </section>
   );
 }
