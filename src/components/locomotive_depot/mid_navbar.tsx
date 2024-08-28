@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import Link from "next/link";
 import { DatePickerForm } from "@/components/ui/date_picker";
 
@@ -24,8 +24,8 @@ const MidNavbar: React.FC = () => {
 
 export default function Page() {
   return (
-    // <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<div>Loading...</div>}>
       <MidNavbar />
-    // </Suspense>
+     </Suspense>
   );
 }
