@@ -33,6 +33,10 @@ export async function getSumStatusListAndsumtotalEqualone(
 }
 
 export async function getSumStatusListAndCarcatalogEqualParam(id: String) {
+  const wait = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+
+  // Wait for 2 seconds (2000 milliseconds) before proceeding
+  await wait(2000);
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getSumStatusList&qdate=2024-08-04&carcatalog=${id}`,
     {
@@ -47,6 +51,10 @@ export async function getSumStatusListAndCarcatalogEqualParam(id: String) {
 }
 
 export async function getCarTypeListAndCarcatalogEqualParam(id: String) {
+  const wait = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+
+  // Wait for 2 seconds (2000 milliseconds) before proceeding
+  await wait(2000);
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getCarTypeList&carcatalog=${id}`,
     {
@@ -64,6 +72,10 @@ export async function getSumStatusListAndMultiplierEqualZeorCarcatalogEqualParam
   id: String,
   trainName: String,
 ) {
+  const wait = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+
+  // Wait for 2 seconds (2000 milliseconds) before proceeding
+  await wait(2000);
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getSumStatusList&multiplier=0&qdate=2024-08-04&carcatalog=${id}&cartype=${trainName}`,
     {
@@ -82,6 +94,10 @@ export async function getSumStatusDetailListMultiplierZeorDeptParamCartypeParamQ
   cartype: String,
   qtype: string,
 ) {
+  const wait = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+
+  // Wait for 2 seconds (2000 milliseconds) before proceeding
+  await wait(2000);
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getSumStatusDetailList&multiplier=0&dept=${dept}&cartype=${cartype}&qtype=${qtype}&qdate=2024-08-04`,
     {
@@ -95,6 +111,10 @@ export async function getSumStatusDetailListMultiplierZeorDeptParamCartypeParamQ
   return res.json();
 }
 export async function getSumStatusDetailListMultiplierZeor(): Promise<FetcheGetSumStatusList> {
+  const wait = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+
+  // Wait for 2 seconds (2000 milliseconds) before proceeding
+  await wait(2000);
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getSumStatusList&multiplier=0&dept=&qdate=2024-08-04`,
     {
@@ -109,6 +129,10 @@ export async function getSumStatusDetailListMultiplierZeor(): Promise<FetcheGetS
 }
 
 export async function getFacRepairYearPlan() {
+  const wait = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+
+  // Wait for 2 seconds (2000 milliseconds) before proceeding
+  await wait(2000);
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getFacRepairYearPlan&year=2024`,
     {
@@ -123,6 +147,10 @@ export async function getFacRepairYearPlan() {
 }
 
 export async function getSumStatusListEq3Param(trainName: String) {
+  const wait = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+
+  // Wait for 2 seconds (2000 milliseconds) before proceeding
+  await wait(2000);
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getSumStatusList&eq3=${trainName}&qdate=2024-08-19
 `,
