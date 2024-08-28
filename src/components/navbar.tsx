@@ -40,14 +40,14 @@ const Navbar: React.FC = () => {
   ];
 
   return (
-    <div className="flex h-[8dvh] w-full items-center gap-3 px-5 py-3">
+    <div className="flex h-fit w-full items-center  gap-3 pr-6">
       <Link href="/">
         <Image
-          className="relative hover:scale-110"
+          className=" relative hover:scale-110"
           alt="IBM Logo"
           src="/ibm-logo-frame.svg"
-          width={64}
-          height={64}
+          width={112}
+          height={96}
         />
       </Link>
       <div className="flex-1" />
@@ -62,9 +62,9 @@ const Navbar: React.FC = () => {
           </div>
         </Link>
       ))}
-      <div className="flex w-[54px] items-center justify-center p-1 bg-neutral-100 rounded-2xl">
+      {/* <div className="flex w-[54px] items-center justify-center p-1 bg-neutral-100 rounded-2xl">
         <ModeToggle />
-      </div>
+      </div> */}
     </div>
   );
 };
