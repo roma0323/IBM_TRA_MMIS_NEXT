@@ -22,13 +22,11 @@ const monthNames = [
   "December",
 ];
 
-async function getData() {
+async function getData(yearString?: string) {
   try {
-    const data = await getFacRepairYearPlan();
+    const data = await getFacRepairYearPlan(yearString);
 
-    // Function to transform the dataset for better readability
     const transformData = (dataset: factoryMaintenanceDataSetByfactory) => {
-      // Create an array of objects for each month
       const monthData = monthNames.map((month, index) => {
         const monthIndex = (index + 1).toString().padStart(2, "0");
         return {
@@ -40,10 +38,8 @@ async function getData() {
         };
       });
 
-      // Determine the department name based on deptid
       const departmentName = departmentNames[dataset.deptid] || "全部";
 
-      // Return an object that includes deptid, year, infaccnt, departmentName, and the month data
       return {
         deptid: dataset.deptid,
         year: dataset.year,
@@ -63,7 +59,16 @@ async function getData() {
   }
 }
 
-export default async function Page() {
-  const data = await getData();
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: { date?: string ,type?:string};
+}) {
+  const dateString = searchParams.date || ""; 
+  const date = new Date(dateString);
+  const year = date.getFullYear();
+  const yearString = year.toString();
+
+  const data = await getData(yearString);
   return <ClientPage Data={data} />;
 }

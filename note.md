@@ -111,6 +111,7 @@ http://tra.webtw.xyz:8888/maximo/zz_data?method=getSumStatusList&qdate=2024-08-0
         // select for overview 
         seems like different path  work 
         try Navigation Menu
+        make home page to three componenet , fetch data in side , suspense it 
 
         8/27週進度：    
                 color align

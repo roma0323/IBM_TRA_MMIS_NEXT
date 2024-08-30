@@ -7,7 +7,7 @@ export default async function Page({
 }: {
   searchParams: { date?: string ,type?:string};
 }) {
-  const date = searchParams.date || ""; // Get the 'date' parameter from the URL or set a default
+  const date = searchParams.date || ""; 
 
   // Fetch data based on the current date
   const fetchedData = await getSumStatusListAndsumtotalEqualone(date);
