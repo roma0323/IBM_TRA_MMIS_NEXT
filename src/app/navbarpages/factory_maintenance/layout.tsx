@@ -1,5 +1,6 @@
 import MidNavbar from "@/components/MidNavbar";
-
+import React, { Suspense } from "react";
+import Loading from "@/components/Loading";
 export default function DashboardLayout({
   children,
 }: {
@@ -14,8 +15,8 @@ export default function DashboardLayout({
   ];
   return (
     <section className="flex-grow flex flex-col relative">
-      <MidNavbar navItems={navItems} />
-      {children}
+      <Suspense fallback={<div>MidNavBar Loading...</div>}><MidNavbar navItems={navItems} /></Suspense>
+      <Suspense fallback={<Loading />}>{children}</Suspense>
     </section>
   );
 }

@@ -13,7 +13,7 @@ export default function DashboardLayout({
   ];
   return (
     <section className="grow overflow-hidden relative flex flex-col">
-      <MidNavbar navItems={navItems} />
+      <Suspense fallback={<div>MidNavBar Loading...</div>}><MidNavbar navItems={navItems} /></Suspense>
       <Suspense fallback={<Loading />}>{children}</Suspense>
     </section>
   );
