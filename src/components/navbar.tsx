@@ -13,7 +13,7 @@ const Navbar: React.FC = () => {
 
   const navLinks = [
     {
-      href: `/navbarpages/train_deployment?type=all`,
+      href: `/navbarpages/train_deployment/all_overview`,
       label: "車輛配置資訊",
       startsWith: "/navbarpages/train_deployment",
     },

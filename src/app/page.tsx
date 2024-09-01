@@ -7,7 +7,7 @@ import Link from "next/link";
 
 const navigationData = [
   {
-    href: `/navbarpages/train_deployment?type=all`,
+    href: `/navbarpages/train_deployment/all_overview`,
     logoClassName: `${process.env.BASEPATH}/icon-train-deployment.png`,
     text: "車輛配置資訊",
     text1: "各區段、車型資料、可用率儀表板",

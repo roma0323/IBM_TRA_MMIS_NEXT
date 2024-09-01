@@ -25,14 +25,14 @@ const DEFAULT_TRAIN_DATA: FetcheGetSumStatusListDataInArray = {
   availability: 1.0,
 };
 export const BigOverviewCard = ({
-  Name = "Unknown Train", // Set the default value for Name
-  Data = DEFAULT_TRAIN_DATA, // Set the default value for Data
+  Name = "Unknown Train", 
+  Data = DEFAULT_TRAIN_DATA, 
 }: {
-  Name?: string; // Make Name optional and allow it to have a default value
-  Data?: FetcheGetSumStatusListDataInArray; // Make Data optional and allow it to have a default value
+  Name?: string; 
+  Data?: FetcheGetSumStatusListDataInArray; 
 }): JSX.Element => {
   return (
-    <div className=" relative size-full  bg-white flex flex-col rounded-lg  hover:shadow-lg">
+    <div className=" relative size-full  bg-white flex flex-col rounded-lg  ">
       <BoardTitleSection
         title={`${Name}`}
         content={

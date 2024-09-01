@@ -112,7 +112,7 @@ http://tra.webtw.xyz:8888/maximo/zz_data?method=getSumStatusList&qdate=2024-08-0
         seems like different path  work 
         try Navigation Menu
         make home page to three componenet , fetch data in side , suspense it 
-
+        suspense 觸發機制 ： 以連結到的那層往上看一層有沒有suspense  （往下看尚未實驗） 
         8/27週進度：    
                 color align
                 loading page

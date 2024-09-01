@@ -1,5 +1,7 @@
+
+'use client'
 import React from "react";
-import { getCarColor } from "@/lib/getCarColor"; // Import the utility function
+import { getCarColor } from "@/lib/getCarColor"; 
 
 import {
   CartesianGrid,
@@ -66,7 +68,7 @@ export default function UseRateAreaChart({
         <XAxis dataKey="name" />
         <YAxis
           tickFormatter={(value) => `${value}%`}
-          domain={[0, 100]} // Set the Y-axis range from 0 to 100
+          domain={[0, 100]} 
         />
         <Tooltip />
         <Area

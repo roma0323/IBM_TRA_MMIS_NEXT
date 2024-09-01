@@ -9,9 +9,7 @@ import { FetcheGetSumStatusListData } from "@/types/type";
 import { DataByCarCatalog } from "@/types/type";
 
 const ClientPage: React.FC<FetcheGetSumStatusListData> = ({ Data }) => {
-  useEffect(() => {
-    console.log("ClientPage component mounted");
-  }, []);
+  
 
   // Transform the Data array into an object where carcatalog is the key
   const dataByCarCatalog: DataByCarCatalog = useMemo(() => {

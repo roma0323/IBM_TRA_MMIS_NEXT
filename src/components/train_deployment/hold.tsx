@@ -27,10 +27,10 @@ const MidNavbar: React.FC = () => {
   const router = useRouter();
   const pathname = usePathname() || "";
   const searchParams = useSearchParams();
+
   let decodedLastPart = decodeURIComponent(pathname.split("/").pop() || "");
   const date = searchParams?.get("date") || "";
-
-  let type = "";
+  let type = "sdcsd";
   if (decodedLastPart == "all_overview") {
     type = "總覽";
   }
@@ -43,7 +43,7 @@ const MidNavbar: React.FC = () => {
 
 
   const handleSelect = (value: string) => {
-    router.replace(`/navbarpages/train_deployment/${value}?date=${date}`);
+    router.push(`/navbarpages/train_deployment/${value}?date=${date}`);
   };
 
   return (
@@ -51,8 +51,7 @@ const MidNavbar: React.FC = () => {
       <div className="h-fit flex items-center justify-between relative">
         <div className="flex items-center">
           <span className="text-2xl">車輛配置資訊/</span>
-          {!type && <span className="text-2xl text-[#397eff]">{decodedLastPart}</span>}
-          {type && <span className="text-2xl text-[#397eff]">{type}</span>}
+          <span className="text-2xl text-[#397eff]">{decodedLastPart}</span>
         </div>
         <DatePickerForm />
       </div>
@@ -60,11 +59,11 @@ const MidNavbar: React.FC = () => {
       <div className="flex items-start gap-1">
         <Select value={decodedLastPart} onValueChange={handleSelect}>
           <SelectTrigger className="w-fit">
-            <SelectValue />
+            <SelectValue  />
           </SelectTrigger>
           <SelectContent>
-          <SelectItem value="all_overview">總覽</SelectItem>
-          <SelectItem value="power_overview">動力車</SelectItem>
+            <SelectItem value="all_overview">總覽</SelectItem>
+            <SelectItem value="power_overview">動力車</SelectItem>
             <SelectItem value="unusual_overview">非常態車輛</SelectItem>
           </SelectContent>
         </Select>
