@@ -1,11 +1,13 @@
 "use client";
-import React, { useState, } from "react";
+import React, { useState,useRef } from "react";
 import { useSearchParams } from 'next/navigation';
+
 import DataSection from "@/components/train_deployment/detail_page/DataSection";
 import TrainCategorySection from "@/components/train_deployment/detail_page/TrainCategorySection";
-import SlideNavigation from "@/components//SlideNavigation";
 import TrainOverviewSection from "@/components/locomotive_depot/TrainOverviewSection";
 import MaintenanceDetailSection from "@/components/locomotive_depot/MaintenanceDetailSection";
+import SlideNavigationContainer, { SlideNavigationContainerRef } from "@/components/SlideNavigationContainer";
+
 import { getSumStatusListAndMultiplierEqualZeorCarcatalogEqualParamCartypeEqualTrainname } from "@/api/api";
 import { getSumStatusDetailListMultiplierZeorDeptParamCartypeParamQtypeParam } from "@/api/api";
 import { getSumStatusListEq3Param } from "@/api/api";
@@ -19,9 +21,12 @@ const DetailClientPage: React.FC<FetcheGetSumStatusListData> = ({ Data }) => {
   const date = searchParams?.get('date') || '';
   const cntSum = Data.reduce((acc, item) => acc + item.current_cnt, 0);
   const readySum = Data.reduce((acc, item) => acc + item.current_ready, 0);
+  const slideNavRef = useRef<SlideNavigationContainerRef>(null);
+
+
   const handleTrainTypeClick = async (trainName: string) => {
-    if (!canMoveLeft) {
-      handleMouseEnter("right");
+    if (!slideNavRef.current?.canMoveLeft) {
+      slideNavRef.current?.handleMouseEnter("right");
     }
     setSelectedTrainName(trainName);
     let fetchedData;
@@ -43,6 +48,8 @@ const DetailClientPage: React.FC<FetcheGetSumStatusListData> = ({ Data }) => {
     cartype: string,
     divData: string
   ) => {
+    slideNavRef.current?.handleMouseEnter("right");
+
     const data =
       await getSumStatusDetailListMultiplierZeorDeptParamCartypeParamQtypeParam(
         dept,
@@ -53,31 +60,11 @@ const DetailClientPage: React.FC<FetcheGetSumStatusListData> = ({ Data }) => {
     setMaintenanceData(data);
   };
 
-  
-
-  //mouse slide
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const totalSlides = 5;
-  const visibleSlides = 3;
-  const handleMouseEnter = (direction: "left" | "right") => {
-    if (direction === "left") {
-      setCurrentIndex((prevIndex) => (prevIndex === 0 ? 0 : prevIndex - 1));
-    } else if (direction === "right") {
-      setCurrentIndex((prevIndex) =>
-        prevIndex >= totalSlides - visibleSlides ? prevIndex : prevIndex + 1
-      );
-    }
-  };
-  const canMoveLeft = currentIndex > 0;
-  const canMoveRight = currentIndex < totalSlides - visibleSlides;
-  //mouse slide
 
   return (
-    <div className=" h-full  p-6 overflow-hidden">
-      <div
-        className="flex h-full gap-6 transition-transform duration-500 ease-in-out"
-        style={{ transform: `translateX(-${currentIndex * 26}%)` }}
-      >
+    <div className=" h-full   overflow-hidden">
+            <SlideNavigationContainer ref={slideNavRef} totalSlides={5} visibleSlides={3} slideWidthPercentage={26}>
+
         {/* first Div */}
         <div className="min-w-[25%] h-full  flex items-center justify-center">
           <DataSection
@@ -105,22 +92,13 @@ const DetailClientPage: React.FC<FetcheGetSumStatusListData> = ({ Data }) => {
           selectedArea={Data[0].carcatalog}
           selectedLabel={selectedTrainName}
           handleTrainClick={handleTrainClick}
-          handleMouseEnter={handleMouseEnter}
         />
 
         {/* fourth Div */}
         <MaintenanceDetailSection maintenanceData={maintenanceData} />
-      </div>
-      <SlideNavigation
-        direction="left"
-        onHover={handleMouseEnter}
-        isVisible={canMoveLeft}
-      />
-      <SlideNavigation
-        direction="right"
-        onHover={handleMouseEnter}
-        isVisible={canMoveRight}
-      />
+     
+            </SlideNavigationContainer>
+
     </div>
   );
 };

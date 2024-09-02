@@ -10,11 +10,12 @@ interface SlideNavigationContainerProps {
 
 export interface SlideNavigationContainerRef {
   handleMouseEnter: (direction: "left" | "right") => void;
+  canMoveLeft: boolean;
 }
 
 const SlideNavigationContainer = forwardRef<SlideNavigationContainerRef, SlideNavigationContainerProps>(
   function SlideNavigationContainer(
-    { totalSlides, visibleSlides, slideWidthPercentage,children },
+    { totalSlides, visibleSlides, slideWidthPercentage, children },
     ref
   ) {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -32,12 +33,13 @@ const SlideNavigationContainer = forwardRef<SlideNavigationContainerRef, SlideNa
       });
     };
 
-    useImperativeHandle(ref, () => ({
-      handleMouseEnter,
-    }));
-
     const canMoveLeft = currentIndex > 0;
     const canMoveRight = currentIndex < totalSlides - visibleSlides;
+
+    useImperativeHandle(ref, () => ({
+      handleMouseEnter,
+      canMoveLeft,
+    }));
 
     return (
       <div className="relative p-6 h-full overflow-hidden">
