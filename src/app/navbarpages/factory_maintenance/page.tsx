@@ -70,5 +70,10 @@ export default async function Page({
   const yearString = year.toString();
 
   const data = await getData(yearString);
-  return <ClientPage Data={data} />;
+  return (
+    <main className=" grow bg-neutral-100 overflow-hidden relative">
+        <ClientPage Data={data} />
+    </main>
+  );
+  
 }

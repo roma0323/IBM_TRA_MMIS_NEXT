@@ -28,7 +28,6 @@ const TrainPageContent: React.FC<FetcheGetSumStatusListData> = ({ Data }) => {
     "臺東機務段",
     "宜蘭機務分段",
   ];
-
   const handleLabelClick = (label: string, area: string) => {
     setSelectedLabel((prevLabel) =>
       prevLabel === label && selectedArea === area ? null : label,
