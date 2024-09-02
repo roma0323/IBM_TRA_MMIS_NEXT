@@ -1,34 +1,14 @@
 import React from "react";
 import { RowByTrain } from "@/components/locomotive_depot/RowByTrain";
 import BoardTitleSection from "@/components/BoardTitleSection"; // Import the Section component
+import { FetcheGetSumStatusListDataInArray } from "@/types/type";
 
-type TrainData = {
-  dept: string;
-  deptdesc: string;
-  cartype: string;
-  carcatalog: string;
-  belongto: number;
-  borrowin: number;
-  borrowout: number;
-  current_cnt: number;
-  current_use: number;
-  current_temp: number;
-  current_ready: number;
-  maintain_w: number;
-  maintain_sec: number;
-  maintain_fac: number;
-  oth_waitrep: number;
-  oth_return: number;
-  oth_stop: number;
-  availability: number;
-};
 
 interface TrainOverviewSectionProps {
-  filteredTrainData: TrainData[];
+  filteredTrainData: FetcheGetSumStatusListDataInArray[];
   selectedLabel: string | null;
   selectedArea: string | null;
   handleTrainClick: (dept: string, cartype: string, divData: string) => void;
-  handleMouseEnter: (direction: "left" | "right") => void;
 }
 
 const TrainOverviewSection: React.FC<TrainOverviewSectionProps> = ({
@@ -36,7 +16,6 @@ const TrainOverviewSection: React.FC<TrainOverviewSectionProps> = ({
   selectedLabel,
   selectedArea,
   handleTrainClick,
-  handleMouseEnter,
 }) => {
   const headers = [
     "車種",
@@ -65,7 +44,6 @@ const TrainOverviewSection: React.FC<TrainOverviewSectionProps> = ({
         content={
           <div
             className="flex flex-col  p-3  relative "
-            onClick={() => handleMouseEnter("right")}
           >
             <div className="grid grid-cols-17 gap-4 bg-zinc-100 border-b-2 border-gray-200 rounded-lg text-left ">
               {headers.map((header, index) => (
