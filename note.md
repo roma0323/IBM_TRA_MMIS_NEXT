@@ -1,16 +1,14 @@
 後端ＡＰＩ重寫
 
-rowbytrain 只有部分可以點可以點
-改為外網沒有就沒有
 車種層級分析：各車型比例 數量 使用率
 /Users/ray/Documents/code_file/ibm_tra_mmis_next/src/components/train_deployment/detail_page/ClientPage.tsx
-查城際列車：
 const data = [
 { name: '太魯閣 - TEMU1000', value: 100 ,use_rate:23},
 { name: '普悠瑪 - TEMU2000', value: 100 ,use_rate:45},
 { name: '新自強號 - MEU3000', value: 150,use_rate:12 },
 { name: 'PP 電力機車 - E1000', value: 90 ,use_rate:48},
 ];
+
 車種層級分析：30 使用率（包含前 30~60 天）（包含非常態車輛 動力車）
 const using_rate_data = [
 { name: '1 號', 本月: 45, 上個月: 50 },
@@ -67,26 +65,7 @@ http://tra.webtw.xyz:8888/maximo/zz_data?method=getSumStatusList&qdate=2024-08-0
 "oth_return": 14.0,
 "oth_stop": 4.0,
 "availability": 0.8543103448275862
-},
-
-        客車 cartype 規則
-        http://tra.webtw.xyz:8888/maximo/zz_data?method=getSumStatusList&multiplier=0&qdate=2024-08-04&carcatalog=客車
-        http://tra.webtw.xyz:8888/maximo/zz_data?method=getSumStatusList&multiplier=0&qdate=2024-08-04
-        拿到的客車參數不同...
-
-        http://tra.webtw.xyz:8888/maximo/zz_data?method=getSumStatusList&eq3=PP&qdate=2024-08-19
-        學外網api 特製抓客車(貨車似乎也是)
-
-
-
-
-
-        這週進度：
-        deploy 要loaading 畫面：ok
-                server render  重新unmount 換use route replace
-                改detail data section  height RWD:ok
-                即便從server 重新搞refresh
-        RWD
+}
 
         重組簡化程式
         use context for color color align
@@ -113,8 +92,15 @@ http://tra.webtw.xyz:8888/maximo/zz_data?method=getSumStatusList&qdate=2024-08-0
         try Navigation Menu
         make home page to three componenet , fetch data in side , suspense it 
         suspense 觸發機制 ： 以連結到的那層往上看一層有沒有suspense  （往下看尚未實驗） 
+
         8/27週進度：    
-                color align
-                loading page
-                server component refacotr
-                date function deoplyment detail /depot 
+                改善用戶體驗
+                        - RWD
+                        - loading page
+                程式重構
+                        - type reuse
+                        - component reuse
+                        - refactor some components to server component 
+                        - color align
+                新增功能
+                        - date function deoplyment detail /depot 
