@@ -1,4 +1,4 @@
-後端ＡＰＩ重寫
+後端ＡＰＩ重寫 
 
 車種層級分析：各車型比例 數量 使用率
 /Users/ray/Documents/code_file/ibm_tra_mmis_next/src/components/train_deployment/detail_page/ClientPage.tsx
@@ -67,40 +67,30 @@ http://tra.webtw.xyz:8888/maximo/zz_data?method=getSumStatusList&qdate=2024-08-0
 "availability": 0.8543103448275862
 }
 
-        重組簡化程式
-        use context for color color align
-        unnessary client component to server
-        can detch same data different plaec, dont pass to many layers(autually onyl fetch once)
+Next.js tips:
+        use context for passing value through deep layer
+        fetch same data different place(autually only fetch once)
         use promise : if fetch two source seqenail  would cause waterfall
-        deployment use searchparams or params
-        suspense right place : suspense must one layer higher then it work
-        suspense with key={searchParams}!!!!!
-        單個檔案suspense包
-        export default function Page() {
-        return (
-        <Suspense fallback={<div>Loading...</div>}>
-        <MidNavbar />
-        </Suspense>
-        );
-        }
+        suspense  :
+                - suspense must one layer higher then it work
+                - with key={searchParams}
+                - 以連結到的那層往上看一層有沒有suspense  （往下看尚未實驗）
+                - export default function Page() {return (<Suspense fallback={<div>Loading...</div>}></Suspense>);}
+                
+                
+CSS & UI tips:
         css devide-y-2 or space-y-2 replace margin bottom
         cn()  to resue the board title
-        make every waiting have loading 
-        // date picker 
-        // select for overview 
-        seems like different path  work 
-        try Navigation Menu
-        make home page to three componenet , fetch data in side , suspense it 
-        suspense 觸發機制 ： 以連結到的那層往上看一層有沒有suspense  （往下看尚未實驗） 
 
-        8/27週進度：    
+
+8/27週進度：
                 改善用戶體驗
                         - RWD
                         - loading page
                 程式重構
                         - type reuse
                         - component reuse
-                        - refactor some components to server component 
+                        - refactor some components to server component
                         - color align
                 新增功能
-                        - date function deoplyment detail /depot 
+                        - date function deoplyment detail /depot
