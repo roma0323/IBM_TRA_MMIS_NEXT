@@ -2,7 +2,7 @@
 
 import React, { useState, useRef } from "react";
 import { LabelAndNumberByArea } from "@/components/locomotive_depot/LabelAndNumberByArea";
-import FactoryOverviewSection from "@/components/factory_maintenance/factoryDepot/FactoryOverviewSection.tsx";
+import FactoryOverviewSection from "@/components/factory_maintenance/factoryDepot/FactoryOverviewSection";
 import BoardTitleSection from "@/components/BoardTitleSection";
 import { getSumStatusDetailListMultiplierZeorDeptParamCartypeParamQtypeParam } from "@/api/api";
 import { factorySumStatusOverall } from "@/types/type"; // Update the import path as needed
