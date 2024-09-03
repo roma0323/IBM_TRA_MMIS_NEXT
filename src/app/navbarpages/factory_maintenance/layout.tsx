@@ -7,7 +7,7 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   const navItems = [
-    { name: "總覽", path: "/navbarpages/factory_maintenance" },
+    { name: "總覽", path: "/navbarpages/factory_maintenance/factory_overview" },
     {
       name: "機廠配置資訊",
       path: "/navbarpages/factory_maintenance/factory_depot",

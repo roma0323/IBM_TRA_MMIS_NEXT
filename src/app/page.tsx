@@ -19,14 +19,14 @@ const navigationData = [
     text1: "各機務段、車型配置資料、可用率查看",
   },
   {
-    href: `/navbarpages/factory_maintenance `,
+    href: `/navbarpages/factory_maintenance/factory_overview `,
     logoClassName: `${process.env.BASEPATH}/icon-locomotive-depot.svg`,
 
     text: "機廠檢修動態",
     text1: "各機廠檢修動態",
   },
   {
-    href: `/navbarpages/fault_notification`,
+    href: `/navbarpages/fault_notification/daily_report`,
     logoClassName: `${process.env.BASEPATH}/icon-fault-notification.svg`,
     text: "故障通報狀態",
     text1: "每日故障報表、ATP 故障分析、年度故障報表",
