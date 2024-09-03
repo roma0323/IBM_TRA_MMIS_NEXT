@@ -6,22 +6,33 @@ import ComposedChartMonthly from "@/components/factory_maintenance/ComposedChart
 import ComposedChartAccmulate from "@/components/factory_maintenance/ComposedChartAccmulate";
 import { factoryMaintenanceOverall } from "@/types/type";
 import BoardTitleSection from "@/components/BoardTitleSection";
-import SlideNavigationContainer, { SlideNavigationContainerRef } from "@/components/SlideNavigationContainer";
+import SlideNavigationContainer, {
+  SlideNavigationContainerRef,
+} from "@/components/SlideNavigationContainer";
 
 const getCurrentMonthIndex = (): number => {
   const date = new Date();
   return date.getMonth(); // January is 0, February is 1, etc.
 };
 
-const ClientPage: React.FC<factoryMaintenanceOverall> = ({ Data }) => {
+interface ClientPageProps extends factoryMaintenanceOverall {
+  listData: any[];
+}
+
+const ClientPage: React.FC<ClientPageProps> = ({ Data, listData }) => {
   const [activeCardIndex, setActiveCardIndex] = useState<number | null>(null);
   const slideNavRef = useRef<SlideNavigationContainerRef>(null);
 
   const currentMonthIndex = getCurrentMonthIndex();
 
   return (
-    <div className="h-full overflow-hidden">
-      <SlideNavigationContainer ref={slideNavRef} totalSlides={3} visibleSlides={2} slideWidthPercentage={36}>
+    <div className="relative h-full  ">
+      <SlideNavigationContainer
+        ref={slideNavRef}
+        totalSlides={3}
+        visibleSlides={2}
+        slideWidthPercentage={36}
+      >
         <div className="min-w-[35%] flex items-center justify-center">
           <BoardTitleSection
             title={`機廠檢修預覽`}
@@ -46,20 +57,24 @@ const ClientPage: React.FC<factoryMaintenanceOverall> = ({ Data }) => {
           />
         </div>
 
-        <div className="min-w-[65%] flex items-center justify-center">
+        <div className="min-w-[63%] flex items-center justify-center">
           <BoardTitleSection
             title={`機廠檢修走勢`}
             content={
-              <div>
+              <div className="size-full">
                 {Data.map(
                   (chartData, index) =>
                     activeCardIndex === index && (
                       <div
                         key={index}
-                        className="flex-grow w-full flex flex-col my-8 items-center justify-start"
+                        className=" size-full flex flex-col py-8 items-center justify-between"
                       >
-                        <ComposedChartMonthly data={chartData.monthData} />
-                        <ComposedChartAccmulate data={chartData.monthData} />
+                        <div className="flex justify-center items-center w-full">
+                          <ComposedChartMonthly data={chartData.monthData} />
+                        </div>
+                        <div className="flex justify-center items-center w-full">
+                          <ComposedChartAccmulate data={chartData.monthData} />
+                        </div>
                       </div>
                     )
                 )}
@@ -67,8 +82,53 @@ const ClientPage: React.FC<factoryMaintenanceOverall> = ({ Data }) => {
             }
           />
         </div>
+
+        <div className="min-w-[35%] flex items-center justify-center ">
+          <BoardTitleSection
+            title={`${currentMonthIndex - 2}月機廠檢修清單`}
+            content={
+              //TODO: filter by factory
+              <div className="flex flex-col size-full">
+                {listData.map((attr, index) => (
+                  <div
+                    key={index}
+                    className="p-4 mx-3 m-3  bg-[#3034380d] rounded-xl  border-l-4"
+                  >
+                    車號 - {attr.assetnum}
+                    <div className="flex flex-col py-2 self-stretch">
+                      <div className="w-full pt-1 px-6 flex  justify-between">
+                        <p>進場收容單號:</p>
+                        <p>{attr.imnum}</p>
+                      </div>
+
+                      <div className="w-full pt-1 px-6 flex  justify-between">
+                        <p>檢修級別:</p>
+                        <p>{attr.worktype}</p>
+                      </div>
+                      <div className="w-full pt-1 px-6 flex  justify-between">
+                        <p>工作單號:</p>
+                        <p>{attr.wojp3}</p>
+                      </div>
+                      <div className="w-full pt-1 px-6 flex  justify-between">
+                        <p>交段日期:</p>
+                        <p>{attr.schedfinish}</p>
+                      </div>
+                      <div className="w-full pt-1 px-6 flex  justify-between">
+                        <p>機場:</p>
+                        <p>{attr.testdate}</p>
+                      </div>
+                      <div className="w-full pt-1 px-6 flex  justify-between">
+                        <p>車輛數:</p>
+                        <p>{attr.childcarcnt}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            }
+          />
+        </div>
       </SlideNavigationContainer>
-     
     </div>
   );
 };

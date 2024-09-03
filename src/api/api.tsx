@@ -150,10 +150,32 @@ export async function getFacRepairYearPlan(yearString?: string) {
   //fetch 機廠檢修圖表
   const wait = (ms: number) =>
     new Promise((resolve) => setTimeout(resolve, ms));
-
   await wait(2000);
+
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getFacRepairYearPlan&year=${yearString}`,
+    {
+      method: "POST",
+      headers: {
+        Accept: "application/json, text/plain, */*",
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  return res.json();
+}
+export async function getFacRepairListByMonth(
+  date?: string,
+) {
+  //fetch 機廠檢修清單
+  let formattedDate = dateFormat(date);
+  const yearString = formattedDate.split("-")[0];
+  const monthString = formattedDate.split("-")[1];
+  const wait = (ms: number) =>
+    new Promise((resolve) => setTimeout(resolve, ms));
+  await wait(2000);
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getSumFacStatusList&year=${yearString}&month=${monthString}`,
     {
       method: "POST",
       headers: {

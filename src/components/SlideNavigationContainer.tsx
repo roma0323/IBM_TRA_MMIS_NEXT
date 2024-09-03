@@ -42,7 +42,7 @@ const SlideNavigationContainer = forwardRef<SlideNavigationContainerRef, SlideNa
     }));
 
     return (
-      <div className="relative p-6 h-full overflow-hidden">
+      <div className="relative p-6 size-full overflow-hidden">
         <div
           className="flex h-full gap-6 transition-transform duration-500 ease-in-out"
           style={{ transform: `translateX(-${currentIndex * slideWidthPercentage}%)` }}

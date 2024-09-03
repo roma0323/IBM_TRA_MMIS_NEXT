@@ -77,10 +77,11 @@ Next.js tips:
                 - 以連結到的那層往上看一層有沒有suspense  （往下看尚未實驗）
                 - export default function Page() {return (<Suspense fallback={<div>Loading...</div>}></Suspense>);}
                 
-                
 CSS & UI tips:
         css devide-y-2 or space-y-2 replace margin bottom
         cn()  to resue the board title
+Other: board overflow :
+        h-64 size-full
 
 
 8/27週進度：
@@ -94,3 +95,15 @@ CSS & UI tips:
                         - color align
                 新增功能
                         - date function deoplyment detail /depot
+                        - 機廠檢修清單
+
+討論：
+        機場車種分配獨立與否
+
+        "facindate": "2022/06/16",
+        "schedfinish": "2022/08/03",
+        "testdate": "2022/06/23",
+        "actstart": "2022/06/16",
+        "actfinish": "2022/06/23",
+        "facoutdate": "2022/06/23",
+

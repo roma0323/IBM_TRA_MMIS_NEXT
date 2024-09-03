@@ -28,6 +28,32 @@ const MaintenanceCard: React.FC<MaintenanceCardProps> = ({
             <div key={index} className="w-full pt-1 px-6 flex  justify-between">
               <p>{attr.label}:</p>
               <p>{attr.value}</p>
+              <div>sdcsdcdsc</div>
+              <div>sdcsdcdsc</div>
+              <div>sdcsdcdsc</div>
+              <div>sdcsdcdsc</div>
+              <div>sdcsdcdsc</div>
+              <div>sdcsdcdsc</div>
+              <div>sdcsdcdsc</div>
+              <div>sdcsdcdsc</div>
+              <div>sdcsdcdsc</div>
+              <div>sdcsdcdsc</div>
+              <div>sdcsdcdsc</div>
+              <div>sdcsdcdsc</div>
+              <div>sdcsdcdsc</div>
+              <div>sdcsdcdsc</div>
+              <div>sdcsdcdsc</div>
+              <div>sdcsdcdsc</div>
+              <div>sdcsdcdsc</div>
+              <div>sdcsdcdsc</div>
+              <div>sdcsdcdsc</div>
+              <div>sdcsdcdsc</div>
+              <div>sdcsdcdsc</div>
+              <div>sdcsdcdsc</div>
+              <div>sdcsdcdsc</div>
+              <div>sdcsdcdsc</div>
+              <div>sdcsdcdsc</div>
+              <div>sdcsdcdsc</div>
             </div>
           ))}
           {maintenanceData.url ? (

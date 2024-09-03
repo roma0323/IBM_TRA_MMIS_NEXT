@@ -1,5 +1,5 @@
 import ClientPage from "@/components/factory_maintenance/ClientPage";
-import { getFacRepairYearPlan } from "@/api/api";
+import { getFacRepairListByMonth, getFacRepairYearPlan } from "@/api/api";
 import { factoryMaintenanceDataSetByfactory } from "@/types/type"; // Update the import path as needed
 
 const departmentNames: { [key: string]: string } = {
@@ -22,7 +22,7 @@ const monthNames = [
   "December",
 ];
 
-async function getData(yearString?: string) {
+async function getChartData(yearString?: string) {
   try {
     const data = await getFacRepairYearPlan(yearString);
 
@@ -69,10 +69,13 @@ export default async function Page({
   const year = date.getFullYear();
   const yearString = year.toString();
 
-  const data = await getData(yearString);
+  const ChartData = await getChartData(yearString);
+  const listData = await getFacRepairListByMonth(searchParams.date);
+  //FIXME :avoid waterfall
+
   return (
     <main className=" grow bg-neutral-100 overflow-hidden relative">
-        <ClientPage Data={data} />
+        <ClientPage Data={ChartData} listData={listData.data}/>
     </main>
   );
   

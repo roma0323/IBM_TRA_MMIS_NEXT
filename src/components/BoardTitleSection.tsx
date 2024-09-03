@@ -18,7 +18,7 @@ const BoardTitleSection: React.FC<SectionProps> = ({ title = "", content }) => {
       >
         {title}
       </div>
-      <div className="size-full flex-grow overflow-auto">{content}</div>
+      <div className="relative h-64 size-full flex-grow overflow-auto">{content}</div>
     </div>
   );
 };
