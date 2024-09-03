@@ -1,4 +1,3 @@
-// RowByTrain.tsx
 
 import { LabelChip } from "@/components/locomotive_depot/LabelChip";
 import { factorySumStatus } from "@/types/type";
@@ -8,8 +7,7 @@ interface TrainData {
   trainData: factorySumStatus;
 }
 
-const CanClickClassName =
-  "m-1 flex items-center justify-center cursor-pointer rounded-2xl hover:text-primary hover:shadow-md hover:shadow-primary/30 hover:scale-110";
+
 const CannotClickClassName = "my-1  flex items-center justify-center  ";
 
 export const FactoryRowByTrain = ({ trainData }: TrainData): JSX.Element => {

@@ -9,7 +9,7 @@ export default function DashboardLayout({
   const navItems = [
     { name: "總覽", path: "/navbarpages/factory_maintenance" },
     {
-      name: "機場配置資訊",
+      name: "機廠配置資訊",
       path: "/navbarpages/factory_maintenance/factory_depot",
     },
   ];

@@ -10,7 +10,7 @@ import { useSearchParams } from "next/navigation";
 
 const TrainPageContent: React.FC<factorySumStatusOverall> = ({ Data }) => {
   const [selectedLabel, setSelectedLabel] = useState<string | null>("All");
-  const [selectedArea, setSelectedArea] = useState<string | null>("全部機務段");
+  const [selectedArea, setSelectedArea] = useState<string | null>("全部機廠");
   const searchParams = useSearchParams();
   const date = searchParams?.get("date") || "";
   const areas = [
@@ -22,7 +22,7 @@ const TrainPageContent: React.FC<factorySumStatusOverall> = ({ Data }) => {
 
   const filteredTrainData = Data.filter((train) => {
     const areaMatches =
-      selectedArea === "全部機務段" ||
+      selectedArea === "全部機廠" ||
       !selectedArea ||
       train.deptdesc.includes(selectedArea.replace("車輛配置", ""));
     const labelMatches =
@@ -34,6 +34,8 @@ const TrainPageContent: React.FC<factorySumStatusOverall> = ({ Data }) => {
   });
 
   const handleLabelClick = (label: string, area: string) => {
+    console.log("label", label);
+    console.log("area", area);
     setSelectedLabel((prevLabel) =>
       prevLabel === label && selectedArea === area ? null : label
     );
