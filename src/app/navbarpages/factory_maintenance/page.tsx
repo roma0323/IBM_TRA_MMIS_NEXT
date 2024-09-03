@@ -71,7 +71,7 @@ export default async function Page({
 
   const ChartData = await getChartData(yearString);
   const listData = await getFacRepairListByMonth(searchParams.date);
-  //FIXME :avoid waterfall
+  //TODO :avoid waterfall
 
   return (
     <main className=" grow bg-neutral-100 overflow-hidden relative">

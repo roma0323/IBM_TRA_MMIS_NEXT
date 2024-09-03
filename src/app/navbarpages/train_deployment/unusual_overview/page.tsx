@@ -11,6 +11,7 @@ export default async function Page({
   searchParams: { date?: string; type?: string };
 }) {
   const date = searchParams.date || "";
+  //BUG: fetch from 內網unusual
   const fetchedData = await getSumStatusListAndsumtotalEqualone(date);
 
   const dataByCarCatalog: DataByCarCatalog = {};
