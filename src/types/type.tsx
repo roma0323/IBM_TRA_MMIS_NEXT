@@ -63,3 +63,32 @@ export type factoryMaintenanceEachFactory = {
 export type factoryMaintenanceOverall = {
   Data: factoryMaintenanceEachFactory[];
 };
+
+
+export type factorySumStatus ={
+  index: number;
+  worktype: string;
+  dept: string;
+  deptdesc: string;
+  facindate: string;
+  schedfinish: string;
+  testdate: string;
+  actstart: string;
+  actfinish: string;
+  facoutdate: string;
+  wojp3: string;
+  cartype: string;
+  assetnum: string;
+  imnum: string;
+  childcarcnt: number;
+  carcatalog: string;
+  infacdays: number;
+  inwodays: number;
+  behindordelaydays: string;
+  url: string;
+}
+
+
+export type factorySumStatusOverall = {
+  Data: factorySumStatus[];
+};

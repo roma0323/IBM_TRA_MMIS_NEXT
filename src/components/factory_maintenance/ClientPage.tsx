@@ -22,9 +22,9 @@ interface ClientPageProps extends factoryMaintenanceOverall {
 const ClientPage: React.FC<ClientPageProps> = ({ Data, listData }) => {
   const [activeCardIndex, setActiveCardIndex] = useState<number | null>(null);
   const slideNavRef = useRef<SlideNavigationContainerRef>(null);
-  const [selectFactory, setSelectFactory] = useState<string>('機廠');
+  const [selectFactory, setSelectFactory] = useState<string>("");
   const currentMonthIndex = getCurrentMonthIndex();
- 
+
   return (
     <div className="relative h-full  ">
       <SlideNavigationContainer
@@ -60,22 +60,25 @@ const ClientPage: React.FC<ClientPageProps> = ({ Data, listData }) => {
 
         <div className="min-w-[63%] flex items-center justify-center">
           <BoardTitleSection
-            title={`機廠檢修走勢`}
+            title={`${selectFactory}-檢修走勢`}
             content={
               <div className="size-full">
-                {Data.map((chartData, index) => (
-                  <div
-                    key={index}
-                    className=" size-full flex flex-col py-8 items-center justify-between"
-                  >
-                    <div className="flex justify-center items-center w-full">
-                      <ComposedChartMonthly data={chartData.monthData} />
-                    </div>
-                    <div className="flex justify-center items-center w-full">
-                      <ComposedChartAccmulate data={chartData.monthData} />
-                    </div>
-                  </div>
-                ))}
+                {Data.map(
+                  (chartData, index) =>
+                    activeCardIndex === index && (
+                      <div
+                        key={index}
+                        className=" size-full flex flex-col py-8 items-center justify-between"
+                      >
+                        <div className="flex justify-center items-center w-full">
+                          <ComposedChartMonthly data={chartData.monthData} />
+                        </div>
+                        <div className="flex justify-center items-center w-full">
+                          <ComposedChartAccmulate data={chartData.monthData} />
+                        </div>
+                      </div>
+                    )
+                )}
               </div>
             }
           />
@@ -83,47 +86,41 @@ const ClientPage: React.FC<ClientPageProps> = ({ Data, listData }) => {
 
         <div className="min-w-[35%] flex items-center justify-center ">
           <BoardTitleSection
-            title={`當月機廠檢修清單`}
+            title={`${selectFactory}-該月檢修清單`}
             content={
               <div className="flex flex-col size-full">
-                {listData.map(
-                  (attr, index) =>(
-                    selectFactory === "全部機廠" || attr.deptdesc.includes(selectFactory) ? (
-                      <div
-                        key={index}
-                        className="p-4 mx-3 m-3  bg-[#3034380d] rounded-xl  border-l-4"
-                      >
-                        車號 - {attr.assetnum} {attr.deptdesc} {selectFactory}
-                        <div className="flex flex-col py-2 self-stretch">
-                          <div className="w-full pt-1 px-6 flex  justify-between">
-                            <p>進場收容單號:</p>
-                            <p>{attr.imnum}</p>
-                          </div>
-
-                          <div className="w-full pt-1 px-6 flex  justify-between">
-                            <p>檢修級別:</p>
-                            <p>{attr.worktype}</p>
-                          </div>
-                          <div className="w-full pt-1 px-6 flex  justify-between">
-                            <p>工作單號:</p>
-                            <p>{attr.wojp3}</p>
-                          </div>
-                          <div className="w-full pt-1 px-6 flex  justify-between">
-                            <p>交段日期:</p>
-                            <p>{attr.schedfinish}</p>
-                          </div>
-                          <div className="w-full pt-1 px-6 flex  justify-between">
-                            <p>機場:</p>
-                            <p>{attr.testdate}</p>
-                          </div>
-                          <div className="w-full pt-1 px-6 flex  justify-between">
-                            <p>車輛數:</p>
-                            <p>{attr.childcarcnt}</p>
-                          </div>
+                {listData.map((attr, index) =>
+                  selectFactory === "全部機廠" ||
+                  attr.deptdesc.includes(selectFactory) ? (
+                    <div
+                      key={index}
+                      className="p-4 mx-3 m-3  bg-[#3034380d] rounded-xl  border-l-4"
+                    >
+                      {attr.deptdesc} - {attr.assetnum}
+                      <div className="flex flex-col py-2 self-stretch">
+                        <div className="w-full pt-1 px-6 flex  justify-between">
+                          <p>進場收容單號:</p>
+                          <p>{attr.imnum}</p>
+                        </div>
+                        <div className="w-full pt-1 px-6 flex  justify-between">
+                          <p>工作單號:</p>
+                          <p>{attr.wojp3}</p>
+                        </div>
+                        <div className="w-full pt-1 px-6 flex  justify-between">
+                          <p>車輛數:</p>
+                          <p>{attr.childcarcnt}</p>
+                        </div>
+                        <div className="w-full pt-1 px-6 flex  justify-between">
+                          <p>檢修級別:</p>
+                          <p>{attr.worktype}</p>
+                        </div>
+                        <div className="w-full pt-1 px-6 flex  justify-between">
+                          <p>交段日期:</p>
+                          <p>{attr.facoutdate}</p>
                         </div>
                       </div>
-                      ) : null
-                    )
+                    </div>
+                  ) : null
                 )}
               </div>
             }

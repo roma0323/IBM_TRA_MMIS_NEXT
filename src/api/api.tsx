@@ -186,3 +186,21 @@ export async function getFacRepairListByMonth(
   );
   return res.json();
 }
+export async function getFacRepairList(
+) {
+  //fetch 機廠檢修清單
+  const wait = (ms: number) =>
+    new Promise((resolve) => setTimeout(resolve, ms));
+  await wait(2000);
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getSumFacStatusList`,
+    {
+      method: "POST",
+      headers: {
+        Accept: "application/json, text/plain, */*",
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  return res.json();
+}

@@ -2,31 +2,22 @@
 
 import React, { useState, useRef } from "react";
 import { LabelAndNumberByArea } from "@/components/locomotive_depot/LabelAndNumberByArea";
-import TrainOverviewSection from "@/components/locomotive_depot/TrainOverviewSection";
-import SlideNavigationContainer, { SlideNavigationContainerRef } from "@/components/SlideNavigationContainer";
+import FactoryOverviewSection from "@/components/factory_maintenance/factoryDepot/FactoryOverviewSection.tsx";
 import BoardTitleSection from "@/components/BoardTitleSection";
-import MaintenanceDetailSection from "@/components/locomotive_depot/MaintenanceDetailSection";
 import { getSumStatusDetailListMultiplierZeorDeptParamCartypeParamQtypeParam } from "@/api/api";
-import { FetcheGetSumStatusListData } from "@/types/type"; // Update the import path as needed
+import { factorySumStatusOverall } from "@/types/type"; // Update the import path as needed
 import { useSearchParams } from "next/navigation";
 
-const TrainPageContent: React.FC<FetcheGetSumStatusListData> = ({ Data }) => {
+const TrainPageContent: React.FC<factorySumStatusOverall> = ({ Data }) => {
   const [selectedLabel, setSelectedLabel] = useState<string | null>("All");
   const [selectedArea, setSelectedArea] = useState<string | null>("全部機務段");
-  const [maintenanceData, setMaintenanceData] = useState<any[]>([]); // New state for maintenance data
   const searchParams = useSearchParams();
   const date = searchParams?.get("date") || "";
   const areas = [
-    "全部機務段",
-    "七堵機務段",
-    "臺北機務段",
-    "新竹機務段",
-    "彰化機務段",
-    "嘉義機務段",
-    "高雄機務段",
-    "花蓮機務段",
-    "臺東機務段",
-    "宜蘭機務分段",
+    "全部機廠",
+    "富岡機廠",
+    "潮州機廠",
+    "花蓮機廠",
   ];
 
   const filteredTrainData = Data.filter((train) => {
@@ -51,38 +42,13 @@ const TrainPageContent: React.FC<FetcheGetSumStatusListData> = ({ Data }) => {
     );
   };
 
-  const handleTrainClick = async (
-    dept: string,
-    cartype: string,
-    divData: string
-  ) => {
-    slideNavRef.current?.handleMouseEnter("right");
-    const data =
-      await getSumStatusDetailListMultiplierZeorDeptParamCartypeParamQtypeParam(
-        dept,
-        cartype,
-        divData,
-        date
-      );
-    setMaintenanceData(data);
-  };
-
-  
-
-  const slideNavRef = useRef<SlideNavigationContainerRef>(null);
-
   return (
-    <div className="h-full overflow-hidden">
-      <SlideNavigationContainer
-        ref={slideNavRef}
-        totalSlides={3}
-        visibleSlides={2}
-        slideWidthPercentage={26}
-      >
+    <div className="size-full flex p-4 gap-4 overflow-hidden">
+      
         {/* First Div */}
-        <div className="min-w-[25%] flex items-center justify-center">
+        <div className="min-w-[15%] flex items-center justify-center">
           <BoardTitleSection
-            title="機務段分配"
+            title={`機廠分配`}
             content={
               <div className="flex flex-col w-full bg-white items-start relative flex-shrink-0 bg-gray-100 rounded-lg overflow-hidden">
                 {areas.map((area) => (
@@ -98,15 +64,11 @@ const TrainPageContent: React.FC<FetcheGetSumStatusListData> = ({ Data }) => {
         </div>
 
         {/* Second Div */}
-        <TrainOverviewSection
+        <FactoryOverviewSection
           filteredTrainData={filteredTrainData}
           selectedLabel={selectedLabel}
           selectedArea={selectedArea}
-          handleTrainClick={handleTrainClick}
         />
-        {/* Third Div */}
-        <MaintenanceDetailSection maintenanceData={maintenanceData} />
-      </SlideNavigationContainer>
       
     </div>
   );
