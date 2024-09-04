@@ -19,6 +19,7 @@ const config = {
         "2xl": "1400px",
       },
     },
+    
     extend: {
       gridTemplateColumns: {
         // Custom 18 column grid
