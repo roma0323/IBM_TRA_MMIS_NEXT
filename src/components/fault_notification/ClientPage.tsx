@@ -66,7 +66,7 @@ const ClientPage: React.FC<Props> = ({ fail_list, ReportLevelCardData }) => {
 
   return (
     <div className="relative flex justify-between p-6 gap-6 h-full">
-      <div className="min-w-[400px] flex items-center justify-center">
+      <div className="min-w-[350px] flex items-center justify-center">
         <BoardTitleSection
           title={`故障通報分級`}
           content={
@@ -92,7 +92,6 @@ const ClientPage: React.FC<Props> = ({ fail_list, ReportLevelCardData }) => {
           content={
             <div className="p-6">
               <Table>
-                <TableCaption>A list of your recent invoices.</TableCaption>
                 <TableHeader>
                   <TableRow className="bg-slate-100 rounded-lg">
                     {headers.map((header, index) => (

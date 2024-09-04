@@ -39,7 +39,7 @@ export const OverviewCard = ({
         title={`${Name}`}
         content={
           <div className="size-full flex flex-col ">
-            <div className="flex w-full py-2 ">
+            <div className="flex justify-around w-full py-2 ">
               <DataCard text={Data.current_ready.toString()} text1="可用數" />
               <DataCard text={Data.current_cnt.toString()} text1="總輛數" />
               <DataCard

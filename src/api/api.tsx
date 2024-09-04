@@ -206,15 +206,36 @@ export async function getSumFailListDaily(date?: string) {
   //fetch 故障通報daily
 
   let formattedDate = dateFormat(date);
-  console.log(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getSumFailList&qdate=${formattedDate}`
-  );
+
   const wait = (ms: number) =>
     new Promise((resolve) => setTimeout(resolve, ms));
   await wait(2000);
 
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getSumFailList&qdate=${formattedDate}`,
+    {
+      method: "POST",
+      headers: {
+        Accept: "application/json, text/plain, */*",
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  return res.json();
+}
+
+export async function getSumFailYearTypeA(date?: string) {
+  //fetch 故障通報annual
+
+  let formattedDate = dateFormat(date);
+  const yearString = formattedDate.split("-")[0];
+  
+  const wait = (ms: number) =>
+    new Promise((resolve) => setTimeout(resolve, ms));
+  await wait(2000);
+
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getSumFailYearRP&year=${yearString}&failtype=A`,
     {
       method: "POST",
       headers: {

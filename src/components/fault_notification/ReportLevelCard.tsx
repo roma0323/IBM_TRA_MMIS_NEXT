@@ -23,9 +23,9 @@ export const ReportLevelCard: React.FC<Props> = ({
       }`}
       onClick={onToggle}
     >
-      <div className="self-stretch items-start flex border-b border-[#646464]/20 justify-between items-center inline-flex">
+      <div className="self-stretch items-start flex border-b pb-2 border-[#646464]/20 justify-between items-center inline-flex">
         <div className="">
-          <span className="text-9xl">{CardDataByLevel.fail_lvl}</span>
+          <span className="text-7xl">{CardDataByLevel.fail_lvl}</span>
           <span className="ml-2 text-lg">級</span>
         </div>
         <div className="flex flex-col grow  items-end">

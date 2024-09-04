@@ -145,3 +145,4 @@ export type ReportLevelCardDataType = {
   Maintenance_fail_quantity: number;
   other_fail_quantity: number;
 };
+

@@ -35,7 +35,7 @@ const DeploymentByTrainCategory: React.FC<MyComponentProps> = ({
       onClick={handleToggle}
     >
       <div className="text-lg">{trainName}</div>
-      <div className="flex w-full">
+      <div className="flex w-full justify-around" >
         <DataCard text="" text1="可用數" />
         <DataCard text="" text1="總輛數" />
         <DataCard text="" text1="可用率" />
