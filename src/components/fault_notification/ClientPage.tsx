@@ -1,26 +1,22 @@
 "use client";
 
 import React, { useState, useRef } from "react";
-import { TrainInFactoryCard } from "@/components/fault_notification/ReportLevelCard";
+import { ReportLevelCard } from "@/components/fault_notification/ReportLevelCard";
 import ComposedChartMonthly from "@/components/factory_maintenance/ComposedChartMonthly";
 import ComposedChartAccmulate from "@/components/factory_maintenance/ComposedChartAccmulate";
-import { factoryMaintenanceOverall } from "@/types/type";
+import { FailListItem } from "@/types/type";
+import { ReportLevelCardDataType } from "@/types/type";
 import BoardTitleSection from "@/components/BoardTitleSection";
 
 
-const getCurrentMonthIndex = (): number => {
-  const date = new Date();
-  return date.getMonth(); // January is 0, February is 1, etc.
+type Props = {
+  fail_list: FailListItem[];
+  ReportLevelCardData: ReportLevelCardDataType[]; // Add the 'ReportLevelCardData' property here
 };
 
-interface ClientPageProps extends factoryMaintenanceOverall {
-  listData: any[];
-}
-
-const ClientPage: React.FC<ClientPageProps> = ({ Data, listData }) => {
+const ClientPage: React.FC<Props> = ({ fail_list, ReportLevelCardData }) => {
   const [activeCardIndex, setActiveCardIndex] = useState<number | null>(null);
   const [selectFactory, setSelectFactory] = useState<string>("");
-  const currentMonthIndex = getCurrentMonthIndex();
 
   return (
     <div className="relative flex gap-6 p-6 h-full  ">
@@ -30,17 +26,16 @@ const ClientPage: React.FC<ClientPageProps> = ({ Data, listData }) => {
             title={`故障通報分級`}
             content={
               <div className="flex flex-col mx-4">
-                {Data.map((factory, index) => (
-                  <TrainInFactoryCard
+                {ReportLevelCardData.map((CardDataByLevel, index) => (
+                  <ReportLevelCard
                     key={index}
-                    factory={factory}
-                    currentMonthIndex={currentMonthIndex}
+                    CardDataByLevel={CardDataByLevel}
                     isActive={activeCardIndex === index}
                     onToggle={() => {
                       setActiveCardIndex(
                         activeCardIndex === index ? null : index
                       );
-                      setSelectFactory(factory.departmentName + "機廠");
+                      setSelectFactory(CardDataByLevel.fail_lvl + "等級");
                     }}
                   />
                 ))}
@@ -54,7 +49,7 @@ const ClientPage: React.FC<ClientPageProps> = ({ Data, listData }) => {
             title={`${selectFactory}-檢修走勢`}
             content={
               <div className="size-full">
-                {Data.map(
+                {/* {Data.map(
                   (chartData, index) =>
                     activeCardIndex === index && (
                       <div
@@ -69,7 +64,7 @@ const ClientPage: React.FC<ClientPageProps> = ({ Data, listData }) => {
                         </div>
                       </div>
                     )
-                )}
+                )} */}
               </div>
             }
           />

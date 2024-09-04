@@ -1,29 +1,17 @@
 import React, { useState } from "react";
 import { DataCard } from "@/components/train_deployment/DataCard";
+import { FailListItem } from "@/types/type";
+import { ReportLevelCardDataType } from "@/types/type";
 
-interface MonthData {
-  name: string;
-  當月預計: number;
-  當月達成: number;
-  累積預計: number;
-  累積達成: number;
-}
 
-interface Factory {
-  departmentName: string;
-  infaccnt: number;
-  monthData: MonthData[];
-}
-
-interface Props {
-  factory: Factory;
-  currentMonthIndex: number;
+type Props ={
+  CardDataByLevel: ReportLevelCardDataType;
   isActive: boolean;
   onToggle: () => void;
 }
 
-export const TrainInFactoryCard: React.FC<Props> = ({
-  factory,
+export const ReportLevelCard: React.FC<Props> = ({
+  CardDataByLevel,
   isActive,
   onToggle,
 }) => {
@@ -49,7 +37,7 @@ export const TrainInFactoryCard: React.FC<Props> = ({
     >
       <div className="self-stretch items-start flex border-b border-[#646464]/20 justify-between items-center inline-flex">
         <div className="">
-          <span className="text-9xl">A</span>
+          <span className="text-9xl">{CardDataByLevel.fail_lvl}</span>
           <span className="ml-2 text-lg">級</span>
         </div>
         <div className="flex flex-col grow items-end">
@@ -58,7 +46,7 @@ export const TrainInFactoryCard: React.FC<Props> = ({
             onClick={() => handleDivClick("other")}
           >
             <span className="text-xs">其他</span>
-            <span className="text-4xl pl-4">2</span>
+            <span className="text-4xl pl-4">{CardDataByLevel.other_fail_quantity}</span>
           </div>
           <div
             className={`cursor-pointer px-2 hover:bg-blue-100 ${
@@ -67,7 +55,7 @@ export const TrainInFactoryCard: React.FC<Props> = ({
             onClick={() => handleDivClick("mechanical")}
           >
             <span className="text-xs">機務處</span>
-            <span className="text-4xl pl-4">0</span>
+            <span className="text-4xl pl-4">{CardDataByLevel.Maintenance_fail_quantity}</span>
           </div>
           <div
             className={`cursor-pointer px-2 hover:bg-blue-100 ${
@@ -76,7 +64,7 @@ export const TrainInFactoryCard: React.FC<Props> = ({
             onClick={() => handleDivClick("allUnits")}
           >
             <span className="text-xs">全部單位</span>
-            <span className="text-4xl pl-4">2</span>
+            <span className="text-4xl pl-4">{CardDataByLevel.all_fail_quantity}</span>
           </div>
         </div>
       </div>
@@ -84,4 +72,4 @@ export const TrainInFactoryCard: React.FC<Props> = ({
   );
 };
 
-export default TrainInFactoryCard;
+export default ReportLevelCard;

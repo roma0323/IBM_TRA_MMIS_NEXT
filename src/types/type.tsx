@@ -92,3 +92,56 @@ export type factorySumStatus ={
 export type factorySumStatusOverall = {
   Data: factorySumStatus[];
 };
+
+export type FailListItem ={
+  trains_no: string;
+  cartype: string;
+  kpicartype: string;
+  assetnum: string;
+  belongto: string;
+  belongtodesc: string;
+  repnum: string;
+  reptime: string;
+  rep_loc: string;
+  fail_lvl: string;
+  tcms_code: string;
+  fail_loc: string;
+  fail_phenomenon: string;
+  fail_status: string;
+  fail_dept: string;
+  fail_cmwo: string;
+  cmwo_url: string;
+  rep_url: string;
+  from: string;
+}
+
+export type FailListData ={
+  fail_total_cnt_a: number;
+  fail_total_cnt_b: number;
+  fail_total_cnt_c: number;
+  fail_total_cnt_ab: number;
+  fail_total_cnt: number;
+  fail_ma_cnt_a: number;
+  fail_ma_cnt_b: number;
+  fail_ma_cnt_c: number;
+  fail_ma_cnt_ab: number;
+  fail_ma_cnt: number;
+  fail_atp_cnt_a: number;
+  fail_atp_cnt_b: number;
+  fail_atp_cnt_c: number;
+  fail_atp_cnt_ab: number;
+  fail_atp_cnt: number;
+  fail_duty_cnt: number;
+  fail_list: FailListItem[];
+}
+
+export type FailListItemArray ={
+  fail_list: FailListItem[];
+}
+
+export type ReportLevelCardDataType = {
+  fail_lvl: string;
+  all_fail_quantity: number;
+  Maintenance_fail_quantity: number;
+  other_fail_quantity: number;
+};

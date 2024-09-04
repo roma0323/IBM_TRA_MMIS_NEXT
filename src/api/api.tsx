@@ -164,9 +164,7 @@ export async function getFacRepairYearPlan(yearString?: string) {
   );
   return res.json();
 }
-export async function getFacRepairListByMonth(
-  date?: string,
-) {
+export async function getFacRepairListByMonth(date?: string) {
   //fetch 機廠檢修清單
   let formattedDate = dateFormat(date);
   const yearString = formattedDate.split("-")[0];
@@ -186,14 +184,37 @@ export async function getFacRepairListByMonth(
   );
   return res.json();
 }
-export async function getFacRepairList(
-) {
+export async function getFacRepairList() {
   //fetch 機廠檢修清單
   const wait = (ms: number) =>
     new Promise((resolve) => setTimeout(resolve, ms));
   await wait(2000);
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getSumFacStatusList`,
+    {
+      method: "POST",
+      headers: {
+        Accept: "application/json, text/plain, */*",
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  return res.json();
+}
+
+export async function getSumFailListDaily(date?: string) {
+  //fetch 故障通報daily
+
+  let formattedDate = dateFormat(date);
+  console.log(
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getSumFailList&qdate=${formattedDate}`
+  );
+  const wait = (ms: number) =>
+    new Promise((resolve) => setTimeout(resolve, ms));
+  await wait(2000);
+
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getSumFailList&qdate=${formattedDate}`,
     {
       method: "POST",
       headers: {

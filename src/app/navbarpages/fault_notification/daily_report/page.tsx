@@ -1,82 +1,170 @@
 import ClientPage from "@/components/fault_notification/ClientPage";
-import { getFacRepairListByMonth, getFacRepairYearPlan } from "@/api/api";
-import { factoryMaintenanceDataSetByfactory } from "@/types/type"; // Update the import path as needed
-
-const departmentNames: { [key: string]: string } = {
-  MXY00: "潮州",
-  MZY00: "花蓮",
-  WAY00: "富岡",
-};
-const monthNames = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-];
-
-async function getChartData(yearString?: string) {
-  try {
-    const data = await getFacRepairYearPlan(yearString);
-
-    const transformData = (dataset: factoryMaintenanceDataSetByfactory) => {
-      const monthData = monthNames.map((month, index) => {
-        const monthIndex = (index + 1).toString().padStart(2, "0");
-        return {
-          name: month,
-          當月預計: dataset[`${monthIndex}_PLAN`],
-          當月達成: dataset[`${monthIndex}_ACT`],
-          累積預計: dataset[`${monthIndex}_YTD_SUM_PLAN`],
-          累積達成: dataset[`${monthIndex}_YTD_SUM_ACT`],
-        };
-      });
-
-      const departmentName = departmentNames[dataset.deptid] || "全部";
-
-      return {
-        deptid: dataset.deptid,
-        year: dataset.year,
-        infaccnt: dataset.infaccnt,
-        departmentName: departmentName,
-        monthData: monthData,
-      };
-    };
-
-    // Transform data for the first 4 datasets
-    const transformedData = data.slice(0, 4).map(transformData);
-
-    return transformedData;
-  } catch (error) {
-    console.error("Error fetching or processing data:", error);
-    return [];
-  }
-}
+import { getSumFailListDaily } from "@/api/api";
 
 export default async function Page({
   searchParams,
 }: {
-  searchParams: { date?: string ,type?:string};
+  searchParams: { date?: string; type?: string };
 }) {
-  const dateString = searchParams.date || ""; 
-  const date = new Date(dateString);
-  const year = date.getFullYear();
-  const yearString = year.toString();
+  const FailListDailyData = await getSumFailListDaily(searchParams.date);
 
-  const ChartData = await getChartData(yearString);
-  const listData = await getFacRepairListByMonth(searchParams.date);
-  //TODO :avoid waterfall
+  const FailListDailyDatatest = [
+    {
+      trains_no: "7501",
+      cartype: "R20",
+      kpicartype: "電力機車",
+      assetnum: "R31",
+      belongto: "MMY00",
+      belongtodesc: "汐止機務段",
+      repnum: "1130903-42",
+      reptime: "2024-09-02 16:32",
+      rep_loc: "汐止",
+      fail_lvl: "B",
+      tcms_code: "",
+      fail_loc: "",
+      fail_phenomenon: "機車引擎過熱,R31 次無效",
+      fail_status: "",
+      fail_dept: "",
+      fail_cmwo: "113-1A-69879",
+      cmwo_url:
+        "https://ap.nmmis.railway.gov.tw/maximo/ui/maximo.jsp?event=loadapp&value=zz_cmwo&uniqueid=9269861",
+      rep_url:
+        "https://ap.nmmis.railway.gov.tw/maximo/ui/maximo.jsp?event=loadapp&value=zz_fnm_view&uniqueid=49654",
+      from: "MAY00",
+    },
+    {
+      trains_no: "7501",
+      cartype: "R20",
+      kpicartype: "柴電機車",
+      assetnum: "R31",
+      belongto: "MMY00",
+      belongtodesc: "彰化機務段",
+      repnum: "1130903-42",
+      reptime: "2024-09-02 16:32",
+      rep_loc: "桃園",
+      fail_lvl: "A",
+      tcms_code: "",
+      fail_loc: "",
+      fail_phenomenon: "機車引擎過熱,R31  LOS作用熄火，復位多次無效",
+      fail_status: "",
+      fail_dept: "",
+      fail_cmwo: "113-1A-69879",
+      cmwo_url:
+        "https://ap.nmmis.railway.gov.tw/maximo/ui/maximo.jsp?event=loadapp&value=zz_cmwo&uniqueid=9269861",
+      rep_url:
+        "https://ap.nmmis.railway.gov.tw/maximo/ui/maximo.jsp?event=loadapp&value=zz_fnm_view&uniqueid=49654",
+      from: "MAY00",
+    },
+    {
+      trains_no: "4547",
+      cartype: "EMU500",
+      kpicartype: "通勤列車",
+      assetnum: "EMC577",
+      belongto: "MIY00",
+      belongtodesc: "臺東機務段",
+      repnum: "1130903-43",
+      reptime: "2024-09-02 16:54",
+      rep_loc: "臺東",
+      fail_lvl: "A",
+      tcms_code: "",
+      fail_loc: "",
+      fail_phenomenon: "限速備援系統異常",
+      fail_status: "",
+      fail_dept: "",
+      fail_cmwo: "113-C1-16958",
+      cmwo_url:
+        "https://ap.nmmis.railway.gov.tw/maximo/ui/maximo.jsp?event=loadapp&value=zz_cmwo&uniqueid=9327351",
+      rep_url:
+        "https://ap.nmmis.railway.gov.tw/maximo/ui/maximo.jsp?event=loadapp&value=zz_fnm_view&uniqueid=49656",
+      from: "MAY00",
+    },
+    {
+      trains_no: "4547",
+      cartype: "EMU500",
+      kpicartype: "通勤列車",
+      assetnum: "EMC577",
+      belongto: "MIY00",
+      belongtodesc: "臺東機務段",
+      repnum: "1130903-43",
+      reptime: "2024-09-02 16:54",
+      rep_loc: "臺東",
+      fail_lvl: "C",
+      tcms_code: "",
+      fail_loc: "",
+      fail_phenomenon: "限速備援系統異常",
+      fail_status: "",
+      fail_dept: "",
+      fail_cmwo: "113-C1-16958",
+      cmwo_url:
+        "https://ap.nmmis.railway.gov.tw/maximo/ui/maximo.jsp?event=loadapp&value=zz_cmwo&uniqueid=9327351",
+      rep_url:
+        "https://ap.nmmis.railway.gov.tw/maximo/ui/maximo.jsp?event=loadapp&value=zz_fnm_view&uniqueid=49656",
+      from: "MAY00",
+    },
+    {
+      trains_no: "4547",
+      cartype: "EMU500",
+      kpicartype: "通勤列車",
+      assetnum: "EMC577",
+      belongto: "MIY00",
+      belongtodesc: "臺東機務段",
+      repnum: "1130903-43",
+      reptime: "2024-09-02 16:54",
+      rep_loc: "臺東",
+      fail_lvl: "B",
+      tcms_code: "",
+      fail_loc: "",
+      fail_phenomenon: "限速備援系統異常",
+      fail_status: "",
+      fail_dept: "",
+      fail_cmwo: "113-C1-16958",
+      cmwo_url:
+        "https://ap.nmmis.railway.gov.tw/maximo/ui/maximo.jsp?event=loadapp&value=zz_cmwo&uniqueid=9327351",
+      rep_url:
+        "https://ap.nmmis.railway.gov.tw/maximo/ui/maximo.jsp?event=loadapp&value=zz_fnm_view&uniqueid=49656",
+      from: "MAY00",
+    },
+  ];
+
+  const refactorData = (data: typeof FailListDailyDatatest) => {
+    const counter: Record<string, { all_fail_quantity: number; Maintenance_fail_quantity: number; other_fail_quantity: number }> = {
+      A: { all_fail_quantity: 0, Maintenance_fail_quantity: 0, other_fail_quantity: 0 },
+      B: { all_fail_quantity: 0, Maintenance_fail_quantity: 0, other_fail_quantity: 0 },
+      C: { all_fail_quantity: 0, Maintenance_fail_quantity: 0, other_fail_quantity: 0 },
+      All: { all_fail_quantity: 0, Maintenance_fail_quantity: 0, other_fail_quantity: 0 }
+    };
+
+    // Initialize counters
+    data.forEach(({ fail_lvl }) => {
+      if (counter[fail_lvl]) {
+        counter[fail_lvl].all_fail_quantity += 1;
+        counter[fail_lvl].Maintenance_fail_quantity += 1; // Assuming all are Maintenance
+        counter[fail_lvl].other_fail_quantity += 1; // Assuming all are Other
+      }
+    });
+
+    // Calculate All totals
+    const allLevelCounts = counter["All"];
+    ["A", "B", "C"].forEach(lvl => {
+      allLevelCounts.all_fail_quantity += counter[lvl].all_fail_quantity;
+      allLevelCounts.Maintenance_fail_quantity += counter[lvl].Maintenance_fail_quantity;
+      allLevelCounts.other_fail_quantity += counter[lvl].other_fail_quantity;
+    });
+
+    // Prepare new data structure in required order
+    const ReportLevelCardData = ["A", "B", "C", "All"].map(lvl => ({
+      fail_lvl: lvl,
+      ...counter[lvl],
+    }));
+
+    return ReportLevelCardData;
+  };
+
+  const ReportLevelCardData = refactorData(FailListDailyDatatest);
 
   return (
-    <main className=" grow bg-neutral-100 overflow-hidden relative">
-        <ClientPage Data={ChartData} listData={listData.data}/>
+    <main className="grow bg-neutral-100 overflow-hidden relative">
+      <ClientPage fail_list={FailListDailyDatatest} ReportLevelCardData={ReportLevelCardData}/>
     </main>
   );
-  
 }
