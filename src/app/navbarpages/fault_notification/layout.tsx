@@ -10,6 +10,7 @@ export default function DashboardLayout({
   const navItems = [
     { name: "每日故障通報", path: "/navbarpages/fault_notification/daily_report" },
     { name: "年度故障通報", path: "/navbarpages/fault_notification/annual_report" },
+    { name: "ATP故障分析", path: "/navbarpages/fault_notification/ATP_report" },
    
   ];
   return (
