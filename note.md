@@ -97,6 +97,14 @@ Other: board overflow :
                         - date function deoplyment detail /depot
                         - 機廠檢修清單
 
+
+
+9/12 進度：
+                每日故障通報 -Done
+                年度故障通報
+                ATP故障通報
+                3D loading 
+
 討論：
 Q:A級故障 是否有其他單位？  
 A:未來需要 先留

@@ -1,14 +1,14 @@
 import React, { PureComponent } from "react";
 import { PieChart, Pie, Sector, ResponsiveContainer } from "recharts";
 
-const data = [null];
+// const data = [null];
 
-// const data = [
-//   { name: '太魯閣 - TEMU1000', value: 100 },
-//   { name: '普悠瑪 - TEMU2000', value: 100 },
-//   { name: '新自強號 - MEU3000', value: 150 },
-//   { name: 'PP電力機車 - E1000', value: 90 },
-// ];
+const data = [
+  { name: '太魯閣 - TEMU1000', value: 100 },
+  { name: '普悠瑪 - TEMU2000', value: 100 },
+  { name: '新自強號 - MEU3000', value: 150 },
+  { name: 'PP電力機車 - E1000', value: 90 },
+];
 
 interface CustomSectorProps {
   cx: number;
