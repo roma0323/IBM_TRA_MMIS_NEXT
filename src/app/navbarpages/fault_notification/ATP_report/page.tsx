@@ -194,8 +194,7 @@ export default async function Page({
   ];
   return (
     <main className="grow bg-neutral-100 overflow-hidden relative">
-      <ClientPage testData={test} cartypeData={refactoredCartype} refactored故障要因分析={refactored故障要因分析} listData={list}
-      />
+      <ClientPage testData={test} cartypeData={refactoredCartype} refactored故障要因分析={refactored故障要因分析} listData={list} 故障設備分析={故障設備分析} />
     </main>
   );
 }

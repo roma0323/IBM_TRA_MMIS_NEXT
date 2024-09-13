@@ -1,5 +1,4 @@
-"use client";
-
+'use client'
 import React, { useState } from "react";
 import BoardTitleSection from "@/components/BoardTitleSection";
 import PieChart from "@/components/fault_notification/annual_report/PieChart";
@@ -13,7 +12,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-type ClientPageProps ={
+type ClientPageProps = {
   testData: Array<{
     year: string;
     month: string;
@@ -36,16 +35,28 @@ type ClientPageProps ={
     dept: string;
     description: string;
   }>;
-}
+  故障設備分析: Array<{
+    key: string;
+    cnt: number;
+    percentage: number;
+    event: Array<{
+      key: string;
+      cnt: number;
+      percentage: number;
+    }>;
+  }>;
+};
 
 const ClientPage: React.FC<ClientPageProps> = ({
   testData,
   cartypeData,
   refactored故障要因分析,
   listData,
+  故障設備分析,
 }) => {
   const [selectedMonth, setSelectedMonth] = useState<string | null>(null);
   const [filteredListData, setFilteredListData] = useState(listData);
+  const [expandedRows, setExpandedRows] = useState<Set<string>>(new Set());
 
   const totalFailCnt = testData.reduce(
     (sum, item) => sum + parseInt(item.failcnt, 10),
@@ -55,8 +66,22 @@ const ClientPage: React.FC<ClientPageProps> = ({
 
   const handleRowClick = (month: string) => {
     setSelectedMonth(month);
-    const filteredData = listData.filter(item => item.enterdate.includes(`-${month}-`));
+    const filteredData = listData.filter((item) =>
+      item.enterdate.includes(`-${month}-`)
+    );
     setFilteredListData(filteredData);
+  };
+
+  const handleExpandClick = (key: string) => {
+    setExpandedRows((prev) => {
+      const newSet = new Set(prev);
+      if (newSet.has(key)) {
+        newSet.delete(key);
+      } else {
+        newSet.add(key);
+      }
+      return newSet;
+    });
   };
 
   return (
@@ -66,10 +91,7 @@ const ClientPage: React.FC<ClientPageProps> = ({
           title="年度總覽"
           content={
             <div className="size-full flex justify-around items-center">
-              <DataCard
-                text={totalFailCnt.toString()}
-                text1="年度故障次數"
-              />
+              <DataCard text={totalFailCnt.toString()} text1="年度故障次數" />
               <DataCard
                 text={averageFailCnt.toFixed(2).toString()}
                 text1="年度日均故障數"
@@ -82,7 +104,7 @@ const ClientPage: React.FC<ClientPageProps> = ({
         <BoardTitleSection
           title="各月份故障"
           content={
-            <div className="mx-4">
+            <>
               <Table>
                 <TableHeader>
                   <TableRow>
@@ -97,7 +119,9 @@ const ClientPage: React.FC<ClientPageProps> = ({
                       key={item.month}
                       onClick={() => handleRowClick(item.month)}
                     >
-                      <TableCell className="font-medium">{item.month}</TableCell>
+                      <TableCell className="font-medium">
+                        {item.month}
+                      </TableCell>
                       <TableCell>{item.failcnt}</TableCell>
                       <TableCell className="text-right">
                         {parseFloat(item.dailyfailcnt).toFixed(2)}
@@ -106,10 +130,7 @@ const ClientPage: React.FC<ClientPageProps> = ({
                   ))}
                 </TableBody>
               </Table>
-              {selectedMonth && (
-                <div className="mt-4">Selected Month: {selectedMonth}</div>
-              )}
-            </div>
+            </>
           }
         />
       </div>
@@ -135,7 +156,43 @@ const ClientPage: React.FC<ClientPageProps> = ({
           title="故障設備分析"
           content={
             <div className=" size-full">
-              
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>故障因子</TableHead>
+                    <TableHead>值</TableHead>
+                    <TableHead className="text-right">百分比</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {故障設備分析.map((item) => (
+                    <React.Fragment key={item.key}>
+                      <TableRow onClick={() => handleExpandClick(item.key)} className={expandedRows.has(item.key) ? "bg-slate-100" : ""}
+                      >
+                        <TableCell className="font-medium ">
+                          {item.key}
+                        </TableCell>
+                        <TableCell>{item.cnt}</TableCell>
+                        <TableCell className="text-right">
+                          {item.percentage}
+                        </TableCell>
+                      </TableRow>
+                      {expandedRows.has(item.key) &&
+                        item.event.map((event_item) => (
+                          <TableRow key={event_item.key}>
+                            <TableCell className="text-center text-xs">
+                              {event_item.key}
+                            </TableCell>
+                            <TableCell>{event_item.cnt}</TableCell>
+                            <TableCell className="text-right">
+                              {event_item.percentage}
+                            </TableCell>
+                          </TableRow>
+                        ))}
+                    </React.Fragment>
+                  ))}
+                </TableBody>
+              </Table>
             </div>
           }
         />
@@ -159,17 +216,21 @@ const ClientPage: React.FC<ClientPageProps> = ({
                 </TableHeader>
                 <TableBody>
                   {filteredListData.map((item) => (
-                    <TableRow key={item.enterdate} onClick={() => handleRowClick(item.enterdate)}>
-                      <TableCell className="font-medium">{item.enterdate}</TableCell>
+                    <TableRow key={item.enterdate}>
+                      <TableCell className="font-medium">
+                        {item.enterdate}
+                      </TableCell>
                       <TableCell>{item.trainno}</TableCell>
                       <TableCell>{item.assetgroup}</TableCell>
                       <TableCell>{item.assetnum}</TableCell>
                       <TableCell>{item.dept}</TableCell>
-                      <TableCell className="text-right">{item.description}</TableCell>
+                      <TableCell className="text-right">
+                        {item.description}
+                      </TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
-              </Table>{" "}
+              </Table>
             </div>
           }
         />
