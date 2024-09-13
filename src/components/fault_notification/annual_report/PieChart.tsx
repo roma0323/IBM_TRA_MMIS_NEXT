@@ -8,20 +8,9 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-const data = [
-  { name: "Group A", value: 400 },
-  { name: "Group B", value: 300 },
-  { name: "Group C", value: 300 },
-  { name: "Group D", value: 200 },
-  { name: "Group A", value: 400 },
-  { name: "Group B", value: 300 },
-  { name: "Group C", value: 300 },
-  { name: "Group D", value: 200 },
-];
-
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
-const CustomTooltip = ({ active, payload }: { active?: boolean; payload?: any }) => {
+const CustomTooltip = ({ active, payload, data }: { active?: boolean; payload?: any; data: any[] }) => {
   if (active && payload && payload.length) {
     const total = data.reduce((sum, entry) => sum + entry.value, 0);
     const value = payload[0].value;
@@ -45,8 +34,9 @@ const CustomTooltip = ({ active, payload }: { active?: boolean; payload?: any })
   return null;
 };
 
-export default class Example extends PureComponent {
+export default class Example extends PureComponent<{ data: any[] }> {
   render() {
+    const { data } = this.props;
     return (
       <ResponsiveContainer width="100%" height="100%">
         <PieChart>
@@ -66,7 +56,7 @@ export default class Example extends PureComponent {
               />
             ))}
           </Pie>
-          <Tooltip content={<CustomTooltip />} />
+          <Tooltip content={<CustomTooltip data={data} />} />
         </PieChart>
       </ResponsiveContainer>
     );

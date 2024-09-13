@@ -69,27 +69,20 @@ export default async function Page({
     {
       year: "2024",
       month: "10",
-      kpicartype: "電力機車",
+      kpicartype: "客車",
       atp: "1",
       duty: "0",
       dutydept: "",
       failtype: "B",
     },
-    {
-      year: "2024",
-      month: "12",
-      kpicartype: "通勤列車",
-      atp: "0",
-      duty: "1",
-      dutydept: "",
-      failtype: "B",
-    },
+    
   ];
 
   // Function to process data
   const processData = (data: any[], failtype: string) => {
     let duty_num = 0;
     let atp_num = 0;
+    const kpicartypeCounts: { [key: string]: number } = {};
 
     data.forEach((item) => {
       if (item.atp === "1") {
@@ -97,6 +90,11 @@ export default async function Page({
       }
       if (item.duty === "1") {
         duty_num++;
+      }
+      if (kpicartypeCounts[item.kpicartype]) {
+        kpicartypeCounts[item.kpicartype]++;
+      } else {
+        kpicartypeCounts[item.kpicartype] = 1;
       }
     });
 
@@ -131,6 +129,7 @@ export default async function Page({
       total: data.length,
       duty_num,
       atp_num,
+      kpicartypeCounts,
       monthlyData,
     };
   };

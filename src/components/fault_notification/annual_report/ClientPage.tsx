@@ -14,12 +14,17 @@ interface AggregatedData {
   total: number;
   duty_num: number;
   atp_num: number;
+  kpicartypeCounts: { [key: string]: number }; // Added kpicartypeCounts
   monthlyData: { name: string; All: number; duty: number; ATP: number }[];
 }
 
 const ClientPage: React.FC<{ aggregatedData: AggregatedData[] }> = ({ aggregatedData }) => {
   const [activeCardIndex, setActiveCardIndex] = useState<number | null>(0);
   const [selectFactory, setSelectFactory] = useState<string>("A");
+
+  const pieChartData = activeCardIndex !== null
+    ? Object.entries(aggregatedData[activeCardIndex].kpicartypeCounts).map(([name, value]) => ({ name, value }))
+    : [];
 
   return (
     <div className="relative flex justify-between p-6 gap-6 h-full">
@@ -42,18 +47,22 @@ const ClientPage: React.FC<{ aggregatedData: AggregatedData[] }> = ({ aggregated
           }
         />
       </div>
-      <div className="grow flex   grid grid-rows-2  gap-4 relative">
+      <div className="grow flex grid grid-rows-2 gap-4 relative">
         <BoardTitleSection
           title="年度累積故障通報-依車種"
           content={
             <div className="size-full flex items-center relative">
               <div className="grid grid-cols-4 gap-4 w-3/5 h-full justify-items-center items-center">
-                <DataCard text={aggregatedData[0].total.toString()} text1="故障通報" />
-                <DataCard text={aggregatedData[0].duty_num.toString()} text1="行車責任事故" />
-                <DataCard text={aggregatedData[0].atp_num.toString()} text1="ATP故障" />
+                {activeCardIndex !== null && (
+                  <>
+                    {Object.entries(aggregatedData[activeCardIndex].kpicartypeCounts).map(([key, value]) => (
+                      <DataCard key={key} text={value.toString()} text1={key} />
+                    ))}
+                  </>
+                )}
               </div>
-              <div className=" grow  h-full">
-                <PieChart />
+              <div className="grow h-full">
+                <PieChart data={pieChartData} />
               </div>
             </div>
           }
