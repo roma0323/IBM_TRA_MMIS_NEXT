@@ -27,8 +27,10 @@ const CustomTooltip = ({ active, payload, data }: { active?: boolean; payload?: 
           borderRadius: "5px",
         }}
       >
-        <p className="label" style={{ color }}>{`${payload[0].name} : ${percentage}%`}</p>
-      </div>
+        <p className="label" style={{ color }}>{`${payload[0].name}`}</p>
+        <p className="label" style={{ color }}>{`數量 : ${value}`}</p>
+        <p className="label" style={{ color }}>{`比例 : ${percentage}%`}</p>
+        </div>
     );
   }
 
