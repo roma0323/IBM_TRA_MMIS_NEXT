@@ -17,7 +17,7 @@ type Props = {
     total: number;
     duty_num: number;
     atp_num: number;
-    monthlyData: MonthlyData[];
+    monthlyData: { [month: string]: { [kpicartype: string]: number } };
   };
 };
 

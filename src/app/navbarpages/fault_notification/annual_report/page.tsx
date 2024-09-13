@@ -84,6 +84,29 @@ export default async function Page({
     let atp_num = 0;
     const kpicartypeCounts: { [key: string]: number } = {};
 
+    const kpicartypes = [
+      "城際列車",
+      "通勤列車",
+      "電力機車",
+      "柴電機車",
+      "柴液機車",
+      "柴油客車",
+      "客車",
+      "貨車",
+    ];
+
+    const monthlyDataBykpicartype: { [month: string]: { [kpicartype: string]: number } } = {};
+    const monthlyData: { [month: string]: { All: number; duty: number; ATP: number } } = {};
+    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+    months.forEach((month) => {
+      monthlyDataBykpicartype[month] = {};
+      kpicartypes.forEach((type) => {
+        monthlyDataBykpicartype[month][type] = 0;
+      });
+      monthlyData[month] = { All: 0, duty: 0, ATP: 0 };
+    });
+
     data.forEach((item) => {
       if (item.atp === "1") {
         atp_num++;
@@ -96,31 +119,16 @@ export default async function Page({
       } else {
         kpicartypeCounts[item.kpicartype] = 1;
       }
-    });
 
-    const monthlyData = [
-      { name: "Jan", All: 0, duty: 0, ATP: 0 },
-      { name: "Feb", All: 0, duty: 0, ATP: 0 },
-      { name: "Mar", All: 0, duty: 0, ATP: 0 },
-      { name: "Apr", All: 0, duty: 0, ATP: 0 },
-      { name: "May", All: 0, duty: 0, ATP: 0 },
-      { name: "Jun", All: 0, duty: 0, ATP: 0 },
-      { name: "Jul", All: 0, duty: 0, ATP: 0 },
-      { name: "Aug", All: 0, duty: 0, ATP: 0 },
-      { name: "Sep", All: 0, duty: 0, ATP: 0 },
-      { name: "Oct", All: 0, duty: 0, ATP: 0 },
-      { name: "Nov", All: 0, duty: 0, ATP: 0 },
-      { name: "Dec", All: 0, duty: 0, ATP: 0 },
-    ];
-
-    data.forEach((item) => {
       const monthIndex = parseInt(item.month, 10) - 1;
-      monthlyData[monthIndex].All++;
+      const monthName = months[monthIndex];
+      monthlyDataBykpicartype[monthName][item.kpicartype]++;
+      monthlyData[monthName].All++;
       if (item.atp === "1") {
-        monthlyData[monthIndex].ATP++;
+        monthlyData[monthName].ATP++;
       }
       if (item.duty === "1") {
-        monthlyData[monthIndex].duty++;
+        monthlyData[monthName].duty++;
       }
     });
 
@@ -131,6 +139,7 @@ export default async function Page({
       atp_num,
       kpicartypeCounts,
       monthlyData,
+      monthlyDataBykpicartype,
     };
   };
 

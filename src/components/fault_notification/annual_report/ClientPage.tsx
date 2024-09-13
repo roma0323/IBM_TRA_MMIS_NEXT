@@ -15,7 +15,8 @@ interface AggregatedData {
   duty_num: number;
   atp_num: number;
   kpicartypeCounts: { [key: string]: number }; // Added kpicartypeCounts
-  monthlyData: { name: string; All: number; duty: number; ATP: number }[];
+  monthlyData: { [month: string]: { [kpicartype: string]: number } };
+  monthlyDataBykpicartype: { [month: string]: { [kpicartype: string]: number } }; // Added monthlyDataBykpicartype
 }
 
 const ClientPage: React.FC<{ aggregatedData: AggregatedData[] }> = ({ aggregatedData }) => {
@@ -68,11 +69,13 @@ const ClientPage: React.FC<{ aggregatedData: AggregatedData[] }> = ({ aggregated
           }
         />
 
-        <BoardTitleSection
+<BoardTitleSection
           title="各月份故障通報-依車種"
           content={
             <div className="size-full">
-              <GroupBarChart />
+              {activeCardIndex !== null && (
+                <GroupBarChart data={aggregatedData[activeCardIndex].monthlyDataBykpicartype} />
+              )}
             </div>
           }
         />
