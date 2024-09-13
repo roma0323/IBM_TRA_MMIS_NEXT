@@ -13,6 +13,10 @@ export const getCarColor = (carcatalog: string): string => {
       "全局": "#397EFF",
       "動力車": "#397EFF",
       "非常態列車": "#1f2937",
+      "故障通報": "#0E1F40",
+      "行車責任事故": "#2A5EBF",
+      "ATP": "#537FD1",
+
     };
   
     return colorMap[carcatalog] || "#000000"; // Default color

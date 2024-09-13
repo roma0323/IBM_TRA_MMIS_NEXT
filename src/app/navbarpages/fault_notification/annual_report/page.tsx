@@ -12,7 +12,7 @@ export default async function Page({
     {
       year: "2024",
       month: "01",
-      kpicartype: "電力機車",
+      kpicartype: "城際列車",
       atp: "0",
       duty: "1",
       dutydept: "",
@@ -30,7 +30,7 @@ export default async function Page({
     {
       year: "2024",
       month: "12",
-      kpicartype: "電力機車",
+      kpicartype: "柴電機車",
       atp: "1",
       duty: "0",
       dutydept: "",
@@ -39,7 +39,43 @@ export default async function Page({
     {
       year: "2024",
       month: "12",
-      kpicartype: "通勤列車",
+      kpicartype: "柴液機車",
+      atp: "0",
+      duty: "1",
+      dutydept: "",
+      failtype: "A",
+    },
+    {
+      year: "2024",
+      month: "12",
+      kpicartype: "客車",
+      atp: "0",
+      duty: "1",
+      dutydept: "",
+      failtype: "A",
+    },
+    {
+      year: "2024",
+      month: "12",
+      kpicartype: "柴油客車",
+      atp: "0",
+      duty: "1",
+      dutydept: "",
+      failtype: "A",
+    },
+    {
+      year: "2024",
+      month: "12",
+      kpicartype: "貨車",
+      atp: "0",
+      duty: "1",
+      dutydept: "",
+      failtype: "A",
+    },
+    {
+      year: "2024",
+      month: "12",
+      kpicartype: "電力機車",
       atp: "0",
       duty: "1",
       dutydept: "",
@@ -96,7 +132,7 @@ export default async function Page({
     ];
 
     const monthlyDataBykpicartype: { [month: string]: { [kpicartype: string]: number } } = {};
-    const monthlyData: { [month: string]: { All: number; duty: number; ATP: number } } = {};
+    const monthlyData: { [month: string]: { 故障通報: number; 行車責任事故: number; ATP: number } } = {};
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
     months.forEach((month) => {
@@ -104,7 +140,7 @@ export default async function Page({
       kpicartypes.forEach((type) => {
         monthlyDataBykpicartype[month][type] = 0;
       });
-      monthlyData[month] = { All: 0, duty: 0, ATP: 0 };
+      monthlyData[month] = { 故障通報: 0, 行車責任事故: 0, ATP: 0 };
     });
 
     data.forEach((item) => {
@@ -123,12 +159,12 @@ export default async function Page({
       const monthIndex = parseInt(item.month, 10) - 1;
       const monthName = months[monthIndex];
       monthlyDataBykpicartype[monthName][item.kpicartype]++;
-      monthlyData[monthName].All++;
+      monthlyData[monthName].故障通報++;
       if (item.atp === "1") {
         monthlyData[monthName].ATP++;
       }
       if (item.duty === "1") {
-        monthlyData[monthName].duty++;
+        monthlyData[monthName].行車責任事故++;
       }
     });
 

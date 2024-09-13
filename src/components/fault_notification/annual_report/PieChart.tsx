@@ -7,26 +7,27 @@ import {
   Cell,
   ResponsiveContainer,
 } from "recharts";
+import { getCarColor } from "@/lib/getCarColor"; // Import the getCarColor function
 
-const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
 const CustomTooltip = ({ active, payload, data }: { active?: boolean; payload?: any; data: any[] }) => {
   if (active && payload && payload.length) {
     const total = data.reduce((sum, entry) => sum + entry.value, 0);
     const value = payload[0].value;
     const percentage = ((value / total) * 100).toFixed(2);
+    const color = getCarColor(payload[0].name); // Get color based on the name
 
     return (
       <div
         className="custom-tooltip"
         style={{
           backgroundColor: "white",
-          border: "1px solid #ccc",
+          border: `1px solid ${color}`,
           padding: "10px",
           borderRadius: "5px",
         }}
       >
-        <p className="label">{`${payload[0].name} : ${percentage}%`}</p>
+        <p className="label" style={{ color }}>{`${payload[0].name} : ${percentage}%`}</p>
       </div>
     );
   }
@@ -52,7 +53,7 @@ export default class Example extends PureComponent<{ data: any[] }> {
             {data.map((entry, index) => (
               <Cell
                 key={`cell-${index}`}
-                fill={COLORS[index % COLORS.length]}
+                fill={getCarColor(entry.name)} // Use getCarColor to set the color
               />
             ))}
           </Pie>

@@ -6,9 +6,6 @@ import BoardTitleSection from "@/components/BoardTitleSection";
 import GroupBarChart from "@/components/fault_notification/annual_report/GroupBarChart";
 import PieChart from "@/components/fault_notification/annual_report/PieChart";
 import { DataCard } from "@/components/train_deployment/DataCard";
-
-import { FailListItem, ReportLevelCardDataType } from "@/types/type";
-
 interface AggregatedData {
   failtype: string;
   total: number;
@@ -16,16 +13,22 @@ interface AggregatedData {
   atp_num: number;
   kpicartypeCounts: { [key: string]: number }; // Added kpicartypeCounts
   monthlyData: { [month: string]: { [kpicartype: string]: number } };
-  monthlyDataBykpicartype: { [month: string]: { [kpicartype: string]: number } }; // Added monthlyDataBykpicartype
+  monthlyDataBykpicartype: {
+    [month: string]: { [kpicartype: string]: number };
+  }; // Added monthlyDataBykpicartype
 }
 
-const ClientPage: React.FC<{ aggregatedData: AggregatedData[] }> = ({ aggregatedData }) => {
+const ClientPage: React.FC<{ aggregatedData: AggregatedData[] }> = ({
+  aggregatedData,
+}) => {
   const [activeCardIndex, setActiveCardIndex] = useState<number | null>(0);
-  const [selectFactory, setSelectFactory] = useState<string>("A");
 
-  const pieChartData = activeCardIndex !== null
-    ? Object.entries(aggregatedData[activeCardIndex].kpicartypeCounts).map(([name, value]) => ({ name, value }))
-    : [];
+  const pieChartData =
+    activeCardIndex !== null
+      ? Object.entries(aggregatedData[activeCardIndex].kpicartypeCounts).map(
+          ([name, value]) => ({ name, value })
+        )
+      : [];
 
   return (
     <div className="relative flex justify-between p-6 gap-6 h-full">
@@ -56,7 +59,9 @@ const ClientPage: React.FC<{ aggregatedData: AggregatedData[] }> = ({ aggregated
               <div className="grid grid-cols-4 gap-4 w-3/5 h-full justify-items-center items-center">
                 {activeCardIndex !== null && (
                   <>
-                    {Object.entries(aggregatedData[activeCardIndex].kpicartypeCounts).map(([key, value]) => (
+                    {Object.entries(
+                      aggregatedData[activeCardIndex].kpicartypeCounts
+                    ).map(([key, value]) => (
                       <DataCard key={key} text={value.toString()} text1={key} />
                     ))}
                   </>
@@ -69,12 +74,14 @@ const ClientPage: React.FC<{ aggregatedData: AggregatedData[] }> = ({ aggregated
           }
         />
 
-<BoardTitleSection
+        <BoardTitleSection
           title="各月份故障通報-依車種"
           content={
             <div className="size-full">
               {activeCardIndex !== null && (
-                <GroupBarChart data={aggregatedData[activeCardIndex].monthlyDataBykpicartype} />
+                <GroupBarChart
+                  data={aggregatedData[activeCardIndex].monthlyDataBykpicartype}
+                />
               )}
             </div>
           }

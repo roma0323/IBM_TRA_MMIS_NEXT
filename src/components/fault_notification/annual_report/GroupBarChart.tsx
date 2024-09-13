@@ -1,10 +1,36 @@
 'use client'
 import React from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { getCarColor } from "@/lib/getCarColor"; 
 
 interface GroupBarChartProps {
   data: { [month: string]: { [kpicartype: string]: number } };
 }
+
+const CustomTooltip = ({ active, payload, label }: { active?: boolean; payload?: any; label?: string }) => {
+  if (active && payload && payload.length) {
+    return (
+      <div
+      className="text-sm"
+      style={{
+        backgroundColor: "white",
+        border: "1px solid #ccc",
+        padding: "10px",
+        borderRadius: "5px",
+      }}
+      >
+      <p>{`${label}`}</p>
+      {payload.map((entry: any, index: number) => (
+        <p key={`item-${index}`} style={{ color: entry.fill }}>
+        {`${entry.name}: ${entry.value}`}
+        </p>
+      ))}
+      </div>
+    );
+  }
+
+  return null;
+};
 
 const GroupBarChart: React.FC<GroupBarChartProps> = ({ data }) => {
   // Transform the data into a format suitable for the BarChart
@@ -28,19 +54,13 @@ const GroupBarChart: React.FC<GroupBarChartProps> = ({ data }) => {
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="month" />
         <YAxis />
-        <Tooltip />
-        {kpicartypes.map((kpicartype, index) => (
-          <Bar key={kpicartype} dataKey={kpicartype} fill={getColor(index)} />
+        <Tooltip content={<CustomTooltip />} />
+        {kpicartypes.map((kpicartype) => (
+          <Bar key={kpicartype} dataKey={kpicartype} fill={getCarColor(kpicartype)} />
         ))}
       </BarChart>
     </ResponsiveContainer>
   );
-};
-
-// Function to get color based on index
-const getColor = (index: number) => {
-  const colors = ['#82ca9d', '#8884d8', '#821a1d', '#ffc658', '#ff7300', '#a4de6c', '#d0ed57', '#8dd1e1'];
-  return colors[index % colors.length];
 };
 
 export default GroupBarChart;

@@ -1,4 +1,5 @@
 import React from "react";
+import { getCarColor } from "@/lib/getCarColor"; // Import the getCarColor function
 
 interface Props {
   text: string;
@@ -6,10 +7,12 @@ interface Props {
 }
 
 export const DataCard = ({ text, text1 }: Props): JSX.Element => {
+  const color = getCarColor(text1); // Get color based on the text
+
   return (
-    <div className="flex h-[75px]  relative flex-col items-center justify-center p-2    ">
-      <div className=" text-4xl">{text}</div>
-      <div className=" text-sm ">{text1}</div>
+    <div className="flex h-[75px] relative flex-col items-center justify-center p-2">
+      <div className="text-4xl" >{text}</div>
+      <div className="text-sm" style={{ color: color }}>{text1}</div>
     </div>
   );
 };

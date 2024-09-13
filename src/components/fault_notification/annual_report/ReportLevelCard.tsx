@@ -35,7 +35,7 @@ export const ReportLevelCard: React.FC<Props> = ({ isActive, onToggle, CardDataB
         <span className="text-8xl">{CardDataByLevel.failtype}</span>
         <DataCard text={CardDataByLevel.total.toString()} text1="故障通報" />
         <DataCard text={CardDataByLevel.duty_num.toString()} text1="行車責任事故" />
-        <DataCard text={CardDataByLevel.atp_num.toString()} text1="ATP故障" />
+        <DataCard text={CardDataByLevel.atp_num.toString()} text1="ATP" />
       </div>
 
       <div className="h-32 w-full">
