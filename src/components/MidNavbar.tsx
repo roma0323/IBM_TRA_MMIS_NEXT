@@ -1,8 +1,8 @@
 "use client";
 import Link from "next/link";
 import React from "react";
-import { usePathname } from 'next/navigation';
 import { DatePickerForm } from "@/components/ui/date_picker";
+import { usePathname, useSearchParams } from "next/navigation";
 
 interface NavItem {
   name: string;
@@ -15,6 +15,8 @@ interface MidNavbarProps {
 
 const MidNavbar: React.FC<MidNavbarProps> = ({ navItems }) => {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const date = searchParams?.get("date") || "";
 
   // Find the active item based on the current pathname
   const activeItem = navItems.find(item => pathname === item.path);
@@ -34,7 +36,7 @@ const MidNavbar: React.FC<MidNavbarProps> = ({ navItems }) => {
 
       <div className="flex items-start gap-1">
         {navItems.map((item) => (
-          <Link key={item.name} href={item.path}>
+          <Link key={item.name} href={`${item.path}?date=${date}`}>
             <div
               className={`inline-flex h-fit items-center px-4 py-2 ${
                 pathname === item.path ? 'mid_nav_active' : 'mid_nav_unactive'

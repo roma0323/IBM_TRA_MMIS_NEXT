@@ -8,7 +8,6 @@ export default async function Page({
 }: {
   searchParams: { date?: string };
 }) {
-  const date = searchParams.date || ""; // Get the 'date' parameter from the URL or set a default
 
   const fetchedData = await getFacRepairList();
   return (

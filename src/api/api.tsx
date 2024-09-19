@@ -140,9 +140,11 @@ export async function getSumStatusDetailListMultiplierZeorDeptParamCartypeParamQ
   return res.json();
 }
 
-export async function getFacRepairYearPlan(yearString?: string) {
+export async function getFacRepairYearPlan(date?: string) {
   //fetch 機廠檢修圖表
-  
+  let formattedDate = dateFormat(date);
+  const yearString = formattedDate.split("-")[0];
+
 
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getFacRepairYearPlan&year=${yearString}`,
@@ -175,7 +177,7 @@ export async function getFacRepairListByMonth(date?: string) {
   return res.json();
 }
 export async function getFacRepairList() {
-  //fetch 機廠檢修清單
+  //fetch 機廠檢修清單 (日期不變)
   
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getSumFacStatusList`,

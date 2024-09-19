@@ -22,9 +22,9 @@ const monthNames = [
   "December",
 ];
 
-async function getChartData(yearString?: string) {
+async function getChartData(date?: string) {
   try {
-    const data = await getFacRepairYearPlan(yearString);
+    const data = await getFacRepairYearPlan(date);
 
     const transformData = (dataset: factoryMaintenanceDataSetByfactory) => {
       const monthData = monthNames.map((month, index) => {
@@ -64,12 +64,8 @@ export default async function Page({
 }: {
   searchParams: { date?: string ,type?:string};
 }) {
-  const dateString = searchParams.date || ""; 
-  const date = new Date(dateString);
-  const year = date.getFullYear();
-  const yearString = year.toString();
 
-  const ChartData = await getChartData(yearString);
+  const ChartData = await getChartData(searchParams.date);
   const listData = await getFacRepairListByMonth(searchParams.date);
   //TODO :avoid waterfall
 
