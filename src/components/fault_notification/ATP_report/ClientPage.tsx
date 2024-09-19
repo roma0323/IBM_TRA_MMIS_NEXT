@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+
 import BoardTitleSection from "@/components/BoardTitleSection";
 import PieChartGradient from "@/components/fault_notification/annual_report/PieChartGradient";
 import { DataCard } from "@/components/train_deployment/DataCard";
@@ -13,45 +14,20 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
+import {
+  ATPFailListByMonth,
+  RefactoredCarTypeForPieChart,
+  FaultListDetail,
+  FaultEquipmentAnalysis,
+} from "@/types/type";
+
 type ClientPageProps = {
-  lastYearDataForAreaChart: Array<{
-    year: string;
-    month: string;
-    failcnt: string;
-    dailyfailcnt: string;
-  }>;
-  thisYearDataForAreaChart: Array<{
-    year: string;
-    month: string;
-    failcnt: string;
-    dailyfailcnt: string;
-  }>;
-  cartypeData: Array<{
-    name: string;
-    value: number;
-  }>;
-  refactoredfaultReasonAnalysis: Array<{
-    name: string;
-    value: number;
-  }>;
-  faultListDetail: Array<{
-    enterdate: string;
-    trainno: string;
-    assetnum: string;
-    assetgroup: string;
-    dept: string;
-    description: string;
-  }>;
-  faultEquipmentAnalysis: Array<{
-    key: string;
-    cnt: number;
-    percentage: number;
-    event: Array<{
-      key: string;
-      cnt: number;
-      percentage: number;
-    }>;
-  }>;
+  lastYearDataForAreaChart: ATPFailListByMonth[];
+  thisYearDataForAreaChart: ATPFailListByMonth[];
+  cartypeData: RefactoredCarTypeForPieChart[];
+  refactoredfaultReasonAnalysis: RefactoredCarTypeForPieChart[];
+  faultListDetail: FaultListDetail[];
+  faultEquipmentAnalysis: FaultEquipmentAnalysis[];
 };
 
 const ClientPage: React.FC<ClientPageProps> = ({
@@ -91,8 +67,6 @@ const ClientPage: React.FC<ClientPageProps> = ({
       return newSet;
     });
   };
- 
-
 
   const allMonths = new Set([
     ...thisYearDataForAreaChart.map((item) => item.month),

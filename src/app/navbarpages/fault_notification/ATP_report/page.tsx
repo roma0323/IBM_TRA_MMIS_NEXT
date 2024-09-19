@@ -1,87 +1,34 @@
 import ClientPage from "@/components/fault_notification/ATP_report/ClientPage";
-import { getATPFailYear } from "@/api/api";
-import { getATPFailListByYearAndCartype } from "@/api/api";
-import { getATPFailListByYearAndFactor } from "@/api/api";
-import { getATPFailListByYearAndElement } from "@/api/api";
-import { getATPFailListAndCartype } from "@/api/api";
+import { getATPFailYear, getATPFailListByYearAndCartype, getATPFailListByYearAndFactor, getATPFailListByYearAndElement, getATPFailListAndCartype } from "@/api/api";
+import { ATPFailListByMonth, ATPReasonByCarType, RefactoredCarTypeForPieChart, FaultListDetail, FaultEquipmentAnalysis } from "@/types/type";
 
 export default async function Page({
   searchParams,
 }: {
   searchParams: { date?: string; type?: string };
 }) {
-  // Function to refactor cartype array
-  type CarType = {
-    key: string;
-    cnt: number;
-    percentage: number;
-  };
-
   const refactorCartype = (
-    cartype: CarType[]
-  ): { name: string; value: number }[] => {
+    cartype: ATPReasonByCarType[]
+  ): RefactoredCarTypeForPieChart[] => {
     return cartype
       .map((item) => ({
         name: item.key,
         value: item.cnt,
       }))
-      .sort((a, b) => b.value - a.value); // Sort by value from big to small
+      .sort((a, b) => b.value - a.value);
   };
 
-  let overview_number: Array<{
-    year: string;
-    month: string;
-    failcnt: string;
-    dailyfailcnt: string;
-  }> = [];
-  overview_number = await getATPFailYear(searchParams.date);
+  const [overview_number, lastYearOverviewNumber, faultListByMonth, faultReasonAnalysis, faultEquipmentAnalysis, faultListDetail] = await Promise.all([
+    getATPFailYear(searchParams.date),
+    getATPFailYear(new Date(new Date(searchParams.date || new Date()).setFullYear(new Date(searchParams.date || new Date()).getFullYear() - 1)).toISOString().slice(0, 10)),
+    getATPFailListByYearAndCartype(searchParams.date),
+    getATPFailListByYearAndFactor(searchParams.date),
+    getATPFailListByYearAndElement(searchParams.date),
+    getATPFailListAndCartype(searchParams.date)
+  ]);
 
-  let lastYearDate = new Date(searchParams.date||"2024-09-09");
-  lastYearDate.setFullYear(lastYearDate.getFullYear() - 1);
-  let lastYearOverviewNumber = await getATPFailYear(
-    lastYearDate.toISOString().slice(0, 10)
-  );
-
-  let faultListByMonth: Array<{
-    key: string;
-    cnt: number;
-    percentage: number;
-  }> = [];
-  faultListByMonth = await getATPFailListByYearAndCartype(searchParams.date);
   const refactoredCartype = refactorCartype(faultListByMonth);
-
-  let faultReasonAnalysis: Array<{
-    key: string;
-    cnt: number;
-    percentage: number;
-  }> = [];
-
-  faultReasonAnalysis = await getATPFailListByYearAndFactor(searchParams.date);
   const refactoredfaultReasonAnalysis = refactorCartype(faultReasonAnalysis);
-
-  let faultEquipmentAnalysis: Array<{
-    key: string;
-    cnt: number;
-    percentage: number;
-    event: Array<{
-      key: string;
-      cnt: number;
-      percentage: number;
-    }>;
-  }> = [];
-  faultEquipmentAnalysis = await getATPFailListByYearAndElement(
-    searchParams.date
-  );
-
-  let faultListDetail: Array<{
-    enterdate: string;
-    trainno: string;
-    assetnum: string;
-    assetgroup: string;
-    dept: string;
-    description: string;
-  }>;
-  faultListDetail = await getATPFailListAndCartype(searchParams.date);
 
   return (
     <main className="grow bg-neutral-100 overflow-hidden relative">

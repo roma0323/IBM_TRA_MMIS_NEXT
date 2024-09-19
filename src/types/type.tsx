@@ -146,3 +146,40 @@ export type ReportLevelCardDataType = {
   other_fail_quantity: number;
 };
 
+export type ATPFailListByMonth = {
+  year: string;
+  month: string;
+  failcnt: string;
+  dailyfailcnt: string;
+};
+
+export type ATPReasonByCarType = {
+  key: string;
+  cnt: number;
+  percentage: number;
+};
+
+export type RefactoredCarTypeForPieChart = {
+  name: string;
+  value: number;
+};
+
+export type FaultListDetail = {
+  enterdate: string;
+  trainno: string;
+  assetnum: string;
+  assetgroup: string;
+  dept: string;
+  description: string;
+};
+
+export type FaultEquipmentAnalysis = {
+  key: string;
+  cnt: number;
+  percentage: number;
+  event: Array<{
+    key: string;
+    cnt: number;
+    percentage: number;
+  }>;
+};

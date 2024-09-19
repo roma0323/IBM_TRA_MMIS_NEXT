@@ -65,14 +65,14 @@ export default async function Page({
   searchParams: { date?: string ,type?:string};
 }) {
 
-  const ChartData = await getChartData(searchParams.date);
-  const listData = await getFacRepairListByMonth(searchParams.date);
-  //TODO :avoid waterfall
+  const [ChartData, listData] = await Promise.all([
+    getChartData(searchParams.date),
+    getFacRepairListByMonth(searchParams.date)
+  ]);
 
   return (
     <main className=" grow bg-neutral-100 overflow-hidden relative">
         <ClientPage Data={ChartData} listData={listData.data}/>
     </main>
   );
-  
 }
