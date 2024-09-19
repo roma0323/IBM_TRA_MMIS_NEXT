@@ -36,7 +36,7 @@ const CustomTooltip = ({ active, payload, data }: { active?: boolean; payload?: 
 
   return null;
 };
-
+// TODO: Add label 
 export default class Example extends PureComponent<{ data: any[] }> {
   render() {
     const { data } = this.props;

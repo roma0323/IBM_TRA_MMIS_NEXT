@@ -100,6 +100,9 @@ const ClientPage: React.FC<ClientPageProps> = ({
           }
         />
       </div>
+      {/* TODO  1~12 month show  */}
+      {/* TODO  add 日均故障件事折線圖 different years in same chart  */}
+      
       <div className="row-span-3 col-span-1 relative">
         <BoardTitleSection
           title="各月份故障"
@@ -185,6 +188,7 @@ const ClientPage: React.FC<ClientPageProps> = ({
                             </TableCell>
                             <TableCell>{event_item.cnt}</TableCell>
                             <TableCell className="text-right">
+                              //TODO: text align left
                               {event_item.percentage}
                             </TableCell>
                           </TableRow>
