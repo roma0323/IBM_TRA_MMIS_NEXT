@@ -1,7 +1,7 @@
 'use client'
 import React, { useState } from "react";
 import BoardTitleSection from "@/components/BoardTitleSection";
-import PieChart from "@/components/fault_notification/annual_report/PieChart";
+import PieChartGradient from "@/components/fault_notification/annual_report/PieChartGradient";
 import { DataCard } from "@/components/train_deployment/DataCard";
 import {
   Table,
@@ -143,7 +143,7 @@ const ClientPage: React.FC<ClientPageProps> = ({
           title="故障車型分析"
           content={
             <div className="size-full">
-              <PieChart data={cartypeData} />
+              <PieChartGradient data={cartypeData} />
             </div>
           }
         />
@@ -151,7 +151,7 @@ const ClientPage: React.FC<ClientPageProps> = ({
           title="故障要因分析"
           content={
             <div className="size-full">
-              <PieChart data={refactored故障要因分析} />
+              <PieChartGradient data={refactored故障要因分析} />
             </div>
           }
         />

@@ -18,10 +18,12 @@ export default async function Page({
   }
 
   const refactorCartype = (cartype: CarType[]): { name: string; value: number }[] => {
-    return cartype.map((item) => ({
-      name: item.key,
-      value: item.cnt,
-    }));
+    return cartype
+      .map((item) => ({
+        name: item.key,
+        value: item.cnt,
+      }))
+      .sort((a, b) => b.value - a.value); // Sort by value from big to small
   };
 
   let overview_number: Array<{

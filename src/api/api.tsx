@@ -13,9 +13,7 @@ export async function getSumStatusListAndsumtotalEqualone( //fetch 首頁所有�
 ): Promise<FetcheGetSumStatusList> {
   let formattedDate = dateFormat(date);
 
-  const wait = (ms: number) =>
-    new Promise((resolve) => setTimeout(resolve, ms));
-  await wait(2000);
+  
 
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getSumStatusList&qdate=${formattedDate}&sumtotal=1`,
@@ -37,9 +35,7 @@ export async function getSumStatusListAndCarcatalogEqualParam( //fetch 特定車
 ) {
   let formattedDate = dateFormat(date);
 
-  const wait = (ms: number) =>
-    new Promise((resolve) => setTimeout(resolve, ms));
-  await wait(2000);
+  
 
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getSumStatusList&qdate=${formattedDate}&carcatalog=${id}`,
@@ -73,9 +69,7 @@ export async function getSumStatusDetailListMultiplierZeor(
 ): Promise<FetcheGetSumStatusList> {
   //fetch All TrainByRow
   let formattedDate = dateFormat(date);
-  const wait = (ms: number) =>
-    new Promise((resolve) => setTimeout(resolve, ms));
-  await wait(2000);
+  
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getSumStatusList&multiplier=0&dept=&qdate=${formattedDate}`,
     {
@@ -148,9 +142,7 @@ export async function getSumStatusDetailListMultiplierZeorDeptParamCartypeParamQ
 
 export async function getFacRepairYearPlan(yearString?: string) {
   //fetch 機廠檢修圖表
-  const wait = (ms: number) =>
-    new Promise((resolve) => setTimeout(resolve, ms));
-  await wait(2000);
+  
 
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getFacRepairYearPlan&year=${yearString}`,
@@ -169,9 +161,7 @@ export async function getFacRepairListByMonth(date?: string) {
   let formattedDate = dateFormat(date);
   const yearString = formattedDate.split("-")[0];
   const monthString = formattedDate.split("-")[1];
-  const wait = (ms: number) =>
-    new Promise((resolve) => setTimeout(resolve, ms));
-  await wait(2000);
+  
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getSumFacStatusList&year=${yearString}&month=${monthString}`,
     {
@@ -186,9 +176,7 @@ export async function getFacRepairListByMonth(date?: string) {
 }
 export async function getFacRepairList() {
   //fetch 機廠檢修清單
-  const wait = (ms: number) =>
-    new Promise((resolve) => setTimeout(resolve, ms));
-  await wait(2000);
+  
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getSumFacStatusList`,
     {
@@ -207,9 +195,7 @@ export async function getSumFailListDaily(date?: string) {
 
   let formattedDate = dateFormat(date);
 
-  const wait = (ms: number) =>
-    new Promise((resolve) => setTimeout(resolve, ms));
-  await wait(2000);
+  
 
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getSumFailList&qdate=${formattedDate}`,
@@ -230,9 +216,7 @@ export async function getSumFailYearType(date?: string,failtype?: string) {
   let formattedDate = dateFormat(date);
   const yearString = formattedDate.split("-")[0];
   
-  const wait = (ms: number) =>
-    new Promise((resolve) => setTimeout(resolve, ms));
-  await wait(2000);
+  
 
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getSumFailYearRP&year=${yearString}&failtype=${failtype}`,
@@ -251,9 +235,7 @@ export async function getATPFailYear(date?: string) {
   let formattedDate = dateFormat(date);
   const yearString = formattedDate.split("-")[0];
 
-  const wait = (ms: number) =>
-    new Promise((resolve) => setTimeout(resolve, ms));
-  await wait(2000);
+  
 
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getATPFailYear&year=${yearString}`,
@@ -272,9 +254,7 @@ export async function getATPFailListByYearAndCartype(date?: string) {
   // Fetch ATP Fail List by year and cartype
   let formattedDate = dateFormat(date);
   const yearString = formattedDate.split("-")[0];
-  const wait = (ms: number) =>
-    new Promise((resolve) => setTimeout(resolve, ms));
-  await wait(2000);
+  
 
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getATPFailList&year=${yearString}&key=cartype`,
@@ -292,9 +272,7 @@ export async function getATPFailListByYearAndFactor(date?: string) {
   // Fetch ATP Fail List by year and factor
   let formattedDate = dateFormat(date);
   const yearString = formattedDate.split("-")[0];
-  const wait = (ms: number) =>
-    new Promise((resolve) => setTimeout(resolve, ms));
-  await wait(2000);
+  
 
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getATPFailList&year=${yearString}&key=factor`,
@@ -313,9 +291,7 @@ export async function getATPFailListByYearAndElement(date?: string) {
   // Fetch ATP Fail List by year and element
   let formattedDate = dateFormat(date);
   const yearString = formattedDate.split("-")[0];
-  const wait = (ms: number) =>
-    new Promise((resolve) => setTimeout(resolve, ms));
-  await wait(2000);
+  
 
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getATPFailList&year=${yearString}&key=element`,
@@ -334,9 +310,7 @@ export async function getATPFailListAndCartype(date?: string) {
   // Fetch ATP Fail List by year and element
   let formattedDate = dateFormat(date);
   const yearString = formattedDate.split("-")[0];
-  const wait = (ms: number) =>
-    new Promise((resolve) => setTimeout(resolve, ms));
-  await wait(2000);
+  
 
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getATPFailList&year=${yearString}&islist=1&key=cartype`,
