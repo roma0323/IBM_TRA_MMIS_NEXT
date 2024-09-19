@@ -5,6 +5,7 @@ import {
   Pie,
   Tooltip,
   Cell,
+  Legend,
   ResponsiveContainer,
 } from "recharts";
 import { getCarColor } from "@/lib/getCarColor"; // Import the getCarColor function
@@ -36,7 +37,6 @@ const CustomTooltip = ({ active, payload, data }: { active?: boolean; payload?: 
 
   return null;
 };
-// TODO: Add label 
 export default class Example extends PureComponent<{ data: any[] }> {
   render() {
     const { data } = this.props;
@@ -59,6 +59,8 @@ export default class Example extends PureComponent<{ data: any[] }> {
               />
             ))}
           </Pie>
+          <Legend />
+
           <Tooltip content={<CustomTooltip data={data} />} />
         </PieChart>
       </ResponsiveContainer>

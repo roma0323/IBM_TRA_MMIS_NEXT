@@ -54,7 +54,17 @@ const ClientPage: React.FC<Props> = ({ fail_list, ReportLevelCardData }) => {
         <TableCell>{fail_by_row.fail_phenomenon}</TableCell>
         <TableCell>{fail_by_row.fail_status}</TableCell>
         <TableCell>{fail_by_row.fail_dept}</TableCell>
-        <TableCell className="text-right">{fail_by_row.fail_cmwo}</TableCell>
+        {/* <TableCell>{fail_by_row.rep_url}</TableCell> */}
+        <TableCell className="text-right">
+          <a
+            href={fail_by_row.rep_url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className=" cursor-pointer"
+          >
+            {fail_by_row.fail_cmwo}
+          </a>
+        </TableCell>
       </TableRow>
     ));
   };
@@ -62,10 +72,11 @@ const ClientPage: React.FC<Props> = ({ fail_list, ReportLevelCardData }) => {
   const filteredFailList =
     selectFactory === "All"
       ? fail_list
-      : fail_list.filter((fail_by_row) => selectFactory === fail_by_row.fail_lvl);
+      : fail_list.filter(
+          (fail_by_row) => selectFactory === fail_by_row.fail_lvl
+        );
 
   return (
-    // TODO : ALL change to 不分級
     <div className="relative flex justify-between p-6 gap-6 h-full">
       <div className="min-w-[350px] flex items-center justify-center">
         <BoardTitleSection
@@ -87,7 +98,6 @@ const ClientPage: React.FC<Props> = ({ fail_list, ReportLevelCardData }) => {
           }
         />
       </div>
-      {/* TODO: 維修單有連結 */}
       <div className="grow flex items-center justify-center">
         <BoardTitleSection
           title={`${selectFactory}級`}

@@ -25,8 +25,7 @@ const MidNavbar: React.FC<MidNavbarProps> = ({ navItems }) => {
     <div className="w-full px-6 space-y-2 sticky">
       <div className="h-fit flex items-center justify-between relative">
         <div className="flex items-center">
-          <span className="text-2xl ">車輛配置資訊 /</span>
-          {/* TODO:間隔放大 */}
+          <span className="text-2xl pr-2 ">車輛配置資訊 / </span>
           <span className="text-2xl text-[#397eff]">
             {activeItem ? activeItem.name : '總覽'}
           </span>

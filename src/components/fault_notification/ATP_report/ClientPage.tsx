@@ -1,8 +1,9 @@
-'use client'
+"use client";
 import React, { useState } from "react";
 import BoardTitleSection from "@/components/BoardTitleSection";
 import PieChartGradient from "@/components/fault_notification/annual_report/PieChartGradient";
 import { DataCard } from "@/components/train_deployment/DataCard";
+import UseRateAreaChart from "@/components/fault_notification/ATP_report/UseRateAreaChart";
 import {
   Table,
   TableBody,
@@ -13,7 +14,13 @@ import {
 } from "@/components/ui/table";
 
 type ClientPageProps = {
-  testData: Array<{
+  lastYearDataForAreaChart: Array<{
+    year: string;
+    month: string;
+    failcnt: string;
+    dailyfailcnt: string;
+  }>;
+  thisYearDataForAreaChart: Array<{
     year: string;
     month: string;
     failcnt: string;
@@ -23,11 +30,11 @@ type ClientPageProps = {
     name: string;
     value: number;
   }>;
-  refactored故障要因分析: Array<{
+  refactoredfaultReasonAnalysis: Array<{
     name: string;
     value: number;
   }>;
-  listData: Array<{
+  faultListDetail: Array<{
     enterdate: string;
     trainno: string;
     assetnum: string;
@@ -35,7 +42,7 @@ type ClientPageProps = {
     dept: string;
     description: string;
   }>;
-  故障設備分析: Array<{
+  faultEquipmentAnalysis: Array<{
     key: string;
     cnt: number;
     percentage: number;
@@ -48,25 +55,26 @@ type ClientPageProps = {
 };
 
 const ClientPage: React.FC<ClientPageProps> = ({
-  testData,
+  lastYearDataForAreaChart,
+  thisYearDataForAreaChart,
   cartypeData,
-  refactored故障要因分析,
-  listData,
-  故障設備分析,
+  refactoredfaultReasonAnalysis,
+  faultListDetail,
+  faultEquipmentAnalysis,
 }) => {
   const [selectedMonth, setSelectedMonth] = useState<string | null>(null);
-  const [filteredListData, setFilteredListData] = useState(listData);
+  const [filteredListData, setFilteredListData] = useState(faultListDetail);
   const [expandedRows, setExpandedRows] = useState<Set<string>>(new Set());
 
-  const totalFailCnt = testData.reduce(
+  const totalFailCnt = thisYearDataForAreaChart.reduce(
     (sum, item) => sum + parseInt(item.failcnt, 10),
     0
   );
-  const averageFailCnt = totalFailCnt / testData.length / 30.5;
+  const averageFailCnt = totalFailCnt / thisYearDataForAreaChart.length / 30.5;
 
   const handleRowClick = (month: string) => {
     setSelectedMonth(month);
-    const filteredData = listData.filter((item) =>
+    const filteredData = faultListDetail.filter((item) =>
       item.enterdate.includes(`-${month}-`)
     );
     setFilteredListData(filteredData);
@@ -83,6 +91,24 @@ const ClientPage: React.FC<ClientPageProps> = ({
       return newSet;
     });
   };
+ 
+
+
+  const allMonths = new Set([
+    ...thisYearDataForAreaChart.map((item) => item.month),
+    ...lastYearDataForAreaChart.map((item) => item.month),
+  ]);
+
+  const combinedData = Array.from(allMonths).map((month) => {
+    const thisYearData = thisYearDataForAreaChart.find((item) => item.month === month);
+    const lastYearData = lastYearDataForAreaChart.find((item) => item.month === month);
+
+    return {
+      month,
+      thisyear_failcnt: thisYearData ? parseInt(thisYearData.failcnt, 10) : 0,
+      lastyear_failcnt: lastYearData ? parseInt(lastYearData.failcnt, 10) : 0,
+    };
+  });
 
   return (
     <div className="grid grid-rows-4 grid-flow-col gap-4 p-4 h-full">
@@ -102,7 +128,7 @@ const ClientPage: React.FC<ClientPageProps> = ({
       </div>
       {/* TODO  1~12 month show  */}
       {/* TODO  add 日均故障件事折線圖 different years in same chart  */}
-      
+
       <div className="row-span-3 col-span-1 relative">
         <BoardTitleSection
           title="各月份故障"
@@ -117,7 +143,7 @@ const ClientPage: React.FC<ClientPageProps> = ({
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {testData.map((item) => (
+                  {thisYearDataForAreaChart.map((item) => (
                     <TableRow
                       key={item.month}
                       onClick={() => handleRowClick(item.month)}
@@ -140,23 +166,26 @@ const ClientPage: React.FC<ClientPageProps> = ({
 
       <div className="row-span-2 col-span-3 grid grid-cols-3 gap-4 relative">
         <BoardTitleSection
-          title="故障車型分析"
+          title="故障件事折線圖"
+          content={
+            <div className="size-full py-6 pr-8  ">
+              <UseRateAreaChart
+                data={combinedData}
+              />
+            </div>
+          }
+        />
+        <BoardTitleSection
+          title="故障要因分析&故障車型分析"
           content={
             <div className="size-full">
+              <PieChartGradient data={refactoredfaultReasonAnalysis} />
               <PieChartGradient data={cartypeData} />
             </div>
           }
         />
         <BoardTitleSection
-          title="故障要因分析"
-          content={
-            <div className="size-full">
-              <PieChartGradient data={refactored故障要因分析} />
-            </div>
-          }
-        />
-        <BoardTitleSection
-          title="故障設備分析"
+          title="faultEquipmentAnalysis"
           content={
             <div className=" size-full">
               <Table>
@@ -168,9 +197,13 @@ const ClientPage: React.FC<ClientPageProps> = ({
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {故障設備分析.map((item) => (
+                  {faultEquipmentAnalysis.map((item) => (
                     <React.Fragment key={item.key}>
-                      <TableRow onClick={() => handleExpandClick(item.key)} className={expandedRows.has(item.key) ? "bg-slate-100" : ""}
+                      <TableRow
+                        onClick={() => handleExpandClick(item.key)}
+                        className={
+                          expandedRows.has(item.key) ? "bg-slate-100" : ""
+                        }
                       >
                         <TableCell className="font-medium ">
                           {item.key}
@@ -188,7 +221,6 @@ const ClientPage: React.FC<ClientPageProps> = ({
                             </TableCell>
                             <TableCell>{event_item.cnt}</TableCell>
                             <TableCell className="text-right">
-                              {/* TODO: text align left */}
                               {event_item.percentage}
                             </TableCell>
                           </TableRow>

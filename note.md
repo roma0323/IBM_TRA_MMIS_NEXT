@@ -67,6 +67,10 @@ http://tra.webtw.xyz:8888/maximo/zz_data?method=getSumStatusList&qdate=2024-08-0
 "availability": 0.8543103448275862
 }
 
+ＡＴＰ圖表需按照月份變更
+
+----------------------------------
+
 Next.js tips:
         use context for passing value through deep layer
         fetch same data different place(autually only fetch once)
@@ -82,7 +86,7 @@ CSS & UI tips:
         cn()  to resue the board title
 Other: board overflow :
         h-64 size-full
-
+--------------------------------
 
 8/27週進度：
                 改善用戶體驗
@@ -105,10 +109,11 @@ Other: board overflow :
                 ATP故障通報
                 3D loading 
 
+
+9/19 進度：
+        故障通報-fetch
+
+
 討論：
-Q:A級故障 是否有其他單位？  
-A:未來需要 先留
-Q:ＡＴＰ圖表不需按照月份變更？ 
-A: UPdating
-Q:ＡＰＴ故障次數不一致
-A: only A & B
+Ａll 改成不分級, 排版外觀不佳        
+label 很亂

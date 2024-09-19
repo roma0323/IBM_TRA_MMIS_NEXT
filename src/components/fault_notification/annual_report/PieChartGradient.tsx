@@ -5,6 +5,7 @@ import {
   Pie,
   Tooltip,
   Cell,
+  Legend,
   ResponsiveContainer,
 } from "recharts";
 
@@ -79,6 +80,7 @@ export default class Example extends PureComponent<{ data: any[] }> {
               />
             ))}
           </Pie>
+          <Legend />
           <Tooltip content={<CustomTooltip data={data} />} />
         </PieChart>
       </ResponsiveContainer>
