@@ -188,7 +188,7 @@ const ClientPage: React.FC<ClientPageProps> = ({
                             </TableCell>
                             <TableCell>{event_item.cnt}</TableCell>
                             <TableCell className="text-right">
-                              //TODO: text align left
+                              {/* TODO: text align left */}
                               {event_item.percentage}
                             </TableCell>
                           </TableRow>

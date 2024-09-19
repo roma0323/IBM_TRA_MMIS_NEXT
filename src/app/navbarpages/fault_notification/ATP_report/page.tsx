@@ -20,7 +20,7 @@ export default async function Page({
     }));
   };
 
-  //http://192.168.36.21/maximo/zz_data?method=getATPFailYear&year=2024
+  // URL: http://192.168.36.21/maximo/zz_data?method=getATPFailYear&year=2024
   const test = [
     {
       year: "2024",
@@ -79,7 +79,7 @@ export default async function Page({
   ];
   const refactoredCartype = refactorCartype(cartype);
 
-  //http://192.168.36.21/maximo/zz_data?method=getATPFailList&year=2024&key=factor
+  // URL: http://192.168.36.21/maximo/zz_data?method=getATPFailList&year=2024&key=factor
 
   const 故障要因分析 = [
     {

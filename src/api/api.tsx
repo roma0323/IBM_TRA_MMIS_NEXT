@@ -224,7 +224,7 @@ export async function getSumFailListDaily(date?: string) {
   return res.json();
 }
 
-export async function getSumFailYearTypeA(date?: string) {
+export async function getSumFailYearType(date?: string,failtype?: string) {
   //fetch 故障通報annual
 
   let formattedDate = dateFormat(date);
@@ -235,7 +235,7 @@ export async function getSumFailYearTypeA(date?: string) {
   await wait(2000);
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getSumFailYearRP&year=${yearString}&failtype=A`,
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getSumFailYearRP&year=${yearString}&failtype=${failtype}`,
     {
       method: "POST",
       headers: {
