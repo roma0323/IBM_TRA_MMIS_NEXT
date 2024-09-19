@@ -36,7 +36,7 @@ export default async function Page({
   }> = [];
   overview_number = await getATPFailYear(searchParams.date);
 
-  let lastYearDate = new Date(searchParams.date||"");
+  let lastYearDate = new Date(searchParams.date||"2024-09-09");
   lastYearDate.setFullYear(lastYearDate.getFullYear() - 1);
   let lastYearOverviewNumber = await getATPFailYear(
     lastYearDate.toISOString().slice(0, 10)

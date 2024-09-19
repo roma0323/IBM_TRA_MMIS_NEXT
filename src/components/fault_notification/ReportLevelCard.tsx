@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { DataCard } from "@/components/train_deployment/DataCard";
-import { FailListItem } from "@/types/type";
 import { ReportLevelCardDataType } from "@/types/type";
 
 type Props = {
@@ -23,45 +22,47 @@ export const ReportLevelCard: React.FC<Props> = ({
       }`}
       onClick={onToggle}
     >
-      <div className="self-stretch items-start flex border-b pb-2 border-[#646464]/20 justify-between items-center inline-flex">
-        <div className="">
-          <span className="text-7xl">{CardDataByLevel.fail_lvl}</span>
-          <span className="ml-2 text-lg">級</span>
+      <div className="flex items-center justify-between">
+        <span className="text-8xl">{CardDataByLevel.fail_lvl}</span>
+
+        <div
+          className={`cursor-pointer px-2  rounded-lg hover:shadow-lg   ${
+            isActive && clickedDiv === "allUnits"
+              ? "bg-white shadow-lg   "
+              : ""
+          }  `}
+          onClick={() => setClickedDiv("allUnits")}
+        >
+          <DataCard
+            text={CardDataByLevel.all_fail_quantity.toString()}
+            text1="全部單位"
+          />
         </div>
-        <div className="flex flex-col grow  items-end">
-          <div
-            className={`cursor-pointer px-2 rounded-lg   hover:border-l-4 border-primary/20 ${
-              isActive && clickedDiv === "other" ? "bg-white border-l-4 border-primary/20" : ""
-            }  `}
-            onClick={() => setClickedDiv("other")}
-          >
-            <span className="text-xs">其他</span>
-            <span className="text-4xl pl-4">
-              {CardDataByLevel.other_fail_quantity}
-            </span>
-          </div>
-          <div
-            className={`cursor-pointer px-2 rounded-lg   hover:border-l-4 border-primary/20 ${
-              isActive && clickedDiv === "mechanical" ? "bg-white border-l-4 border-primary/20" : ""
-            }`}
-            onClick={() => setClickedDiv("mechanical")}
-          >
-            <span className="text-xs">機務處</span>
-            <span className="text-4xl pl-4">
-              {CardDataByLevel.Maintenance_fail_quantity}
-            </span>
-          </div>
-          <div
-            className={`cursor-pointer px-2 rounded-lg   hover:border-l-4 border-primary/20 ${
-              isActive && clickedDiv === "allUnits" ? "bg-white border-l-4 border-primary/20" : ""
-            }`}
-            onClick={() => setClickedDiv("allUnits")}
-          >
-            <span className="text-xs">全部單位</span>
-            <span className="text-4xl pl-4">
-              {CardDataByLevel.all_fail_quantity}
-            </span>
-          </div>
+        <div
+          className={`cursor-pointer px-2  rounded-lg hover:shadow-lg    ${
+            isActive && clickedDiv === "mechanical"
+              ? "bg-white shadow-lg   "
+              : ""
+          }`}
+          onClick={() => setClickedDiv("mechanical")}
+        >
+          <DataCard
+            text={CardDataByLevel.Maintenance_fail_quantity.toString()}
+            text1="機務處"
+          />
+        </div>
+        <div
+          className={`cursor-pointer px-2  rounded-lg hover:shadow-lg    ${
+            isActive && clickedDiv === "other"
+              ? "bg-white shadow-lg   "
+              : ""
+          }  `}
+          onClick={() => setClickedDiv("other")}
+        >
+          <DataCard
+            text={CardDataByLevel.other_fail_quantity.toString()}
+            text1="其他"
+          />
         </div>
       </div>
     </div>

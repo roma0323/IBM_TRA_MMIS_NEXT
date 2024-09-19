@@ -126,8 +126,6 @@ const ClientPage: React.FC<ClientPageProps> = ({
           }
         />
       </div>
-      {/* TODO  1~12 month show  */}
-      {/* TODO  add 日均故障件事折線圖 different years in same chart  */}
 
       <div className="row-span-3 col-span-1 relative">
         <BoardTitleSection
@@ -185,7 +183,7 @@ const ClientPage: React.FC<ClientPageProps> = ({
           }
         />
         <BoardTitleSection
-          title="faultEquipmentAnalysis"
+          title="故障設備分析"
           content={
             <div className=" size-full">
               <Table>

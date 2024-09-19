@@ -22,7 +22,6 @@ type Props = {
 };
 
 export const ReportLevelCard: React.FC<Props> = ({ isActive, onToggle, CardDataByLevel }) => {
-  const [clickedDiv, setClickedDiv] = useState<string | null>("allUnits");
 
   return (
     <div
