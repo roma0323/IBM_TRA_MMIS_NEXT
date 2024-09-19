@@ -108,7 +108,7 @@ export async function getSumStatusListAndMultiplierEqualZeorCarcatalogEqualParam
 }
 export async function getSumStatusListEq3Param(
   trainName: string,
-  date: string
+  date?: string
 ) {
   //fetch TrainByRow 客車專用
   let formattedDate = dateFormat(date);
@@ -129,7 +129,7 @@ export async function getSumStatusDetailListMultiplierZeorDeptParamCartypeParamQ
   dept: String,
   cartype: String,
   qtype: string,
-  date: string
+  date?: string
 ) {
   let formattedDate = dateFormat(date);
 
@@ -236,6 +236,110 @@ export async function getSumFailYearType(date?: string,failtype?: string) {
 
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getSumFailYearRP&year=${yearString}&failtype=${failtype}`,
+    {
+      method: "POST",
+      headers: {
+        Accept: "application/json, text/plain, */*",
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  return res.json();
+}
+export async function getATPFailYear(date?: string) {
+  // Fetch ATP Fail Year data
+  let formattedDate = dateFormat(date);
+  const yearString = formattedDate.split("-")[0];
+
+  const wait = (ms: number) =>
+    new Promise((resolve) => setTimeout(resolve, ms));
+  await wait(2000);
+
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getATPFailYear&year=${yearString}`,
+    {
+      method: "POST",
+      headers: {
+        Accept: "application/json, text/plain, */*",
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  return res.json();
+}
+
+export async function getATPFailListByYearAndCartype(date?: string) {
+  // Fetch ATP Fail List by year and cartype
+  let formattedDate = dateFormat(date);
+  const yearString = formattedDate.split("-")[0];
+  const wait = (ms: number) =>
+    new Promise((resolve) => setTimeout(resolve, ms));
+  await wait(2000);
+
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getATPFailList&year=${yearString}&key=cartype`,
+    {
+      method: "POST",
+      headers: {
+        Accept: "application/json, text/plain, */*",
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  return res.json();
+}
+export async function getATPFailListByYearAndFactor(date?: string) {
+  // Fetch ATP Fail List by year and factor
+  let formattedDate = dateFormat(date);
+  const yearString = formattedDate.split("-")[0];
+  const wait = (ms: number) =>
+    new Promise((resolve) => setTimeout(resolve, ms));
+  await wait(2000);
+
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getATPFailList&year=${yearString}&key=factor`,
+    {
+      method: "POST",
+      headers: {
+        Accept: "application/json, text/plain, */*",
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  return res.json();
+}
+
+export async function getATPFailListByYearAndElement(date?: string) {
+  // Fetch ATP Fail List by year and element
+  let formattedDate = dateFormat(date);
+  const yearString = formattedDate.split("-")[0];
+  const wait = (ms: number) =>
+    new Promise((resolve) => setTimeout(resolve, ms));
+  await wait(2000);
+
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getATPFailList&year=${yearString}&key=element`,
+    {
+      method: "POST",
+      headers: {
+        Accept: "application/json, text/plain, */*",
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  return res.json();
+}
+
+export async function getATPFailListAndCartype(date?: string) {
+  // Fetch ATP Fail List by year and element
+  let formattedDate = dateFormat(date);
+  const yearString = formattedDate.split("-")[0];
+  const wait = (ms: number) =>
+    new Promise((resolve) => setTimeout(resolve, ms));
+  await wait(2000);
+
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getATPFailList&year=${yearString}&islist=1&key=cartype`,
     {
       method: "POST",
       headers: {

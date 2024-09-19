@@ -219,8 +219,8 @@ const ClientPage: React.FC<ClientPageProps> = ({
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {filteredListData.map((item) => (
-                    <TableRow key={item.enterdate}>
+                  {filteredListData.map((item, itemIndex) => (
+                    <TableRow key={itemIndex}>
                       <TableCell className="font-medium">
                         {item.enterdate}
                       </TableCell>
