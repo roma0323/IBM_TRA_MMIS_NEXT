@@ -14,6 +14,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 
+
 export function DatePickerForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -44,9 +45,6 @@ export function DatePickerForm() {
       const currentParams = new URLSearchParams(searchParams?.toString() || "");
       currentParams.set("date", formattedDate);
 
-      // router.replace(`${window.location.pathname}?${currentParams.toString()}`);
-      // router.refresh();
-
       const newUrl = `${window.location.origin}${
         window.location.pathname
       }?${currentParams.toString()}`;
@@ -67,19 +65,26 @@ export function DatePickerForm() {
             )}
           >
             {selectedDate ? format(selectedDate, "PPP") : <span></span>}
+
             <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
           </Button>
         </PopoverTrigger>
         <PopoverContent className="w-auto p-0" align="start">
-          <Calendar
+          {/* <Calendar
             mode="single"
             selected={selectedDate}
             onSelect={handleDateChange}
-            disabled={(date) =>
-              date > new Date() || date < new Date("1900-01-01")
-            }
+            // yearPicker={yearPicker} // Use the yearPicker prop
             initialFocus
-          />
+          /> */}
+          <Calendar
+          mode="single"
+          captionLayout="dropdown-buttons"
+          selected={selectedDate}
+          onSelect={handleDateChange}
+          fromYear={1960}
+          toYear={2080}
+        />
         </PopoverContent>
       </Popover>
     </div>
