@@ -24,30 +24,30 @@ const trainTypes = [
 ];
 
 const MidNavbar: React.FC = () => {
-  const router = useRouter();
+  // const router = useRouter();
   const pathname = usePathname() || "";
   const searchParams = useSearchParams();
   let decodedLastPart = decodeURIComponent(pathname.split("/").pop() || "");
   const date = searchParams?.get("date") || "";
 
-  let type = "";
-  if (decodedLastPart == "all_overview") {
-    type = "總覽";
-  }
-  if (decodedLastPart === "unusual_overview") {
-    type = "非常態車輛";
-  }
-  if (decodedLastPart === "power_overview") {
-    type = "動力車";
-  }
+  // let type = "";
+  // if (decodedLastPart == "all_overview") {
+  //   type = "總覽";
+  // }
+  // if (decodedLastPart === "unusual_overview") {
+  //   type = "非常態車輛";
+  // }
+  // if (decodedLastPart === "power_overview") {
+  //   type = "動力車";
+  // }
 
-  const handleSelect = (value: string) => {
-    router.replace(`/navbarpages/train_deployment/${value}?date=${date}`);
-  };
+  // const handleSelect = (value: string) => {
+  //   router.replace(`/navbarpages/train_deployment/${value}?date=${date}`);
+  // };
 
   return (
     <div className="flex w-full px-6 sticky items-start gap-1">
-      <Select value={decodedLastPart} onValueChange={handleSelect}>
+      {/* <Select value={decodedLastPart} onValueChange={handleSelect}>
         <SelectTrigger className="w-fit">
           <SelectValue />
         </SelectTrigger>
@@ -56,12 +56,48 @@ const MidNavbar: React.FC = () => {
           <SelectItem value="power_overview">動力車</SelectItem>
           <SelectItem value="unusual_overview">非常態車輛</SelectItem>
         </SelectContent>
-      </Select>
+      </Select> */}
 
+      <Link
+        href={`/navbarpages/train_deployment/all_overview/?date=${date}`}
+        className={` ${
+          decodedLastPart === "all_overview"
+            ? "mid_nav_active"
+            : "mid_nav_unactive"
+        }`}
+      >
+        <div className="inline-flex h-fit items-center px-4 py-2">
+        總覽
+        </div>
+      </Link>
+      <Link
+        href={`/navbarpages/train_deployment/power_overview/?date=${date}`}
+        className={` ${
+          decodedLastPart === "power_overview"
+            ? "mid_nav_active"
+            : "mid_nav_unactive"
+        }`}
+      >
+        <div className="inline-flex h-fit items-center px-4 py-2">
+        動力車
+        </div>
+      </Link>
+      <Link
+        href={`/navbarpages/train_deployment/unusual_overview/?date=${date}`}
+        className={` ${
+          decodedLastPart === "unusual_overview"
+            ? "mid_nav_active"
+            : "mid_nav_unactive"
+        }`}
+      >
+        <div className="inline-flex h-fit items-center px-4 py-2">
+        非常態車輛
+        </div>
+      </Link>
       {trainTypes.map((train) => (
         <Link
           href={`/navbarpages/train_deployment/certain_train/${train.name}?date=${date}`}
-          className={`link ${
+          className={` ${
             decodedLastPart === train.name
               ? "mid_nav_active"
               : "mid_nav_unactive"

@@ -1,7 +1,6 @@
 "use client";
 import Link from "next/link";
 import React from "react";
-import { DatePickerForm } from "@/components/ui/date_picker";
 import { usePathname, useSearchParams } from "next/navigation";
 
 interface NavItem {
@@ -37,23 +36,10 @@ const MidNavbar: React.FC<MidNavbarProps> = ({ navItems }) => {
             </Link>
           ))}
         </div>
-      {/* <DatePickerForm /> */}
 
       </div>
 
-      {/* <div className="flex items-start gap-1">
-        {navItems.map((item) => (
-          <Link key={item.name} href={`${item.path}?date=${date}`}>
-            <div
-              className={`inline-flex h-fit items-center px-4 py-2 ${
-                pathname === item.path ? 'mid_nav_active' : 'mid_nav_unactive'
-              }`}
-            >
-              {item.name}
-            </div>
-          </Link>
-        ))}
-      </div> */}
+    
     </div>
   );
 };

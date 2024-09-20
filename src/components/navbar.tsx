@@ -52,6 +52,7 @@ const Navbar: React.FC = () => {
             height={96}
           />
         </Link>
+
         {navLinks.map((link) => (
           <Link
             key={link.href}
@@ -65,6 +66,8 @@ const Navbar: React.FC = () => {
             </div>
           </Link>
         ))}
+
+        
       </div>
       <div className="flex gap-2">
         <DatePickerForm />
