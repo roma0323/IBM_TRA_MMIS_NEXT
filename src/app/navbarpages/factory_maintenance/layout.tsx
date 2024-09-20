@@ -15,7 +15,7 @@ export default function DashboardLayout({
   ];
   return (
     <section className="flex-grow flex flex-col relative">
-      <Suspense fallback={<div>MidNavBar Loading...</div>}><MidNavbar navItems={navItems} /></Suspense>
+      {/* <Suspense fallback={<div>MidNavBar Loading...</div>}><MidNavbar navItems={navItems} /></Suspense> */}
       <Suspense fallback={<Loading />}>{children}</Suspense>
     </section>
   );

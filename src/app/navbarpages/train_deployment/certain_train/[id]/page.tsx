@@ -6,23 +6,36 @@ interface PageProps {
   params: any;
   searchParams: any;
 }
+
 export function generateStaticParams() {
   return [
-    { id: "電力機車" },
-    { id: "城際列車" },
-    { id: "通勤列車" },
-    { id: "柴電機車" },
-    { id: "柴液機車" },
-    { id: "柴油客車" },
-    { id: "客車" },
+    { id: "intercity_train", name: "城際列車" },
+    { id: "commuter_train", name: "通勤列車" },
+    { id: "electric_locomotive", name: "電力機車" },
+    { id: "diesel_electric_locomotive", name: "柴電機車" },
+    { id: "diesel_hydraulic_locomotive", name: "柴液機車" },
+    { id: "diesel_passenger_car", name: "柴油客車" },
+    { id: "passenger_car", name: "客車" },
+    { id: "freight_car", name: "貨車" },
   ];
 }
 
-export default async function Page({ params ,searchParams}: PageProps) {
-  const carcatalog = decodeURIComponent(params.id);
+const carcatalogMap: { [key: string]: string } = {
+  intercity_train: "城際列車",
+  commuter_train: "通勤列車",
+  electric_locomotive: "電力機車",
+  diesel_electric_locomotive: "柴電機車",
+  diesel_hydraulic_locomotive: "柴液機車",
+  diesel_passenger_car: "柴油客車",
+  passenger_car: "客車",
+  freight_car: "貨車",
+};
+
+export default async function Page({ params, searchParams }: PageProps) {
+  const carcatalog = carcatalogMap[params.id] || "Unknown";
   const date = searchParams.date;
 
-  const data = await getSumStatusListAndCarcatalogEqualParam(carcatalog,date);
+  const data = await getSumStatusListAndCarcatalogEqualParam(carcatalog, date);
   if (data.data == null || data.data.length === 0) {
     data.data = [
       {
@@ -50,8 +63,8 @@ export default async function Page({ params ,searchParams}: PageProps) {
   }
 
   return (
-    <main className=" grow bg-neutral-100 overflow-hidden relative">
-        <ClientPage key={params.id} Data={data.data} />
+    <main className="grow bg-neutral-100 overflow-hidden relative">
+      <ClientPage key={params.id} Data={data.data} />
     </main>
   );
 }

@@ -24,26 +24,16 @@ const trainTypes = [
 ];
 
 const MidNavbar: React.FC = () => {
-  // const router = useRouter();
+  const router = useRouter();
   const pathname = usePathname() || "";
   const searchParams = useSearchParams();
   let decodedLastPart = decodeURIComponent(pathname.split("/").pop() || "");
   const date = searchParams?.get("date") || "";
 
-  // let type = "";
-  // if (decodedLastPart == "all_overview") {
-  //   type = "總覽";
-  // }
-  // if (decodedLastPart === "unusual_overview") {
-  //   type = "非常態車輛";
-  // }
-  // if (decodedLastPart === "power_overview") {
-  //   type = "動力車";
-  // }
 
-  // const handleSelect = (value: string) => {
-  //   router.replace(`/navbarpages/train_deployment/${value}?date=${date}`);
-  // };
+  const handleSelect = (value: string) => {
+    router.replace(`/navbarpages/train_deployment/${value}?date=${date}`);
+  };
 
   return (
     <div className="flex w-full px-6 sticky items-start gap-1">

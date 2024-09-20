@@ -17,17 +17,15 @@ const MidNavbar: React.FC<MidNavbarProps> = ({ navItems }) => {
   const searchParams = useSearchParams();
   const date = searchParams?.get("date") || "";
 
-  // Find the active item based on the current pathname
-  const activeItem = navItems.find((item) => pathname === item.path);
 
   return (
-    <div className="w-full px-6 space-y-2 sticky">
+    <div className="w-full px-6  sticky">
       <div className="h-fit  flex items-center justify-between relative">
         <div className="flex  items-end gap-1">
           {navItems.map((item) => (
             <Link key={item.name} href={`${item.path}?date=${date}`}>
               <div
-                className={`inline-flex h-fit items-center px-4 py-2 ${
+                className={`inline-flex h-fit items-center px-4 pb-2 pt-4 ${
                   pathname === item.path ? "mid_nav_active" : "mid_nav_unactive"
                 }`}
               >

@@ -9,11 +9,10 @@ export default function DashboardLayout({
 }) {
   const navItems = [
     { name: "總覽", path: "/navbarpages/locomotive_depot" },
-   
   ];
   return (
     <section className="grow overflow-hidden relative flex flex-col">
-      <MidNavbar navItems={navItems} />
+      {/* <MidNavbar navItems={navItems} /> */}
       <Suspense fallback={<Loading />}>{children}</Suspense>
     </section>
   );

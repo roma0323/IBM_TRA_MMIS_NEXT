@@ -4,8 +4,6 @@
 
 .active {
   color: hsl(var(--active-button-color));
-  border: 1px solid hsl(var(--active-button-color));
-  border-radius: 0.5rem; /* Adjust the radius as needed */
 }
 .mid_nav_active {
   color: hsl(var(--active-button-color));

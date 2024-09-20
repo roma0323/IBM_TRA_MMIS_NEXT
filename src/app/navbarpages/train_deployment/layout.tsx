@@ -8,7 +8,7 @@ export default function DashboardLayout({
 }) {
   return (
     <section className="grow overflow-hidden relative flex flex-col">
-      <MidNavbar />
+      {/* <MidNavbar /> */}
       {/* <Suspense fallback={<Loading />}>{children}</Suspense> */}
  {children}
     </section>
