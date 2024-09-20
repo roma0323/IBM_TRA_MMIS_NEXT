@@ -11,6 +11,7 @@ import MidNavbar from "@/components/MidNavbar";
 const Navbar: React.FC = () => {
   const pathname = usePathname();
   const [isHovered, setIsHovered] = useState<number | null>(null);
+  const [isClicked, setIsClicked] = useState<number | null>(null);
 
   const navLinks = [
     {
@@ -19,7 +20,7 @@ const Navbar: React.FC = () => {
       startsWith: "/navbarpages/train_deployment",
       subLinks: [
         {
-          name: "總覽",
+          name: "車輛總覽",
           path: "/navbarpages/train_deployment/all_overview",
         },
         {
@@ -68,7 +69,7 @@ const Navbar: React.FC = () => {
       href: `/navbarpages/locomotive_depot`,
       label: "機務段配置資訊",
       startsWith: "/navbarpages/locomotive_depot",
-      subLinks: [{ name: "總覽", path: "/navbarpages/locomotive_depot" }],
+      subLinks: [{ name: "機務段總覽", path: "/navbarpages/locomotive_depot" }],
     },
     {
       href: `/navbarpages/factory_maintenance/factory_overview`,
@@ -76,7 +77,7 @@ const Navbar: React.FC = () => {
       startsWith: "/navbarpages/factory_maintenance",
       subLinks: [
         {
-          name: "總覽",
+          name: "機廠檢修總覽",
           path: "/navbarpages/factory_maintenance/factory_overview",
         },
         {
@@ -111,8 +112,10 @@ const Navbar: React.FC = () => {
       subLinks: [],
     },
   ];
+
   const searchParams = useSearchParams();
   const date = searchParams?.get("date") || "";
+
   return (
     <div>
       <div className="h-fit w-full flex justify-between relative pr-6">
@@ -128,18 +131,24 @@ const Navbar: React.FC = () => {
           </Link>
 
           {navLinks.map((link, index) => (
-            <Link
+            <div
               key={link.href}
-              
-              href={`${link.href}?date=${date}`}
-              className={` px-3 flex   items-center ${
+              className={`px-3 flex cursor-pointer items-center ${
                 pathname?.startsWith(link.startsWith) ? "active" : ""
-              }`}
+              } ${isClicked === index ? "mid_nav_unactive" : ""}
+              ${isHovered === index ? "mid_nav_unactive" : ""}`}
               onMouseEnter={() => setIsHovered(index)}
               onMouseLeave={() => setIsHovered(null)}
+              onClick={() => {
+                if (isClicked === index) {
+                  setIsClicked(null);
+                } else {
+                  setIsClicked(index);
+                }
+              }}
             >
               {link.label}
-            </Link>
+            </div>
           ))}
         </div>
         <div className="flex items-center gap-2">
@@ -150,13 +159,29 @@ const Navbar: React.FC = () => {
 
       <div
         className={`transition-opacity duration-1000 ease-in-out bg-gradient-to-b from-transparent to-white ${
-          isHovered !== null ? "opacity-100" : "opacity-0"
+          isHovered !== null || isClicked !== null ? "opacity-100" : "opacity-0"
         }`}
         onMouseEnter={() => setIsHovered(isHovered)}
         onMouseLeave={() => setIsHovered(null)}
       >
-        {isHovered !== null && (
-          <MidNavbar navItems={navLinks[isHovered].subLinks} />
+        {isClicked !== null ? (
+          <div
+            onClick={() => {
+              setIsClicked(null);
+            }}
+          >
+            <MidNavbar navItems={navLinks[isClicked].subLinks} />
+          </div>
+        ) : (
+          isHovered !== null && (
+            <div
+              onClick={() => {
+                setIsClicked(null);
+              }}
+            >
+              <MidNavbar navItems={navLinks[isHovered].subLinks} />
+            </div>
+          )
         )}
       </div>
     </div>
