@@ -138,7 +138,7 @@ const ClientPage: React.FC<ClientPageProps> = ({
 
       <div className="row-span-2 col-span-3 grid grid-cols-3 gap-4 relative">
         <BoardTitleSection
-          title="故障件事折線圖"
+          title="當月故障數趨勢圖"
           content={
             <div className="size-full py-6 pr-8  ">
               <UseRateAreaChart
@@ -173,12 +173,12 @@ const ClientPage: React.FC<ClientPageProps> = ({
                     <React.Fragment key={item.key}>
                       <TableRow
                         onClick={() => handleExpandClick(item.key)}
-                        className={
-                          expandedRows.has(item.key) ? "bg-slate-100" : ""
-                        }
+                        className={"cursor-pointer"}
+                          
+                        
                       >
                         <TableCell className="font-medium ">
-                          {item.key}
+                        &gt; {item.key}
                         </TableCell>
                         <TableCell>{item.cnt}</TableCell>
                         <TableCell className="text-right">
@@ -219,7 +219,7 @@ const ClientPage: React.FC<ClientPageProps> = ({
                     <TableHead>車型</TableHead>
                     <TableHead>車號</TableHead>
                     <TableHead>所屬段</TableHead>
-                    <TableHead className="text-right">故障原因</TableHead>
+                    <TableHead className="text-left">故障原因</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -232,7 +232,7 @@ const ClientPage: React.FC<ClientPageProps> = ({
                       <TableCell>{item.assetgroup}</TableCell>
                       <TableCell>{item.assetnum}</TableCell>
                       <TableCell>{item.dept}</TableCell>
-                      <TableCell className="text-right">
+                      <TableCell className="text-left">
                         {item.description}
                       </TableCell>
                     </TableRow>

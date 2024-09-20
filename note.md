@@ -115,8 +115,4 @@ Other: board overflow :
         feat: 根據年份選擇
         feat: ATP故障分析-故障件事折線圖
         refactor:故障通報-每日故障通報 layout 
-
-
-討論：
-Ａll 改成不分級, 排版外觀不佳        
-label 很亂
+        refactor: nav bar

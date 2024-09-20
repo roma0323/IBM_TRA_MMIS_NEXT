@@ -23,7 +23,7 @@ export const ReportLevelCard: React.FC<Props> = ({
       onClick={onToggle}
     >
       <div className="flex items-center justify-between">
-        <span className="text-8xl">{CardDataByLevel.fail_lvl}</span>
+        <span className="text-5xl">{CardDataByLevel.fail_lvl}</span>
 
         <div
           className={`cursor-pointer px-2  rounded-lg hover:shadow-lg   ${
