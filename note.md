@@ -111,7 +111,10 @@ Other: board overflow :
 
 
 9/19 進度：
-        故障通報-fetch
+        feat: 故障通報-fetch
+        feat: 根據年份選擇
+        feat: ATP故障分析-故障件事折線圖
+        refactor:故障通報-每日故障通報 layout 
 
 
 討論：

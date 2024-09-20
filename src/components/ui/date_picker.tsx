@@ -1,8 +1,7 @@
 "use client";
-//FIXME: pick by year
 import { format, parse } from "date-fns";
 import { CalendarIcon } from "lucide-react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
 
 import { cn } from "@/lib/utils";
@@ -16,7 +15,6 @@ import {
 
 
 export function DatePickerForm() {
-  const router = useRouter();
   const searchParams = useSearchParams();
 
   // Get the date from the URL if it exists
@@ -70,20 +68,14 @@ export function DatePickerForm() {
           </Button>
         </PopoverTrigger>
         <PopoverContent className="w-auto p-0" align="start">
-          {/* <Calendar
-            mode="single"
-            selected={selectedDate}
-            onSelect={handleDateChange}
-            // yearPicker={yearPicker} // Use the yearPicker prop
-            initialFocus
-          /> */}
+          
           <Calendar
           mode="single"
           captionLayout="dropdown-buttons"
           selected={selectedDate}
           onSelect={handleDateChange}
-          fromYear={1960}
-          toYear={2080}
+          fromYear={1950}
+          toYear={2200}
         />
         </PopoverContent>
       </Popover>

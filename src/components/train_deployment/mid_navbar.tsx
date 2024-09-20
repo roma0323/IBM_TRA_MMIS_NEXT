@@ -41,50 +41,38 @@ const MidNavbar: React.FC = () => {
     type = "動力車";
   }
 
-
   const handleSelect = (value: string) => {
     router.replace(`/navbarpages/train_deployment/${value}?date=${date}`);
   };
 
   return (
-    <div className="w-full px-6 space-y-2 sticky">
-      <div className="h-fit flex items-center justify-between relative">
-        <div className="flex items-center">
-          <span className="text-2xl">車輛配置資訊/</span>
-          {!type && <span className="text-2xl text-[#397eff]">{decodedLastPart}</span>}
-          {type && <span className="text-2xl text-[#397eff]">{type}</span>}
-        </div>
-        <DatePickerForm />
-      </div>
-
-      <div className="flex items-start gap-1">
-        <Select value={decodedLastPart} onValueChange={handleSelect}>
-          <SelectTrigger className="w-fit">
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent>
+    <div className="flex w-full px-6 sticky items-start gap-1">
+      <Select value={decodedLastPart} onValueChange={handleSelect}>
+        <SelectTrigger className="w-fit">
+          <SelectValue />
+        </SelectTrigger>
+        <SelectContent>
           <SelectItem value="all_overview">總覽</SelectItem>
           <SelectItem value="power_overview">動力車</SelectItem>
-            <SelectItem value="unusual_overview">非常態車輛</SelectItem>
-          </SelectContent>
-        </Select>
+          <SelectItem value="unusual_overview">非常態車輛</SelectItem>
+        </SelectContent>
+      </Select>
 
-        {trainTypes.map((train) => (
-          <Link
-            href={`/navbarpages/train_deployment/certain_train/${train.name}?date=${date}`}
-            className={`link ${
-              decodedLastPart === train.name
-                ? "mid_nav_active"
-                : "mid_nav_unactive"
-            }`}
-            key={train.id}
-          >
-            <div className="inline-flex h-fit items-center px-4 py-2">
-              {train.name}
-            </div>
-          </Link>
-        ))}
-      </div>
+      {trainTypes.map((train) => (
+        <Link
+          href={`/navbarpages/train_deployment/certain_train/${train.name}?date=${date}`}
+          className={`link ${
+            decodedLastPart === train.name
+              ? "mid_nav_active"
+              : "mid_nav_unactive"
+          }`}
+          key={train.id}
+        >
+          <div className="inline-flex h-fit items-center px-4 py-2">
+            {train.name}
+          </div>
+        </Link>
+      ))}
     </div>
   );
 };

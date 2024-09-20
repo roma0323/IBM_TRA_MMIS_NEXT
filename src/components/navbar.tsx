@@ -2,6 +2,7 @@
 
 import React, { Suspense } from "react";
 import { usePathname } from "next/navigation";
+import { DatePickerForm } from "@/components/ui/date_picker";
 import Link from "next/link";
 import { ModeToggle } from "@/components/ui/mode_toggle";
 import Image from "next/image";
@@ -40,31 +41,35 @@ const Navbar: React.FC = () => {
   ];
 
   return (
-    <div className="flex h-fit w-full items-center  gap-3 pr-6">
-      <Link href="/">
-        <Image
-          className=" relative hover:scale-110"
-          alt="IBM Logo"
-          src="/ibm-logo-frame.svg"
-          width={112}
-          height={96}
-        />
-      </Link>
-      <div className="flex-1" />
-      {navLinks.map((link) => (
-        <Link
-          key={link.href}
-          href={link.href}
-          className={`link ${pathname?.startsWith(link.startsWith) ? "active" : ""}`}
-        >
-          <div className="inline-flex items-center justify-center gap-2.5 px-3 py-2 rounded-[30px]">
-            {link.label}
-          </div>
+    <div className="h-fit w-full flex items-center justify-between relative pr-6">
+      <div className="flex  items-center gap-1">
+        <Link href="/">
+          <Image
+            className=" relative hover:scale-110"
+            alt="IBM Logo"
+            src="/ibm-logo-frame.svg"
+            width={112}
+            height={96}
+          />
         </Link>
-      ))}
-      {/* <div className="flex w-[54px] items-center justify-center p-1 bg-neutral-100 rounded-2xl">
+        {navLinks.map((link) => (
+          <Link
+            key={link.href}
+            href={link.href}
+            className={`link ${
+              pathname?.startsWith(link.startsWith) ? "mid_nav_active" : ""
+            }`}
+          >
+            <div className="inline-flex items-center justify-center gap-2.5 px-3 py-2 rounded-[30px]">
+              {link.label}
+            </div>
+          </Link>
+        ))}
+      </div>
+      <div className="flex gap-2">
+        <DatePickerForm />
         <ModeToggle />
-      </div> */}
+      </div>
     </div>
   );
 };
