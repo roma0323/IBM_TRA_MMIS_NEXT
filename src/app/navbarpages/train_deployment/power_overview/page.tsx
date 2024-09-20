@@ -29,7 +29,7 @@ export default async function Page({
           <div className="grid grid-cols-3   gap-4 relative">
             <Link
               href={{
-                pathname: `/navbarpages/train_deployment/certain_train/城際列車`,
+                pathname: `/navbarpages/train_deployment/certain_train/intercity_train`,
               }}
             >
               <OverviewCard
@@ -39,7 +39,7 @@ export default async function Page({
             </Link>
             <Link
               href={{
-                pathname: `/navbarpages/train_deployment/certain_train/通勤列車`,
+                pathname: `/navbarpages/train_deployment/certain_train/commuter_train`,
               }}
             >
               <OverviewCard
@@ -49,7 +49,7 @@ export default async function Page({
             </Link>
             <Link
               href={{
-                pathname: `/navbarpages/train_deployment/certain_train/電力機車`,
+                pathname: `/navbarpages/train_deployment/certain_train/electric_locomotive`,
               }}
             >
               <OverviewCard
@@ -59,7 +59,7 @@ export default async function Page({
             </Link>
             <Link
               href={{
-                pathname: `/navbarpages/train_deployment/certain_train/柴油客車`,
+                pathname: `/navbarpages/train_deployment/certain_train/diesel_passenger_car`,
               }}
             >
               <OverviewCard
@@ -69,7 +69,7 @@ export default async function Page({
             </Link>
             <Link
               href={{
-                pathname: `/navbarpages/train_deployment/certain_train/柴液機車`,
+                pathname: `/navbarpages/train_deployment/certain_train/diesel_hydraulic_locomotive`,
               }}
             >
               <OverviewCard
@@ -79,7 +79,7 @@ export default async function Page({
             </Link>
             <Link
               href={{
-                pathname: `/navbarpages/train_deployment/certain_train/柴電機車`,
+                pathname: `/navbarpages/train_deployment/certain_train/diesel_electric_locomotive`,
               }}
             >
               <OverviewCard

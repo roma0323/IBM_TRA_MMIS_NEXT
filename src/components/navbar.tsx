@@ -1,18 +1,15 @@
 "use client";
 
 import React, { Suspense, useState } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { DatePickerForm } from "@/components/ui/date_picker";
 import Link from "next/link";
 import { ModeToggle } from "@/components/ui/mode_toggle";
 import Image from "next/image";
-import { format } from "date-fns";
-import MidNavbarTrainDeployment from "@/components/train_deployment/mid_navbar";
 import MidNavbar from "@/components/MidNavbar";
 
 const Navbar: React.FC = () => {
   const pathname = usePathname();
-  const currentDate = format(new Date(), "yyyy-MM-dd");
   const [isHovered, setIsHovered] = useState<number | null>(null);
 
   const navLinks = [
@@ -114,7 +111,8 @@ const Navbar: React.FC = () => {
       subLinks: [],
     },
   ];
-
+  const searchParams = useSearchParams();
+  const date = searchParams?.get("date") || "";
   return (
     <div>
       <div className="h-fit w-full flex justify-between relative pr-6">
@@ -132,7 +130,8 @@ const Navbar: React.FC = () => {
           {navLinks.map((link, index) => (
             <Link
               key={link.href}
-              href={link.href}
+              
+              href={`${link.href}?date=${date}`}
               className={` px-3 flex   items-center ${
                 pathname?.startsWith(link.startsWith) ? "active" : ""
               }`}

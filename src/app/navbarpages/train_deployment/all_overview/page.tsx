@@ -38,14 +38,14 @@ export default async function Page({
 
             <Link
               href={{
-                pathname: `/navbarpages/train_deployment/certain_train/客車`,
+                pathname: `/navbarpages/train_deployment/certain_train/passenger_car`,
               }}
             >
               <OverviewCard Name="客車" Data={dataByCarCatalog["客車"]} />
             </Link>
             <Link
               href={{
-                pathname: `/navbarpages/train_deployment/certain_train/貨車`,
+                pathname: `/navbarpages/train_deployment/certain_train/freight_car`,
               }}
             >
               <OverviewCard Name="貨車" Data={dataByCarCatalog["貨車"]} />
