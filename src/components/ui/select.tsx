@@ -38,7 +38,7 @@ const SelectTrigger = React.forwardRef<
       </SelectPrimitive.Trigger>
       {isHovered && (
         <SelectContent>
-          {props.children}
+          {children}
         </SelectContent>
       )}
     </div>
