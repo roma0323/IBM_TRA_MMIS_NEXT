@@ -10,7 +10,7 @@ function dateFormat(date?: string) {
 //TODO :fetch without internet , error handling
 export async function getSumStatusListAndsumtotalEqualone( //fetch 首頁所有車輛資料
   date?: string
-): Promise<FetcheGetSumStatusList> {
+) {
   let formattedDate = dateFormat(date);
 
   
@@ -316,6 +316,62 @@ export async function getATPFailListAndCartype(date?: string) {
 
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getATPFailList&year=${yearString}&islist=1&key=cartype`,
+    {
+      method: "POST",
+      headers: {
+        Accept: "application/json, text/plain, */*",
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  return res.json();
+}
+
+export async function getInvMount(date?: string) {
+  // Fetch inventory cost amount
+  let formattedDate = dateFormat(date);
+  const yearString = formattedDate.split("-")[0];
+  
+
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getInvMount&year=${yearString}`,
+    {
+      method: "POST",
+      headers: {
+        Accept: "application/json, text/plain, */*",
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  return res.json();
+}
+
+export async function getInvMountList(date?: string) {
+  // Fetch getInventory List 
+  let formattedDate = dateFormat(date);
+  const yearString = formattedDate.split("-")[0];
+  
+
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getInvMountList&year=${yearString}&month=1&type=inv`,
+    {
+      method: "POST",
+      headers: {
+        Accept: "application/json, text/plain, */*",
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  return res.json();
+}
+export async function getInvMountListIssue(date?: string) {
+  // Fetch getInventory List 
+  let formattedDate = dateFormat(date);
+  const yearString = formattedDate.split("-")[0];
+  
+
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getInvMountList&year=${yearString}&month=1&type=issue`,
     {
       method: "POST",
       headers: {

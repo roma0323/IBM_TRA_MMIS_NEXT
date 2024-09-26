@@ -108,8 +108,8 @@ const Navbar: React.FC = () => {
     {
       href: `/navbarpages/maintenance_materials`,
       label: "庫存績效",
-      startsWith: "/navbarpages/inventory_performance",
-      subLinks: [],
+      startsWith: "/navbarpages/maintenance_materials",
+      subLinks: [{ name: "庫存績效總覽", path: "/navbarpages/maintenance_materials" }],
     },
   ];
 
