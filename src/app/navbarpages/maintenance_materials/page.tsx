@@ -1,5 +1,6 @@
 // import  ClientPage  from "./clientCom";
 import ClientPage from "@/components/maintenance_materials/ClientPage";
+import Loading from "@/components/Loading.jsx";
 import React from "react";
 import { getInvMount,getInvMountList,getInvMountListIssue } from "@/api/api";
 
@@ -23,7 +24,8 @@ export default async function Page({
 
   return (
     <main className=" grow bg-neutral-100 overflow-hidden relative">
-      <div>{inventory_list_issue[0].itemnum}</div>
+      {/* <div>{inventory_list_issue[0].itemnum}</div> */}
+      <div><Loading /></div>
         {/* <ClientPage key={searchParams.date} Data={fetchedData.data} /> */}
     </main>
   );
