@@ -53,11 +53,12 @@ const GroupBarChart: React.FC<GroupBarChartProps> = ({ data }) => {
         margin={{
           top: 20,
           right: 20,
+          left: 20,
         }}
       >
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="month" />
-        <YAxis />
+        {/* <YAxis /> */}
         <Tooltip content={<CustomTooltip />} />
         {kpicartypes.map((kpicartype) => (
           <Bar key={kpicartype} dataKey={kpicartype} fill={getCarColor(kpicartype)} />

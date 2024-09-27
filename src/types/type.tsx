@@ -192,3 +192,28 @@ export type InventoryOverview = {
   sum_issue_mount: string;
   sum_invbal_mount: string;
 };
+
+
+export type InventoryListBalance = {
+  itemnum: string;
+  conditioncode: string;
+  unitprice: string;
+  dept: string;
+  year: string;
+  unit: string;
+  itemdesc: string;
+  sum_invbal_mount: string;
+  curbal: string;
+};
+
+export type InventoryListIssue = {
+  itemnum: string;
+  conditioncode: string;
+  unitprice: string;
+  dept: string;
+  year: string;
+  unit: string;
+  itemdesc: string;
+  sum_issue_mount: string;
+  quantity: string;
+};
