@@ -183,3 +183,12 @@ export type FaultEquipmentAnalysis = {
     percentage: number;
   }>;
 };
+
+
+export type InventoryOverview = {
+  dept: string;
+  month: string;
+  year: string;
+  sum_issue_mount: string;
+  sum_invbal_mount: string;
+};

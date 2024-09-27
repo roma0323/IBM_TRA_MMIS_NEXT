@@ -6,7 +6,11 @@ import { getCarColor } from "@/lib/getCarColor";
 interface GroupBarChartProps {
   data: { [month: string]: { [kpicartype: string]: number } };
 }
+// Dec: {故障通報: 0, 行車責任事故: 0, ATP: 0}
 
+// Feb: {故障通報: 0, 行車責任事故: 0, ATP: 0}
+
+// Jan: {故障通報: 12, 行車責任事故: 0, ATP: 0}
 const CustomTooltip = ({ active, payload, label }: { active?: boolean; payload?: any; label?: string }) => {
   if (active && payload && payload.length) {
     return (
