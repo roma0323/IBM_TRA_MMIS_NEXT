@@ -15,7 +15,7 @@ export default async function Page({
   const fetchedData = await getSumStatusListAndsumtotalEqualone(date);
 
   const dataByCarCatalog: DataByCarCatalog = {};
-  fetchedData.data.forEach((item) => {
+  fetchedData.data.forEach((item: DataByCarCatalog[keyof DataByCarCatalog]) => {
     dataByCarCatalog[item.carcatalog] = item;
   });
 

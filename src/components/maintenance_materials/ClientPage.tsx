@@ -73,18 +73,58 @@ const ClientPage: React.FC<Props> = ({
         sum_issue_mount: overviewMap[month].sum_issue_mount.toString(),
         sum_invbal_mount: overviewMap[month].sum_invbal_mount.toString(),
       }));
+    } else if (selectFactory === "All_factory") {
+      const overviewMap: { [key: string]: { sum_issue_mount: number; sum_invbal_mount: number } } = {};
+      inventory_overview.forEach(item => {
+        if (["WAY00", "MXY00", "MZY00"].includes(item.dept)) {
+          if (!overviewMap[item.month]) {
+            overviewMap[item.month] = { sum_issue_mount: 0, sum_invbal_mount: 0 };
+          }
+          overviewMap[item.month].sum_issue_mount += Number(item.sum_issue_mount);
+          overviewMap[item.month].sum_invbal_mount += Number(item.sum_invbal_mount);
+        }
+      });
+      return Object.keys(overviewMap).map(month => ({
+        dept: "All_factory",
+        month,
+        year: "2024", // Assuming year is constant, adjust if necessary
+        sum_issue_mount: overviewMap[month].sum_issue_mount.toString(),
+        sum_invbal_mount: overviewMap[month].sum_invbal_mount.toString(),
+      }));
+    } else if (selectFactory === "All_depot") {
+      const overviewMap: { [key: string]: { sum_issue_mount: number; sum_invbal_mount: number } } = {};
+      inventory_overview.forEach(item => {
+        if (["MGY00", "MHY00", "MHY10", "MMY00", "MMY20", "MPY00", "MYY00", "MIY00", "MFY00"].includes(item.dept)) {
+          if (!overviewMap[item.month]) {
+            overviewMap[item.month] = { sum_issue_mount: 0, sum_invbal_mount: 0 };
+          }
+          overviewMap[item.month].sum_issue_mount += Number(item.sum_issue_mount);
+          overviewMap[item.month].sum_invbal_mount += Number(item.sum_invbal_mount);
+        }
+      });
+      return Object.keys(overviewMap).map(month => ({
+        dept: "All_depot",
+        month,
+        year: "2024", // Assuming year is constant, adjust if necessary
+        sum_issue_mount: overviewMap[month].sum_issue_mount.toString(),
+        sum_invbal_mount: overviewMap[month].sum_invbal_mount.toString(),
+      }));
     } else {
       return inventory_overview.filter(item => item.dept === selectFactory);
     }
   }, [inventory_overview, selectFactory]);
 
   const filteredInventoryListBalance = useMemo(
-    () => (selectFactory === "All" ? inventory_list_balance : inventory_list_balance.filter(item => item.dept === selectFactory)),
+    () => (selectFactory === "All" || selectFactory === "All_factory" || selectFactory === "All_depot"
+      ? inventory_list_balance.filter(item => selectFactory === "All" || (selectFactory === "All_factory" && ["WAY00", "MXY00", "MZY00"].includes(item.dept)) || (selectFactory === "All_depot" && ["MGY00", "MHY00", "MHY10", "MMY00", "MMY20", "MPY00", "MYY00", "MIY00", "MFY00"].includes(item.dept)))
+      : inventory_list_balance.filter(item => item.dept === selectFactory)),
     [inventory_list_balance, selectFactory]
   );
 
   const filteredInventoryListIssue = useMemo(
-    () => (selectFactory === "All" ? inventory_list_issue : inventory_list_issue.filter(item => item.dept === selectFactory)),
+    () => (selectFactory === "All" || selectFactory === "All_factory" || selectFactory === "All_depot"
+      ? inventory_list_issue.filter(item => selectFactory === "All" || (selectFactory === "All_factory" && ["WAY00", "MXY00", "MZY00"].includes(item.dept)) || (selectFactory === "All_depot" && ["MGY00", "MHY00", "MHY10", "MMY00", "MMY20", "MPY00", "MYY00", "MIY00", "MFY00"].includes(item.dept)))
+      : inventory_list_issue.filter(item => item.dept === selectFactory)),
     [inventory_list_issue, selectFactory]
   );
 

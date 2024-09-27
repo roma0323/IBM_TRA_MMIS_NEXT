@@ -15,13 +15,13 @@ export const InventoryTypeCard: React.FC<Props> = ({
 
   return (
     <div
-      className={`mt-3 p-3 rounded-lg flex-col inline-flex transform ${
+      className={`mt-1 p-2 rounded-lg flex-col inline-flex transform ${
         isActive && clickedDiv !== null ? "bg-slate-100" : ""
       }`}
       onClick={onToggle}
     >
       <div className="flex items-center justify-between">
-        <span className="text-5xl">{factory.name}</span>
+        <span className="text-md">{factory.name}</span>
         
       </div>
     </div>
