@@ -12,7 +12,7 @@ import GroupBarChart from "@/components/fault_notification/annual_report/GroupBa
 type InventoryOverviewTableProps = {
   chartData: { [key: string]: { 庫存餘額: number; 領用金額: number } };
   inventoryOverview: any[];
-  handleCellClick: (value: string) => void;
+  handleCellClick: (value: string, month: string) => void;
 };
 
 const InventoryOverviewTable: React.FC<InventoryOverviewTableProps> = ({
@@ -22,7 +22,7 @@ const InventoryOverviewTable: React.FC<InventoryOverviewTableProps> = ({
 }) => {
   return (
     <div className="">
-      <div className="w-full h-48">
+      <div className="w-full h-40">
         <GroupBarChart data={chartData} />
       </div>
       <Table>
@@ -37,10 +37,10 @@ const InventoryOverviewTable: React.FC<InventoryOverviewTableProps> = ({
           {inventoryOverview.map((item, index) => (
             <TableRow key={index}>
               <TableCell>{item.month}</TableCell>
-              <TableCell onClick={() => handleCellClick("庫存餘額")}>
+              <TableCell onClick={() => handleCellClick("庫存餘額", item.month)}>
                 {Math.round(Number(item.sum_invbal_mount))}
               </TableCell>
-              <TableCell onClick={() => handleCellClick("領用金額")}>
+              <TableCell onClick={() => handleCellClick("領用金額", item.month)}>
                 {Math.round(Number(item.sum_issue_mount))}
               </TableCell>
             </TableRow>

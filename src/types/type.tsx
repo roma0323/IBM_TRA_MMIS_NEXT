@@ -199,6 +199,7 @@ export type InventoryListBalance = {
   conditioncode: string;
   unitprice: string;
   dept: string;
+  month: string;
   year: string;
   unit: string;
   itemdesc: string;
@@ -211,6 +212,7 @@ export type InventoryListIssue = {
   conditioncode: string;
   unitprice: string;
   dept: string;
+  month: string;
   year: string;
   unit: string;
   itemdesc: string;

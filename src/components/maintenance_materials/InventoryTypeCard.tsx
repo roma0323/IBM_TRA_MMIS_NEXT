@@ -1,19 +1,17 @@
 import React, { useState } from "react";
-import { DataCard } from "@/components/train_deployment/DataCard";
-import { InventoryOverview } from "@/types/type";
 
 type Props = {
-  CardDataByLevel: InventoryOverview;
+  factory:  { factory_id: string, name: string };
   isActive: boolean;
   onToggle: () => void;
 };
 
 export const InventoryTypeCard: React.FC<Props> = ({
-  CardDataByLevel,
+  factory,
   isActive,
   onToggle,
 }) => {
-  const [clickedDiv, setClickedDiv] = useState<string | null>("sum_issue_mount");
+  const [clickedDiv, setClickedDiv] = useState<string | null>("");
 
   return (
     <div
@@ -23,7 +21,7 @@ export const InventoryTypeCard: React.FC<Props> = ({
       onClick={onToggle}
     >
       <div className="flex items-center justify-between">
-        <span className="text-5xl">{CardDataByLevel.dept}</span>
+        <span className="text-5xl">{factory.name}</span>
         
       </div>
     </div>

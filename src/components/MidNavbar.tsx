@@ -25,7 +25,7 @@ const MidNavbar: React.FC<MidNavbarProps> = ({ navItems }) => {
           {navItems.map((item) => (
             <Link key={item.name} href={`${item.path}?date=${date}`}>
               <div
-                className={`inline-flex h-fit items-center px-4 pb-2 pt-4 ${
+                className={`inline-flex h-fit items-center px-4 pb-2 pt-4  ${
                   pathname === item.path ? "mid_nav_active" : "mid_nav_unactive"
                 }`}
               >

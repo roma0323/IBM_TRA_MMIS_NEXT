@@ -6,11 +6,7 @@ import { getCarColor } from "@/lib/getCarColor";
 interface GroupBarChartProps {
   data: { [month: string]: { [kpicartype: string]: number } };
 }
-// Dec: {故障通報: 0, 行車責任事故: 0, ATP: 0}
 
-// Feb: {故障通報: 0, 行車責任事故: 0, ATP: 0}
-
-// Jan: {故障通報: 12, 行車責任事故: 0, ATP: 0}
 const CustomTooltip = ({ active, payload, label }: { active?: boolean; payload?: any; label?: string }) => {
   if (active && payload && payload.length) {
     return (
@@ -37,6 +33,11 @@ const CustomTooltip = ({ active, payload, label }: { active?: boolean; payload?:
 };
 
 const GroupBarChart: React.FC<GroupBarChartProps> = ({ data }) => {
+  // Check if data is empty or undefined
+  if (!data || Object.keys(data).length === 0) {
+    return <div>No data available</div>;
+  }
+
   // Transform the data into a format suitable for the BarChart
   const transformedData = Object.entries(data).map(([month, kpicartypes]) => ({
     month,
@@ -44,7 +45,7 @@ const GroupBarChart: React.FC<GroupBarChartProps> = ({ data }) => {
   }));
 
   // Extract all kpicartypes from the data
-  const kpicartypes = Object.keys(data[Object.keys(data)[0]]);
+  const kpicartypes = Object.keys(data[Object.keys(data)[0]] || {});
 
   return (
     <ResponsiveContainer width="100%" height="100%">

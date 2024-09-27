@@ -20,10 +20,10 @@ export default async function Page({
     "dept": "WAY00",
     "month": "1",
     "year": "2024",
-    "sum_issue_mount": "54789464.8000",
-    "sum_invbal_mount": "1344924283.5500"
+    "sum_issue_mount": "8000",
+    "sum_invbal_mount": "5500"
   }, {
-    "dept": "MGY00",
+    "dept": "WAY00",
     "month": "2",
     "year": "2024",
     "sum_issue_mount": "29145173.7900",
@@ -41,11 +41,18 @@ export default async function Page({
     "sum_issue_mount": "29145173.7900",
     "sum_invbal_mount": "1299152818.2700"
   },{
+    "dept": "WAY00",
+    "month": "5",
+    "year": "2024",
+    "sum_issue_mount": "100",
+    "sum_invbal_mount": "200"
+  },
+  ,{
     "dept": "MGY00",
     "month": "5",
     "year": "2024",
-    "sum_issue_mount": "54789464.8000",
-    "sum_invbal_mount": "1344924283.5500"
+    "sum_issue_mount": "300",
+    "sum_invbal_mount": "400"
   }, {
     "dept": "WAY00",
     "month": "6",
@@ -94,7 +101,7 @@ export default async function Page({
     "itemnum": "1924671900",
     "conditioncode": "3",
     "unitprice": "25238.00",
-    "dept": "MGY00",
+    "dept": "WAY00",
     "month": "1",
     "year": "2024",
     "unit": "PC",
@@ -105,7 +112,7 @@ export default async function Page({
     "itemnum": "1924671900",
     "conditioncode": "1",
     "unitprice": "25238.00",
-    "dept": "MGY00",
+    "dept": "WAY00",
     "month": "1",
     "year": "2024",
     "unit": "PC",
@@ -118,8 +125,8 @@ export default async function Page({
     "itemnum": "0001030105",
     "conditioncode": "1",
     "unitprice": "21.35",
-    "dept": "MGY00",
-    "month": "1",
+    "dept": "WAY00",
+    "month": "5",
     "year": "2024",
     "unit": "LT",
     "itemdesc": "柴油",
@@ -129,8 +136,19 @@ export default async function Page({
     "itemnum": "19EMEM0220",
     "conditioncode": "1",
     "unitprice": "756.00",
+    "dept": "WAY00",
+    "month": "5",
+    "year": "2024",
+    "unit": "PC",
+    "itemdesc": "PP機車合成閘瓦",
+    "sum_issue_mount": "290304.0000",
+    "quantity": "384.00"
+  }, {
+    "itemnum": "19EMEM06220",
+    "conditioncode": "1",
+    "unitprice": "756.00",
     "dept": "MGY00",
-    "month": "1",
+    "month": "5",
     "year": "2024",
     "unit": "PC",
     "itemdesc": "PP機車合成閘瓦",
