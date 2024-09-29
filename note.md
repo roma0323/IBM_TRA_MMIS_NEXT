@@ -116,3 +116,8 @@ Other: board overflow :
         feat: ATP故障分析-故障件事折線圖
         refactor:故障通報-每日故障通報 layout 
         refactor: nav bar
+
+
+
+9/26 進度：
+        error :庫存餘額  領用金額 month only Jan work
