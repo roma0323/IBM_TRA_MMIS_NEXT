@@ -16,6 +16,8 @@ export const getCarColor = (carcatalog: string): string => {
       "故障通報": "#0E1F40",
       "行車責任事故": "#2A5EBF",
       "ATP": "#537FD1",
+      "庫存餘額": "#537FD1",
+      "領用金額": "#0E1F40",
 
     };
   

@@ -1,6 +1,5 @@
 import React, { Suspense } from "react";
 import Loading from "@/components/Loading";
-import MidNavbar from "@/components/MidNavbar";
 
 export default function DashboardLayout({
   children,

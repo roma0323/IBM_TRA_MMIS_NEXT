@@ -24,6 +24,7 @@ const ClientPage: React.FC<Props> = ({ inventory_overview, date }) => {
   const [selectFactoryName, setSelectFactoryName] = useState<string>("機務處");
   const [selectedType, setSelectedValue] = useState<string>("");
   const [inventoryList, setInventoryList] = useState<InventoryListIssue[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false); // New loading state
   const slideNavRef = useRef<SlideNavigationContainerRef>(null);
 
   const fetchAndSumData = async (factories: string[], date: string, month: string, type: string) => {
@@ -43,8 +44,9 @@ const ClientPage: React.FC<Props> = ({ inventory_overview, date }) => {
     }, [] as InventoryListIssue[]);
   };
 
-  const handleCellClick = async (type: string, month: string,typeName:string) => {
+  const handleCellClick = async (type: string, month: string, typeName: string) => {
     setSelectedValue(typeName);
+    setIsLoading(true); // Set loading to true before fetching data
 
     let factories: string[] = [];
     if (selectFactory === "All_depot") {
@@ -64,6 +66,7 @@ const ClientPage: React.FC<Props> = ({ inventory_overview, date }) => {
       setInventoryList(listRow);
     }
 
+    setIsLoading(false); // Set loading to false after fetching data
     slideNavRef.current?.handleMouseEnter("right");
   };
 
@@ -149,7 +152,7 @@ const ClientPage: React.FC<Props> = ({ inventory_overview, date }) => {
         <div className="min-w-[73%] grow flex items-center justify-center">
           <BoardTitleSection
             title={`${selectFactoryName} - ${selectedType}`}
-            content={<InventoryTableList data={inventoryList} />}
+            content={<InventoryTableList data={inventoryList} isLoading={isLoading} />} // Pass isLoading to InventoryTableList
           />
         </div>
       </SlideNavigationContainer>
