@@ -353,7 +353,8 @@ export async function getInvMountList(date?: string) {
   
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getInvMountList&year=${yearString}&month=1&type=inv`,
+    // `${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getInvMountList&year=${yearString}&month=2&type=inv`,
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getInvMountList&year=${yearString}&month=1&dept=MYY00&type=inv`,
     {
       method: "POST",
       headers: {
@@ -368,10 +369,9 @@ export async function getInvMountListIssue(date?: string) {
   // Fetch getInventory List 
   let formattedDate = dateFormat(date);
   const yearString = formattedDate.split("-")[0];
-  
-
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getInvMountList&year=${yearString}&month=1&type=issue`,
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getInvMountList&year=${yearString}&month=1&dept=MYY00&type=issue`,
+    // `${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getInvMountList&year=${yearString}&type=issue`,
     {
       method: "POST",
       headers: {

@@ -71,9 +71,9 @@ const FactorySection: React.FC<FactorySectionProps> = ({
                   setActiveContentId(undefined);
                 }}
                 contents={[
-                  { id: "WAY00", name: "富岡" },
-                  { id: "MXY00", name: "潮州" },
-                  { id: "MZY00", name: "花蓮" },
+                  { id: "WAY00", name: "富岡機廠" },
+                  { id: "MXY00", name: "潮州機廠" },
+                  { id: "MZY00", name: "花蓮機廠" },
                 ]}
                 onContentClick={(id, name) => {
                   setSelectFactory(id);
@@ -91,15 +91,15 @@ const FactorySection: React.FC<FactorySectionProps> = ({
                   setActiveContentId(undefined);
                 }}
                 contents={[
-                  { id: "MGY00", name: "七堵" },
-                  { id: "MHY00", name: "臺北" },
-                  { id: "MHY10", name: "新竹" },
-                  { id: "MMY00", name: "彰化" },
-                  { id: "MMY20", name: "嘉義" },
-                  { id: "MPY00", name: "高雄" },
-                  { id: "MYY00", name: "花蓮" },
-                  { id: "MIY00", name: "臺東" },
-                  { id: "MFY00", name: "宜蘭" },
+                  { id: "MGY00", name: "七堵機務段" },
+                  { id: "MHY00", name: "臺北機務段" },
+                  { id: "MHY10", name: "新竹機務段" },
+                  { id: "MMY00", name: "彰化機務段" },
+                  { id: "MMY20", name: "嘉義機務段" },
+                  { id: "MPY00", name: "高雄機務段" },
+                  { id: "MYY00", name: "花蓮機務段" },
+                  { id: "MIY00", name: "臺東機務段" },
+                  { id: "MFY00", name: "宜蘭機務段" },
                 ]}
                 onContentClick={(id, name) => {
                   setSelectFactory(id);
