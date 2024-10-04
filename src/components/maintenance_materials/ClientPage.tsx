@@ -1,9 +1,8 @@
 "use client";
 
-import React, { useState, useRef, useMemo } from "react";
+import React, { useState, useRef, useMemo, useEffect } from "react";
 import {
   InventoryOverview,
-  InventoryListBalance,
   InventoryListIssue,
 } from "@/types/type";
 import BoardTitleSection from "@/components/BoardTitleSection";
@@ -13,38 +12,31 @@ import SlideNavigationContainer, {
 import InventoryTableList from "@/components/maintenance_materials/InventoryTableList";
 import InventoryOverviewTable from "@/components/maintenance_materials/InventoryOverviewTable";
 import FactorySection from "@/components/maintenance_materials/FactorySection";
+import {  getInvMountListRow } from "@/api/api";
 
 type Props = {
   inventory_overview: InventoryOverview[];
-  inventory_list_balance: InventoryListBalance[];
-  inventory_list_issue: InventoryListIssue[];
+  date: string;
 };
 
-const ClientPage: React.FC<Props> = ({
-  inventory_overview,
-  inventory_list_balance,
-  inventory_list_issue,
-}) => {
+const ClientPage: React.FC<Props> = ({ inventory_overview, date }) => {
   const [selectFactory, setSelectFactory] = useState<string>("");
   const [selectFactoryName, setSelectFactoryName] = useState<string>("name");
   const [selectedValue, setSelectedValue] = useState<string>("");
-  const [tableData, setTableData] = useState<any[]>([]);
   const [activeContentId, setActiveContentId] = useState<string | undefined>(undefined);
+  const [inventoryList, setInventoryList] = useState<InventoryListIssue[]>([]);
   const slideNavRef = useRef<SlideNavigationContainerRef>(null);
 
-  const handleCellClick = (value: string, month: string) => {
-    setSelectedValue(value);
-    if (value === "庫存餘額") {
-      setTableData(
-        filteredInventoryListBalance.filter((item) => item.month === month)
-      );
-    } else if (value === "領用金額") {
-      setTableData(
-        filteredInventoryListIssue.filter((item) => item.month === month)
-      );
-    }
+  
+  
+  const handleCellClick = async (type: string, month: string) => {
+    setSelectedValue(type);
+    const listRow = await getInvMountListRow(date, month, selectFactory, type);
+    setInventoryList(listRow);
     slideNavRef.current?.handleMouseEnter("right");
   };
+
+  
 
   const filteredInventoryOverview = useMemo(() => {
     if (selectFactory === "All") {
@@ -138,60 +130,6 @@ const ClientPage: React.FC<Props> = ({
     }
   }, [inventory_overview, selectFactory]);
 
-  const filteredInventoryListBalance = useMemo(
-    () =>
-      selectFactory === "All" ||
-      selectFactory === "All_factory" ||
-      selectFactory === "All_depot"
-        ? inventory_list_balance.filter(
-            (item) =>
-              selectFactory === "All" ||
-              (selectFactory === "All_factory" &&
-                ["WAY00", "MXY00", "MZY00"].includes(item.dept)) ||
-              (selectFactory === "All_depot" &&
-                [
-                  "MGY00",
-                  "MHY00",
-                  "MHY10",
-                  "MMY00",
-                  "MMY20",
-                  "MPY00",
-                  "MYY00",
-                  "MIY00",
-                  "MFY00",
-                ].includes(item.dept))
-          )
-        : inventory_list_balance.filter((item) => item.dept === selectFactory),
-    [inventory_list_balance, selectFactory]
-  );
-
-  const filteredInventoryListIssue = useMemo(
-    () =>
-      selectFactory === "All" ||
-      selectFactory === "All_factory" ||
-      selectFactory === "All_depot"
-        ? inventory_list_issue.filter(
-            (item) =>
-              selectFactory === "All" ||
-              (selectFactory === "All_factory" &&
-                ["WAY00", "MXY00", "MZY00"].includes(item.dept)) ||
-              (selectFactory === "All_depot" &&
-                [
-                  "MGY00",
-                  "MHY00",
-                  "MHY10",
-                  "MMY00",
-                  "MMY20",
-                  "MPY00",
-                  "MYY00",
-                  "MIY00",
-                  "MFY00",
-                ].includes(item.dept))
-          )
-        : inventory_list_issue.filter((item) => item.dept === selectFactory),
-    [inventory_list_issue, selectFactory]
-  );
-
   const chartData = useMemo(() => {
     if (filteredInventoryOverview.length === 0) {
       return {};
@@ -211,8 +149,12 @@ const ClientPage: React.FC<Props> = ({
     );
   }, [filteredInventoryOverview]);
 
+  
+  
+  
   return (
     <div className="h-full overflow-hidden">
+      {/* <div>{inventoryListBalance[0].month}</div> */}
       <SlideNavigationContainer
         ref={slideNavRef}
         totalSlides={3}
@@ -247,7 +189,7 @@ const ClientPage: React.FC<Props> = ({
         <div className="min-w-[73%] grow flex items-center justify-center">
           <BoardTitleSection
             title={`${selectFactoryName} - ${selectedValue}`}
-            content={<InventoryTableList data={tableData} />}
+            content={<InventoryTableList data={inventoryList} />}
           />
         </div>
       </SlideNavigationContainer>
@@ -256,3 +198,58 @@ const ClientPage: React.FC<Props> = ({
 };
 
 export default ClientPage;
+
+
+// const filteredInventoryListBalance = useMemo(
+//   () =>
+//     selectFactory === "All" ||
+//     selectFactory === "All_factory" ||
+//     selectFactory === "All_depot"
+//       ? inventoryListBalance.filter(
+//           (item) =>
+//             selectFactory === "All" ||
+//             (selectFactory === "All_factory" &&
+//               ["WAY00", "MXY00", "MZY00"].includes(item.dept)) ||
+//             (selectFactory === "All_depot" &&
+//               [
+//                 "MGY00",
+//                 "MHY00",
+//                 "MHY10",
+//                 "MMY00",
+//                 "MMY20",
+//                 "MPY00",
+//                 "MYY00",
+//                 "MIY00",
+//                 "MFY00",
+//               ].includes(item.dept))
+//         )
+//       : inventoryListBalance.filter((item) => item.dept === selectFactory),
+//   [inventoryListBalance, selectFactory]
+// );
+
+// const filteredInventoryListIssue = useMemo(
+//   () =>
+//     selectFactory === "All" ||
+//     selectFactory === "All_factory" ||
+//     selectFactory === "All_depot"
+//       ? inventoryList.filter(
+//           (item) =>
+//             selectFactory === "All" ||
+//             (selectFactory === "All_factory" &&
+//               ["WAY00", "MXY00", "MZY00"].includes(item.dept)) ||
+//             (selectFactory === "All_depot" &&
+//               [
+//                 "MGY00",
+//                 "MHY00",
+//                 "MHY10",
+//                 "MMY00",
+//                 "MMY20",
+//                 "MPY00",
+//                 "MYY00",
+//                 "MIY00",
+//                 "MFY00",
+//               ].includes(item.dept))
+//         )
+//       : inventoryList.filter((item) => item.dept === selectFactory),
+//   [inventoryList, selectFactory]
+// );

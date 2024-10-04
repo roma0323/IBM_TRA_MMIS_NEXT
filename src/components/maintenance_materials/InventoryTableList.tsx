@@ -64,7 +64,7 @@ const InventoryTableList: React.FC<InventoryTableListProps> = ({ data }) => {
                   ? inventory_balance_by_row.sum_invbal_mount
                   : inventory_balance_by_row.sum_issue_mount}
               </TableCell>
-              <TableCell>percentage%</TableCell> {/* should be percentage */}
+              <TableCell>??%</TableCell> {/* should be percentage */}
             </TableRow>
           ))}
         </TableBody>
