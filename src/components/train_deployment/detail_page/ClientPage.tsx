@@ -66,7 +66,7 @@ const DetailClientPage: React.FC<FetcheGetSumStatusListData> = ({ Data }) => {
             <SlideNavigationContainer ref={slideNavRef} totalSlides={5} visibleSlides={3} slideWidthPercentage={26}>
 
         {/* first Div */}
-        <div className="min-w-[25%] h-full  flex items-center justify-center">
+        <div className="min-w-[25%]   flex items-center justify-center">
           <DataSection
             cntSum={cntSum}
             readySum={readySum}
