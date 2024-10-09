@@ -86,38 +86,3 @@ CSS & UI tips:
         cn()  to resue the board title
 Other: board overflow :
         h-64 size-full
---------------------------------
-
-8/27週進度：
-                改善用戶體驗
-                        - RWD
-                        - loading page
-                程式重構
-                        - type reuse
-                        - component reuse
-                        - refactor some components to server component
-                        - color align
-                新增功能
-                        - date function deoplyment detail /depot
-                        - 機廠檢修清單
-
-
-
-9/12 進度：
-                每日故障通報 -Done
-                年度故障通報
-                ATP故障通報
-                3D loading 
-
-
-9/19 進度：
-        feat: 故障通報-fetch
-        feat: 根據年份選擇
-        feat: ATP故障分析-故障件事折線圖
-        refactor:故障通報-每日故障通報 layout 
-        refactor: nav bar
-
-
-
-9/26 進度：
-        error :庫存餘額  領用金額 month only Jan work
