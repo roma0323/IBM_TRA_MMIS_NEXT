@@ -16,7 +16,7 @@ const Navbar: React.FC = () => {
   const navLinks = [
     {
       href: `/navbarpages/train_deployment/all_overview`,
-      label: "車輛配置資訊",
+      label: "車輛配置",
       startsWith: "/navbarpages/train_deployment",
       subLinks: [
         {
@@ -67,13 +67,13 @@ const Navbar: React.FC = () => {
     },
     {
       href: `/navbarpages/locomotive_depot`,
-      label: "機務段配置資訊",
+      label: "機務段配置",
       startsWith: "/navbarpages/locomotive_depot",
       subLinks: [{ name: "機務段總覽", path: "/navbarpages/locomotive_depot" }],
     },
     {
       href: `/navbarpages/factory_maintenance/factory_overview`,
-      label: "機廠檢修資訊",
+      label: "機廠檢修",
       startsWith: "/navbarpages/factory_maintenance",
       subLinks: [
         {
@@ -81,7 +81,7 @@ const Navbar: React.FC = () => {
           path: "/navbarpages/factory_maintenance/factory_overview",
         },
         {
-          name: "機廠配置資訊",
+          name: "機廠配置",
           path: "/navbarpages/factory_maintenance/factory_depot",
         },
       ],
@@ -111,10 +111,20 @@ const Navbar: React.FC = () => {
       startsWith: "/navbarpages/maintenance_materials",
       subLinks: [{ name: "庫存績效總覽", path: "/navbarpages/maintenance_materials" }],
     },
+    {
+      href: `/navbarpages/car_type_spec`,
+      label: "車輛諸元",
+      startsWith: "/navbarpages/car_type_spec",
+      subLinks: [{ name: "車輛諸元總覽", path: "/navbarpages/car_type_spec" }],
+    },
+    {
+      href: `/navbarpages/operation_signal`,
+      label: "營運燈號",
+      startsWith: "/navbarpages/operation_signal",
+      subLinks: [{ name: "營運燈號總覽", path: "/navbarpages/operation_signal" }],
+    },
   ];
 
-  const searchParams = useSearchParams();
-  const date = searchParams?.get("date") || "";
 
   return (
     <div>
