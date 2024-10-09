@@ -9,7 +9,7 @@ import BoardTitleSection from "@/components/BoardTitleSection";
 
 type TrainCategorySectionProps = {
   setSelectTrain: (factory: string) => void;
-  all_car_type: { cartype: string; kpi_oprtype: string; cardesc: string }[]; 
+  all_car_type: { cartype: string; kpi_oprtype: string; cardesc: string }[];
 };
 
 const AccordionSection: React.FC<{
@@ -25,7 +25,9 @@ const AccordionSection: React.FC<{
       contents.map((content) => (
         <AccordionContent
           key={content.id}
-          onClick={() => onContentClick && onContentClick(content.id, content.name)}
+          onClick={() =>
+            onContentClick && onContentClick(content.id, content.name)
+          }
           className={`p-2 text-lg cursor-pointer rounded-lg  hover:bg-slate-100`}
         >
           {content.name}
@@ -55,7 +57,19 @@ const TrainCategorySection: React.FC<TrainCategorySectionProps> = ({
       <BoardTitleSection
         title="廠段分類"
         content={
-          <div className="flex flex-col mx-4 text-lg">
+          <div className="flex flex-col mx-4 text-lg relative">
+            <div className="fixed bottom-4  bg-white underline cursor-pointer hover:font-medium text-primary">
+            <a
+                href="http://192.168.36.21/maximo/webclient/common/openreport_AM108.jsp"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary underline"
+              >
+                機客貨車概況及車號表
+              </a>
+             
+            </div>
+
             <Accordion type="single" collapsible>
               {Object.entries(groupedData).map(([cartype, contents]) => (
                 <AccordionSection
@@ -68,7 +82,6 @@ const TrainCategorySection: React.FC<TrainCategorySectionProps> = ({
                 />
               ))}
             </Accordion>
-            客車貨車button這裏
           </div>
         }
       />

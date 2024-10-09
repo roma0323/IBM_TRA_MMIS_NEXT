@@ -89,7 +89,7 @@ const ClientPage: React.FC<Props> = ({  all_car_type }) => {
                   <div className=" size-full">
                     {allCarSpecInfo && (
                       <CarSetTable
-                        carTypeChildrenList={allCarSpecInfo.carchildren}
+                        carTypeChildrenList={allCarSpecInfo.cartypechildrenlist}
                       />
                     )}
                   </div>
