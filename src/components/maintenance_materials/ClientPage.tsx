@@ -4,6 +4,7 @@ import React, { useState, useRef, useMemo, useEffect } from "react";
 import {
   InventoryOverview,
   InventoryListIssue,
+  InventoryListBalance,
 } from "@/types/type";
 import BoardTitleSection from "@/components/BoardTitleSection";
 import SlideNavigationContainer, {
@@ -24,7 +25,8 @@ const ClientPage: React.FC<Props> = ({ inventory_overview, date }) => {
   const [selectFactoryName, setSelectFactoryName] = useState<string>("機務處");
   const [selectedType, setSelectedValue] = useState<string>("");
   const [inventoryList, setInventoryList] = useState<InventoryListIssue[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(false); // New loading state
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [totalMoney, setTotalMoney] = useState<number>(0); // New state for total money
   const slideNavRef = useRef<SlideNavigationContainerRef>(null);
 
   const fetchAndSumData = async (factories: string[], date: string, month: string, type: string) => {
@@ -46,7 +48,7 @@ const ClientPage: React.FC<Props> = ({ inventory_overview, date }) => {
 
   const handleCellClick = async (type: string, month: string, typeName: string) => {
     setSelectedValue(typeName);
-    setIsLoading(true); // Set loading to true before fetching data
+    setIsLoading(true);
 
     let factories: string[] = [];
     if (selectFactory === "All_depot") {
@@ -57,16 +59,24 @@ const ClientPage: React.FC<Props> = ({ inventory_overview, date }) => {
       factories = ["MGY00", "MHY00", "MHY10", "MMY00", "MMY20", "MPY00", "MYY00", "MIY00", "MFY00", "WAY00", "MXY00", "MZY00"];
     }
 
+    let summedData = [];
     if (factories.length > 0) {
-      let summedData = await fetchAndSumData(factories, date, month, type);
+      summedData = await fetchAndSumData(factories, date, month, type);
       summedData = summedData.sort((a: InventoryListIssue, b: InventoryListIssue) => parseFloat(b.sum_issue_mount) - parseFloat(a.sum_issue_mount));
-      setInventoryList(summedData);
     } else {
-      const listRow = await getInvMountListRow(date, month, selectFactory, type);
-      setInventoryList(listRow);
+      summedData = await getInvMountListRow(date, month, selectFactory, type);
     }
 
-    setIsLoading(false); // Set loading to false after fetching data
+    setInventoryList(summedData);
+
+    // Calculate total money
+    const total = summedData.reduce((acc: number, item: InventoryListIssue | InventoryListBalance) => {
+      const sumMount = 'sum_issue_mount' in item ? parseFloat(item.sum_issue_mount) : parseFloat(item.sum_invbal_mount);
+      return acc + sumMount;
+    }, 0);
+    setTotalMoney(total);
+
+    setIsLoading(false);
     slideNavRef.current?.handleMouseEnter("right");
   };
 
@@ -152,7 +162,7 @@ const ClientPage: React.FC<Props> = ({ inventory_overview, date }) => {
         <div className="min-w-[73%] grow flex items-center justify-center">
           <BoardTitleSection
             title={`${selectFactoryName} - ${selectedType}`}
-            content={<InventoryTableList data={inventoryList} isLoading={isLoading} />} // Pass isLoading to InventoryTableList
+            content={<InventoryTableList data={inventoryList} isLoading={isLoading} totalMoney={totalMoney} />} // Pass totalMoney to InventoryTableList
           />
         </div>
       </SlideNavigationContainer>

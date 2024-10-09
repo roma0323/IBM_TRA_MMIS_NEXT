@@ -21,13 +21,13 @@ const InventoryOverviewTable: React.FC<InventoryOverviewTableProps> = ({
   handleCellClick,
 }) => {
   return (
-    <div className="">
+    <div className="text-lg">
       <div className="w-full h-40">
         <GroupBarChart data={chartData} />
       </div>
       <Table>
         <TableHeader>
-          <TableRow className="bg-slate-100 rounded-lg">
+          <TableRow className="bg-slate-100">
             <TableHead>月份</TableHead>
             <TableHead>庫存餘額</TableHead>
             <TableHead>領用金額</TableHead>
@@ -36,11 +36,11 @@ const InventoryOverviewTable: React.FC<InventoryOverviewTableProps> = ({
         <TableBody>
           {inventoryOverview.map((item, index) => (
             <TableRow key={index}>
-              <TableCell>{item.month}</TableCell>
-              <TableCell className='cursor-pointer hover:underline' onClick={() => handleCellClick("inv", item.month,"庫存餘額")}>
+              <TableCell className="text-lg">{item.month}</TableCell>
+              <TableCell className='cursor-pointer hover:underline text-lg' onClick={() => handleCellClick("inv", item.month,"庫存餘額")}>
                 {Math.round(Number(item.sum_invbal_mount))}
               </TableCell>
-              <TableCell className='cursor-pointer hover:underline' onClick={() => handleCellClick("issue", item.month,"領用金額")}>
+              <TableCell className='cursor-pointer hover:underline text-lg' onClick={() => handleCellClick("issue", item.month,"領用金額")}>
                 {Math.round(Number(item.sum_issue_mount))}
               </TableCell>
             </TableRow>

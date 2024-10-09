@@ -16,11 +16,16 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { InventoryListBalance, InventoryListIssue } from "@/types/type";
-import Loading from "@/components/Loading";
 
 type InventoryTableListProps = {
   data: (InventoryListBalance | InventoryListIssue)[];
-  isLoading: boolean; // New prop for loading state
+  isLoading: boolean;
+  totalMoney: number; // New prop for total money
+};
+
+// Define a type for the table meta
+type TableMeta = {
+  totalMoney: number;
 };
 
 // Define your columns using react-table's ColumnDef
@@ -68,13 +73,21 @@ const columns: ColumnDef<InventoryListBalance | InventoryListIssue>[] = [
   {
     id: "percentage",
     header: "金額占比",
-    cell: () => "??%", // Replace with actual percentage calculation
+    cell: ({ row, table }) => {
+      const totalMoney = (table.options.meta as TableMeta).totalMoney;
+      const sumMount = "sum_invbal_mount" in row.original
+        ? parseFloat((row.original as InventoryListBalance).sum_invbal_mount)
+        : parseFloat((row.original as InventoryListIssue).sum_issue_mount);
+      const percentage = ((sumMount / totalMoney) * 100).toFixed(2);
+      return `${percentage}%`;
+    },
   },
 ];
 
 const InventoryTableList: React.FC<InventoryTableListProps> = ({
   data,
   isLoading,
+  totalMoney,
 }) => {
   const table = useReactTable({
     data,
@@ -83,8 +96,11 @@ const InventoryTableList: React.FC<InventoryTableListProps> = ({
     getPaginationRowModel: getPaginationRowModel(),
     initialState: {
       pagination: {
-        pageSize: 15, // Number of items per page
+        pageSize: 15,
       },
+    },
+    meta: {
+      totalMoney, // Pass totalMoney to table meta
     },
   });
 
@@ -109,7 +125,7 @@ const InventoryTableList: React.FC<InventoryTableListProps> = ({
         </TableHeader>
 
         {isLoading ? (
-          <div className="text-xl">
+          <div className="text-2xl">
             <span>Loading...</span>
           </div>
         ) : (
@@ -119,7 +135,7 @@ const InventoryTableList: React.FC<InventoryTableListProps> = ({
                 table.getRowModel().rows.map((row) => (
                   <TableRow key={row.id}>
                     {row.getVisibleCells().map((cell) => (
-                      <TableCell key={cell.id}>
+                      <TableCell key={cell.id} className="text-lg">
                         {flexRender(
                           cell.column.columnDef.cell,
                           cell.getContext()
@@ -131,7 +147,7 @@ const InventoryTableList: React.FC<InventoryTableListProps> = ({
               ) : (
                 <TableRow>
                   <TableCell colSpan={columns.length} className="text-center">
-                    
+                    No data available
                   </TableCell>
                 </TableRow>
               )}
@@ -139,8 +155,7 @@ const InventoryTableList: React.FC<InventoryTableListProps> = ({
           </>
         )}
       </Table>
-      {/* Pagination Controls */}
-      <div className="bg-slate-100 fixed rounded-lg bottom-6 flex items-center justify-end space-x-2 p-4">
+      <div className="rounded-lg bottom-6 flex items-center justify-end space-x-2 p-4">
         <Button
           variant="outline"
           size="sm"

@@ -29,7 +29,7 @@ const AccordionSection: React.FC<{
         <AccordionContent
           key={content.id}
           onClick={() => onContentClick && onContentClick(content.id, content.name)}
-          className={`p-2 cursor-pointer rounded-lg  hover:bg-slate-100`}
+          className={`p-2 text-lg cursor-pointer rounded-lg  hover:bg-slate-100`}
         >
           {content.name}
         </AccordionContent>
@@ -55,7 +55,7 @@ const FactorySection: React.FC<FactorySectionProps> = ({
       <BoardTitleSection
         title="廠段分類"
         content={
-          <div className="flex flex-col mx-4">
+          <div className="flex flex-col mx-4 text-lg">
             <Accordion type="single" collapsible>
               <AccordionSection
                 value="All"
