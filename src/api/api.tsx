@@ -363,3 +363,35 @@ export async function getInvMountListRow(date?: string,month?: string,dept?:stri
   );
   return res.json();
 }
+
+
+export async function getAllCarSpecInfoByCarType(type?: string) {
+  // Fetch car spec
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getCarBaseInfoByCarType&cartype=${type}`,
+    {
+      method: "POST",
+      headers: {
+        Accept: "application/json, text/plain, */*",
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  return res.json();
+}
+
+
+export async function getCarTypeList() {
+  // Fetch all car type
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getCarTypeList`,
+    {
+      method: "POST",
+      headers: {
+        Accept: "application/json, text/plain, */*",
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  return res.json();
+}

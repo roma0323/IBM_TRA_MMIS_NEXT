@@ -64,8 +64,7 @@ export type factoryMaintenanceOverall = {
   Data: factoryMaintenanceEachFactory[];
 };
 
-
-export type factorySumStatus ={
+export type factorySumStatus = {
   index: number;
   worktype: string;
   dept: string;
@@ -86,14 +85,13 @@ export type factorySumStatus ={
   inwodays: number;
   behindordelaydays: string;
   url: string;
-}
-
+};
 
 export type factorySumStatusOverall = {
   Data: factorySumStatus[];
 };
 
-export type FailListItem ={
+export type FailListItem = {
   trains_no: string;
   cartype: string;
   kpicartype: string;
@@ -113,9 +111,9 @@ export type FailListItem ={
   cmwo_url: string;
   rep_url: string;
   from: string;
-}
+};
 
-export type FailListData ={
+export type FailListData = {
   fail_total_cnt_a: number;
   fail_total_cnt_b: number;
   fail_total_cnt_c: number;
@@ -133,11 +131,11 @@ export type FailListData ={
   fail_atp_cnt: number;
   fail_duty_cnt: number;
   fail_list: FailListItem[];
-}
+};
 
-export type FailListItemArray ={
+export type FailListItemArray = {
   fail_list: FailListItem[];
-}
+};
 
 export type ReportLevelCardDataType = {
   fail_lvl: string;
@@ -184,7 +182,6 @@ export type FaultEquipmentAnalysis = {
   }>;
 };
 
-
 export type InventoryOverview = {
   dept: string;
   month: string;
@@ -192,7 +189,6 @@ export type InventoryOverview = {
   sum_issue_mount: string;
   sum_invbal_mount: string;
 };
-
 
 export type InventoryListBalance = {
   itemnum: string;
@@ -218,4 +214,19 @@ export type InventoryListIssue = {
   itemdesc: string;
   sum_issue_mount: string;
   quantity: string;
+};
+
+export type CarSpecChildren = {
+  assetnum: string;
+  status: string;
+  statusdesc: string;
+  url: string;
+  testrundate: string;
+  belongtodept: string;
+  belongtodeptdesc: string;
+  belongtofac: string;
+  belongtofacdesc: string;
+  startdate: string;
+  stopdate: string;
+  remark: string;
 };

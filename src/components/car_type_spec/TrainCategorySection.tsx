@@ -9,7 +9,7 @@ import BoardTitleSection from "@/components/BoardTitleSection";
 
 type TrainCategorySectionProps = {
   setSelectTrain: (factory: string) => void;
-  fake_data: { cartype: string; kpi_oprtype: string; cardesc: string }[]; // Add fake_data prop
+  all_car_type: { cartype: string; kpi_oprtype: string; cardesc: string }[]; 
 };
 
 const AccordionSection: React.FC<{
@@ -36,13 +36,13 @@ const AccordionSection: React.FC<{
 
 const TrainCategorySection: React.FC<TrainCategorySectionProps> = ({
   setSelectTrain,
-  fake_data, // Destructure the new prop
+  all_car_type, // Destructure the new prop
 }) => {
   const handleTrainSelection = (train_id: string) => {
     setSelectTrain(train_id);
   };
 
-  const groupedData = fake_data.reduce((acc, item) => {
+  const groupedData = all_car_type.reduce((acc, item) => {
     if (!acc[item.cartype]) {
       acc[item.cartype] = [];
     }

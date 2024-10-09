@@ -1,20 +1,36 @@
 "use client";
 
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import SlideNavigationContainer, {
   SlideNavigationContainerRef,
 } from "@/components/SlideNavigationContainer";
-import TrainCategorySection from "@/components/car_type_spec/TrainCategorySection";
 import BoardTitleSection from "../BoardTitleSection";
+import { getAllCarSpecInfoByCarType } from "@/api/api";
+
+import TrainCategorySection from "@/components/car_type_spec/TrainCategorySection";
+import CarUseStatusTable from "@/components/car_type_spec/CarUseStatusTable";
+import CarInfoSection from "@/components/car_type_spec/CarBasicInfoSection"; // Import the new component
+import CarSetTable from "@/components/car_type_spec/CarSetTable"; // Import the new component
+import CarMaintenanceTable from "@/components/car_type_spec/CarMaintenanceTable"; // Import the new component
+
 
 type Props = {
-  date: string;
-  fake_data: { cartype: string; kpi_oprtype: string; cardesc: string }[]; // Add fake_data prop
+  all_car_type: { cartype: string; kpi_oprtype: string; cardesc: string }[]; // Add all_car_type prop
 };
 
-const ClientPage: React.FC<Props> = ({ date, fake_data }) => {
-  const [selectTrain, setSelectTrain] = useState<string>("EMU700");
+const ClientPage: React.FC<Props> = ({  all_car_type }) => {
+  const [selectTrain, setSelectTrain] = useState<string>("");
+  const [allCarSpecInfo, setAllCarSpecInfo] = useState<any>(null);
   const slideNavRef = useRef<SlideNavigationContainerRef>(null);
+
+  useEffect(() => {
+    const fetchCarSpecInfo = async () => {
+      const carSpecInfo = await getAllCarSpecInfoByCarType(selectTrain);
+      setAllCarSpecInfo(carSpecInfo);
+    };
+
+    fetchCarSpecInfo();
+  }, [selectTrain]);
 
   return (
     <div className="h-full overflow-hidden">
@@ -22,32 +38,41 @@ const ClientPage: React.FC<Props> = ({ date, fake_data }) => {
         ref={slideNavRef}
         totalSlides={3}
         visibleSlides={2}
-        slideWidthPercentage={21}
+        slideWidthPercentage={22}
       >
         {/* First Div */}
         <TrainCategorySection
-          setSelectTrain={setSelectTrain}
-          fake_data={fake_data} // Pass fake_data to TrainSection
+          setSelectTrain={(train) => {
+            setSelectTrain(train);
+            slideNavRef.current?.handleMouseEnter("right");
+          }}
+          all_car_type={all_car_type} // Pass all_car_type to TrainSection
         />
         {/* Second Div */}
-        <div className="min-w-[40%]   flex items-center justify-center">
-          <div className="size-full grid grid-rows-4  gap-4 relative ">
-            <div className="row-span-2">
+        <div className="min-w-[40%] flex items-center justify-center">
+          <div className="size-full grid grid-rows-5 gap-4 relative">
+            <div className="row-span-3">
               <BoardTitleSection
-                title={`車輛基本資訊`}
+                title={`車輛基本資訊 - ${selectTrain}`}
                 content={
-                  <div className="h-full relative w-full flex items-start justify-start">
-                    ds
-                  </div>
+                  <>
+                    {allCarSpecInfo && (
+                      <CarInfoSection baseinfo={allCarSpecInfo.baseinfo} />
+                    )}
+                  </>
                 }
               />
             </div>
             <div className="row-span-2">
               <BoardTitleSection
-                title={`檢修？？？`}
+                title={`檢修週期`}
                 content={
-                  <div className="h-full relative w-full flex items-start justify-start">
-                    ds
+                  <div className=" size-full">
+                    {allCarSpecInfo && (
+                      <CarMaintenanceTable
+                        maintenanceList={allCarSpecInfo.maintainance}
+                      />
+                    )}
                   </div>
                 }
               />
@@ -55,33 +80,38 @@ const ClientPage: React.FC<Props> = ({ date, fake_data }) => {
           </div>
         </div>
         {/* Third Div */}
-
-        <div className="min-w-[58%]   flex items-center justify-center">
-          <div className="size-full grid grid-rows-4  gap-4 relative ">
+        <div className="min-w-[58%] flex items-center justify-center">
+          <div className="size-full grid grid-rows-5 gap-4 relative">
             <div className="row-span-2">
               <BoardTitleSection
-                title={`車輛基本資訊`}
+                title={`車組`}
                 content={
-                  <div className="h-full relative w-full flex items-start justify-start">
-                    ds
+                  <div className=" size-full">
+                    {allCarSpecInfo && (
+                      <CarSetTable
+                        carTypeChildrenList={allCarSpecInfo.carchildren}
+                      />
+                    )}
                   </div>
                 }
               />
             </div>
-            <div className="row-span-2">
+            <div className="row-span-3">
               <BoardTitleSection
-                title={`檢修？？？`}
+                title={`使用狀態`}
                 content={
-                  <div className="h-full relative w-full flex items-start justify-start">
-                    ds
+                  <div className=" size-full">
+                    {allCarSpecInfo && (
+                      <CarUseStatusTable
+                        carChildren={allCarSpecInfo.carchildren}
+                      />
+                    )}
                   </div>
                 }
               />
             </div>
           </div>
         </div>
-
-
       </SlideNavigationContainer>
     </div>
   );
