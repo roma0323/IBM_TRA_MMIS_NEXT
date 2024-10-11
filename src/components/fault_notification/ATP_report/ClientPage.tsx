@@ -119,6 +119,7 @@ const ClientPage: React.FC<ClientPageProps> = ({
                     <TableRow
                       key={item.month}
                       onClick={() => handleRowClick(item.month)}
+                      className="hover:bg-primary/30 cursor-pointer"
                     >
                       <TableCell className="font-medium">
                         {item.month}
