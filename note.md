@@ -86,3 +86,10 @@ CSS & UI tips:
         cn()  to resue the board title
 Other: board overflow :
         h-64 size-full
+
+
+question:
+{SOURCE: "1", ASSETNUM: "E1012", EQ4: "E1000", EQ2_C: "高雄機務段", DESC: "進廠"}
+{SOURCE: "2", ASSETNUM: "E1012", EQ4: "E1000", EQ2_C: "高雄機務段"}
+
+ source 意思? sjow 哪個？

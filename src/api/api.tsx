@@ -395,3 +395,30 @@ export async function getCarTypeList() {
   );
   return res.json();
 }
+
+
+// api.tsx
+
+export async function getOperationSignal() {
+  try {
+    const query = "SELECT EQ2_C, EQ8_C, ASSETNUM, EQ4, SOURCE, DESC FROM ZZ_V_DRIVER ORDER BY SEQ, ASSETNUM ASC, SOURCE ASC";
+
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getResult`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: query, // Sending the query string as the body
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data; // Return the fetched data
+  } catch (error) {
+    console.error('Error fetching operation signal:', error);
+    return null; // Return null or handle the error as needed
+  }
+}

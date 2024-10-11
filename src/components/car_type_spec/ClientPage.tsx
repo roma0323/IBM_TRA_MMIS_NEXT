@@ -7,18 +7,17 @@ import SlideNavigationContainer, {
 import BoardTitleSection from "../BoardTitleSection";
 import { getAllCarSpecInfoByCarType } from "@/api/api";
 
-import TrainCategorySection from "@/components/car_type_spec/TrainCategorySection";
+import CategorySection from "@/components/operation_signal/CategorySection";
 import CarUseStatusTable from "@/components/car_type_spec/CarUseStatusTable";
 import CarInfoSection from "@/components/car_type_spec/CarBasicInfoSection"; // Import the new component
 import CarSetTable from "@/components/car_type_spec/CarSetTable"; // Import the new component
 import CarMaintenanceTable from "@/components/car_type_spec/CarMaintenanceTable"; // Import the new component
 
-
 type Props = {
   all_car_type: { cartype: string; kpi_oprtype: string; cardesc: string }[]; // Add all_car_type prop
 };
 
-const ClientPage: React.FC<Props> = ({  all_car_type }) => {
+const ClientPage: React.FC<Props> = ({ all_car_type }) => {
   const [selectTrain, setSelectTrain] = useState<string>("");
   const [allCarSpecInfo, setAllCarSpecInfo] = useState<any>(null);
   const slideNavRef = useRef<SlideNavigationContainerRef>(null);
@@ -32,22 +31,51 @@ const ClientPage: React.FC<Props> = ({  all_car_type }) => {
     fetchCarSpecInfo();
   }, [selectTrain]);
 
+  const groupedData = all_car_type.reduce((acc, item) => {
+    if (!acc[item.cartype]) {
+      acc[item.cartype] = [];
+    }
+    acc[item.cartype].push({ id: item.cardesc, name: item.kpi_oprtype });
+    return acc;
+  }, {} as Record<string, { id: string; name: string }[]>);
+
   return (
     <div className="h-full overflow-hidden">
       <SlideNavigationContainer
         ref={slideNavRef}
         totalSlides={3}
         visibleSlides={2}
-        slideWidthPercentage={22}
+        slideWidthPercentage={21}
       >
         {/* First Div */}
-        <TrainCategorySection
-          setSelectTrain={(train) => {
-            setSelectTrain(train);
-            slideNavRef.current?.handleMouseEnter("right");
-          }}
-          all_car_type={all_car_type} // Pass all_car_type to TrainSection
-        />
+        <div className="min-w-[20%] flex items-center justify-center">
+          <BoardTitleSection
+            title="廠段分類"
+            content={
+              <div className="flex flex-col mx-4 text-lg relative">
+                <div className="fixed bottom-4  bg-white underline cursor-pointer hover:font-medium text-primary">
+                  <a
+                    href="http://192.168.36.21/maximo/webclient/common/openreport_AM108.jsp"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary underline"
+                  >
+                    機客貨車概況及車號表
+                  </a>
+                </div>
+
+                <CategorySection
+                  setSelectTrain={(id) => {
+                    setSelectTrain(id);
+                    slideNavRef.current?.handleMouseEnter("right");
+                  }}
+                  data={groupedData}
+                />
+              </div>
+            }
+          />
+        </div>
+
         {/* Second Div */}
         <div className="min-w-[40%] flex items-center justify-center">
           <div className="size-full grid grid-rows-5 gap-4 relative">
