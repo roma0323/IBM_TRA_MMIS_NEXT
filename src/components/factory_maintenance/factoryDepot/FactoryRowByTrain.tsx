@@ -13,7 +13,6 @@ const CannotClickClassName = "my-1  flex items-center justify-center  ";
 export const FactoryRowByTrain = ({ trainData }: TrainData): JSX.Element => {
   return (
     <div className="grid grid-cols-20 gap-2 text-wrap w-full border-b-2 border-gray-200 ">
-      {/* FIXME: sort by shadcn ui */}
       <div className=" flex items-center justify-center">
         <LabelChip text={trainData.carcatalog} />
       </div>

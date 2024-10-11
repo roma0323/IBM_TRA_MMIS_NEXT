@@ -2,13 +2,16 @@
 
 import React, { useState, useRef } from "react";
 import TrainOverviewSection from "@/components/locomotive_depot/TrainOverviewSection";
-import SlideNavigationContainer, { SlideNavigationContainerRef } from "@/components/SlideNavigationContainer";
+import SlideNavigationContainer, {
+  SlideNavigationContainerRef,
+} from "@/components/SlideNavigationContainer";
 import BoardTitleSection from "@/components/BoardTitleSection";
 import MaintenanceDetailSection from "@/components/locomotive_depot/MaintenanceDetailSection";
 import { getSumStatusDetailListMultiplierZeorDeptParamCartypeParamQtypeParam } from "@/api/api";
 import { FetcheGetSumStatusListData } from "@/types/type"; // Update the import path as needed
 import { useSearchParams } from "next/navigation";
 import CategorySection from "@/components/operation_signal/CategorySection";
+import TrainListTable from "@/components/locomotive_depot/TrainListTable";
 
 const TrainPageContent: React.FC<FetcheGetSumStatusListData> = ({ Data }) => {
   const [selectedLabel, setSelectedLabel] = useState<string | null>("全部");
@@ -56,8 +59,6 @@ const TrainPageContent: React.FC<FetcheGetSumStatusListData> = ({ Data }) => {
     return areaMatches && labelMatches;
   });
 
-  
-
   const handleTrainClick = async (
     dept: string,
     cartype: string,
@@ -73,8 +74,6 @@ const TrainPageContent: React.FC<FetcheGetSumStatusListData> = ({ Data }) => {
       );
     setMaintenanceData(data);
   };
-
-  
 
   const slideNavRef = useRef<SlideNavigationContainerRef>(null);
 
@@ -93,9 +92,9 @@ const TrainPageContent: React.FC<FetcheGetSumStatusListData> = ({ Data }) => {
             content={
               <>
                 <CategorySection
-                  setSelectTrain={(id,title) => {
-                    setSelectedLabel(id)
-                    setSelectedArea(title)
+                  setSelectTrain={(id, title) => {
+                    setSelectedLabel(id);
+                    setSelectedArea(title);
                   }}
                   data={factoryData} // Pass the factory data here
                 />
@@ -103,19 +102,25 @@ const TrainPageContent: React.FC<FetcheGetSumStatusListData> = ({ Data }) => {
             }
           />
         </div>
-       
 
         {/* Second Div */}
-        <TrainOverviewSection
-          filteredTrainData={filteredTrainData}
-          selectedLabel={selectedLabel}
-          selectedArea={selectedArea}
-          handleTrainClick={handleTrainClick}
-        />
+        <div className="min-w-[72%]  h-full  relative ">
+          <BoardTitleSection
+            title={`${selectedArea} - ${selectedLabel}`}
+            content={
+              <>
+                <TrainListTable 
+                  TrainDataInArray={filteredTrainData}
+                  handleTrainClick={handleTrainClick}
+                />
+              </>
+            }
+          />
+        </div>
+
         {/* Third Div */}
         <MaintenanceDetailSection maintenanceData={maintenanceData} />
       </SlideNavigationContainer>
-      
     </div>
   );
 };

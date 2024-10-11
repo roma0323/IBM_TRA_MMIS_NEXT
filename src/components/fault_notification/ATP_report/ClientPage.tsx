@@ -38,7 +38,7 @@ const ClientPage: React.FC<ClientPageProps> = ({
   faultListDetail,
   faultEquipmentAnalysis,
 }) => {
-  const [selectedMonth, setSelectedMonth] = useState<string | null>(null);
+  const [selectedMonth, setSelectedMonth] = useState<string | null>("各");
   const [filteredListData, setFilteredListData] = useState(faultListDetail);
   const [expandedRows, setExpandedRows] = useState<Set<string>>(new Set());
 
@@ -209,7 +209,7 @@ const ClientPage: React.FC<ClientPageProps> = ({
 
       <div className="row-span-2 col-span-3 relative">
         <BoardTitleSection
-          title="各月份故障清單"
+          title={`${selectedMonth}月故障清單`}
           content={
             <div className=" size-full">
               <Table>

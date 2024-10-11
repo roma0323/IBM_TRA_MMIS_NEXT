@@ -7,7 +7,6 @@ function dateFormat(date?: string) {
   const formattedDate = qdate.toISOString().split("T")[0];
   return formattedDate;
 }
-//TODO :fetch without internet , error handling
 export async function getSumStatusListAndsumtotalEqualone( //fetch 首頁所有車輛資料
   date?: string
 ) {
