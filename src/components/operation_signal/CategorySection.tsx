@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/accordion";
 
 type CombinedCategorySectionProps = {
-  setSelectTrain: (id: string, name?: string) => void;
+  setSelectTrain: (id: string,title:string, name?: string) => void;
   data: Record<string, { id: string; name: string }[] | string[]>; // Accept both types of data
 };
 
@@ -16,7 +16,7 @@ const AccordionSection: React.FC<{
   title: string;
   contents?: { id: string; name: string }[] | string[];
   onTriggerClick: () => void;
-  onContentClick?: (id: string, name?: string) => void;
+  onContentClick?: (id: string,title:string, name?: string) => void;
 }> = ({ value, title, contents, onTriggerClick, onContentClick }) => (
   <AccordionItem value={value}>
     <AccordionTrigger onClick={onTriggerClick}>{title}</AccordionTrigger>
@@ -25,7 +25,7 @@ const AccordionSection: React.FC<{
         <AccordionContent
           key={content.id || index}
           onClick={() =>
-            onContentClick && onContentClick(content.id || content, content.name)
+            onContentClick && onContentClick(content.id || content,title, content.name)
           }
           className={`p-2 text-lg cursor-pointer rounded-lg hover:bg-slate-100`}
         >
@@ -39,8 +39,8 @@ const CombinedCategorySection: React.FC<CombinedCategorySectionProps> = ({
   setSelectTrain,
   data,
 }) => {
-  const handleTrainSelection = (id: string, name?: string) => {
-    setSelectTrain(id, name || '');
+  const handleTrainSelection = (id: string,title:string, name?: string) => {
+    setSelectTrain(id,title, name || '');
   };
 
   return (
@@ -53,7 +53,7 @@ const CombinedCategorySection: React.FC<CombinedCategorySectionProps> = ({
             title={key}
             contents={values}
             onTriggerClick={() => {}}
-            onContentClick={(id, name) => handleTrainSelection(id, name)}
+            onContentClick={(id,title, name) => handleTrainSelection(id,title, name)}
           />
         ))}
       </Accordion>
