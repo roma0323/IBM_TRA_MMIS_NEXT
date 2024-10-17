@@ -28,7 +28,7 @@ export const LabelAndNumberByArea = ({
       </div>
       {isVisible && (
         <>
-          <LabelChipAndNumber onClick={onLabelClick} text="All" />
+          <LabelChipAndNumber onClick={onLabelClick} text="全部" />
           <LabelChipAndNumber onClick={onLabelClick} text="客車" />
           <LabelChipAndNumber onClick={onLabelClick} text="貨車" />
           <LabelChipAndNumber onClick={onLabelClick} text="柴油客車" />

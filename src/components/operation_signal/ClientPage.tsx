@@ -5,8 +5,7 @@ import SlideNavigationContainer, {
   SlideNavigationContainerRef,
 } from "@/components/SlideNavigationContainer";
 import BoardTitleSection from "../BoardTitleSection";
-
-import CategorySection from "@/components/operation_signal/CategorySection";
+import CategorySection from "@/components/ui/accordionSection";
 
 const infor_for_accordionitem = {
   所屬段: [

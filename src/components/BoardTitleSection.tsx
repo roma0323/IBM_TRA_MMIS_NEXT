@@ -14,8 +14,8 @@ const BoardTitleSection: React.FC<SectionProps> = ({ title = "", content }) => {
     <div className="size-full overflow-hidden flex flex-col items-start bg-white relative rounded-lg">
       <div
         className="w-full p-2.5 border-b border-gray-400"
-        style={{ color }} // Apply the dynamic color to the title
-      >
+        // style={{ color }}  Apply the dynamic color to the title
+        >
         {title}
       </div>
       <div className="relative h-64 size-full flex-grow overflow-auto">{content}</div>

@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useRef } from "react";
-import TrainOverviewSection from "@/components/locomotive_depot/TrainOverviewSection";
 import SlideNavigationContainer, {
   SlideNavigationContainerRef,
 } from "@/components/SlideNavigationContainer";
@@ -10,7 +9,7 @@ import MaintenanceDetailSection from "@/components/locomotive_depot/MaintenanceD
 import { getSumStatusDetailListMultiplierZeorDeptParamCartypeParamQtypeParam } from "@/api/api";
 import { FetcheGetSumStatusListData } from "@/types/type"; // Update the import path as needed
 import { useSearchParams } from "next/navigation";
-import CategorySection from "@/components/operation_signal/CategorySection";
+import CategorySection from "@/components/ui/accordionSection";
 import TrainListTable from "@/components/locomotive_depot/TrainListTable";
 
 const TrainPageContent: React.FC<FetcheGetSumStatusListData> = ({ Data }) => {
@@ -88,7 +87,7 @@ const TrainPageContent: React.FC<FetcheGetSumStatusListData> = ({ Data }) => {
         {/* First Div */}
         <div className="min-w-[25%] flex items-center justify-center">
           <BoardTitleSection
-            title="廠段分類"
+            title="機務段分類"
             content={
               <>
                 <CategorySection

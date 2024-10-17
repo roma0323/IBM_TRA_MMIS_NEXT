@@ -7,7 +7,7 @@ import SlideNavigationContainer, {
 import BoardTitleSection from "../BoardTitleSection";
 import { getAllCarSpecInfoByCarType } from "@/api/api";
 
-import CategorySection from "@/components/operation_signal/CategorySection";
+import CategorySection from "@/components/ui/accordionSection";
 import CarUseStatusTable from "@/components/car_type_spec/CarUseStatusTable";
 import CarInfoSection from "@/components/car_type_spec/CarBasicInfoSection"; // Import the new component
 import CarSetTable from "@/components/car_type_spec/CarSetTable"; // Import the new component

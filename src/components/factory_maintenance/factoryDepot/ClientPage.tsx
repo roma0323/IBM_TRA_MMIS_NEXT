@@ -1,17 +1,34 @@
 "use client";
 
-import React, { useState, useRef } from "react";
-import { LabelAndNumberByArea } from "@/components/locomotive_depot/LabelAndNumberByArea";
-import FactoryOverviewSection from "@/components/factory_maintenance/factoryDepot/FactoryOverviewSection";
+import React, { useState } from "react";
 import BoardTitleSection from "@/components/BoardTitleSection";
 import { factorySumStatusOverall } from "@/types/type"; // Update the import path as needed
-import { useSearchParams } from "next/navigation";
+import CategorySection from "@/components/ui/accordionSection";
+import TrainListTable from "@/components/factory_maintenance/factoryDepot/TrainListTable";
 
 const TrainPageContent: React.FC<factorySumStatusOverall> = ({ Data }) => {
-  const [selectedLabel, setSelectedLabel] = useState<string | null>("All");
+  const [selectedLabel, setSelectedLabel] = useState<string | null>("全部");
   const [selectedArea, setSelectedArea] = useState<string | null>("全部機廠");
-  const searchParams = useSearchParams();
-  const areas = ["全部機廠", "富岡機廠", "潮州機廠", "花蓮機廠"];
+
+  const factoryData: { [key: string]: string[] } = [
+    "全部機廠",
+    "富岡機廠",
+    "潮州機廠",
+    "花蓮機廠",
+  ].reduce((acc: { [key: string]: string[] }, dept: string) => {
+    acc[dept] = [
+      "全部",
+      "客車",
+      "貨車",
+      "柴油客車",
+      "柴液機車",
+      "柴電機車",
+      "電力機車",
+      "通勤列車",
+      "城際列車",
+    ];
+    return acc;
+  }, {});
 
   const filteredTrainData = Data.filter((train) => {
     const areaMatches =
@@ -19,38 +36,29 @@ const TrainPageContent: React.FC<factorySumStatusOverall> = ({ Data }) => {
       !selectedArea ||
       train.deptdesc.includes(selectedArea.replace("車輛配置", ""));
     const labelMatches =
-      selectedLabel === "All" ||
+      selectedLabel === "全部" ||
       !selectedLabel ||
       train.carcatalog === selectedLabel;
 
     return areaMatches && labelMatches;
   });
 
-  const handleLabelClick = (label: string, area: string) => {
-    setSelectedLabel((prevLabel) =>
-      prevLabel === label && selectedArea === area ? null : label
-    );
-    setSelectedArea((prevArea) =>
-      prevArea === area && selectedLabel === label ? null : area
-    );
-  };
-  //TODO: change to CategorySection
   return (
     <div className="size-full flex p-4 gap-4 overflow-hidden">
       {/* First Div */}
       <div className="min-w-[15%] flex items-center justify-center">
         <BoardTitleSection
-          title={`機廠分配`}
+          title="機務段分類"
           content={
-            <div className="flex flex-col w-full bg-white items-start relative flex-shrink-0 bg-gray-100 rounded-lg overflow-hidden">
-              {areas.map((area) => (
-                <LabelAndNumberByArea
-                  key={area}
-                  area_name={area}
-                  onLabelClick={(label) => handleLabelClick(label, area)}
-                />
-              ))}
-            </div>
+            <>
+              <CategorySection
+                setSelectTrain={(id, title) => {
+                  setSelectedLabel(id);
+                  setSelectedArea(title);
+                }}
+                data={factoryData} // Pass the factory data here
+              />
+            </>
           }
         />
       </div>
@@ -59,13 +67,7 @@ const TrainPageContent: React.FC<factorySumStatusOverall> = ({ Data }) => {
       <div className="min-w-[72%] h-full relative">
         <BoardTitleSection
           title={`${selectedArea} - ${selectedLabel}`}
-          content={
-            <FactoryOverviewSection
-              filteredTrainData={filteredTrainData}
-              selectedLabel={selectedLabel}
-              selectedArea={selectedArea}
-            />
-          }
+          content={<TrainListTable TrainDataInArray={filteredTrainData} />}
         />
       </div>
     </div>

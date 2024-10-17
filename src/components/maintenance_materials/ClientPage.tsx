@@ -12,7 +12,7 @@ import SlideNavigationContainer, {
 } from "@/components/SlideNavigationContainer";
 import InventoryTableList from "@/components/maintenance_materials/InventoryTableList";
 import InventoryOverviewTable from "@/components/maintenance_materials/InventoryOverviewTable";
-import CategorySection from "@/components/operation_signal/CategorySection";
+import CategorySection from "@/components/ui/accordionSection";
 import { getInvMountListRow } from "@/api/api";
 
 type Props = {
