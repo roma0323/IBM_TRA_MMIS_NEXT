@@ -8,7 +8,6 @@ export default function Loading() {
    .loader {
         height: 30px;
         width: 10px;
-        margin-top: 20px;
         border-radius: 4px;
         color: #537FD1;
         background: currentColor;
@@ -26,7 +25,7 @@ export default function Loading() {
   `;
 
   return (
-    <div className="flex items-center justify-center size-full">
+    <div className="flex items-center justify-center size-full m-6">
       <style>{cssStyles}</style>
       <span className="loader" style={loaderStyle}></span>
     </div>

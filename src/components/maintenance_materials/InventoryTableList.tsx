@@ -106,11 +106,11 @@ const InventoryTableList: React.FC<InventoryTableListProps> = ({
   });
 
   return (
-    <div className="p-6">
+    <div >
       <Table>
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
-            <TableRow key={headerGroup.id} className="bg-slate-100 rounded-lg">
+            <TableRow key={headerGroup.id} >
               {headerGroup.headers.map((header) => (
                 <TableHead key={header.id}>
                   {header.isPlaceholder

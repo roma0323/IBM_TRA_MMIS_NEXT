@@ -78,7 +78,7 @@ const ClientPage: React.FC<Props> = ({ fail_list, ReportLevelCardData }) => {
 
   return (
     <div className="relative flex justify-between p-6 gap-6 h-full">
-      <div className="min-w-[400px] flex items-center justify-center">
+      <div className="min-w-[25rem] flex items-center justify-center">
         <BoardTitleSection
           title={`故障通報分級`}
           content={
@@ -98,14 +98,14 @@ const ClientPage: React.FC<Props> = ({ fail_list, ReportLevelCardData }) => {
           }
         />
       </div>
-      <div className="grow flex items-center justify-center">
+      <div className="grow flex items-center justify-center relative">
         <BoardTitleSection
           title={`${selectFactory}級`}
           content={
-            <div className="p-6">
+            <>
               <Table>
                 <TableHeader>
-                  <TableRow className="bg-slate-100 rounded-lg">
+                  <TableRow>
                     {headers.map((header, index) => (
                       <TableHead key={index}>{header}</TableHead>
                     ))}
@@ -113,7 +113,7 @@ const ClientPage: React.FC<Props> = ({ fail_list, ReportLevelCardData }) => {
                 </TableHeader>
                 <TableBody>{renderTableRows(filteredFailList)}</TableBody>
               </Table>
-            </div>
+            </>
           }
         />
       </div>

@@ -1,6 +1,5 @@
 import React from "react";
 import { RowByTrain } from "@/components/locomotive_depot/RowByTrain";
-import BoardTitleSection from "@/components/BoardTitleSection"; // Import the Section component
 import { FetcheGetSumStatusListDataInArray } from "@/types/type";
 
 interface TrainOverviewSectionProps {

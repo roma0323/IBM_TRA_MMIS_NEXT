@@ -8,14 +8,13 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { factorySumStatus } from "@/types/type";
-type TrainData =  {
+type TrainData = {
   TrainDataInArray: factorySumStatus[];
-}
-
+};
 
 const TrainListTable: React.FC<TrainData> = ({ TrainDataInArray }) => {
   return (
-    <Table >
+    <Table>
       <TableHeader>
         <TableRow>
           <TableHead>車種</TableHead>
@@ -34,24 +33,32 @@ const TrainListTable: React.FC<TrainData> = ({ TrainDataInArray }) => {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {TrainDataInArray.map((item, itemIndex) => (
-          <TableRow  className="" key={itemIndex}>
-            <TableCell>{item.carcatalog}</TableCell>
-            <TableCell>{item.deptdesc}</TableCell>
-            <TableCell>{item.cartype}</TableCell>
-            <TableCell>{item.assetnum}</TableCell>
-            <TableCell>{item.worktype}</TableCell>
-            <TableCell>{item.facindate}</TableCell>
-            <TableCell>{item.actstart}</TableCell>
-            <TableCell>{item.schedfinish}</TableCell>
-            <TableCell>{item.actfinish}</TableCell>
-            <TableCell>{item.facoutdate}</TableCell>
-            <TableCell>{item.infacdays}</TableCell>
-            <TableCell>{item.inwodays}</TableCell>
-            <TableCell>{item.behindordelaydays}</TableCell>
-            {/* <TableCell>{Number(item.availability.toFixed(2))}</TableCell> */}
+        {TrainDataInArray.length > 0 ? (
+          TrainDataInArray.map((item, itemIndex) => (
+            <TableRow className="" key={itemIndex}>
+              <TableCell>{item.carcatalog}</TableCell>
+              <TableCell>{item.deptdesc}</TableCell>
+              <TableCell>{item.cartype}</TableCell>
+              <TableCell>{item.assetnum}</TableCell>
+              <TableCell>{item.worktype}</TableCell>
+              <TableCell>{item.facindate}</TableCell>
+              <TableCell>{item.actstart}</TableCell>
+              <TableCell>{item.schedfinish}</TableCell>
+              <TableCell>{item.actfinish}</TableCell>
+              <TableCell>{item.facoutdate}</TableCell>
+              <TableCell>{item.infacdays}</TableCell>
+              <TableCell>{item.inwodays}</TableCell>
+              <TableCell>{item.behindordelaydays}</TableCell>
+              {/* <TableCell>{Number(item.availability.toFixed(2))}</TableCell> */}
+            </TableRow>
+          ))
+        ) : (
+          <TableRow>
+            <TableCell colSpan={10} className="text-left">
+              No data available
+            </TableCell>
           </TableRow>
-        ))}
+        )}
       </TableBody>
     </Table>
   );

@@ -64,7 +64,7 @@ const TrainPageContent: React.FC<factorySumStatusOverall> = ({ Data }) => {
       </div>
 
       {/* Second Div */}
-      <div className="min-w-[72%] h-full relative">
+      <div className="min-w-[84%] h-full relative">
         <BoardTitleSection
           title={`${selectedArea} - ${selectedLabel}`}
           content={<TrainListTable TrainDataInArray={filteredTrainData} />}

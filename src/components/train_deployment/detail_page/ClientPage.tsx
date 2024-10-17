@@ -1,12 +1,16 @@
 "use client";
-import React, { useState,useRef } from "react";
-import { useSearchParams } from 'next/navigation';
+import React, { useState, useRef } from "react";
+import { useSearchParams } from "next/navigation";
+
+import TrainListTable from "@/components/locomotive_depot/TrainListTable";
+import BoardTitleSection from "@/components/BoardTitleSection";
 
 import DataSection from "@/components/train_deployment/detail_page/DataSection";
 import TrainCategorySection from "@/components/train_deployment/detail_page/TrainCategorySection";
-import TrainOverviewSection from "@/components/locomotive_depot/TrainOverviewSection";
 import MaintenanceDetailSection from "@/components/locomotive_depot/MaintenanceDetailSection";
-import SlideNavigationContainer, { SlideNavigationContainerRef } from "@/components/SlideNavigationContainer";
+import SlideNavigationContainer, {
+  SlideNavigationContainerRef,
+} from "@/components/SlideNavigationContainer";
 
 import { getSumStatusListAndMultiplierEqualZeorCarcatalogEqualParamCartypeEqualTrainname } from "@/api/api";
 import { getSumStatusDetailListMultiplierZeorDeptParamCartypeParamQtypeParam } from "@/api/api";
@@ -17,12 +21,11 @@ const DetailClientPage: React.FC<FetcheGetSumStatusListData> = ({ Data }) => {
   const [selectedTrainName, setSelectedTrainName] = useState("");
   const [maintenanceData, setMaintenanceData] = useState<any[]>([]);
   const [filteredTrainData, setFilteredTrainData] = useState<any[]>([]);
-  const searchParams = useSearchParams()
-  const date = searchParams?.get('date') || '';
+  const searchParams = useSearchParams();
+  const date = searchParams?.get("date") || "";
   const cntSum = Data.reduce((acc, item) => acc + item.current_cnt, 0);
   const readySum = Data.reduce((acc, item) => acc + item.current_ready, 0);
   const slideNavRef = useRef<SlideNavigationContainerRef>(null);
-
 
   const handleTrainTypeClick = async (trainName: string) => {
     if (!slideNavRef.current?.canMoveLeft) {
@@ -31,7 +34,7 @@ const DetailClientPage: React.FC<FetcheGetSumStatusListData> = ({ Data }) => {
     setSelectedTrainName(trainName);
     let fetchedData;
     if (Data[0].carcatalog === "客車") {
-      fetchedData = await getSumStatusListEq3Param(trainName,date);
+      fetchedData = await getSumStatusListEq3Param(trainName, date);
     } else {
       fetchedData =
         await getSumStatusListAndMultiplierEqualZeorCarcatalogEqualParamCartypeEqualTrainname(
@@ -60,11 +63,14 @@ const DetailClientPage: React.FC<FetcheGetSumStatusListData> = ({ Data }) => {
     setMaintenanceData(data);
   };
 
-
   return (
     <div className=" h-full   overflow-hidden">
-            <SlideNavigationContainer ref={slideNavRef} totalSlides={5} visibleSlides={3} slideWidthPercentage={26}>
-
+      <SlideNavigationContainer
+        ref={slideNavRef}
+        totalSlides={5}
+        visibleSlides={3}
+        slideWidthPercentage={26}
+      >
         {/* first Div */}
         <div className="min-w-[25%]   flex items-center justify-center">
           <DataSection
@@ -76,29 +82,38 @@ const DetailClientPage: React.FC<FetcheGetSumStatusListData> = ({ Data }) => {
 
         {/* second Div */}
         <div className="min-w-[25%] overflow-hidden relative">
-            <TrainCategorySection
-              key={Data[0].carcatalog}
-              initialData={Data}
-              selectedTrainName={selectedTrainName}
-              carcatalog={Data[0].carcatalog}
-              handleTrainClick={handleTrainTypeClick} // Pass the handleTrainClick function
-            />
+          <BoardTitleSection
+            title={`${Data[0].carcatalog} - 車種分配資訊`}
+            content={
+              <TrainCategorySection
+                key={Data[0].carcatalog}
+                selectedTrainName={selectedTrainName}
+                carcatalog={Data[0].carcatalog}
+                handleTrainClick={handleTrainTypeClick} // Pass the handleTrainClick function
+              />
+            }
+          />
         </div>
 
         {/* Third Div */}
 
-        <TrainOverviewSection
-          filteredTrainData={filteredTrainData} // Pass fetched data to TrainOverviewSection
-          selectedArea={Data[0].carcatalog}
-          selectedLabel={selectedTrainName}
-          handleTrainClick={handleTrainClick}
-        />
+        <div className="min-w-[72%]  h-full  relative ">
+          <BoardTitleSection
+            title={`${Data[0].carcatalog} - ${selectedTrainName}`} //${selectedArea} - ${selectedLabel}
+            content={
+              <>
+                <TrainListTable
+                  TrainDataInArray={filteredTrainData}
+                  handleTrainClick={handleTrainClick}
+                />
+              </>
+            }
+          />
+        </div>
 
         {/* fourth Div */}
         <MaintenanceDetailSection maintenanceData={maintenanceData} />
-     
-            </SlideNavigationContainer>
-
+      </SlideNavigationContainer>
     </div>
   );
 };
