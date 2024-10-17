@@ -106,9 +106,9 @@ const InventoryTableList: React.FC<InventoryTableListProps> = ({
   });
 
   return (
-    <div >
+    < >
       <Table>
-        <TableHeader>
+        <TableHeader >
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id} >
               {headerGroup.headers.map((header) => (
@@ -176,7 +176,7 @@ const InventoryTableList: React.FC<InventoryTableListProps> = ({
           Next
         </Button>
       </div>
-    </div>
+    </>
   );
 };
 

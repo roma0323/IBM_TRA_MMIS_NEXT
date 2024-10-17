@@ -230,3 +230,11 @@ export type CarSpecChildren = {
   stopdate: string;
   remark: string;
 };
+
+export type Signal = {
+  SOURCE?: string;
+  ASSETNUM: string;
+  EQ4: string;
+  EQ2_C: string;
+  DESC?: string;
+};

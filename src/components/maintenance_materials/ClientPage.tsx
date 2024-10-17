@@ -257,7 +257,7 @@ const ClientPage: React.FC<Props> = ({ inventory_overview, date }) => {
         </div>
 
         {/* Third Div */}
-        <div className="min-w-[73%] grow flex items-center justify-center">
+        <div className="min-w-[73%] grow flex items-center justify-center relative">
           <BoardTitleSection
             title={`${selectFactoryName} - ${selectedType}`}
             content={

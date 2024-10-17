@@ -1,91 +1,167 @@
+// ClientPage.tsx
+
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
-import SlideNavigationContainer, {
-  SlideNavigationContainerRef,
-} from "@/components/SlideNavigationContainer";
+import React, { useState, useEffect } from "react";
 import BoardTitleSection from "../BoardTitleSection";
 import CategorySection from "@/components/ui/accordionSection";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Signal } from "@/types/type";
 
 const infor_for_accordionitem = {
   所屬段: [
-    "七堵",
-    "臺北",
-    "新竹",
-    "彰化",
-    "嘉義",
-    "高雄",
-    "臺東",
-    "花蓮",
-    "宜蘭",
-  ],
-  燈號: [
-    "全部",
-    "紅燈",
-    "黃燈",
-    "綠燈",
+    "七堵機務段",
+    "臺北機務段",
+    "新竹機務段",
+    "彰化機務段",
+    "嘉義機務段",
+    "高雄機務段",
+    "臺東機務段",
+    "花蓮機務段",
+    "宜蘭機務段",
   ],
 };
-const ClientPage: React.FC = () => {
-  const [selectTrain, setSelectTrain] = useState<string>("");
-  const slideNavRef = useRef<SlideNavigationContainerRef>(null);
+
+const light_for_accordionitem = {
+  燈號: ["全部燈號", "紅燈", "黃燈", "綠燈"],
+};
+
+type ClientPageProps = {
+  signals: Signal[];
+};
+
+const ClientPage: React.FC<ClientPageProps> = ({ signals }) => {
+  const [selectTrain, setSelectTrain] = useState<string[]>(["七堵機務段"]);
+  const [selectLight, setSelectLight] = useState<string>("全部燈號");
+  const [filteredSignals, setFilteredSignals] = useState<Signal[]>([]);
+  const [searchText, setSearchText] = useState<string>("");
+
+  const handleSelectTrain = (id: string) => {
+    setSearchText("");
+    setSelectTrain((prevSelectTrain) => {
+      if (prevSelectTrain.includes(id)) {
+        return prevSelectTrain.filter((trainId) => trainId !== id);
+      } else {
+        return [...prevSelectTrain, id];
+      }
+    });
+  };
+
+  const handleSelectLight = (id: string) => {
+    setSearchText("");
+    setSelectLight(id);
+  };
+
+  const handleSearchTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchText(event.target.value);
+    
+  };
+
+  const handleSearch = () => {
+    const filtered = signals.filter((signal) =>
+      signal.ASSETNUM.includes(searchText)
+    );
+    setFilteredSignals(filtered);
+  };
+
+  useEffect(() => {
+    let filtered = signals.filter((signal) =>
+      selectTrain.includes(signal.EQ2_C)
+    );
+
+    if (selectLight === "黃燈") {
+      filtered = filtered.filter(
+        (signal) => signal.SOURCE === "6" || signal.SOURCE === "7"
+      );
+    } else if (selectLight === "紅燈") {
+      filtered = filtered.filter(
+        (signal) => signal.SOURCE && signal.SOURCE !== "6" && signal.SOURCE !== "7"
+      );
+    } else if (selectLight === "綠燈") {
+      filtered = filtered.filter((signal) => !signal.SOURCE);
+    }
+
+    setFilteredSignals(filtered);
+  }, [selectTrain, selectLight, signals,searchText]);
+
+  useEffect(() => {
+    console.log(filteredSignals);
+  }, [filteredSignals]);
 
   return (
-    <div className="h-full overflow-hidden">
-      <SlideNavigationContainer
-        ref={slideNavRef}
-        totalSlides={3}
-        visibleSlides={2}
-        slideWidthPercentage={21}
-      >
-        {/* First Div */}
-        <div className="min-w-[20%] flex items-center justify-center">
-          <BoardTitleSection
-            title="廠段分類"
-            content={
+    <div className="relative flex justify-between p-6 gap-6 h-full">
+      {/* First Div */}
+      <div className="min-w-[20%] flex items-center justify-center">
+        <BoardTitleSection
+          title="廠段分類"
+          content={
+            <>
               <CategorySection
-                setSelectTrain={(id) => {
-                  setSelectTrain(id);
-                }}
-                data={infor_for_accordionitem} // Pass the data here
+                setSelectTrain={handleSelectTrain}
+                data={infor_for_accordionitem}
               />
-            }
-          />
-        </div>
+              <CategorySection
+                setSelectTrain={handleSelectLight}
+                data={light_for_accordionitem}
+              />
+              <div className="sticky bottom-0 p-4 flex w-full max-w-sm items-center space-x-2">
+                <Input
+                  type="search"
+                  placeholder="車輛燈號"
+                  value={searchText}
+                  onChange={handleSearchTextChange}
+                />
+                <Button
+                  type="button"
+                  className="bg-primary/80 hover:bg-primary"
+                  onClick={handleSearch}
+                >
+                  查詢
+                </Button>
+              </div>
+            </>
+          }
+        />
+      </div>
 
-        <div>{selectTrain}</div>
-        {/* Second Div */}
-        {/* <div className="min-w-[40%] flex items-center justify-center">
-          <div className="size-full grid grid-rows-5 gap-4 relative">
-            <div className="row-span-3">
-              <BoardTitleSection
-                title={`車輛基本資訊 - ${selectTrain}`}
-                content={
-                  <>
-                    {allCarSpecInfo && (
-                      <CarInfoSection baseinfo={allCarSpecInfo.baseinfo} />
-                    )}
-                  </>
-                }
-              />
-            </div>
-            <div className="row-span-2">
-              <BoardTitleSection
-                title={`檢修週期`}
-                content={
-                  <div className=" size-full">
-                    {allCarSpecInfo && (
-                      <CarMaintenanceTable
-                        maintenanceList={allCarSpecInfo.maintainance}
-                      />
+      {/* Second Div */}
+      <div className="grow flex items-center justify-center">
+        <BoardTitleSection
+          title={`${selectLight} - ${selectTrain.join(", ")}`}
+          content={
+            <>
+                {selectTrain.length > 0 && (
+                  <div>
+                    {filteredSignals.length > 0 ? (
+                      <div className="grid-container">
+                        {filteredSignals.map((signal, index) => (
+                          <div key={index} className="grid-item">
+                            {signal.ASSETNUM}
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <p>No data available</p>
                     )}
                   </div>
-                }
-              />
-            </div>
-          </div>
-        </div> */}
-      </SlideNavigationContainer>
+                )}
+            </>
+          }
+        />
+      </div>
+      <style jsx>{`
+        .grid-container {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+          gap: 10px;
+        }
+        .grid-item {
+          padding: 10px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+        }
+      `}</style>
     </div>
   );
 };

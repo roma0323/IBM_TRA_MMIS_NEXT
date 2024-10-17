@@ -32,7 +32,7 @@ const ClientPage: React.FC<{ aggregatedData: AggregatedData[] }> = ({
 
   return (
     <div className="relative flex justify-between p-6 gap-6 h-full">
-      <div className="min-w-[550px] flex items-center justify-center">
+      <div className="min-w-[30%] flex items-center justify-center">
         <BoardTitleSection
           title={`故障通報分級`}
           content={
