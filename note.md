@@ -84,9 +84,7 @@ Next.js tips:
 CSS & UI tips:
         css devide-y-2 or space-y-2 replace margin bottom
         cn()  to resue the board title
-Other: board overflow :
-        h-64 size-full
-
+Other: board overflow 
 
 question:
 {SOURCE: "1", ASSETNUM: "E1012", EQ4: "E1000", EQ2_C: "高雄機務段", DESC: "進廠"}

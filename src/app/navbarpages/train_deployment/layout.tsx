@@ -1,4 +1,5 @@
 import React, { Suspense } from "react";
+import "@/styles/globals.css";
 import Loading from "@/components/Loading";
 export default function DashboardLayout({
   children,
@@ -6,8 +7,8 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <section className="grow overflow-hidden relative flex flex-col">
-      {children}
+    <section className="layout_section">
+      <Suspense fallback={<Loading />}>{children}</Suspense>
     </section>
   );
 }

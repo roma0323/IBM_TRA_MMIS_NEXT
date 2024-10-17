@@ -15,10 +15,7 @@ const TrainOverviewSection: React.FC<TrainOverviewSectionProps> = ({
   selectedArea,
 }) => {
   return (
-    <div className="min-w-[72%] h-full relative">
-      <BoardTitleSection
-        title={`${selectedArea} - ${selectedLabel}`}
-        content={
+   
           <div className="flex flex-col p-3 relative">
             <div className="grid grid-cols-20 gap-1 bg-zinc-100 border-b-2 border-gray-200 rounded-lg ">
               <div className="m-2 flex items-center justify-center ">車種</div>
@@ -42,9 +39,7 @@ const TrainOverviewSection: React.FC<TrainOverviewSectionProps> = ({
                 ))}
             </div>
           </div>
-        }
-      />
-    </div>
+       
   );
 };
 

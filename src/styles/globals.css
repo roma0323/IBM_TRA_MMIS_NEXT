@@ -20,6 +20,19 @@
   color: hsl(var(--active-button-color));
   border-bottom: 3px solid hsl(var(--active-button-color));
 }
+
+.mid_nav_unactive:hover {
+  color: hsl(var(--active-button-color));
+  border-bottom: 3px solid hsl(var(--active-button-color));
+}
+.layout_section {
+  height: 100%;
+  flex-grow: 1;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
 @layer base {
   :root {
     --background: 0 0% 100%;

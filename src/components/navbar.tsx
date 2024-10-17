@@ -1,7 +1,7 @@
 "use client";
 
 import React, { Suspense, useState } from "react";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { DatePickerForm } from "@/components/ui/date_picker";
 import Link from "next/link";
 import { ModeToggle } from "@/components/ui/mode_toggle";
