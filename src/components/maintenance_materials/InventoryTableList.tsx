@@ -72,6 +72,7 @@ const columns: ColumnDef<InventoryListBalance | InventoryListIssue>[] = [
         : (row.original as InventoryListIssue).sum_issue_mount,
   },
   {
+    //FIXME: error in 庫存餘額 全部機物處,全部機場,全部機務段
     id: "percentage",
     header: "金額占比",
     cell: ({ row, table }) => {
