@@ -16,7 +16,7 @@ export default function Page() {
         }}
       />
 
-      <div style={{ fontSize: "18vh", lineHeight: "1.2" }} className="bottom-[10vh]  left-[5vw]   absolute text-white">
+      <div style={{ fontSize: "18vh", lineHeight: "1.2" }} className="bottom-[6vh]  left-[4vw]   absolute text-slate-100">
         <div >MM I S</div>
         <div>績效</div>
         <div>管理指標</div>
