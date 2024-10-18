@@ -69,6 +69,36 @@ http://tra.webtw.xyz:8888/maximo/zz_data?method=getSumStatusList&qdate=2024-08-0
 
 ＡＴＰ圖表需按照月份變更
 
+http://tra.webtw.xyz:8888/maximo/zz_data?method=getInvMountList&year=${yearString}&month=${month}&dept=${dept}&type=${type}`,
+1.新增percentage 
+2.整合sum_invbal_mount,sum_issue_mount & curbal,quantity
+
+export type InventoryListBalance = {
+  itemnum: string;
+  conditioncode: string;
+  unitprice: string;
+  dept: string;
+  month: string;
+  year: string;
+  unit: string;
+  itemdesc: string;
+  sum_invbal_mount: string;
+  curbal: string;
+};
+
+export type InventoryListIssue = {
+  itemnum: string;
+  conditioncode: string;
+  unitprice: string;
+  dept: string;
+  month: string;
+  year: string;
+  unit: string;
+  itemdesc: string;
+  sum_issue_mount: string;
+  quantity: string;
+};
+
 ----------------------------------
 
 Next.js tips:
