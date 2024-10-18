@@ -1,5 +1,3 @@
-// ClientPage.tsx
-
 "use client";
 
 import React, { useState, useEffect } from "react";
@@ -8,6 +6,12 @@ import CategorySection from "@/components/ui/accordionSection";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Signal } from "@/types/type";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 const infor_for_accordionitem = {
   所屬段: [
@@ -53,9 +57,10 @@ const ClientPage: React.FC<ClientPageProps> = ({ signals }) => {
     setSelectLight(id);
   };
 
-  const handleSearchTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSearchTextChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     setSearchText(event.target.value);
-    
   };
 
   const handleSearch = () => {
@@ -76,18 +81,36 @@ const ClientPage: React.FC<ClientPageProps> = ({ signals }) => {
       );
     } else if (selectLight === "紅燈") {
       filtered = filtered.filter(
-        (signal) => signal.SOURCE && signal.SOURCE !== "6" && signal.SOURCE !== "7"
+        (signal) =>
+          signal.SOURCE && signal.SOURCE !== "6" && signal.SOURCE !== "7"
       );
     } else if (selectLight === "綠燈") {
       filtered = filtered.filter((signal) => !signal.SOURCE);
     }
 
     setFilteredSignals(filtered);
-  }, [selectTrain, selectLight, signals,searchText]);
+  }, [selectTrain, selectLight, signals, searchText]);
 
-  useEffect(() => {
-    console.log(filteredSignals);
-  }, [filteredSignals]);
+  const groupByEQ4 = (signals: Signal[]) => {
+    return signals.reduce((groups, signal) => {
+      const group = groups[signal.EQ4] || [];
+      group.push(signal);
+      groups[signal.EQ4] = group;
+      return groups;
+    }, {} as Record<string, Signal[]>);
+  };
+
+  const groupedSignals = groupByEQ4(filteredSignals);
+
+  const getButtonBgColor = (source: string | undefined) => {
+    if (source === "6" || source === "7") {
+      return "bg-[#ffeecf]";
+    } else if (source && source !== "6" && source !== "7") {
+      return "bg-[#FFDFEA]";
+    } else {
+      return "bg-[#dfffcf]";
+    }
+  };
 
   return (
     <div className="relative flex justify-between p-6 gap-6 h-full">
@@ -112,11 +135,7 @@ const ClientPage: React.FC<ClientPageProps> = ({ signals }) => {
                   value={searchText}
                   onChange={handleSearchTextChange}
                 />
-                <Button
-                  type="button"
-                  className="bg-primary/80 hover:bg-primary"
-                  onClick={handleSearch}
-                >
+                <Button variant="secondary" onClick={handleSearch}>
                   查詢
                 </Button>
               </div>
@@ -131,35 +150,61 @@ const ClientPage: React.FC<ClientPageProps> = ({ signals }) => {
           title={`${selectLight} - ${selectTrain.join(", ")}`}
           content={
             <>
-                {selectTrain.length > 0 && (
-                  <div>
-                    {filteredSignals.length > 0 ? (
-                      <div className="grid-container">
-                        {filteredSignals.map((signal, index) => (
-                          <div key={index} className="grid-item">
-                            {signal.ASSETNUM}
+              {selectTrain.length > 0 && (
+                <div>
+                  {Object.keys(groupedSignals).length > 0 ? (
+                    <>
+                      {Object.entries(groupedSignals).map(([eq4, signals]) => (
+                        <div key={eq4}>
+                          <h1 className="p-4 text-lg">{eq4}</h1>
+                          <div className="grid-container px-8">
+                            {signals.map((signal, index) => (
+                              <div key={index} className="grid-item">
+                                <TooltipProvider>
+                                  <Tooltip>
+                                    <TooltipTrigger asChild>
+                                      <Button
+                                        key={index}
+                                        className={`w-full hover:bg-white text-gray-700  ${getButtonBgColor(
+                                          signal.SOURCE
+                                        )}`}
+                                      >
+                                        {signal.ASSETNUM}
+                                      </Button>
+                                    </TooltipTrigger>
+                                    <TooltipContent>
+                                      {signal.DESC
+                                        ? signal.DESC
+                                        : signal.ASSETNUM}
+                                    </TooltipContent>
+                                  </Tooltip>
+                                </TooltipProvider>
+                              </div>
+                            ))}
                           </div>
-                        ))}
-                      </div>
-                    ) : (
-                      <p>No data available</p>
-                    )}
-                  </div>
-                )}
+                        </div>
+                      ))}
+                    </>
+                  ) : (
+                    <p>No data available</p>
+                  )}
+                </div>
+              )}
             </>
           }
         />
       </div>
+
       <style jsx>{`
         .grid-container {
           display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-          gap: 10px;
+          grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));
+          gap: 0.5rem;
         }
+
         .grid-item {
-          padding: 10px;
-          border: 1px solid #ccc;
-          border-radius: 4px;
+          width: 8rem;
+          text-align: center;
         }
       `}</style>
     </div>
