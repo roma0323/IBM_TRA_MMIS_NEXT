@@ -58,7 +58,7 @@ const Navbar: React.FC = () => {
               height={96}
             />
           </Link>
-          <div>新 MMIS 績效管理指標</div>
+          {/* <div>新 MMIS 績效管理指標</div> */}
         </div>
         <div className="flex items-center gap-2">
           {navLinks.map((link, index) => (
