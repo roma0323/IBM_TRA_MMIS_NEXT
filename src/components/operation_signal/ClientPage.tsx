@@ -165,7 +165,7 @@ const ClientPage: React.FC<ClientPageProps> = ({ signals }) => {
                                     <TooltipTrigger asChild>
                                       <Button
                                         key={index}
-                                        className={`w-full hover:bg-white text-gray-700  ${getButtonBgColor(
+                                        className={`w-full hover:bg-white cursor-default text-gray-700  ${getButtonBgColor(
                                           signal.SOURCE
                                         )}`}
                                       >

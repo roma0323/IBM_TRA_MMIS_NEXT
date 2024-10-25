@@ -27,7 +27,7 @@ const AccordionSection: React.FC<{
           onClick={() =>
             onContentClick && onContentClick(content.id || content,title, content.name)
           }
-          className={`p-2 text-lg cursor-pointer rounded-lg hover:bg-slate-100`}
+          className={`p-2 text-lg cursor-pointer rounded-lg hover:bg-secondary-background`}
         >
           {content.name || content}
         </AccordionContent>

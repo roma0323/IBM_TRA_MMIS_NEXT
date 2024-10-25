@@ -38,14 +38,14 @@ export const TrainInFactoryCard: React.FC<Props> = ({
   return (
     <div
       className={`mt-5 p-5 rounded-lg flex-col inline-flex cursor-pointer transition-transform duration-300 ease-in-out transform ${
-        isHovered || isActive ? "bg-slate-100" : ""
+        isHovered || isActive ? "bg-secondary-background" : ""
       }`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onClick={onToggle}
     >
       <div className="self-stretch flex-col items-start flex">
-        <div className="self-stretch py-1 border-b border-[#646464]/20 justify-between items-end inline-flex">
+        <div className="self-stretch py-1 border-b justify-between items-end inline-flex">
           <div className="text-xl">
             {factory.departmentName}機廠
             <span className="ml-2 text-xs">在廠車輛數</span>

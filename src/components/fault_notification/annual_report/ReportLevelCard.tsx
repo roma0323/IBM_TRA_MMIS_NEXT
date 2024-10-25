@@ -25,8 +25,8 @@ export const ReportLevelCard: React.FC<Props> = ({ isActive, onToggle, CardDataB
 console.log(CardDataByLevel.monthlyData,'CardDataByLevel.monthlyData')
   return (
     <div
-      className={`mt-3 p-3 rounded-lg border-b border-[#646464]/20 hover:bg-slate-100 transform ${
-        isActive ? "bg-slate-100" : ""
+      className={`mt-3 p-3 rounded-lg border-b border-[#646464]/20 hover:bg-secondary-background transform ${
+        isActive ? "bg-secondary-background" : ""
       }`}
       onClick={onToggle}
     >

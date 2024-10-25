@@ -29,7 +29,7 @@ const DeploymentByTrainCategory: React.FC<MyComponentProps> = ({
 
   return (
     <div
-      className={`p-4 self-stretch bg-[#3034380d] rounded-lg cursor-pointer hover:shadow-lg
+      className={`p-4 self-stretch bg-secondary-background rounded-lg cursor-pointer hover:shadow-lg
         ${isActive ? "border-l-4" : ""} flex-col justify-center relative`}
       style={{ borderColor: isActive ? color : "transparent" }} // Apply dynamic border color here
       onClick={handleToggle}

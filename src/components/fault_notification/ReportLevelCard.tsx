@@ -18,7 +18,7 @@ export const ReportLevelCard: React.FC<Props> = ({
   return (
     <div
       className={`mt-3 p-3 rounded-lg flex-col inline-flex  transform ${
-        isActive && clickedDiv !== null ? "bg-slate-100" : ""
+        isActive && clickedDiv !== null ? "bg-secondary-background" : ""
       }`}
       onClick={onToggle}
     >
@@ -28,7 +28,7 @@ export const ReportLevelCard: React.FC<Props> = ({
         <div
           className={`cursor-pointer px-2  rounded-lg hover:shadow-lg   ${
             isActive && clickedDiv === "allUnits"
-              ? "bg-white shadow-lg   "
+              ? "bg-background shadow-lg   "
               : ""
           }  `}
           onClick={() => setClickedDiv("allUnits")}
@@ -41,7 +41,7 @@ export const ReportLevelCard: React.FC<Props> = ({
         <div
           className={`cursor-pointer px-2  rounded-lg hover:shadow-lg    ${
             isActive && clickedDiv === "mechanical"
-              ? "bg-white shadow-lg   "
+              ? "bg-background shadow-lg   "
               : ""
           }`}
           onClick={() => setClickedDiv("mechanical")}
@@ -54,7 +54,7 @@ export const ReportLevelCard: React.FC<Props> = ({
         <div
           className={`cursor-pointer px-2  rounded-lg hover:shadow-lg    ${
             isActive && clickedDiv === "other"
-              ? "bg-white shadow-lg   "
+              ? "bg-background shadow-lg   "
               : ""
           }  `}
           onClick={() => setClickedDiv("other")}
