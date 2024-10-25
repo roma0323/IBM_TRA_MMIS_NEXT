@@ -65,7 +65,7 @@ const Navbar: React.FC = () => {
             <Link key={index} href={link.href}>
               <div
                 key={link.href}
-                className={`px-3 flex cursor-pointer items-center hover:text-primary`}
+                className={`px-3 flex cursor-pointer items-center text-zinc-600 hover:text-primary`}
               >
                 {link.label}
               </div>

@@ -13,7 +13,7 @@ export default async function Page({
   );
 
   return (
-    <main className="grow bg-neutral-100 overflow-hidden relative">
+    <main className="grow bg-secondary-background overflow-hidden relative">
       <ClientPage
         all_car_type={all_car_type} 
       />

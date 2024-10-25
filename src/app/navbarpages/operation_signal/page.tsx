@@ -68,7 +68,7 @@ export default async function Page() {
     { ASSETNUM: "EMU3060", EQ4: "EMU3000", EQ2_C: "臺東機務段" },
   ];
   return (
-    <main className="grow bg-neutral-100 overflow-hidden relative">
+    <main className="grow bg-secondary-background overflow-hidden relative">
       <ClientPage signals={operation_signal} />
     </main>
   );

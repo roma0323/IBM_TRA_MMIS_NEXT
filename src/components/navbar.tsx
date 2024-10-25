@@ -168,7 +168,7 @@ const Navbar: React.FC = () => {
       </div>
 
       <div
-        className={`transition-opacity duration-1000 ease-in-out bg-gradient-to-b from-transparent to-white ${
+        className={`transition-opacity duration-1000 ease-in-out  ${
           isHovered !== null || isClicked !== null ? "opacity-100" : "opacity-0"
         }`}
         onMouseEnter={() => setIsHovered(isHovered)}

@@ -31,7 +31,7 @@ export default async function Page({
   const refactoredfaultReasonAnalysis = refactorCartype(faultReasonAnalysis);
 
   return (
-    <main className="grow bg-neutral-100 overflow-hidden relative">
+    <main className="grow bg-secondary-background overflow-hidden relative">
       <ClientPage
         lastYearDataForAreaChart={lastYearOverviewNumber}
         thisYearDataForAreaChart={overview_number}

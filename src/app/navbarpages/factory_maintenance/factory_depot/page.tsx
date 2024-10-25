@@ -11,7 +11,7 @@ export default async function Page({
 
   const fetchedData = await getFacRepairList();
   return (
-    <main className=" grow bg-neutral-100 overflow-hidden relative">
+    <main className=" grow bg-secondary-background overflow-hidden relative">
         <ClientPage key={searchParams.date} Data={fetchedData.data} />
     </main>
   );

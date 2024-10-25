@@ -38,6 +38,9 @@
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
 
+    --secondary-background: 0 0% 96.1%; 
+    /* 灰色 */
+
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
 
@@ -67,41 +70,15 @@
     --ring: 222.2 84% 4.9%;
 
     --radius: 0.5rem;
-
     --active-button-color: 221, 100%, 60%;
-    /* homepage css */
-    --headline-1-font-family: "Noto Sans JP", Helvetica;
-    --headline-1-font-size: 24px;
-    --headline-1-font-style: normal;
-    --headline-1-font-weight: 400;
-    --headline-1-letter-spacing: 0px;
-    --headline-1-line-height: normal;
-    --label-text-2-font-family: "Noto Sans JP", Helvetica;
-    --label-text-2-font-size: 12px;
-    --label-text-2-font-style: normal;
-    --label-text-2-font-weight: 400;
-    --label-text-2-letter-spacing: 0px;
-    --label-text-2-line-height: normal;
-    --on-primary: rgba(255, 255, 255, 1);
-    --surface: rgba(255, 255, 255, 1);
-    --title-1-font-family: "Noto Sans JP", Helvetica;
-    --title-1-font-size: 18px;
-    --title-1-font-style: normal;
-    --title-1-font-weight: 400;
-    --title-1-letter-spacing: 0px;
-    --title-1-line-height: normal;
-    --title-2-font-family: "Noto Sans JP", Helvetica;
-    --title-2-font-size: 16px;
-    --title-2-font-style: normal;
-    --title-2-font-weight: 400;
-    --title-2-letter-spacing: 0px;
-    --title-2-line-height: normal;
-    /* homepage css */
+
+    
   }
 
   .dark {
     --background: 250, 100%, 14%;
     --foreground: 210 40% 98%;
+    --secondary-background: 250, 100%, 25%;
 
     --card: 222.2 84% 4.9%;
     --card-foreground: 210 40% 98%;
@@ -132,21 +109,3 @@
   }
 }
 
-@layer base {
-  * {
-    @apply border-border;
-  }
-
-  body {
-    @apply bg-background text-foreground;
-  }
-}
-
-/* homepage css */
-
-@layer components {
-  .all-\[unset\] {
-    all: unset;
-  }
-}
-/* homepage css */

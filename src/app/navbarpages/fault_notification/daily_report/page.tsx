@@ -46,7 +46,7 @@ export default async function Page({
   const ReportLevelCardData = refactorData(FailListDailyData.fail_list);
  
   return (
-    <main className="grow bg-neutral-100 overflow-hidden relative">
+    <main className="grow bg-secondary-background overflow-hidden relative">
       <ClientPage fail_list={FailListDailyData.fail_list} ReportLevelCardData={ReportLevelCardData}/>
     </main>
   );

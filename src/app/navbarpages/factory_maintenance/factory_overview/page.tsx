@@ -71,7 +71,7 @@ export default async function Page({
   ]);
 
   return (
-    <main className=" grow bg-neutral-100 overflow-hidden relative">
+    <main className=" grow bg-secondary-background overflow-hidden relative">
         <ClientPage Data={ChartData} listData={listData.data}/>
     </main>
   );

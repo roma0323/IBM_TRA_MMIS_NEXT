@@ -20,17 +20,15 @@ const config = {
   		}
   	},
   	extend: {
-  		gridTemplateColumns: {
-  			'17': 'repeat(17, minmax(0, 1fr))',
-  			'20': 'repeat(20, minmax(0, 1fr))'
-  		},
+
   		colors: {
   			border: 'hsl(var(--border))',
   			input: 'hsl(var(--input))',
   			ring: 'hsl(var(--ring))',
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
-  			'on-primary': 'var(--on-primary)',
+			"secondary-background": 'hsl(var(--secondary-background))',
+
   			surface: 'var(--surface)',
   			primary: {
   				DEFAULT: '#397EFF',
@@ -40,38 +38,7 @@ const config = {
   				DEFAULT: 'hsl(var(--secondary))',
   				foreground: 'hsl(var(--secondary-foreground))'
   			},
-  			'城際列車': {
-  				DEFAULT: '#538164',
-  				foreground: 'hsl(var(--secondary-foreground))'
-  			},
-  			'電力列車': {
-  				DEFAULT: '#FFBB54',
-  				foreground: 'hsl(var(--secondary-foreground))'
-  			},
-  			'柴電列車': {
-  				DEFAULT: '#D9730D',
-  				foreground: 'hsl(var(--secondary-foreground))'
-  			},
-  			'柴液機車': {
-  				DEFAULT: '#C3554E',
-  				foreground: 'hsl(var(--secondary-foreground))'
-  			},
-  			'客車': {
-  				DEFAULT: '#00BBC7',
-  				foreground: 'hsl(var(--secondary-foreground))'
-  			},
-  			'柴油客車': {
-  				DEFAULT: '#9F8170',
-  				foreground: 'hsl(var(--secondary-foreground))'
-  			},
-  			'貨車': {
-  				DEFAULT: '#8F65AF',
-  				foreground: 'hsl(var(--secondary-foreground))'
-  			},
-  			'通勤列車': {
-  				DEFAULT: '#28BF02',
-  				foreground: 'hsl(var(--secondary-foreground))'
-  			},
+  			
   			destructive: {
   				DEFAULT: 'hsl(var(--destructive))',
   				foreground: 'hsl(var(--destructive-foreground))'

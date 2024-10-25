@@ -18,7 +18,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={cn(
-          "h-dvh w-dvw bg-background font-sans antialiased",
+          "h-dvh w-dvw  font-sans bg-background text-foreground",
           fontSans.variable,
         )}
       >
@@ -26,7 +26,7 @@ export default function RootLayout({
           attribute="class"
           defaultTheme="light"
           enableSystem
-          disableTransitionOnChange
+          disableTransitionOnChange={false}
         >
           <main className="size-full">{children}</main>
         </ThemeProvider>

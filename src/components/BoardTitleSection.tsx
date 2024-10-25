@@ -11,9 +11,9 @@ const BoardTitleSection: React.FC<SectionProps> = ({ title = "", content }) => {
   const color = getCarColor(title);
 
   return (
-    <div className="size-full overflow-hidden flex flex-col items-start bg-white relative rounded-lg">
+    <div className="size-full overflow-hidden flex flex-col items-start bg-background relative rounded-lg">
       <div
-        className="w-full p-2.5 border-b border-gray-400"
+        className="w-full p-2.5 border-b border-gray-400 text-foreground"
         // style={{ color }}  Apply the dynamic color to the title
         >
         {title}
