@@ -55,7 +55,7 @@ const ClientPage: React.FC<Props> = ({ fail_list, ReportLevelCardData }) => {
         <TableCell>{fail_by_row.fail_status}</TableCell>
         <TableCell>{fail_by_row.fail_dept}</TableCell>
         {/* <TableCell>{fail_by_row.rep_url}</TableCell> */}
-        <TableCell className="text-right">
+        <TableCell className="text-primary underline">
           <a
             href={fail_by_row.rep_url}
             target="_blank"

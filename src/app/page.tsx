@@ -16,10 +16,9 @@ export default function Page() {
         }}
       />
 
-      <div style={{ fontSize: "18vh", lineHeight: "1.1" }} className="bottom-[6vh]  left-[4vw]   absolute text-slate-100">
-        <div >MMIS</div>
-        <div>績效</div>
-        <div>管理指標</div>
+      <div style={{ fontSize: "18vh", lineHeight: "1.1" }} className="bottom-[6vh]  left-[4vw]   absolute text-slate-100 cursor-default">
+        <div>MMIS</div>
+        <div>績效管理</div>
       </div>
       <AnimatedNavbar />
     </div>

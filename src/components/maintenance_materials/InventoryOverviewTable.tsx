@@ -37,10 +37,10 @@ const InventoryOverviewTable: React.FC<InventoryOverviewTableProps> = ({
           {inventoryOverview.map((item, index) => (
             <TableRow key={index}>
               <TableCell className="text-lg">{item.month}</TableCell>
-              <TableCell className='cursor-pointer hover:underline text-lg' onClick={() => handleCellClick("inv", item.month,"庫存餘額")}>
+              <TableCell className='cursor-pointer hover:underline hover:text-primary text-lg ' onClick={() => handleCellClick("inv", item.month,"庫存餘額")}>
                 {Math.round(Number(item.sum_invbal_mount)).toLocaleString()}
               </TableCell>
-              <TableCell className='cursor-pointer hover:underline text-lg' onClick={() => handleCellClick("issue", item.month,"領用金額")}>
+              <TableCell className='cursor-pointer hover:underline hover:text-primary text-lg' onClick={() => handleCellClick("issue", item.month,"領用金額")}>
                 {Math.round(Number(item.sum_issue_mount)).toLocaleString()}
               </TableCell>
             </TableRow>
