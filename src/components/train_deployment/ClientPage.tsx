@@ -8,6 +8,9 @@ import { useSearchParams, useRouter } from "next/navigation";
 import { FetcheGetSumStatusListData } from "@/types/type";
 import { DataByCarCatalog } from "@/types/type";
 
+
+const basePath = process.env.NEXT_PUBLIC_BASEPATH || '';
+
 const ClientPage: React.FC<FetcheGetSumStatusListData> = ({ Data }) => {
   
 
@@ -42,14 +45,14 @@ const ClientPage: React.FC<FetcheGetSumStatusListData> = ({ Data }) => {
             </div>
             <Link
               href={{
-                pathname: `/navbarpages/train_deployment/certain_train/客車`,
+                pathname: `${basePath}/navbarpages/train_deployment/certain_train/客車`,
               }}
             >
               <OverviewCard Name="客車" Data={dataByCarCatalog["客車"]} />
             </Link>
             <Link
               href={{
-                pathname: `/navbarpages/train_deployment/certain_train/貨車`,
+                pathname: `${basePath}/navbarpages/train_deployment/certain_train/貨車`,
               }}
             >
               <OverviewCard Name="貨車" Data={dataByCarCatalog["貨車"]} />
@@ -73,7 +76,7 @@ const ClientPage: React.FC<FetcheGetSumStatusListData> = ({ Data }) => {
           <div className="grid grid-cols-3   gap-4 relative">
             <Link
               href={{
-                pathname: `/navbarpages/train_deployment/certain_train/城際列車`,
+                pathname: `${basePath}/navbarpages/train_deployment/certain_train/城際列車`,
               }}
             >
               <OverviewCard
@@ -83,7 +86,7 @@ const ClientPage: React.FC<FetcheGetSumStatusListData> = ({ Data }) => {
             </Link>
             <Link
               href={{
-                pathname: `/navbarpages/train_deployment/certain_train/通勤列車`,
+                pathname: `${basePath}/navbarpages/train_deployment/certain_train/通勤列車`,
               }}
             >
               <OverviewCard
@@ -93,7 +96,7 @@ const ClientPage: React.FC<FetcheGetSumStatusListData> = ({ Data }) => {
             </Link>
             <Link
               href={{
-                pathname: `/navbarpages/train_deployment/certain_train/電力機車`,
+                pathname: `${basePath}/navbarpages/train_deployment/certain_train/電力機車`,
               }}
             >
               <OverviewCard
@@ -103,7 +106,7 @@ const ClientPage: React.FC<FetcheGetSumStatusListData> = ({ Data }) => {
             </Link>
             <Link
               href={{
-                pathname: `/navbarpages/train_deployment/certain_train/柴油客車`,
+                pathname: `${basePath}/navbarpages/train_deployment/certain_train/柴油客車`,
               }}
             >
               <OverviewCard
@@ -113,7 +116,7 @@ const ClientPage: React.FC<FetcheGetSumStatusListData> = ({ Data }) => {
             </Link>
             <Link
               href={{
-                pathname: `/navbarpages/train_deployment/certain_train/柴液機車`,
+                pathname: `${basePath}/navbarpages/train_deployment/certain_train/柴液機車`,
               }}
             >
               <OverviewCard
@@ -123,7 +126,7 @@ const ClientPage: React.FC<FetcheGetSumStatusListData> = ({ Data }) => {
             </Link>
             <Link
               href={{
-                pathname: `/navbarpages/train_deployment/certain_train/柴電機車`,
+                pathname: `${basePath}/navbarpages/train_deployment/certain_train/柴電機車`,
               }}
             >
               <OverviewCard

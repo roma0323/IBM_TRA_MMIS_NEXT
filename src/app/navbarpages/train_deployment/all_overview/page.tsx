@@ -5,6 +5,9 @@ import { OverviewCard } from "@/components/train_deployment/OverviewCard";
 import { BigOverviewCard } from "@/components/train_deployment/BigOverviewCard";
 import { DataByCarCatalog } from "@/types/type";
 
+const basePath = process.env.NEXT_PUBLIC_BASEPATH || "";
+
+
 export default async function Page({
   searchParams, 
 }: {
@@ -30,7 +33,7 @@ export default async function Page({
           <div className="grid grid-cols-4  gap-4 h-2/5 relative">
             <Link
               href={{
-                pathname: `/navbarpages/train_deployment/power_overview`,
+                pathname: `${basePath}/navbarpages/train_deployment/power_overview`,
               }}
             >
               <OverviewCard Name="動力車" Data={dataByCarCatalog["動力車"]} />
@@ -38,21 +41,21 @@ export default async function Page({
 
             <Link
               href={{
-                pathname: `/navbarpages/train_deployment/certain_train/passenger_car`,
+                pathname: `${basePath}/navbarpages/train_deployment/certain_train/passenger_car`,
               }}
             >
               <OverviewCard Name="客車" Data={dataByCarCatalog["客車"]} />
             </Link>
             <Link
               href={{
-                pathname: `/navbarpages/train_deployment/certain_train/freight_car`,
+                pathname: `${basePath}/navbarpages/train_deployment/certain_train/freight_car`,
               }}
             >
               <OverviewCard Name="貨車" Data={dataByCarCatalog["貨車"]} />
             </Link>
             <Link
               href={{
-                pathname: `/navbarpages/train_deployment/unusual_overview`,
+                pathname: `${basePath}/navbarpages/train_deployment/unusual_overview`,
               }}
             >
               <OverviewCard

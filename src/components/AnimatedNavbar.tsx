@@ -1,46 +1,48 @@
 "use client";
 
-import React, { Suspense, useState } from "react";
+import React, { Suspense } from "react";
 import Link from "next/link";
 import Image from "next/image";
+
+const basePath = process.env.NEXT_PUBLIC_BASEPATH || "";
 
 const Navbar: React.FC = () => {
  
 
   const navLinks = [
     {
-      href: `/navbarpages/train_deployment/all_overview`,
+      href: `${basePath}/navbarpages/train_deployment/all_overview`,
       label: "車輛配置",
       startsWith: "/navbarpages/train_deployment",
       
     },
     {
-      href: `/navbarpages/locomotive_depot`,
+      href: `${basePath}/navbarpages/locomotive_depot`,
       label: "機務段配置",
       
     },
     {
-      href: `/navbarpages/factory_maintenance/factory_overview`,
+      href: `${basePath}/navbarpages/factory_maintenance/factory_overview`,
       label: "機廠檢修",
      
     },
     {
-      href: `/navbarpages/fault_notification/daily_report`,
+      href: `${basePath}/navbarpages/fault_notification/daily_report`,
       label: "故障通報",
       
     },
     {
-      href: `/navbarpages/maintenance_materials`,
+      href: `${basePath}/navbarpages/maintenance_materials`,
       label: "庫存績效",
       
     },
     {
-      href: `/navbarpages/car_type_spec`,
+      href: `${basePath}/navbarpages/car_type_spec`,
       label: "車輛諸元",
 
     },
     {
-      href: `/navbarpages/operation_signal`,
+      href: `${basePath}/navbarpages/operation_signal`,
       label: "營運燈號",
     },
   ];
@@ -49,7 +51,11 @@ const Navbar: React.FC = () => {
     <>
       <div className="h-fit w-full flex justify-between absolute pr-6">
         <div className="flex items-center">
-          <Link href="/">
+        <Link
+            href={{
+              pathname: `/${basePath}/`,
+            }}
+          >
             <Image
               className="relative hover:scale-110"
               alt="IBM Logo"
@@ -58,6 +64,7 @@ const Navbar: React.FC = () => {
               height={96}
             />
           </Link>
+         
           {/* <div>新 MMIS 績效管理指標</div> */}
         </div>
         <div className="flex items-center gap-2">
