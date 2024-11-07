@@ -71,7 +71,12 @@ const Navbar: React.FC = () => {
       href: `${basePath}/navbarpages/locomotive_depot`,
       label: "機務段配置",
       startsWith: `${basePath}/navbarpages/locomotive_depot`,
-      subLinks: [{ name: "機務段總覽", path: `${basePath}/navbarpages/locomotive_depot` }],
+      subLinks: [
+        {
+          name: "機務段總覽",
+          path: `${basePath}/navbarpages/locomotive_depot`,
+        },
+      ],
     },
     {
       href: `${basePath}/navbarpages/factory_maintenance/factory_overview`,
@@ -80,11 +85,11 @@ const Navbar: React.FC = () => {
       subLinks: [
         {
           name: "機廠檢修總覽",
-         path: `${basePath}/navbarpages/factory_maintenance/factory_overview`,
+          path: `${basePath}/navbarpages/factory_maintenance/factory_overview`,
         },
         {
           name: "機廠配置",
-         path: `${basePath}/navbarpages/factory_maintenance/factory_depot`,
+          path: `${basePath}/navbarpages/factory_maintenance/factory_depot`,
         },
       ],
     },
@@ -95,15 +100,15 @@ const Navbar: React.FC = () => {
       subLinks: [
         {
           name: "每日故障通報",
-         path: `${basePath}/navbarpages/fault_notification/daily_report`,
+          path: `${basePath}/navbarpages/fault_notification/daily_report`,
         },
         {
           name: "年度故障通報",
-         path: `${basePath}/navbarpages/fault_notification/annual_report`,
+          path: `${basePath}/navbarpages/fault_notification/annual_report`,
         },
         {
           name: "ATP故障分析",
-         path: `${basePath}/navbarpages/fault_notification/ATP_report`,
+          path: `${basePath}/navbarpages/fault_notification/ATP_report`,
         },
       ],
     },
@@ -112,21 +117,29 @@ const Navbar: React.FC = () => {
       label: "庫存績效",
       startsWith: `${basePath}/navbarpages/maintenance_materials`,
       subLinks: [
-        { name: "庫存績效總覽",path: `${basePath}/navbarpages/maintenance_materials`, },
+        {
+          name: "庫存績效總覽",
+          path: `${basePath}/navbarpages/maintenance_materials`,
+        },
       ],
     },
     {
       href: `${basePath}/navbarpages/car_type_spec`,
       label: "車輛諸元",
       startsWith: `${basePath}/navbarpages/car_type_spec`,
-      subLinks: [{ name: "車輛諸元總覽",path: `${basePath}/navbarpages/car_type_spec`, }],
+      subLinks: [
+        { name: "車輛諸元總覽", path: `${basePath}/navbarpages/car_type_spec` },
+      ],
     },
     {
       href: `${basePath}/navbarpages/operation_signal`,
       label: "營運燈號",
       startsWith: `${basePath}/navbarpages/operation_signal`,
       subLinks: [
-        { name: "營運燈號總覽",path: `${basePath}/navbarpages/operation_signal`, },
+        {
+          name: "營運燈號總覽",
+          path: `${basePath}/navbarpages/operation_signal`,
+        },
       ],
     },
   ];
@@ -149,25 +162,24 @@ const Navbar: React.FC = () => {
             />
           </Link>
 
+
+
           {navLinks.map((link, index) => (
-            <div
+            <Link
+              href={{
+                pathname: `${link.href}`,
+              }}
               key={link.href}
               className={`px-3 flex cursor-pointer items-center ${
                 pathname?.startsWith(link.startsWith) ? "active" : ""
-              } ${isClicked === index ? "mid_nav_unactive" : ""}
+              } 
               ${isHovered === index ? "mid_nav_unactive" : ""}`}
               onMouseEnter={() => setIsHovered(index)}
               onMouseLeave={() => setIsHovered(null)}
-              onClick={() => {
-                if (isClicked === index) {
-                  setIsClicked(null);
-                } else {
-                  setIsClicked(index);
-                }
-              }}
+              
             >
               {link.label}
-            </div>
+            </Link>
           ))}
         </div>
         <div className="flex items-center gap-2">

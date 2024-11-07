@@ -16,7 +16,7 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { InventoryListBalance, InventoryListIssue } from "@/types/type";
-import Loading_text from "@/components/Loading_text";
+import Loading2 from "@/components/Loading2";
 
 type InventoryTableListProps = {
   data: (InventoryListBalance | InventoryListIssue)[];
@@ -127,7 +127,7 @@ const InventoryTableList: React.FC<InventoryTableListProps> = ({
         </TableHeader>
 
         {isLoading ? (
-          <Loading_text />
+          <Loading2 />
         ) : (
           <>
             <TableBody>
