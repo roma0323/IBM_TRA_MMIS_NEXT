@@ -66,8 +66,9 @@ export default function Loading() {
   `;
 
   return (
-    <div className="flex items-center justify-center size-full ">
+    <div className="flex items-center   justify-center size-full  absolute top-0 left-0">
       <style>{cssStyles}</style>
+      <div className='size-full bg-background opacity-80 absolute'></div>
       <span className="loader" style={loaderStyle}></span>
     </div>
   );

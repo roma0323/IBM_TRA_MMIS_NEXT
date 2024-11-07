@@ -41,10 +41,8 @@ const TrainCategorySection: React.FC<TrainCategorySectionProps> = ({
         <TrainCategorySectionCard
           key={index}
           trainName={train.trainName}
-          trainCount={train.trainCount}
           onClick={() => handleTrainClick(train.trainName)}
           isActive={selectedTrainName === train.trainName}
-          carcatalog={carcatalog}
         />
       ))}
     </div>

@@ -1,25 +1,36 @@
-import React from "react";
+"use client";
 import Link from "next/link";
+import React from "react";
+import { useSearchParams } from "next/navigation";
+import useSWR from "swr";
+
+import { DataByCarCatalog } from "@/types/type";
 import { getSumStatusListAndsumtotalEqualone } from "@/api/api";
+
 import { OverviewCard } from "@/components/train_deployment/OverviewCard";
 import { BigOverviewCard } from "@/components/train_deployment/BigOverviewCard";
-import { DataByCarCatalog } from "@/types/type";
+import Loading from "@/components/Loading";
 
 const basePath = process.env.NEXT_PUBLIC_BASEPATH || "";
 
-export default async function Page({
-  searchParams,
-}: {
-  searchParams: { date?: string; type?: string };
-}) {
-  const date = searchParams.date || "";
-  const fetchedData = await getSumStatusListAndsumtotalEqualone(date);
+export default function Page() {
+  const urlParams = useSearchParams();
+  const date = urlParams ? urlParams.get("date") || "" : "";
+  const fetcher = async () => {
+    const fetchedData = await getSumStatusListAndsumtotalEqualone(date);
+    return fetchedData.data;
+  };
+  //must add value before fetcher, cannot be date , it may be empty value
+  const { data, error } = useSWR("fetch trigger",fetcher);
+
+  if (error) return <div>Failed to load</div>;
+  if (!data) return <Loading />;
 
   const dataByCarCatalog: DataByCarCatalog = {};
-  fetchedData.data.forEach((item: DataByCarCatalog[keyof DataByCarCatalog]) => {
+  data.forEach((item: DataByCarCatalog[keyof DataByCarCatalog]) => {
     dataByCarCatalog[item.carcatalog] = item;
   });
-
+  
   return (
     <main className=" grow bg-secondary-background overflow-hidden relative">
       <div className=" h-full p-3 relative overflow-auto">
@@ -92,6 +103,7 @@ export default async function Page({
           </div>
         </div>
       </div>
+     
     </main>
   );
 }
