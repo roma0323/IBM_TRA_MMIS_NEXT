@@ -1,19 +1,19 @@
 "use client";
 
 import React, { useState, useRef, useMemo, useEffect } from "react";
+
 import {
   InventoryOverview,
   InventoryListIssue,
   InventoryListBalance,
 } from "@/types/type";
+import { getInvMountListRow } from "@/api/api";
+
 import BoardTitleSection from "@/components/BoardTitleSection";
-import SlideNavigationContainer, {
-  SlideNavigationContainerRef,
-} from "@/components/SlideNavigationContainer";
+import SlideNavigationContainer, {SlideNavigationContainerRef,} from "@/components/SlideNavigationContainer";
 import InventoryTableList from "@/components/maintenance_materials/InventoryTableList";
 import InventoryOverviewTable from "@/components/maintenance_materials/InventoryOverviewTable";
 import CategorySection from "@/components/ui/accordionSection";
-import { getInvMountListRow } from "@/api/api";
 
 type Props = {
   inventory_overview: InventoryOverview[];

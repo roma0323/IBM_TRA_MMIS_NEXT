@@ -3,9 +3,7 @@ import React from "react";
 import {  getCarTypeList } from "@/api/api";
 
 export default async function Page({
-  searchParams,
 }: {
-  searchParams: { date?: string };
 }) {
   let all_car_type = await getCarTypeList();
   all_car_type = all_car_type.filter(

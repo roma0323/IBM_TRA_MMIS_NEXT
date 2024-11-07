@@ -27,6 +27,26 @@ export async function getSumStatusListAndsumtotalEqualone( //fetch 首頁所有�
 
   return res.json();
 }
+export async function getSumStatusListAndsumtotalEqualoneNotNormaltrain( //fetch 非常態車輛
+  date?: string
+) {
+  let formattedDate = dateFormat(date);
+
+  
+
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getSumStatusList&qdate=${formattedDate}&sumtotal=1&multiplier=1&normaltrain=0`,
+    {
+      method: "POST",
+      headers: {
+        Accept: "application/json, text/plain, */*",
+        "Content-Type": "application/json",
+      },
+    }
+  );
+
+  return res.json();
+}
 
 export async function getSumStatusListAndCarcatalogEqualParam( //fetch 特定車種資料 deployment detail
   id: String,
