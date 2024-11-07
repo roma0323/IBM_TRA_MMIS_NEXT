@@ -27,6 +27,34 @@ export async function getSumStatusListAndsumtotalEqualone( //fetch 首頁所有�
 
   return res.json();
 }
+
+//FIXME :can not fetch 30~60days
+export async function get30DayData() { //fetch current 30 day data
+  try {
+    const query = "SELECT ALL_D, EQ11, AVAILABLE, TOTAL, RATION, USUALFLAG FROM ZZ_P_DAILY_REPORT_24_KPI zvdrk WHERE VARCHAR_FORMAT(CURRENT date, 'yyyy-MM-dd') <> ALL_D ORDER BY VARCHAR_FORMAT(ALL_D, 'yyyy-MM-dd') ASC";
+
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getResult`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: query, // Sending the query string as the body
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data; // Return the fetched data
+  } catch (error) {
+    console.error('Error fetching operation signal:', error);
+    return null; // Return null or handle the error as needed
+  }
+}
+
+
+
 export async function getSumStatusListAndsumtotalEqualoneNotNormaltrain( //fetch 非常態車輛
   date?: string
 ) {

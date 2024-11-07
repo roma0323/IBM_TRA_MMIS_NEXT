@@ -1,6 +1,9 @@
+// components/operation_signal/ClientPage.tsx
+
 "use client";
 
 import React, { useState, useEffect } from "react";
+import useSWR from "swr";
 import BoardTitleSection from "../BoardTitleSection";
 import CategorySection from "@/components/ui/accordionSection";
 import { Button } from "@/components/ui/button";
@@ -12,6 +15,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { getOperationSignal } from "@/api/api";
 
 const infor_for_accordionitem = {
   所屬段: [
@@ -31,15 +35,46 @@ const light_for_accordionitem = {
   燈號: ["全部燈號", "紅燈", "黃燈", "綠燈"],
 };
 
-type ClientPageProps = {
-  signals: Signal[];
+const fetcher = async () => {
+  const data = await getOperationSignal();
+  return data;
 };
 
-const ClientPage: React.FC<ClientPageProps> = ({ signals }) => {
+const ClientPage: React.FC = () => {
+  const { data: signals, error } = useSWR<Signal[]>(
+    "/api/operation_signal",
+    fetcher
+  );
   const [selectTrain, setSelectTrain] = useState<string[]>(["七堵機務段"]);
   const [selectLight, setSelectLight] = useState<string>("全部燈號");
   const [filteredSignals, setFilteredSignals] = useState<Signal[]>([]);
   const [searchText, setSearchText] = useState<string>("");
+
+  useEffect(() => {
+    if (signals) {
+      let filtered = signals.filter((signal) =>
+        selectTrain.includes(signal.EQ2_C)
+      );
+
+      if (selectLight === "黃燈") {
+        filtered = filtered.filter(
+          (signal) => signal.SOURCE === "6" || signal.SOURCE === "7"
+        );
+      } else if (selectLight === "紅燈") {
+        filtered = filtered.filter(
+          (signal) =>
+            signal.SOURCE && signal.SOURCE !== "6" && signal.SOURCE !== "7"
+        );
+      } else if (selectLight === "綠燈") {
+        filtered = filtered.filter((signal) => !signal.SOURCE);
+      }
+
+      setFilteredSignals(filtered);
+    }
+  }, [selectTrain, selectLight, signals, searchText]);
+
+  if (error) return <div>Failed to load</div>;
+  if (!signals) return <div>Loading...</div>;
 
   const handleSelectTrain = (id: string) => {
     setSearchText("");
@@ -64,32 +99,13 @@ const ClientPage: React.FC<ClientPageProps> = ({ signals }) => {
   };
 
   const handleSearch = () => {
-    const filtered = signals.filter((signal) =>
-      signal.ASSETNUM.includes(searchText)
-    );
-    setFilteredSignals(filtered);
-  };
-
-  useEffect(() => {
-    let filtered = signals.filter((signal) =>
-      selectTrain.includes(signal.EQ2_C)
-    );
-
-    if (selectLight === "黃燈") {
-      filtered = filtered.filter(
-        (signal) => signal.SOURCE === "6" || signal.SOURCE === "7"
+    if (signals) {
+      const filtered = signals.filter((signal) =>
+        signal.ASSETNUM.includes(searchText)
       );
-    } else if (selectLight === "紅燈") {
-      filtered = filtered.filter(
-        (signal) =>
-          signal.SOURCE && signal.SOURCE !== "6" && signal.SOURCE !== "7"
-      );
-    } else if (selectLight === "綠燈") {
-      filtered = filtered.filter((signal) => !signal.SOURCE);
+      setFilteredSignals(filtered);
     }
-
-    setFilteredSignals(filtered);
-  }, [selectTrain, selectLight, signals, searchText]);
+  };
 
   const groupByEQ4 = (signals: Signal[]) => {
     return signals.reduce((groups, signal) => {

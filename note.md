@@ -120,10 +120,10 @@ Other: board overflow
 總量數 7 台變動 加貨車
 可用數sum of(current_ready current_temp current_use)
 
-nav bar fix 
 
 text dynamic size
 
-silder trigger by click
 
 slow may cause by fetch twice 
+
+SWR loading lagging

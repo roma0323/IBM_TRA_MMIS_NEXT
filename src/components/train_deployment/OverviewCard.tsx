@@ -2,7 +2,7 @@ import React from "react";
 import { DataCard } from "@/components/train_deployment/DataCard";
 import UseRateAreaChart from "@/components/train_deployment/UseRateAreaChart";
 import { FetcheGetSumStatusListDataInArray } from "@/types/type";
-import BoardTitleSection from "@/components/BoardTitleSection"; // Import the Section component
+import BoardTitleSection from "@/components/BoardTitleSection";
 
 const DEFAULT_TRAIN_DATA: FetcheGetSumStatusListDataInArray = {
   carcatalog: "Unknown",
@@ -27,28 +27,32 @@ const DEFAULT_TRAIN_DATA: FetcheGetSumStatusListDataInArray = {
 };
 
 export const OverviewCard = ({
-  Name = "Unknown Train", 
+  Name = "Unknown Train",
   Data = DEFAULT_TRAIN_DATA,
+  chartData = [],
 }: {
-  Name?: string; 
+  Name?: string;
   Data?: FetcheGetSumStatusListDataInArray;
+  chartData?: Array<{ name: string; RATION: number }>;
 }): JSX.Element => {
   return (
-    <div className="rounded-lg  hover:shadow-lg">
+    <div className="rounded-lg hover:shadow-lg">
       <BoardTitleSection
         title={`${Name}`}
         content={
-          <div className="size-full flex flex-col ">
-            <div className="flex justify-around w-full py-2 ">
+          <div className="size-full flex flex-col">
+            <div className="flex justify-around w-full py-2">
               <DataCard text={Data.current_ready.toString()} text1="可用數" />
               <DataCard text={Data.current_cnt.toString()} text1="總輛數" />
               <DataCard
-                text={`${Math.round((Data.current_ready / Data.current_cnt) * 100).toString()}%`}
+                text={`${Math.round(
+                  (Data.current_ready / Data.current_cnt) * 100
+                ).toString()}%`}
                 text1="可用率"
               />
             </div>
-            <div className="w-full h-32 ">
-              <UseRateAreaChart styleTemplate={Name} />
+            <div className="w-full h-32">
+              <UseRateAreaChart styleTemplate={Name} chartData={chartData} />
             </div>
           </div>
         }

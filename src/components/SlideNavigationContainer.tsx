@@ -51,12 +51,12 @@ const SlideNavigationContainer = forwardRef<SlideNavigationContainerRef, SlideNa
         </div>
         <SlideNavigation
           direction="left"
-          onHover={handleMouseEnter}
+          onClick={handleMouseEnter}
           isVisible={canMoveLeft}
         />
         <SlideNavigation
           direction="right"
-          onHover={handleMouseEnter}
+          onClick={handleMouseEnter}
           isVisible={canMoveRight}
         />
       </div>

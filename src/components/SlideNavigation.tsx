@@ -2,13 +2,13 @@ import React from "react";
 
 type SlideNavigationProps = {
   direction: "left" | "right";
-  onHover: (direction: "left" | "right") => void;
+  onClick: (direction: "left" | "right") => void;
   isVisible: boolean;
 };
 
 const SlideNavigation: React.FC<SlideNavigationProps> = ({
   direction,
-  onHover,
+  onClick,
   isVisible,
 }) => {
   if (!isVisible) return null; // Don't render anything if not visible
@@ -20,7 +20,7 @@ const SlideNavigation: React.FC<SlideNavigationProps> = ({
 
   return (
     <div
-      onMouseEnter={() => onHover(direction)}
+      onClick={() => onClick(direction)}
       className={`absolute top-0 ${direction === "left" ? "left-0" : "right-0"} h-full w-[3vw] ${gradientClasses} cursor-pointer flex items-center justify-center text-[#397EFF] text-3xl`}
     >
       {direction === "left" ? "<" : ">"}
