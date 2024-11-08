@@ -1,12 +1,22 @@
 // utils/dataUtils.ts
 import { FailListItem } from "@/types/type";
 
+type FailLevel = "A" | "B" | "C" | "All";
+
+interface Counter {
+  [key: string]: {
+    all_fail_quantity: number;
+    Maintenance_fail_quantity: number;
+    other_fail_quantity: number;
+  };
+}
+
 export const refactorData = (data: FailListItem[]) => {
-  const counter = initializeCounter();
+  const counter: Counter = initializeCounter();
 
   data.forEach(({ fail_lvl }) => {
     if (counter[fail_lvl]) {
-      incrementCounter(counter, fail_lvl);
+      incrementCounter(counter, fail_lvl as FailLevel);
     }
   });
 
@@ -15,7 +25,7 @@ export const refactorData = (data: FailListItem[]) => {
   return prepareReportLevelCardData(counter);
 };
 
-const initializeCounter = () => ({
+const initializeCounter = (): Counter => ({
   A: createCounter(),
   B: createCounter(),
   C: createCounter(),
@@ -28,13 +38,13 @@ const createCounter = () => ({
   other_fail_quantity: 0,
 });
 
-const incrementCounter = (counter: any, fail_lvl: string) => {
+const incrementCounter = (counter: Counter, fail_lvl: FailLevel) => {
   counter[fail_lvl].all_fail_quantity += 1;
   counter[fail_lvl].Maintenance_fail_quantity += 1;
   counter[fail_lvl].other_fail_quantity += 1;
 };
 
-const calculateAllTotals = (counter: any) => {
+const calculateAllTotals = (counter: Counter) => {
   const allLevelCounts = counter["All"];
   ["A", "B", "C"].forEach((lvl) => {
     allLevelCounts.all_fail_quantity += counter[lvl].all_fail_quantity;
@@ -43,7 +53,7 @@ const calculateAllTotals = (counter: any) => {
   });
 };
 
-const prepareReportLevelCardData = (counter: any) => {
+const prepareReportLevelCardData = (counter: Counter) => {
   return ["A", "B", "C", "All"].map((lvl) => ({
     fail_lvl: lvl,
     ...counter[lvl],
