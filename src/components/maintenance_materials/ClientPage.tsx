@@ -1,33 +1,44 @@
 "use client";
 
-import React, { useState, useRef, useMemo, useEffect } from "react";
+import React, { useState, useRef, useMemo } from "react";
+import { useSearchParams } from "next/navigation";
+import useSWR from "swr";
 
 import {
   InventoryOverview,
   InventoryListIssue,
   InventoryListBalance,
 } from "@/types/type";
-import { getInvMountListRow } from "@/api/api";
+import { getInvMountListRow, getInvMount } from "@/api/api";
 
+import Loading from "@/components/Loading";
 import BoardTitleSection from "@/components/BoardTitleSection";
-import SlideNavigationContainer, {SlideNavigationContainerRef,} from "@/components/SlideNavigationContainer";
+import SlideNavigationContainer, {
+  SlideNavigationContainerRef,
+} from "@/components/SlideNavigationContainer";
 import InventoryTableList from "@/components/maintenance_materials/InventoryTableList";
 import InventoryOverviewTable from "@/components/maintenance_materials/InventoryOverviewTable";
 import CategorySection from "@/components/ui/accordionSection";
 
-type Props = {
-  inventory_overview: InventoryOverview[];
-  date: string;
-};
+export function ClientPage() {
+  const urlParams = useSearchParams();
+  const date = urlParams ? urlParams.get("date") || "" : "";
 
-const ClientPage: React.FC<Props> = ({ inventory_overview, date }) => {
+  const {
+    data: inventory_overview=[],
+    error,
+    isLoading,
+  } = useSWR(`${date}urlParams`, () => getInvMount(date));
+
   const [selectFactory, setSelectFactory] = useState<string>("All");
   const [selectFactoryName, setSelectFactoryName] = useState<string>("機務處");
   const [selectedType, setSelectedValue] = useState<string>("");
   const [inventoryList, setInventoryList] = useState<InventoryListIssue[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [totalMoney, setTotalMoney] = useState<number>(0); // New state for total money
+  const [isLoadingState, setisLoadingState] = useState<boolean>(false);
+  const [totalMoney, setTotalMoney] = useState<number>(0);
   const slideNavRef = useRef<SlideNavigationContainerRef>(null);
+
+  
 
   const factoryData = {
     機務處: [{ id: "All", name: "全部機務處" }],
@@ -87,7 +98,7 @@ const ClientPage: React.FC<Props> = ({ inventory_overview, date }) => {
     typeName: string
   ) => {
     setSelectedValue(typeName);
-    setIsLoading(true);
+    setisLoadingState(true);
 
     let factories: string[] = [];
     if (selectFactory === "All_depot") {
@@ -134,7 +145,6 @@ const ClientPage: React.FC<Props> = ({ inventory_overview, date }) => {
 
     setInventoryList(summedData);
 
-    // Calculate total money
     const total = summedData.reduce(
       (acc: number, item: InventoryListIssue | InventoryListBalance) => {
         const sumMount =
@@ -147,16 +157,18 @@ const ClientPage: React.FC<Props> = ({ inventory_overview, date }) => {
     );
     setTotalMoney(total);
 
-    setIsLoading(false);
+    setisLoadingState(false);
     slideNavRef.current?.handleMouseEnter("right");
   };
+  
 
+  
   const filteredInventoryOverview = useMemo(() => {
     const overviewMap: {
       [key: string]: { sum_issue_mount: number; sum_invbal_mount: number };
     } = {};
-
-    inventory_overview.forEach((item) => {
+  
+    inventory_overview.forEach((item: InventoryOverview) => {
       if (
         selectFactory === "All" ||
         (selectFactory === "All_factory" &&
@@ -176,19 +188,20 @@ const ClientPage: React.FC<Props> = ({ inventory_overview, date }) => {
         item.dept === selectFactory
       ) {
         if (!overviewMap[item.month]) {
-          overviewMap[item.month] = { sum_issue_mount: 0, sum_invbal_mount: 0 };
+          overviewMap[item.month] = {
+            sum_issue_mount: 0,
+            sum_invbal_mount: 0,
+          };
         }
         overviewMap[item.month].sum_issue_mount += Number(item.sum_issue_mount);
-        overviewMap[item.month].sum_invbal_mount += Number(
-          item.sum_invbal_mount
-        );
+        overviewMap[item.month].sum_invbal_mount += Number(item.sum_invbal_mount);
       }
     });
-
+  
     return Object.keys(overviewMap).map((month) => ({
       dept: selectFactory,
       month,
-      year: "2024", // Assuming year is constant, adjust if necessary
+      year: "2024",
       sum_issue_mount: overviewMap[month].sum_issue_mount.toString(),
       sum_invbal_mount: overviewMap[month].sum_invbal_mount.toString(),
     }));
@@ -199,10 +212,7 @@ const ClientPage: React.FC<Props> = ({ inventory_overview, date }) => {
       return {};
     }
     return filteredInventoryOverview.reduce(
-      (
-        acc: { [key: string]: { 庫存餘額: number; 領用金額: number } },
-        item
-      ) => {
+      (acc: { [key: string]: { 庫存餘額: number; 領用金額: number } }, item) => {
         acc[item.month] = {
           庫存餘額: Math.round(Number(item.sum_invbal_mount)),
           領用金額: Math.round(Number(item.sum_issue_mount)),
@@ -213,6 +223,10 @@ const ClientPage: React.FC<Props> = ({ inventory_overview, date }) => {
     );
   }, [filteredInventoryOverview]);
 
+
+  if (error) return <div>Failed to load</div>;
+  if (isLoading) return <Loading />;
+
   return (
     <div className="h-full overflow-hidden">
       <SlideNavigationContainer
@@ -221,28 +235,23 @@ const ClientPage: React.FC<Props> = ({ inventory_overview, date }) => {
         visibleSlides={2}
         slideWidthPercentage={21}
       >
-        {/* First Div */}
-
         <div className="min-w-[20%] flex items-center justify-center">
           <BoardTitleSection
             title="廠段分類"
             content={
-              <>
-                <CategorySection
-                  setSelectTrain={(id,name) => {
-                    setSelectFactory(id);
-                    setSelectFactoryName(name || "");
-                    setSelectedValue(""); // Reset selectedType
-                    setInventoryList([]); // Reset inventoryList
-                  }}
-                  data={factoryData} // Pass the factory data here
-                />
-              </>
+              <CategorySection
+                setSelectTrain={(id, name) => {
+                  setSelectFactory(id);
+                  setSelectFactoryName(name || "");
+                  setSelectedValue("");
+                  setInventoryList([]);
+                }}
+                data={factoryData}
+              />
             }
           />
         </div>
 
-        {/* Second Div */}
         <div className="min-w-[25%] flex items-center justify-center">
           <BoardTitleSection
             title={`${selectFactoryName}`}
@@ -256,22 +265,21 @@ const ClientPage: React.FC<Props> = ({ inventory_overview, date }) => {
           />
         </div>
 
-        {/* Third Div */}
         <div className="min-w-[73%] grow flex items-center justify-center relative">
           <BoardTitleSection
             title={`${selectFactoryName} - ${selectedType}`}
             content={
               <InventoryTableList
                 data={inventoryList}
-                isLoading={isLoading}
+                isLoading={isLoadingState}
                 totalMoney={totalMoney}
               />
-            } // Pass totalMoney to InventoryTableList
+            }
           />
         </div>
       </SlideNavigationContainer>
     </div>
   );
-};
+}
 
 export default ClientPage;
