@@ -120,10 +120,6 @@ Other: board overflow
 總量數 7 台變動 加貨車
 可用數sum of(current_ready current_temp current_use)
 
-
 text dynamic size
 
-
 slow may cause by fetch twice 
-
-SWR loading lagging
