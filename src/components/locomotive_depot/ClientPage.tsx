@@ -20,7 +20,7 @@ import { useSearchParams } from "next/navigation";
 import CategorySection from "@/components/ui/accordionSection";
 import TrainListTable from "@/components/locomotive_depot/TrainListTable";
 
-const TrainPageContent: React.FC<FetcheGetSumStatusListData> = () => {
+const TrainPageContent: React.FC = () => {
   const [selectedLabel, setSelectedLabel] = useState<string | null>("全部");
   const [selectedArea, setSelectedArea] = useState<string | null>("全部機務段");
   const [maintenanceData, setMaintenanceData] = useState<any[]>([]);
