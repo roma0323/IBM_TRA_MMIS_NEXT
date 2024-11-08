@@ -17,7 +17,7 @@ export default function UseRateAreaChart({
   chartData = [],
 }: {
   styleTemplate: string;
-  chartData: Array<{ name: string; RATION: number }>;
+  chartData?: Array<{ name: string; RATION: number }>;
 }) {
   let color = getCarColor(styleTemplate);
 

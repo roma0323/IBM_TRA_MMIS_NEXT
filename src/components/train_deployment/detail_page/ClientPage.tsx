@@ -37,15 +37,18 @@ const DetailClientPage: React.FC<{ carcatalogId: string }> = ({
   const [maintenanceData, setMaintenanceData] = useState<any[]>([]);
   const [filteredTrainData, setFilteredTrainData] = useState<any[]>([]);
   const slideNavRef = useRef<SlideNavigationContainerRef>(null);
+
+  //fetch and loading 
   const fetcher = async () => {
       const carcatalog = carcatalogMap[carcatalogId] || "Unknown";
       const fetchedData = await getSumStatusListAndCarcatalogEqualParam(carcatalog);
     return fetchedData.data;
   };
-  const { data, error } = useSWR<FetcheGetSumStatusListDataInArray [] >("fetch trigger",fetcher);
+  const { data, error } = useSWR<FetcheGetSumStatusListDataInArray [] >( `fetch_${carcatalogId}`,fetcher);
 
   if (error) return <div>Failed to load</div>;
   if (!data) return <Loading />;
+  //fetch and loading 
   
 
 
@@ -113,7 +116,7 @@ const DetailClientPage: React.FC<{ carcatalogId: string }> = ({
                 key={data[0].carcatalog}
                 selectedTrainName={selectedTrainName}
                 carcatalog={data[0].carcatalog}
-                handleTrainClick={handleTrainTypeClick} // Pass the handleTrainClick function
+                handleTrainClick={handleTrainTypeClick} 
               />
             }
           />
@@ -123,7 +126,7 @@ const DetailClientPage: React.FC<{ carcatalogId: string }> = ({
 
         <div className="min-w-[72%]  h-full  relative ">
           <BoardTitleSection
-            title={`${data[0].carcatalog} - ${selectedTrainName}`} //${selectedArea} - ${selectedLabel}
+            title={`${data[0].carcatalog} - ${selectedTrainName}`} 
             content={
               <>
                 <TrainListTable
