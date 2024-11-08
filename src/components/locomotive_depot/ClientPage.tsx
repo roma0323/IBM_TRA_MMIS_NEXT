@@ -2,22 +2,20 @@
 
 import useSWR from "swr";
 import React, { useState, useRef } from "react";
-import SlideNavigationContainer, {
-  SlideNavigationContainerRef,
-} from "@/components/SlideNavigationContainer";
-import BoardTitleSection from "@/components/BoardTitleSection";
-import Loading from "@/components/Loading";
-import MaintenanceDetailSection from "@/components/locomotive_depot/MaintenanceDetailSection";
+import { useSearchParams } from "next/navigation";
+
 import {
   getSumStatusDetailListMultiplierZeor,
   getSumStatusDetailListMultiplierZeorDeptParamCartypeParamQtypeParam,
 } from "@/api/api";
-import {
-  FetcheGetSumStatusListData,
-  FetcheGetSumStatusList,
-} from "@/types/type";
-import { useSearchParams } from "next/navigation";
+import {FetcheGetSumStatusList,} from "@/types/type";
+
+import SlideNavigationContainer, {SlideNavigationContainerRef,} from "@/components/SlideNavigationContainer";
+import BoardTitleSection from "@/components/BoardTitleSection";
+import Loading from "@/components/Loading";
 import CategorySection from "@/components/ui/accordionSection";
+
+import MaintenanceDetailSection from "@/components/locomotive_depot/MaintenanceDetailSection";
 import TrainListTable from "@/components/locomotive_depot/TrainListTable";
 
 const TrainPageContent: React.FC = () => {

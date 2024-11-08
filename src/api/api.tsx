@@ -1,4 +1,4 @@
-import { FetcheGetSumStatusList } from "@/types/type"; // Update the import path as needed
+import { FetcheGetSumStatusList,FailListData } from "@/types/type"; // Update the import path as needed
 function dateFormat(date?: string) {
   let qdate = date ? new Date(date) : new Date();
   // Subtract one day from the date
@@ -239,7 +239,7 @@ export async function getFacRepairList() {
   return res.json();
 }
 
-export async function getSumFailListDaily(date?: string) {
+export async function getSumFailListDaily(date?: string) : Promise<FailListData>{
   //fetch 故障通報daily
 
   let formattedDate = dateFormat(date);
