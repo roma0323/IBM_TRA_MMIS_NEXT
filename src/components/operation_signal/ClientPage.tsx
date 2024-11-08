@@ -3,7 +3,10 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import useSWR from "swr";
+
+import Loading from "@/components/Loading";
 import BoardTitleSection from "../BoardTitleSection";
 import CategorySection from "@/components/ui/accordionSection";
 import { Button } from "@/components/ui/button";
@@ -41,8 +44,11 @@ const fetcher = async () => {
 };
 
 const ClientPage: React.FC = () => {
+  const searchParams = useSearchParams();
+  const date = searchParams?.get("date") || "";
+
   const { data: signals, error } = useSWR<Signal[]>(
-    "/api/operation_signal",
+    `operation_signal${date}`,
     fetcher
   );
   const [selectTrain, setSelectTrain] = useState<string[]>(["七堵機務段"]);
@@ -74,7 +80,7 @@ const ClientPage: React.FC = () => {
   }, [selectTrain, selectLight, signals, searchText]);
 
   if (error) return <div>Failed to load</div>;
-  if (!signals) return <div>Loading...</div>;
+  if (!signals) return <div><Loading /></div>;
 
   const handleSelectTrain = (id: string) => {
     setSearchText("");

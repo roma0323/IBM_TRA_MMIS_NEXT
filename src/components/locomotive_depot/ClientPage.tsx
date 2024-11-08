@@ -1,23 +1,41 @@
 "use client";
 
+import useSWR from "swr";
 import React, { useState, useRef } from "react";
 import SlideNavigationContainer, {
   SlideNavigationContainerRef,
 } from "@/components/SlideNavigationContainer";
 import BoardTitleSection from "@/components/BoardTitleSection";
+import Loading from "@/components/Loading";
 import MaintenanceDetailSection from "@/components/locomotive_depot/MaintenanceDetailSection";
-import { getSumStatusDetailListMultiplierZeorDeptParamCartypeParamQtypeParam } from "@/api/api";
-import { FetcheGetSumStatusListData } from "@/types/type"; // Update the import path as needed
+import {
+  getSumStatusDetailListMultiplierZeor,
+  getSumStatusDetailListMultiplierZeorDeptParamCartypeParamQtypeParam,
+} from "@/api/api";
+import {
+  FetcheGetSumStatusListData,
+  FetcheGetSumStatusList,
+} from "@/types/type";
 import { useSearchParams } from "next/navigation";
 import CategorySection from "@/components/ui/accordionSection";
 import TrainListTable from "@/components/locomotive_depot/TrainListTable";
 
-const TrainPageContent: React.FC<FetcheGetSumStatusListData> = ({ Data }) => {
+const TrainPageContent: React.FC<FetcheGetSumStatusListData> = () => {
   const [selectedLabel, setSelectedLabel] = useState<string | null>("全部");
   const [selectedArea, setSelectedArea] = useState<string | null>("全部機務段");
-  const [maintenanceData, setMaintenanceData] = useState<any[]>([]); // New state for maintenance data
+  const [maintenanceData, setMaintenanceData] = useState<any[]>([]);
   const searchParams = useSearchParams();
   const date = searchParams?.get("date") || "";
+
+  const fetcher = async () => {
+    const data = await getSumStatusDetailListMultiplierZeor(date);
+    return data;
+  };
+
+  const { data, error, isLoading } = useSWR<FetcheGetSumStatusList>(
+    `locomative${date}`,
+    fetcher
+  );
 
   const factoryData: { [key: string]: string[] } = [
     "全部機務段",
@@ -45,7 +63,7 @@ const TrainPageContent: React.FC<FetcheGetSumStatusListData> = ({ Data }) => {
     return acc;
   }, {});
 
-  const filteredTrainData = Data.filter((train) => {
+  const filteredTrainData = data?.data.filter((train) => {
     const areaMatches =
       selectedArea === "全部機務段" ||
       !selectedArea ||
@@ -56,7 +74,7 @@ const TrainPageContent: React.FC<FetcheGetSumStatusListData> = ({ Data }) => {
       train.carcatalog === selectedLabel;
 
     return areaMatches && labelMatches;
-  });
+  }) || [];
 
   const handleTrainClick = async (
     dept: string,
@@ -75,6 +93,8 @@ const TrainPageContent: React.FC<FetcheGetSumStatusListData> = ({ Data }) => {
   };
 
   const slideNavRef = useRef<SlideNavigationContainerRef>(null);
+  if (error) return <div>Failed to load</div>;
+  if (isLoading) return <div><Loading /></div>;
 
   return (
     <div className="h-full overflow-hidden">
@@ -95,7 +115,7 @@ const TrainPageContent: React.FC<FetcheGetSumStatusListData> = ({ Data }) => {
                     setSelectedLabel(id);
                     setSelectedArea(title);
                   }}
-                  data={factoryData} // Pass the factory data here
+                  data={factoryData}
                 />
               </>
             }
@@ -103,12 +123,12 @@ const TrainPageContent: React.FC<FetcheGetSumStatusListData> = ({ Data }) => {
         </div>
 
         {/* Second Div */}
-        <div className="min-w-[72%]  h-full  relative ">
+        <div className="min-w-[72%] h-full relative">
           <BoardTitleSection
             title={`${selectedArea} - ${selectedLabel}`}
             content={
               <>
-                <TrainListTable 
+                <TrainListTable
                   TrainDataInArray={filteredTrainData}
                   handleTrainClick={handleTrainClick}
                 />
