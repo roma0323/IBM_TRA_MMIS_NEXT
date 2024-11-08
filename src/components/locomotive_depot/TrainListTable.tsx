@@ -96,29 +96,7 @@ const TrainListTable: React.FC<TrainDataInArray> = ({ TrainDataInArray, handleTr
               )}
       </TableBody>
 
-      <TableBody>
-        {TrainDataInArray.map((item, itemIndex) => (
-          <TableRow  className="" key={itemIndex}>
-            <TableCell>{item.carcatalog}</TableCell>
-            <TableCell>{item.deptdesc}</TableCell>
-            <TableCell>{item.cartype}</TableCell>
-            <TableCell>{item.belongto}</TableCell>
-            <TableCell className={CanClickClassName} onClick={() => handleDivClick(item.dept, item.cartype, "borrowout")}>{item.borrowout}</TableCell>
-            <TableCell className={CanClickClassName} onClick={() => handleDivClick(item.dept, item.cartype, "current_temp")}>{item.current_temp}</TableCell>
-            <TableCell>{item.current_cnt}</TableCell>
-            <TableCell className={CanClickClassName} onClick={() => handleDivClick(item.dept, item.cartype, "current_use")}>{item.current_use}</TableCell>
-            <TableCell>{item.current_temp}</TableCell>
-            <TableCell>{item.current_ready}</TableCell>
-            <TableCell className={CanClickClassName} onClick={() => handleDivClick(item.dept, item.cartype, "maintain_w")}>{item.maintain_w}</TableCell>
-            <TableCell className={CanClickClassName} onClick={() => handleDivClick(item.dept, item.cartype, "maintain_sec")}>{item.maintain_sec}</TableCell>
-            <TableCell className={CanClickClassName} onClick={() => handleDivClick(item.dept, item.cartype, "maintain_fac")}>{item.maintain_fac}</TableCell>
-            <TableCell className={CanClickClassName} onClick={() => handleDivClick(item.dept, item.cartype, "oth_waitrep")}>{item.oth_waitrep}</TableCell>
-            <TableCell className={CanClickClassName} onClick={() => handleDivClick(item.dept, item.cartype, "oth_return")}>{item.oth_return}</TableCell>
-            <TableCell>{item.oth_stop}</TableCell>
-            <TableCell>{Number(item.availability.toFixed(2))}</TableCell>
-          </TableRow>
-        ))}
-      </TableBody>
+     
     </Table>
   );
 };
