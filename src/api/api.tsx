@@ -205,6 +205,8 @@ export async function getFacRepairYearPlan(date?: string) {
   );
   return res.json();
 }
+
+// data type :FacStatusList
 export async function getFacRepairListByMonth(date?: string) {
   //fetch 機廠檢修清單
   let formattedDate = dateFormat(date);

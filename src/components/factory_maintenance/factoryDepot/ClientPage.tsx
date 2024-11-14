@@ -1,14 +1,29 @@
 "use client";
 
 import React, { useState } from "react";
+import useSWR from "swr";
+import { useSearchParams } from "next/navigation";
+import { factorySumStatusOverall, factorySumStatus } from "@/types/type"; // Update the import path as needed
+import { getFacRepairList } from "@/api/api";
+
 import BoardTitleSection from "@/components/BoardTitleSection";
-import { factorySumStatusOverall } from "@/types/type"; // Update the import path as needed
 import CategorySection from "@/components/ui/accordionSection";
 import TrainListTable from "@/components/factory_maintenance/factoryDepot/TrainListTable";
 
-const TrainPageContent: React.FC<factorySumStatusOverall> = ({ Data }) => {
+const TrainPageContent: React.FC = () => {
   const [selectedLabel, setSelectedLabel] = useState<string | null>("全部");
   const [selectedArea, setSelectedArea] = useState<string | null>("全部機廠");
+
+  const searchParams = useSearchParams();
+  const date = searchParams?.get("date") || "";
+
+  const fetcher = async () => {
+    const data = await getFacRepairList();
+    return data.data;
+  };
+  const { data, error } = useSWR<factorySumStatus[]>(`feactory_depot_fetcher${date}`,fetcher);
+  if (error) return <p>Error loading data</p>;
+  if (!data) return <p>Loading...</p>;
 
   const factoryData: { [key: string]: string[] } = [
     "全部機廠",
@@ -30,7 +45,7 @@ const TrainPageContent: React.FC<factorySumStatusOverall> = ({ Data }) => {
     return acc;
   }, {});
 
-  const filteredTrainData = Data.filter((train) => {
+  const filteredTrainData = data.filter((train) => {
     const areaMatches =
       selectedArea === "全部機廠" ||
       !selectedArea ||

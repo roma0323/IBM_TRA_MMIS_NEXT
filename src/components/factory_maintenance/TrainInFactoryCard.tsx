@@ -15,7 +15,7 @@ interface Factory {
 }
 
 interface Props {
-  factory: Factory;
+  factory: any;
   currentMonthIndex: number;
   isActive: boolean;
   onToggle: () => void;

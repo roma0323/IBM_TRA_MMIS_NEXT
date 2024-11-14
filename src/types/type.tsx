@@ -91,6 +91,11 @@ export type factorySumStatusOverall = {
   Data: factorySumStatus[];
 };
 
+export type FacStatusList = {
+  data: factorySumStatus[];
+  carKpiCatalogcnt: any[];
+};
+
 export type FailListItem = {
   trains_no: string;
   cartype: string;

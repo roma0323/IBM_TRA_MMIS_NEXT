@@ -1,30 +1,50 @@
 "use client";
 
 import React, { useState, useRef } from "react";
+import useSWR from "swr";
+import { useSearchParams } from "next/navigation";
+import { getFacRepairListByMonth, getFacRepairYearPlan } from "@/api/api";
 import { TrainInFactoryCard } from "@/components/factory_maintenance/TrainInFactoryCard";
 import ComposedChartMonthly from "@/components/factory_maintenance/ComposedChartMonthly";
 import ComposedChartAccmulate from "@/components/factory_maintenance/ComposedChartAccmulate";
-import { factoryMaintenanceOverall } from "@/types/type";
+import { factorySumStatus } from "@/types/type";
 import BoardTitleSection from "@/components/BoardTitleSection";
 import SlideNavigationContainer, {
   SlideNavigationContainerRef,
 } from "@/components/SlideNavigationContainer";
+import getChartData from "@/components/factory_maintenance/ChartDataRefactor";
 
 const getCurrentMonthIndex = (): number => {
   const date = new Date();
   return date.getMonth(); // January is 0, February is 1, etc.
 };
 
-interface ClientPageProps extends factoryMaintenanceOverall {
-  listData: any[];
-}
-
-const ClientPage: React.FC<ClientPageProps> = ({ Data, listData }) => {
+const ClientPage: React.FC = () => {
   const [activeCardIndex, setActiveCardIndex] = useState<number | null>(null);
   const slideNavRef = useRef<SlideNavigationContainerRef>(null);
   const [selectFactory, setSelectFactory] = useState<string>("");
   const currentMonthIndex = getCurrentMonthIndex();
 
+  const searchParams = useSearchParams();
+  const date = searchParams?.get("date") || "";
+  const fetcher = async () => {
+    const [
+      ChartData,
+      listData,
+    ] = await Promise.all([
+      getFacRepairYearPlan(date),
+      getFacRepairListByMonth(date)
+    ]);
+    return {
+      ChartData,
+      listData,
+    };
+  };
+  const { data, error } = useSWR('fetchData', fetcher);
+  if (error) return <p>Error loading data</p>;
+  if (!data) return <p>Loading...</p>;
+
+  const refactorChartData = getChartData(data.ChartData);
   return (
     <div className="relative h-full  ">
       <SlideNavigationContainer
@@ -38,7 +58,7 @@ const ClientPage: React.FC<ClientPageProps> = ({ Data, listData }) => {
             title={`機廠檢修預覽`}
             content={
               <div className="flex flex-col mx-4">
-                {Data.map((factory, index) => (
+                {refactorChartData.map((factory, index) => (
                   <TrainInFactoryCard
                     key={index}
                     factory={factory}
@@ -63,7 +83,7 @@ const ClientPage: React.FC<ClientPageProps> = ({ Data, listData }) => {
             title={`${selectFactory}-檢修走勢`}
             content={
               <div className="size-full">
-                {Data.map(
+                {refactorChartData.map(
                   (chartData, index) =>
                     activeCardIndex === index && (
                       <div
@@ -71,10 +91,18 @@ const ClientPage: React.FC<ClientPageProps> = ({ Data, listData }) => {
                         className=" size-full flex flex-col py-8 items-center justify-between"
                       >
                         <div className="flex justify-center items-center w-full">
-                          <ComposedChartMonthly data={chartData.monthData} />
+                          <ComposedChartMonthly data={chartData.monthData.map(item => ({
+                            ...item,
+                            當月預計: Number(item.當月預計),
+                            當月達成: Number(item.當月達成),
+                          }))} />
                         </div>
                         <div className="flex justify-center items-center w-full">
-                          <ComposedChartAccmulate data={chartData.monthData} />
+                          <ComposedChartAccmulate data={chartData.monthData.map(item => ({
+                            ...item,
+                            累積預計: Number(item.累積預計),
+                            累積達成: Number(item.累積達成),
+                          }))} />
                         </div>
                       </div>
                     )
@@ -89,7 +117,7 @@ const ClientPage: React.FC<ClientPageProps> = ({ Data, listData }) => {
             title={`${selectFactory}-該月檢修清單`}
             content={
               <div className="flex flex-col size-full">
-                {listData.map((attr, index) =>
+                {data.listData.data.map((attr: factorySumStatus, index:number) =>
                   selectFactory === "全部機廠" ||
                   attr.deptdesc.includes(selectFactory) ? (
                     <div

@@ -15,7 +15,7 @@ type ChartData = {
   name: string;
   累積預計: number;
   累積達成: number;
-  累積差距: number;
+  累積差距?: number;
 };
 
 type ExampleProps = {

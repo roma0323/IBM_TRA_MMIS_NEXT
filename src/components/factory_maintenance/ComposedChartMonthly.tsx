@@ -15,7 +15,7 @@ type ChartData = {
   name: string;
   當月預計: number;
   當月達成: number;
-  當月差距: number;
+  當月差距?: number;
 };
 
 type ExampleProps = {
@@ -23,8 +23,7 @@ type ExampleProps = {
 };
 
 export default class Example extends PureComponent<ExampleProps> {
-  static demoUrl =
-    "https://codesandbox.io/p/sandbox/simple-composed-chart-lyz572";
+  
 
   render() {
     const { data } = this.props;
