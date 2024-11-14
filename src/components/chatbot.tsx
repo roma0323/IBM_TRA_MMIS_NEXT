@@ -17,7 +17,6 @@ const Chatbot = () => {
   const toggleChatbot = () => {
     setIsOpen(!isOpen);
   };
-  const basePath = process.env.NEXT_PUBLIC_BASEPATH || '';
   return (
     <div>
       <button
@@ -25,7 +24,7 @@ const Chatbot = () => {
         className="fixed bottom-4 right-4 hover:scale-105"
       >
         <Image
-          src={`${basePath}/chatbot-icon.png`}
+          src={`${process.env.BASEPATH}/chatbot-icon.png`}
           alt="Chatbot Icon"
           width={64}
           height={64}
@@ -87,7 +86,7 @@ const Chatbot = () => {
                   <Image
                     className="absolute w-[37px] h-7 top-[75px] left-[202px]"
                     alt="Rectangle"
-                    src={`${basePath}/profile.png`}
+                    src={`${process.env.BASEPATH}/profile.png`}
                     width={37}
                     height={28} // Assuming height of 7rem translates to 28px
                   />{" "}
@@ -124,21 +123,21 @@ const Chatbot = () => {
                     <Image
                       className="relative"
                       alt="Vuesax outline"
-                      src={`${basePath}/clipboard-text.svg`}
+                      src={`${process.env.BASEPATH}/clipboard-text.svg`}
                       width={13.23}
                       height={13.23}
                     />{" "}
                     <Image
                       className="relative"
                       alt="Vuesax linear like"
-                      src={`${basePath}/like.svg`}
+                      src={`${process.env.BASEPATH}/like.svg`}
                       width={13.23}
                       height={13.23}
                     />
                     <Image
                       className="relative"
                       alt="Vuesax linear"
-                      src={`${basePath}/dislike.svg`}
+                      src={`${process.env.BASEPATH}/dislike.svg`}
                       width={13.23}
                       height={13.23}
                     />{" "}
@@ -148,7 +147,7 @@ const Chatbot = () => {
                   <Image
                     className="absolute top-1.5 left-[7px]"
                     alt="Wapp GPT logo"
-                    src={`${basePath}/chatbot-icon.png`}
+                    src={`${process.env.BASEPATH}/chatbot-icon.png`}
                     width={27}
                     height={27}
                   />
@@ -165,7 +164,7 @@ const Chatbot = () => {
                   <Image
                     className="absolute w-[37px] h-7 top-[75px] left-[202px]"
                     alt="Rectangle"
-                    src={`${basePath}/profile.png`}
+                    src={`${process.env.BASEPATH}/profile.png`}
                     width={37}
                     height={28} // Assuming height of 7rem translates to 28px
                   />{" "}
@@ -205,7 +204,7 @@ const Chatbot = () => {
                 <Image
                   className="relative"
                   alt="Vuesax linear send-icon"
-                  src={`${basePath}/send-icon.svg`}
+                  src={`${process.env.BASEPATH}/send-icon.svg`}
                   width={19}
                   height={19}
                 />{" "}

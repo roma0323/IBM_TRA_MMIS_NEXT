@@ -1,13 +1,9 @@
 import "@/styles/globals.css";
-import { Inter as FontSans } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import { cn } from "@/lib/utils";
 import Chatbot from "@/components/chatbot"; // Adjust this import according to your project structure
 
-const fontSans = FontSans({
-  subsets: ["latin"],
-  variable: "--font-sans",
-});
+
 
 export default function RootLayout({
   children,
@@ -18,8 +14,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={cn(
-          "h-dvh w-dvw  font-sans bg-background text-foreground",
-          fontSans.variable,
+          "h-dvh w-dvw  bg-background text-foreground",
         )}
       >
         <ThemeProvider

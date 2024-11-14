@@ -105,26 +105,19 @@ Next.js tips:
         use context for passing value through deep layer
         fetch same data different place(autually only fetch once)
         use promise : if fetch two source seqenail  would cause waterfall
-        suspense  :
-                - suspense must one layer higher then it work
-                - with key={searchParams}
-                - 以連結到的那層往上看一層有沒有suspense  （往下看尚未實驗）
-                - export default function Page() {return (<Suspense fallback={<div>Loading...</div>}></Suspense>);}
-                
 CSS & UI tips:
         css devide-y-2 or space-y-2 replace margin bottom
         cn()  to resue the board title
-Other: board overflow 
+Other: board overflow
 
-
-總量數 7 台變動 加貨車
-可用數sum of(current_ready current_temp current_use)
+總量數 7 台變動 加貨車   客車總量數不知道怎來.....
+可用數sum of(current_ready current_temp current_use) 貨車客車不符合此規則....
+make sure data same as old version
 
 text dynamic size, text font
 
-slow may cause by fetch twice 
+slow may cause by fetch twice
 
-calendar correspoding with date
+calendar refresh, correspoding with date
 
-make sure data same as old version
 

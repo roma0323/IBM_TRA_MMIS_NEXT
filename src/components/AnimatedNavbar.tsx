@@ -4,43 +4,46 @@ import React, { Suspense } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
+const basePath = process.env.NEXT_PUBLIC_BASEPATH || "";
+
+
 const Navbar: React.FC = () => {
  
 
   const navLinks = [
     {
-      href: `${process.env.BASEPATH}/navbarpages/train_deployment/all_overview`,
+      href: `${basePath}/navbarpages/train_deployment/all_overview`,
       label: "車輛配置",
       startsWith: "/navbarpages/train_deployment",
       
     },
     {
-      href: `${process.env.BASEPATH}/navbarpages/locomotive_depot`,
+      href: `${basePath}/navbarpages/locomotive_depot`,
       label: "機務段配置",
       
     },
     {
-      href: `${process.env.BASEPATH}/navbarpages/factory_maintenance/factory_overview`,
+      href: `${basePath}/navbarpages/factory_maintenance/factory_overview`,
       label: "機廠檢修",
      
     },
     {
-      href: `${process.env.BASEPATH}/navbarpages/fault_notification/daily_report`,
+      href: `${basePath}/navbarpages/fault_notification/daily_report`,
       label: "故障通報",
       
     },
     {
-      href: `${process.env.BASEPATH}/navbarpages/maintenance_materials`,
+      href: `${basePath}/navbarpages/maintenance_materials`,
       label: "庫存績效",
       
     },
     {
-      href: `${process.env.BASEPATH}/navbarpages/car_type_spec`,
+      href: `${basePath}/navbarpages/car_type_spec`,
       label: "車輛諸元",
 
     },
     {
-      href: `${process.env.BASEPATH}/navbarpages/operation_signal`,
+      href: `${basePath}/navbarpages/operation_signal`,
       label: "營運燈號",
     },
   ];
@@ -51,7 +54,7 @@ const Navbar: React.FC = () => {
         <div className="flex items-center">
         <Link
             href={{
-              pathname: `/${process.env.BASEPATH}/`,
+              pathname: `/${basePath}/`,
             }}
           >
             <Image
