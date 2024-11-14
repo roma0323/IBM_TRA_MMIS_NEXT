@@ -238,3 +238,16 @@ export type Signal = {
   EQ2_C: string;
   DESC?: string;
 };
+
+//annual report data refactor 
+export type AggregatedData =   {
+  failtype: string;
+  total: number;
+  duty_num: number;
+  atp_num: number;
+  kpicartypeCounts: { [key: string]: number };
+  monthlyData: { [month: string]: { [kpicartype: string]: number } };
+  monthlyDataBykpicartype: {
+    [month: string]: { [kpicartype: string]: number };
+  };
+}

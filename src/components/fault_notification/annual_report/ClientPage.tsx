@@ -6,25 +6,50 @@ import BoardTitleSection from "@/components/BoardTitleSection";
 import GroupBarChart from "@/components/fault_notification/annual_report/GroupBarChart";
 import PieChart from "@/components/fault_notification/annual_report/PieChart";
 import { DataCard } from "@/components/train_deployment/DataCard";
-interface AggregatedData {
-  failtype: string;
-  total: number;
-  duty_num: number;
-  atp_num: number;
-  kpicartypeCounts: { [key: string]: number }; // Added kpicartypeCounts
-  monthlyData: { [month: string]: { [kpicartype: string]: number } };
-  monthlyDataBykpicartype: {
-    [month: string]: { [kpicartype: string]: number };
-  }; // Added monthlyDataBykpicartype
-}
+import refactorData  from "@/components/fault_notification/annual_report/refactorData";
+import { useSearchParams } from "next/navigation";
+import useSWR from "swr";
+import { getSumFailYearType } from "@/api/api";
 
-const ClientPage: React.FC<{ aggregatedData: AggregatedData[] }> = ({
-  aggregatedData,
-}) => {
+function MyComponent()  {
   const [activeCardIndex, setActiveCardIndex] = useState<number | null>(0);
 
+  const searchParams = useSearchParams();
+  const date = searchParams?.get("date") || "";
+  const fetcher = async () => {
+    const [
+      getSumFailYearTypeA,
+      getSumFailYearTypeB,
+      getSumFailYearTypeC,
+    ] = await Promise.all([
+      getSumFailYearType(date, "A"),
+      getSumFailYearType(date, "B"),
+      getSumFailYearType(date, "C")
+    ]);
+    return {
+      getSumFailYearTypeA,
+      getSumFailYearTypeB,
+      getSumFailYearTypeC,
+    };
+  };
+
+  const { data, error } = useSWR('fetchData', fetcher);
+  if (error) return <p>Error loading data</p>;
+  if (!data) return <p>Loading...</p>;
+
+  const getSumFailYearTypeAll = data.getSumFailYearTypeA
+    .concat(data.getSumFailYearTypeB)
+    .concat(data.getSumFailYearTypeC);
+
+
+  const aggregatedDataA = refactorData(data.getSumFailYearTypeA, "A");
+  const aggregatedDataB = refactorData(data.getSumFailYearTypeB, "B");
+  const aggregatedDataC = refactorData(data.getSumFailYearTypeC, "C");
+  const aggregatedDataAll = refactorData(getSumFailYearTypeAll, "All");
+  
+  const aggregatedData = [aggregatedDataA, aggregatedDataB, aggregatedDataC, aggregatedDataAll];
   const pieChartData =
-    activeCardIndex !== null
+    activeCardIndex !== null 
       ? Object.entries(aggregatedData[activeCardIndex].kpicartypeCounts).map(
           ([name, value]) => ({ name, value })
         )
@@ -91,4 +116,4 @@ const ClientPage: React.FC<{ aggregatedData: AggregatedData[] }> = ({
   );
 };
 
-export default ClientPage;
+export default MyComponent;
