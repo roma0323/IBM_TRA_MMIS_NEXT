@@ -114,7 +114,7 @@ Other: board overflow
 可用數sum of(current_ready current_temp current_use) 貨車客車不符合此規則....
 make sure data same as old version
 
-text dynamic size, text font
+text dynamic size
 
 slow may cause by fetch twice
 
