@@ -1,15 +1,19 @@
 "use client";
 
 import React, { useState } from "react";
+import { useSearchParams } from "next/navigation";
+import useSWR from "swr";
+import { getSumFailYearType } from "@/api/api";
+
 import { ReportLevelCard } from "@/components/fault_notification/annual_report/ReportLevelCard";
+import Loading from "@/components/Loading"
 import BoardTitleSection from "@/components/BoardTitleSection";
+
 import GroupBarChart from "@/components/fault_notification/annual_report/GroupBarChart";
 import PieChart from "@/components/fault_notification/annual_report/PieChart";
 import { DataCard } from "@/components/train_deployment/DataCard";
 import refactorData  from "@/components/fault_notification/annual_report/refactorData";
-import { useSearchParams } from "next/navigation";
-import useSWR from "swr";
-import { getSumFailYearType } from "@/api/api";
+
 
 function MyComponent()  {
   const [activeCardIndex, setActiveCardIndex] = useState<number | null>(0);
@@ -35,11 +39,12 @@ function MyComponent()  {
 
   const { data, error } = useSWR('fetchData', fetcher);
   if (error) return <p>Error loading data</p>;
-  if (!data) return <p>Loading...</p>;
+  if (!data) return <p><Loading /></p>;
 
-  const getSumFailYearTypeAll = data.getSumFailYearTypeA
-    .concat(data.getSumFailYearTypeB)
-    .concat(data.getSumFailYearTypeC);
+  const getSumFailYearTypeAll = (data.getSumFailYearTypeA || [])
+  .concat(data.getSumFailYearTypeB || [])
+  .concat(data.getSumFailYearTypeC || []);
+
 
 
   const aggregatedDataA = refactorData(data.getSumFailYearTypeA, "A");

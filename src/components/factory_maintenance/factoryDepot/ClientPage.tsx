@@ -3,9 +3,10 @@
 import React, { useState } from "react";
 import useSWR from "swr";
 import { useSearchParams } from "next/navigation";
-import { factorySumStatusOverall, factorySumStatus } from "@/types/type"; // Update the import path as needed
+import {  factorySumStatus } from "@/types/type"; // Update the import path as needed
 import { getFacRepairList } from "@/api/api";
 
+import Loading from "@/components/Loading"
 import BoardTitleSection from "@/components/BoardTitleSection";
 import CategorySection from "@/components/ui/accordionSection";
 import TrainListTable from "@/components/factory_maintenance/factoryDepot/TrainListTable";
@@ -23,7 +24,7 @@ const TrainPageContent: React.FC = () => {
   };
   const { data, error } = useSWR<factorySumStatus[]>(`feactory_depot_fetcher${date}`,fetcher);
   if (error) return <p>Error loading data</p>;
-  if (!data) return <p>Loading...</p>;
+  if (!data) return <p><Loading /></p>;
 
   const factoryData: { [key: string]: string[] } = [
     "全部機廠",

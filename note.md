@@ -120,8 +120,11 @@ Other: board overflow
 總量數 7 台變動 加貨車
 可用數sum of(current_ready current_temp current_use)
 
-text dynamic size
+text dynamic size, text font
 
 slow may cause by fetch twice 
 
 calendar correspoding with date
+
+make sure data same as old version
+

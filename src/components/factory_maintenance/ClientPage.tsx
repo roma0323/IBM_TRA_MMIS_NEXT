@@ -4,14 +4,16 @@ import React, { useState, useRef } from "react";
 import useSWR from "swr";
 import { useSearchParams } from "next/navigation";
 import { getFacRepairListByMonth, getFacRepairYearPlan } from "@/api/api";
-import { TrainInFactoryCard } from "@/components/factory_maintenance/TrainInFactoryCard";
-import ComposedChartMonthly from "@/components/factory_maintenance/ComposedChartMonthly";
-import ComposedChartAccmulate from "@/components/factory_maintenance/ComposedChartAccmulate";
 import { factorySumStatus } from "@/types/type";
+import Loading from "@/components/Loading"
 import BoardTitleSection from "@/components/BoardTitleSection";
 import SlideNavigationContainer, {
   SlideNavigationContainerRef,
 } from "@/components/SlideNavigationContainer";
+
+import { TrainInFactoryCard } from "@/components/factory_maintenance/TrainInFactoryCard";
+import ComposedChartMonthly from "@/components/factory_maintenance/ComposedChartMonthly";
+import ComposedChartAccmulate from "@/components/factory_maintenance/ComposedChartAccmulate";
 import getChartData from "@/components/factory_maintenance/ChartDataRefactor";
 
 const getCurrentMonthIndex = (): number => {
@@ -42,7 +44,7 @@ const ClientPage: React.FC = () => {
   };
   const { data, error } = useSWR('fetchData', fetcher);
   if (error) return <p>Error loading data</p>;
-  if (!data) return <p>Loading...</p>;
+  if (!data) return <p><Loading /></p>;
 
   const refactorChartData = getChartData(data.ChartData);
   return (
