@@ -114,3 +114,5 @@ text dynamic size-> percentage 調整大小 顯示器像素密度高 就小
 slow may cause by fetch twice
 
 make sure data same as old version
+
+annual static dploy sometime error , dont know why so far
