@@ -112,11 +112,12 @@ Other: board overflow
 
 
 
-總量數 7 台變動 加貨車   客車總量數不知道怎來.....
-可用數sum of(current_ready current_temp current_use) 貨車客車不符合此規則....
-make sure data same as old version
+總量數 7 台變動 加貨車  
+可用數sum of(current_ready current_temp current_use) 貨車不符合此規則....
+客車可以了！
 
-text dynamic size
+text dynamic size-> percentage 調整大小 顯示器像素密度高 就小
 
 slow may cause by fetch twice
 
+make sure data same as old version

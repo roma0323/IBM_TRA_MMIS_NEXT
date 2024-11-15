@@ -36,17 +36,17 @@ export const OverviewCard = ({
   chartData?: Array<{ name: string; RATION: number }>;
 }): JSX.Element => {
   return (
-    <div className="rounded-lg hover:shadow-lg">
+    <div className="rounded-lg hover:shadow-lg size-full">
       <BoardTitleSection
         title={`${Name}`}
         content={
-          <div className="size-full flex flex-col">
-            <div className="flex justify-around w-full py-2">
-              <DataCard text={Data.current_ready.toString()} text1="可用數" />
+          <div className="size-full flex flex-col justify-around " >
+            <div className="flex justify-around w-full py-2 ">
+              <DataCard text={(Data.current_ready+Data.current_temp+Data.current_use).toString()} text1="可用數" />
               <DataCard text={Data.current_cnt.toString()} text1="總輛數" />
               <DataCard
                 text={`${Math.round(
-                  (Data.current_ready / Data.current_cnt) * 100
+                  ((Data.current_ready+Data.current_temp+Data.current_use) / Data.current_cnt) * 100
                 ).toString()}%`}
                 text1="可用率"
               />

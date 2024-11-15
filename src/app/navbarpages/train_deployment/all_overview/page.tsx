@@ -102,14 +102,17 @@ export default function Page() {
 
   return (
     <main className="grow bg-secondary-background overflow-hidden relative">
-      <div className="h-full p-3 relative overflow-auto">
-        <div className="flex flex-col h-full justify-around">
-          <div className="h-1/2 w-full">
+      <div className="size-full p-6 relative overflow-auto">
+
+        <div className="flex flex-col flex-1 size-full gap-6 ">
+
+          <div className="grow">
             <BigOverviewCard Name="全局" Data={dataByCarCatalog["全局"]} />
           </div>
 
-          <div className="grid grid-cols-4 gap-4 h-2/5 relative">
+          <div className="grid grid-cols-4 gap-4 grow  relative">
             <Link
+             
               href={{
                 pathname: `${basePath}/navbarpages/train_deployment/power_overview`,
               }}

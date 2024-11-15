@@ -15,7 +15,7 @@ export async function getSumStatusListAndsumtotalEqualone( //fetch 首頁所有�
   
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getSumStatusList&qdate=${formattedDate}&sumtotal=1`,
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getSumStatusList&qdate=${formattedDate}&sumtotal=1&multiplier=1&normaltrain=1`,
     {
       method: "POST",
       headers: {

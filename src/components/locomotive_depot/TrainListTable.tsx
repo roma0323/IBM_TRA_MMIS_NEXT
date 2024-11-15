@@ -49,8 +49,8 @@ const TrainListTable: React.FC<TrainDataInArray> = ({ TrainDataInArray, handleTr
           <TableHead>機務段</TableHead>
           <TableHead>型號</TableHead>
           <TableHead>配置</TableHead>
-          <TableHead>借出</TableHead>
           <TableHead>借入</TableHead>
+          <TableHead>借出</TableHead>
           <TableHead>現有</TableHead>
           <TableHead>定期</TableHead>
           <TableHead>臨時</TableHead>
@@ -72,8 +72,8 @@ const TrainListTable: React.FC<TrainDataInArray> = ({ TrainDataInArray, handleTr
                     <TableCell>{item.deptdesc}</TableCell>
                     <TableCell>{item.cartype}</TableCell>
                     <TableCell>{item.belongto}</TableCell>
+                    <TableCell className={CanClickClassName} onClick={() => handleDivClick(item.dept, item.cartype, "borrowin")}>{item.borrowin}</TableCell>
                     <TableCell className={CanClickClassName} onClick={() => handleDivClick(item.dept, item.cartype, "borrowout")}>{item.borrowout}</TableCell>
-                    <TableCell className={CanClickClassName} onClick={() => handleDivClick(item.dept, item.cartype, "current_temp")}>{item.current_temp}</TableCell>
                     <TableCell>{item.current_cnt}</TableCell>
                     <TableCell className={CanClickClassName} onClick={() => handleDivClick(item.dept, item.cartype, "current_use")}>{item.current_use}</TableCell>
                     <TableCell>{item.current_temp}</TableCell>
@@ -83,8 +83,8 @@ const TrainListTable: React.FC<TrainDataInArray> = ({ TrainDataInArray, handleTr
                     <TableCell className={CanClickClassName} onClick={() => handleDivClick(item.dept, item.cartype, "maintain_fac")}>{item.maintain_fac}</TableCell>
                     <TableCell className={CanClickClassName} onClick={() => handleDivClick(item.dept, item.cartype, "oth_waitrep")}>{item.oth_waitrep}</TableCell>
                     <TableCell className={CanClickClassName} onClick={() => handleDivClick(item.dept, item.cartype, "oth_return")}>{item.oth_return}</TableCell>
-                    <TableCell>{item.oth_stop}</TableCell>
-                    <TableCell>{Number(item.availability.toFixed(2))}</TableCell>
+                    <TableCell className={CanClickClassName} onClick={() => handleDivClick(item.dept, item.cartype, "oth_stop")}>{item.oth_stop}</TableCell>
+                    <TableCell>{Number(item.availability.toFixed(2))*100}%</TableCell>
                   </TableRow>
                 ))
               ) : (

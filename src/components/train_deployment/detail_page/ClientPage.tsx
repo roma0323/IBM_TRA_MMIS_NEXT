@@ -1,6 +1,11 @@
 "use client";
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import useSWR from "swr";
+
+
+import { getSumStatusListAndMultiplierEqualZeorCarcatalogEqualParamCartypeEqualTrainname,getSumStatusDetailListMultiplierZeorDeptParamCartypeParamQtypeParam,getSumStatusListEq3Param,getSumStatusListAndsumtotalEqualone } from "@/api/api";
+import { useSearchParams } from "next/navigation";
+import { FetcheGetSumStatusListDataInArray } from "@/types/type"; 
 
 import BoardTitleSection from "@/components/BoardTitleSection";
 import Loading from "@/components/Loading";
@@ -13,11 +18,7 @@ import SlideNavigationContainer, {
   SlideNavigationContainerRef,
 } from "@/components/SlideNavigationContainer";
 
-import { getSumStatusListAndMultiplierEqualZeorCarcatalogEqualParamCartypeEqualTrainname } from "@/api/api";
-import { getSumStatusDetailListMultiplierZeorDeptParamCartypeParamQtypeParam } from "@/api/api";
-import { getSumStatusListEq3Param } from "@/api/api";
-import { getSumStatusListAndCarcatalogEqualParam } from "@/api/api";
-import { FetcheGetSumStatusListDataInArray } from "@/types/type"; // Update the import path as needed
+
 
 const carcatalogMap: { [key: string]: string } = {
   intercity_train: "城際列車",
@@ -37,23 +38,36 @@ const DetailClientPage: React.FC<{ carcatalogId: string }> = ({
   const [maintenanceData, setMaintenanceData] = useState<any[]>([]);
   const [filteredTrainData, setFilteredTrainData] = useState<any[]>([]);
   const slideNavRef = useRef<SlideNavigationContainerRef>(null);
+  const urlParams = useSearchParams();
+  const date = urlParams ? urlParams.get("date") || "" : "";
+  const carcatalog = carcatalogMap[carcatalogId] || "Unknown";
 
-  //fetch and loading 
+  //fetch and loading
   const fetcher = async () => {
-      const carcatalog = carcatalogMap[carcatalogId] || "Unknown";
-      const fetchedData = await getSumStatusListAndCarcatalogEqualParam(carcatalog);
+    const fetchedData = await getSumStatusListAndsumtotalEqualone(date);
+    console.log(fetchedData.data,'fetchedData.data')
+    console.log(fetchedData.data[0],'fetchedData.data')
     return fetchedData.data;
   };
-  const { data, error } = useSWR<FetcheGetSumStatusListDataInArray [] >( `fetch_${carcatalogId}`,fetcher);
+  const { data, error } = useSWR<FetcheGetSumStatusListDataInArray[]>(
+    `fetch_${carcatalogId}`,
+    fetcher
+  );
 
   if (error) return <div>Failed to load</div>;
   if (!data) return <Loading />;
-  //fetch and loading 
-  
+  //fetch and loading
 
-
-  const cntSum = data.reduce((acc, item) => acc + item.current_cnt, 0);
-  const readySum = data.reduce((acc, item) => acc + item.current_ready, 0);
+  const cntSum = data
+    .filter((item) => item.carcatalog === carcatalog)
+    .reduce((sum, item) => sum + item.current_cnt, 0);
+  const readySum = data
+    .filter((item) => item.carcatalog === carcatalog)
+    .reduce(
+      (sum, item) =>
+        sum + item.current_ready + item.current_temp + item.current_use,
+      0
+    );
 
   const handleTrainTypeClick = async (trainName: string) => {
     if (!slideNavRef.current?.canMoveLeft) {
@@ -61,12 +75,12 @@ const DetailClientPage: React.FC<{ carcatalogId: string }> = ({
     }
     setSelectedTrainName(trainName);
     let fetchedData;
-    if (data[0].carcatalog === "客車") {
+    if (carcatalog === "客車") {
       fetchedData = await getSumStatusListEq3Param(trainName);
     } else {
       fetchedData =
         await getSumStatusListAndMultiplierEqualZeorCarcatalogEqualParamCartypeEqualTrainname(
-          data[0].carcatalog,
+          carcatalog,
           trainName
         );
     }
@@ -91,7 +105,6 @@ const DetailClientPage: React.FC<{ carcatalogId: string }> = ({
 
   return (
     <div className=" h-full   overflow-hidden">
-      
       <SlideNavigationContainer
         ref={slideNavRef}
         totalSlides={5}
@@ -110,13 +123,13 @@ const DetailClientPage: React.FC<{ carcatalogId: string }> = ({
         {/* second Div */}
         <div className="min-w-[25%] overflow-hidden relative">
           <BoardTitleSection
-            title={`${data[0].carcatalog} - 車種分配資訊`}
+            title={`${carcatalog} - 車種分配資訊`}
             content={
               <TrainCategorySection
-                key={data[0].carcatalog}
+                key={carcatalog}
                 selectedTrainName={selectedTrainName}
-                carcatalog={data[0].carcatalog}
-                handleTrainClick={handleTrainTypeClick} 
+                carcatalog={carcatalog}
+                handleTrainClick={handleTrainTypeClick}
               />
             }
           />
@@ -126,7 +139,7 @@ const DetailClientPage: React.FC<{ carcatalogId: string }> = ({
 
         <div className="min-w-[72%]  h-full  relative ">
           <BoardTitleSection
-            title={`${data[0].carcatalog} - ${selectedTrainName}`} 
+            title={`${carcatalog} - ${selectedTrainName}`}
             content={
               <>
                 <TrainListTable
@@ -139,9 +152,8 @@ const DetailClientPage: React.FC<{ carcatalogId: string }> = ({
         </div>
 
         {/* fourth Div */}
-      <MaintenanceDetailSection maintenanceData={maintenanceData} />
+        <MaintenanceDetailSection maintenanceData={maintenanceData} />
       </SlideNavigationContainer>
-      
     </div>
   );
 };
