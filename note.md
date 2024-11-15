@@ -110,6 +110,8 @@ CSS & UI tips:
         cn()  to resue the board title
 Other: board overflow
 
+
+
 總量數 7 台變動 加貨車   客車總量數不知道怎來.....
 可用數sum of(current_ready current_temp current_use) 貨車客車不符合此規則....
 make sure data same as old version
@@ -118,4 +120,3 @@ text dynamic size
 
 slow may cause by fetch twice
 
-tooltip duration
