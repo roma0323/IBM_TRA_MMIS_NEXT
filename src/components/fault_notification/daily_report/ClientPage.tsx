@@ -39,11 +39,17 @@ const ClientPage: React.FC = () => {
   const [activeCardIndex, setActiveCardIndex] = useState<number | null>(0);
   const [selectFactory, setSelectFactory] = useState<string>("A");
 
-  //fetch data
+  //report fetch is current day
   const searchParams = useSearchParams();
   const date = searchParams?.get("date") || "";
+  let qdate = date ? new Date(date) : new Date();
+  // Subtract one day from the date
+  qdate.setDate(qdate.getDate() + 1);
+  const formattedDate = qdate.toISOString().split("T")[0];
+  
+
   const fetcher = async () => {
-    const FailListDailyData = await getSumFailListDaily(date);
+    const FailListDailyData = await getSumFailListDaily(formattedDate);
     return FailListDailyData;
   };
   const { data: FailListDailyData, error, isLoading } = useSWR<FailListData>(`fault${date}`, fetcher);

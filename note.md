@@ -69,6 +69,7 @@ http://tra.webtw.xyz:8888/maximo/zz_data?method=getSumStatusList&qdate=2024-08-0
 
 ＡＴＰ圖表需按照月份變更
 
+
 http://tra.webtw.xyz:8888/maximo/zz_data?method=getInvMountList&year=${yearString}&month=${month}&dept=${dept}&type=${type}`,
 1.新增percentage 
 2.整合sum_invbal_mount,sum_issue_mount & curbal,quantity
@@ -100,16 +101,8 @@ export type InventoryListIssue = {
 };
 
 ----------------------------------
-
-Next.js tips:
-        use context for passing value through deep layer
-        fetch same data different place(autually only fetch once)
-        use promise : if fetch two source seqenail  would cause waterfall
-CSS & UI tips:
-        css devide-y-2 or space-y-2 replace margin bottom
-        cn()  to resue the board title
-Other: board overflow
-
+page 車輛諸元
+動力連續定額(HP) ?????
 
 
 總量數 7 台變動 加貨車  
