@@ -11,7 +11,6 @@ import { OverviewCard } from "@/components/train_deployment/OverviewCard";
 import { BigOverviewCard } from "@/components/train_deployment/BigOverviewCard";
 import Loading from "@/components/Loading";
 
-const basePath = process.env.NEXT_PUBLIC_BASEPATH || "";
 
 // RSTA 客車 RSTL 動力車 RSTF RSTP 貨車 USUALFLAG 常用
 
@@ -114,7 +113,7 @@ export default function Page() {
             <Link
              
               href={{
-                pathname: `${basePath}/navbarpages/train_deployment/power_overview`,
+                pathname: `${process.env.BASEPATH}/navbarpages/train_deployment/power_overview`,
               }}
             >
               <OverviewCard
@@ -126,7 +125,7 @@ export default function Page() {
 
             <Link
               href={{
-                pathname: `${basePath}/navbarpages/train_deployment/certain_train/passenger_car`,
+                pathname: `${process.env.BASEPATH}/navbarpages/train_deployment/certain_train/passenger_car`,
               }}
             >
               <OverviewCard
@@ -137,7 +136,7 @@ export default function Page() {
             </Link>
             <Link
               href={{
-                pathname: `${basePath}/navbarpages/train_deployment/certain_train/freight_car`,
+                pathname: `${process.env.BASEPATH}/navbarpages/train_deployment/certain_train/freight_car`,
               }}
             >
               <OverviewCard
@@ -148,7 +147,7 @@ export default function Page() {
             </Link>
             <Link
               href={{
-                pathname: `${basePath}/navbarpages/train_deployment/unusual_overview`,
+                pathname: `${process.env.BASEPATH}/navbarpages/train_deployment/unusual_overview`,
               }}
             >
               <OverviewCard

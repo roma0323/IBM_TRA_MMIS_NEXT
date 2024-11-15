@@ -11,7 +11,6 @@ import { OverviewCard } from "@/components/train_deployment/OverviewCard";
 import { BigOverviewCard } from "@/components/train_deployment/BigOverviewCard";
 import Loading from "@/components/Loading";
 
-const basePath = process.env.NEXT_PUBLIC_BASEPATH || "";
 
 export default function Page() {
   const urlParams = useSearchParams();
@@ -42,7 +41,7 @@ export default function Page() {
           <div className="grid grid-cols-3   gap-4 relative">
             <Link
               href={{
-                pathname: `${basePath}/navbarpages/train_deployment/certain_train/intercity_train`,
+                pathname: `${process.env.BASEPATH}/navbarpages/train_deployment/certain_train/intercity_train`,
               }}
             >
               <OverviewCard
@@ -52,7 +51,7 @@ export default function Page() {
             </Link>
             <Link
               href={{
-                pathname: `${basePath}/navbarpages/train_deployment/certain_train/commuter_train`,
+                pathname: `${process.env.BASEPATH}/navbarpages/train_deployment/certain_train/commuter_train`,
               }}
             >
               <OverviewCard
@@ -62,7 +61,7 @@ export default function Page() {
             </Link>
             <Link
               href={{
-                pathname: `${basePath}/navbarpages/train_deployment/certain_train/electric_locomotive`,
+                pathname: `${process.env.BASEPATH}/navbarpages/train_deployment/certain_train/electric_locomotive`,
               }}
             >
               <OverviewCard
@@ -72,7 +71,7 @@ export default function Page() {
             </Link>
             <Link
               href={{
-                pathname: `${basePath}/navbarpages/train_deployment/certain_train/diesel_passenger_car`,
+                pathname: `${process.env.BASEPATH}/navbarpages/train_deployment/certain_train/diesel_passenger_car`,
               }}
             >
               <OverviewCard
@@ -82,7 +81,7 @@ export default function Page() {
             </Link>
             <Link
               href={{
-                pathname: `${basePath}/navbarpages/train_deployment/certain_train/diesel_hydraulic_locomotive`,
+                pathname: `${process.env.BASEPATH}/navbarpages/train_deployment/certain_train/diesel_hydraulic_locomotive`,
               }}
             >
               <OverviewCard
@@ -92,7 +91,7 @@ export default function Page() {
             </Link>
             <Link
               href={{
-                pathname: `${basePath}/navbarpages/train_deployment/certain_train/diesel_electric_locomotive`,
+                pathname: `${process.env.BASEPATH}/navbarpages/train_deployment/certain_train/diesel_electric_locomotive`,
               }}
             >
               <OverviewCard
