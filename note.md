@@ -118,6 +118,4 @@ text dynamic size
 
 slow may cause by fetch twice
 
-calendar refresh, correspoding with date
-
-
+tooltip duration

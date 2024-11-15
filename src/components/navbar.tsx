@@ -1,7 +1,7 @@
 "use client";
 
 import React, { Suspense, useState, useEffect, useMemo } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { DatePickerForm } from "@/components/ui/date_picker";
 import Link from "next/link";
 import { ModeToggle } from "@/components/ui/mode_toggle";
@@ -12,6 +12,8 @@ const basePath = process.env.NEXT_PUBLIC_BASEPATH || "";
 
 const Navbar: React.FC = () => {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const date = searchParams?.get("date") || "";
   const [isHovered, setIsHovered] = useState<number | null>(null);
   const [currentPageIndex, setCurrentPageIndex] = useState<number | null>(null);
 
@@ -173,7 +175,7 @@ const Navbar: React.FC = () => {
 
           {navLinks.map((link, index) => (
             <Link
-              href={{ pathname: `${link.href}` }}
+              href={`${link.href}?date=${date}` }
               key={link.href}
               className={`px-3 flex cursor-pointer items-center ${
                 pathname?.startsWith(link.startsWith) ? "active" : ""

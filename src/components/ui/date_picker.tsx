@@ -1,7 +1,6 @@
 "use client";
 import { format, parse } from "date-fns";
 import { CalendarIcon } from "lucide-react";
-import { useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
 
 import { cn } from "@/lib/utils";
@@ -13,40 +12,33 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 
-
 export function DatePickerForm() {
-  const searchParams = useSearchParams();
-
-  // Get the date from the URL if it exists
-  const dateFromURL = searchParams?.get("date");
-  const initialDate = dateFromURL
-    ? parse(dateFromURL, "yyyy-MM-dd", new Date())
-    : new Date();
-
-  const [selectedDate, setSelectedDate] = useState<Date | undefined>(
-    initialDate
-  );
+  const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date());
+  const [initialDate, setInitialDate] = useState<Date | undefined>();
 
   useEffect(() => {
-    // Update the state if the date in the URL changes
-    if (dateFromURL && !selectedDate) {
-      setSelectedDate(parse(dateFromURL, "yyyy-MM-dd", new Date()));
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dateFromURL]); // Only re-run the effect when `dateFromURL` changes
+    // Ensure this runs only in the browser
+    const searchParams = new URLSearchParams(window.location.search);
+    const dateFromURL = searchParams.get("date");
+    const parsedDate = dateFromURL
+      ? parse(dateFromURL, "yyyy-MM-dd", new Date())
+      : new Date();
+
+    setSelectedDate(parsedDate);
+    setInitialDate(parsedDate);
+  }, []); // Runs once after the component mounts
 
   const handleDateChange = (date?: Date) => {
     if (date) {
       setSelectedDate(date);
       const formattedDate = format(date, "yyyy-MM-dd");
 
-      const currentParams = new URLSearchParams(searchParams?.toString() || "");
+      const currentParams = new URLSearchParams(window.location.search);
       currentParams.set("date", formattedDate);
 
-      const newUrl = `${window.location.origin}${
-        window.location.pathname
-      }?${currentParams.toString()}`;
+      const newUrl = `${window.location.origin}${window.location.pathname}?${currentParams.toString()}`;
 
+      // Update the URL and reload the page
       window.location.href = newUrl;
     }
   };
@@ -62,21 +54,20 @@ export function DatePickerForm() {
               !selectedDate && "text-muted-foreground"
             )}
           >
-            {selectedDate ? format(selectedDate, "PPP") : <span></span>}
+            {selectedDate ? format(selectedDate, "PPP") : <span>Select Date</span>}
 
             <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
           </Button>
         </PopoverTrigger>
         <PopoverContent className="w-auto p-0" align="start">
-          
           <Calendar
-          mode="single"
-          captionLayout="dropdown-buttons"
-          selected={selectedDate}
-          onSelect={handleDateChange}
-          fromYear={1950}
-          toYear={2200}
-        />
+            mode="single"
+            captionLayout="dropdown-buttons"
+            selected={selectedDate}
+            onSelect={handleDateChange}
+            fromYear={1950}
+            toYear={2200}
+          />
         </PopoverContent>
       </Popover>
     </div>
