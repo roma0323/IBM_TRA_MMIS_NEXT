@@ -130,7 +130,7 @@ const Chatbot = () => {
                     <Image
                       className="relative"
                       alt="Vuesax linear like"
-                      src={`${process.env.BASEPATH}/like.svg`}
+                      src={`/${process.env.BASEPATH}like.svg`}
                       width={13.23}
                       height={13.23}
                     />

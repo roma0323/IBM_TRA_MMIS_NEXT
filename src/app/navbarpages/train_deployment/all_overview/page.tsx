@@ -113,7 +113,7 @@ export default function Page() {
             <Link
              
               href={{
-                pathname: `${process.env.BASEPATH}/navbarpages/train_deployment/power_overview`,
+                pathname: `/navbarpages/train_deployment/power_overview`,
               }}
             >
               <OverviewCard
@@ -125,7 +125,7 @@ export default function Page() {
 
             <Link
               href={{
-                pathname: `${process.env.BASEPATH}/navbarpages/train_deployment/certain_train/passenger_car`,
+                pathname: `/navbarpages/train_deployment/certain_train/passenger_car`,
               }}
             >
               <OverviewCard
@@ -136,7 +136,7 @@ export default function Page() {
             </Link>
             <Link
               href={{
-                pathname: `${process.env.BASEPATH}/navbarpages/train_deployment/certain_train/freight_car`,
+                pathname: `/navbarpages/train_deployment/certain_train/freight_car`,
               }}
             >
               <OverviewCard
@@ -147,7 +147,7 @@ export default function Page() {
             </Link>
             <Link
               href={{
-                pathname: `${process.env.BASEPATH}/navbarpages/train_deployment/unusual_overview`,
+                pathname: `/navbarpages/train_deployment/unusual_overview`,
               }}
             >
               <OverviewCard

@@ -2,8 +2,8 @@
 const nextConfig = {
   // output: process.env.NEXT_PUBLIC_CONFIG === "prod" ? "export" : "standalone",
   output:  "export" ,
-  basePath: process.env.NEXT_PUBLIC_CONFIG === "prod" ? "/m2" : "",
-  assetPrefix: process.env.NEXT_PUBLIC_CONFIG === "prod" ? "/m2" : "",
+  basePath: "/m2",
+  assetPrefix: "/m2",
   images: {
     loader: "imgix",
     path: process.env.BASEPATH,
