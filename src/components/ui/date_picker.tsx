@@ -2,7 +2,6 @@
 import { format, parse } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 import { useState, useEffect } from "react";
-import { useRouter } from 'next/router';
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -16,7 +15,6 @@ import {
 export function DatePickerForm() {
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date());
   const [initialDate, setInitialDate] = useState<Date | undefined>();
-  const router = useRouter();
 
   useEffect(() => {
     // Ensure this runs only in the browser
@@ -30,23 +28,18 @@ export function DatePickerForm() {
     setInitialDate(parsedDate);
   }, []); // Runs once after the component mounts
 
-  const handleDateChange = (date:Date) => {
+  const handleDateChange = (date?: Date) => {
     if (date) {
       setSelectedDate(date);
-      const formattedDate = format(date, 'yyyy-MM-dd');
+      const formattedDate = format(date, "yyyy-MM-dd");
 
-      // Update the query parameters without reloading the page
-      router.push(
-        {
-          pathname: router.pathname,
-          query: {
-            ...router.query,
-            date: formattedDate,
-          },
-        },
-        undefined,
-        { shallow: true }
-      );
+      const currentParams = new URLSearchParams(window.location.search);
+      currentParams.set("date", formattedDate);
+
+      const newUrl = `${window.location.origin}${window.location.pathname}?${currentParams.toString()}`;
+
+      // Update the URL and reload the page
+      window.location.href = newUrl;
     }
   };
 
