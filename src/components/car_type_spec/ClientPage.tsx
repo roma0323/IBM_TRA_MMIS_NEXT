@@ -52,7 +52,7 @@ const ClientPage: React.FC<Props> = ({ all_car_type }) => {
           <BoardTitleSection
             title="廠段分類"
             content={
-              <div className="flex flex-col mx-4 text-lg relative">
+              <div className="flex flex-col mx-4 relative">
                 <div className="fixed bottom-4  bg-white underline cursor-pointer hover:font-medium text-primary">
                   <a
                     href="http://192.168.36.21/maximo/webclient/common/openreport_AM108.jsp"

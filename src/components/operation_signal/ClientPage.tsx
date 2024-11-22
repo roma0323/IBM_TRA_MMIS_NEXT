@@ -126,9 +126,9 @@ const ClientPage: React.FC = () => {
 
   const getButtonBgColor = (source: string | undefined) => {
     if (source === "6" || source === "7") {
-      return "bg-[#ffeecf]";
+      return "bg-[#ffee11]";
     } else if (source && source !== "6" && source !== "7") {
-      return "bg-[#FFDFEA]";
+      return "bg-[#ff1f1f]";
     } else {
       return "bg-[#dfffcf]";
     }
@@ -187,7 +187,7 @@ const ClientPage: React.FC = () => {
                                     <TooltipTrigger asChild>
                                       <Button
                                         key={index}
-                                        className={`w-full hover:bg-white cursor-default text-gray-700  ${getButtonBgColor(
+                                        className={`w-full hover:bg-white cursor-default text-base font-bold text-black  ${getButtonBgColor(
                                           signal.SOURCE
                                         )}`}
                                       >

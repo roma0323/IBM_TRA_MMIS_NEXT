@@ -62,7 +62,7 @@ function MyComponent()  {
 
   return (
     <div className="relative flex justify-between p-6 gap-6 h-full">
-      <div className="min-w-[30%] flex items-center justify-center">
+      <div className="min-w-[35rem] w-[30vw] max-w-[70rem] flex items-center justify-center">
         <BoardTitleSection
           title={`故障通報分級`}
           content={

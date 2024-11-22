@@ -11,7 +11,6 @@ const CustomTooltip = ({ active, payload, label }: { active?: boolean; payload?:
   if (active && payload && payload.length) {
     return (
       <div
-      className="text-sm"
       style={{
         backgroundColor: "white",
         border: "1px solid #ccc",

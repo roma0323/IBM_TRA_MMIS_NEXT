@@ -20,7 +20,12 @@ const config = {
   		}
   	},
   	extend: {
-
+		fontSize: {
+			sm: ['clamp(0.8rem, 0.7vw, 1.8rem)', '1'], 
+			base: ['clamp(1rem, 0.8vw, 2rem)', '1.2'], 
+			lg: ['clamp(1.5rem, 1vw, 4rem)', '1.3'], 
+			xl: ['clamp(3rem, 2vw, 10rem)', '1.5'], 
+		},
   		colors: {
   			border: 'hsl(var(--border))',
   			input: 'hsl(var(--input))',

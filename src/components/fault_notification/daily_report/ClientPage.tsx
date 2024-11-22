@@ -64,7 +64,7 @@ const ClientPage: React.FC = () => {
 
   return (
     <div className="relative flex justify-between p-6 gap-6 h-full">
-      <div className="min-w-[25rem] flex items-center justify-center">
+      <div className="min-w-[25rem] w-[25vw] max-w-[45rem] flex items-center justify-center">
         <BoardTitleSection
           title={`故障通報分級`}
           content={

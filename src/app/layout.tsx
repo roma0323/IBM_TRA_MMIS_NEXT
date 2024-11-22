@@ -14,7 +14,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={cn(
-          "h-dvh w-dvw  bg-background text-foreground",
+          "h-dvh w-dvw  bg-background text-foreground text-base",
         )}
       >
         <ThemeProvider

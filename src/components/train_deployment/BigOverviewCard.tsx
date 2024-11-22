@@ -25,11 +25,11 @@ const DEFAULT_TRAIN_DATA: FetcheGetSumStatusListDataInArray = {
   availability: 1.0,
 };
 export const BigOverviewCard = ({
-  Name = "Unknown Train", 
-  Data = DEFAULT_TRAIN_DATA, 
+  Name = "Unknown Train",
+  Data = DEFAULT_TRAIN_DATA,
 }: {
-  Name?: string; 
-  Data?: FetcheGetSumStatusListDataInArray; 
+  Name?: string;
+  Data?: FetcheGetSumStatusListDataInArray;
 }): JSX.Element => {
   return (
     <div className=" relative size-full  bg-white flex flex-col rounded-lg  ">
@@ -39,30 +39,26 @@ export const BigOverviewCard = ({
           <div className="size-full flex  py-6  px-10">
             <div className="flex-col flex  justify-around w-1/4  ">
               <div>
-              <div className="text-5xl">{Data.current_ready}</div>
-              <div>可用數</div>
-            </div>
-            <div>
-              <div className="text-5xl">{Data.current_cnt}</div>
-              <div> 總輛數</div>
-            </div>
-            <div>
-              <div className="text-5xl">
-                {`${Math.round((Data.current_ready / Data.current_cnt) * 100).toString()}%`}
+
+                <div className="text-xl">{(Data.current_ready+Data.current_temp+Data.current_use).toString()}</div>
+                <div>可用數</div>
               </div>
-              <div> 可用率</div>
+              <div>
+                <div className="text-xl">{Data.current_cnt}</div>
+                <div> 總輛數</div>
+              </div>
+              <div>
+                <div className="text-xl">
+                  {`${Math.round(
+                    (Data.current_ready / Data.current_cnt) * 100
+                  ).toString()}%`}
+                </div>
+                <div> 可用率</div>
+              </div>
             </div>
-            </div>
-            <div className="flex flex-col items-center justify-start">
-              <p className="text-center">
-                <span className="block">30</span>
-                <span className="block">日</span>
-                <span className="block">使</span>
-                <span className="block">用</span>
-                <span className="block">率</span>
-              </p>
-            </div>
+
             <div className="w-3/4">
+              近30日使用率
               <UseRateAreaChart styleTemplate={Name} />
             </div>
           </div>

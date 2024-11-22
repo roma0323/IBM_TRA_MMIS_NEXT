@@ -27,7 +27,7 @@ const AccordionSection: React.FC<{
           onClick={() =>
             onContentClick && onContentClick(content.id || content,title, content.name)
           }
-          className={`p-2 text-lg cursor-pointer rounded-lg hover:bg-slate-100`}
+          className={`p-2  cursor-pointer rounded-lg hover:bg-slate-100`}
         >
           {content.name || content}
         </AccordionContent>
@@ -44,7 +44,7 @@ const CombinedCategorySection: React.FC<CombinedCategorySectionProps> = ({
   };
 
   return (
-    <div className="flex flex-col mx-4 text-lg relative">
+    <div className="flex flex-col mx-4  relative">
       <Accordion type="single" collapsible>
         {Object.entries(data).map(([key, values]) => (
           <AccordionSection

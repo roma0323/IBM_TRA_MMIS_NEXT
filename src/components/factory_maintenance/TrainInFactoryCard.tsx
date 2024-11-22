@@ -46,12 +46,12 @@ export const TrainInFactoryCard: React.FC<Props> = ({
     >
       <div className="self-stretch flex-col items-start flex">
         <div className="self-stretch py-1 border-b justify-between items-end inline-flex">
-          <div className="text-xl">
+          <div className="text-lg">
             {factory.departmentName}機廠
-            <span className="ml-2 text-xs">在廠車輛數</span>
+            <span className="ml-2 text-sm">在廠車輛數</span>
           </div>
           <div className="flex items-end">
-            <div className="ml-4 text-4xl">{factory.infaccnt}</div>
+            <div className="ml-4 text-xl">{factory.infaccnt}</div>
           </div>
         </div>
 

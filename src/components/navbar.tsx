@@ -8,7 +8,6 @@ import { ModeToggle } from "@/components/ui/mode_toggle";
 import Image from "next/image";
 import MidNavbar from "@/components/MidNavbar";
 
-
 const Navbar: React.FC = () => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -162,20 +161,22 @@ const Navbar: React.FC = () => {
     <div>
       <div className="h-fit w-full flex justify-between relative pr-6">
         <div className="flex ">
-          
-          <Link href={{ pathname: `/` }}>
-            <Image
-              className="relative hover:scale-110"
-              alt="IBM Logo"
-              src={`${process.env.BASEPATH}/ibm-logo-frame.svg`}
-              width={112}
-              height={96}
-            />
-          </Link>
+          <div className={`p-4  flex cursor-pointer items-center `}>
+            <Link href={{ pathname: `/` }}>
+              <Image
+                className="relative hover:scale-110  h-[1vw] w-auto min-h-[2rem] "
+                alt="IBM Logo"
+                src={`/m2/ibm-logo-frame.svg`}
+                sizes="10rem"
+                width="0"
+                height="0"
+              />
+            </Link>
+          </div>
 
           {navLinks.map((link, index) => (
             <Link
-              href={`${link.href}?date=${date}` }
+              href={`${link.href}?date=${date}`}
               key={link.href}
               className={`px-3 flex cursor-pointer items-center ${
                 pathname?.startsWith(link.startsWith) ? "active" : ""

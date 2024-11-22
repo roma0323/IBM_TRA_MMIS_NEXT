@@ -42,8 +42,8 @@ export const OverviewCard = ({
         content={
           <div className="size-full flex flex-col justify-around " >
             <div className="flex justify-around w-full py-2 ">
-              <DataCard text={(Data.current_ready+Data.current_temp+Data.current_use).toString()} text1="可用數" />
               <DataCard text={Data.current_cnt.toString()} text1="總輛數" />
+              <DataCard text={(Data.current_ready+Data.current_temp+Data.current_use).toString()} text1="可用數" />
               <DataCard
                 text={`${Math.round(
                   ((Data.current_ready+Data.current_temp+Data.current_use) / Data.current_cnt) * 100

@@ -241,18 +241,18 @@ const ClientPage: React.FC = () => {
                           </TableCell>
                           <TableCell>{item.cnt}</TableCell>
                           <TableCell className="text-right">
-                            {item.percentage}
+                            {item.percentage}%
                           </TableCell>
                         </TableRow>
                         {expandedRows.has(item.key) &&
                           item.event.map((event_item) => (
                             <TableRow key={event_item.key}>
-                              <TableCell className="text-center text-xs">
+                              <TableCell className="text-center text-sm">
                                 {event_item.key}
                               </TableCell>
                               <TableCell>{event_item.cnt}</TableCell>
                               <TableCell className="text-right">
-                                {event_item.percentage}
+                                {event_item.percentage}%
                               </TableCell>
                             </TableRow>
                           ))}
