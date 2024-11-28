@@ -9,6 +9,7 @@ import useSWR from "swr";
 import Loading from "@/components/Loading";
 import BoardTitleSection from "../BoardTitleSection";
 import CategorySection from "@/components/ui/accordionSection";
+import AccordionSectionMulti from "@/components/ui/AccordionSectionMulti";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Signal } from "@/types/type";
@@ -51,7 +52,7 @@ const ClientPage: React.FC = () => {
     `operation_signal${date}`,
     fetcher
   );
-  const [selectTrain, setSelectTrain] = useState<string[]>(["七堵機務段"]);
+  const [selectTrain, setSelectTrain] = useState<string[]>([]);
   const [selectLight, setSelectLight] = useState<string>("全部燈號");
   const [filteredSignals, setFilteredSignals] = useState<Signal[]>([]);
   const [searchText, setSearchText] = useState<string>("");
@@ -80,7 +81,7 @@ const ClientPage: React.FC = () => {
   }, [selectTrain, selectLight, signals, searchText]);
 
   if (error) return <div>Failed to load</div>;
-  if (!signals) return <div><Loading /></div>;
+  if (!signals) return <><Loading /></>;
 
   const handleSelectTrain = (id: string) => {
     setSearchText("");
@@ -142,7 +143,7 @@ const ClientPage: React.FC = () => {
           title="廠段分類"
           content={
             <>
-              <CategorySection
+              <AccordionSectionMulti
                 setSelectTrain={handleSelectTrain}
                 data={infor_for_accordionitem}
               />
