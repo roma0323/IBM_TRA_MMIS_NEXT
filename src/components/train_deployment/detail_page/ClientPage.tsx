@@ -2,11 +2,19 @@
 import React, { useState, useRef } from "react";
 import useSWR from "swr";
 
-
-import { getSumStatusListAndMultiplierEqualZeorCarcatalogEqualParamCartypeEqualTrainname,getSumStatusDetailListMultiplierZeorDeptParamCartypeParamQtypeParam,getSumStatusListEq3Param,getSumStatusListAndsumtotalEqualone,getSumStatusListAndCarcatalogEqualParam } from "@/api/api";
+import {
+  getSumStatusListAndMultiplierEqualZeorCarcatalogEqualParamCartypeEqualTrainname,
+  getSumStatusDetailListMultiplierZeorDeptParamCartypeParamQtypeParam,
+  getSumStatusListEq3Param,
+  getSumStatusListAndsumtotalEqualone,
+  getSumStatusListAndCarcatalogEqualParam,
+} from "@/api/api";
 import { useSearchParams } from "next/navigation";
-import { FetcheGetSumStatusListDataInArray } from "@/types/type"; 
-import {refactorPieChartData,refactorCardData } from "@/components/train_deployment/detail_page/ProcessPieChartData"
+import { FetcheGetSumStatusListDataInArray } from "@/types/type";
+import {
+  refactorPieChartData,
+  refactorCardData,
+} from "@/components/train_deployment/detail_page/ProcessPieChartData";
 import BoardTitleSection from "@/components/BoardTitleSection";
 import Loading from "@/components/Loading";
 import TrainCategorySectionCard from "@/components/train_deployment/detail_page/TrainCategorySectionCard";
@@ -17,8 +25,6 @@ import MaintenanceDetailSection from "@/components/locomotive_depot/MaintenanceD
 import SlideNavigationContainer, {
   SlideNavigationContainerRef,
 } from "@/components/SlideNavigationContainer";
-
-
 
 const carcatalogMap: { [key: string]: string } = {
   intercity_train: "城際列車",
@@ -38,6 +44,7 @@ const DetailClientPage: React.FC<{ carcatalogId: string }> = ({
   const [maintenanceData, setMaintenanceData] = useState<any[]>([]);
   const [filteredTrainData, setFilteredTrainData] = useState<any[]>([]);
   const slideNavRef = useRef<SlideNavigationContainerRef>(null);
+  const [loading, setLoading] = useState(false); // Add loading state
   const urlParams = useSearchParams();
   const date = urlParams ? urlParams.get("date") || "" : "";
   const carcatalog = carcatalogMap[carcatalogId] || "Unknown";
@@ -48,7 +55,10 @@ const DetailClientPage: React.FC<{ carcatalogId: string }> = ({
     return fetchedData.data;
   };
   const fetchCertainSumStatusList = async () => {
-    const fetchedData = await getSumStatusListAndCarcatalogEqualParam(carcatalog,date);
+    const fetchedData = await getSumStatusListAndCarcatalogEqualParam(
+      carcatalog,
+      date
+    );
     return fetchedData.data;
   };
 
@@ -57,11 +67,11 @@ const DetailClientPage: React.FC<{ carcatalogId: string }> = ({
     fetcher
   );
 
-  const { data: CertainTrainStatusData, error: CertainTrainStatusError } = useSWR<FetcheGetSumStatusListDataInArray[]>(
-    `fetchCertainTrainStatusData_${carcatalogId}`,
-    fetchCertainSumStatusList
-  );
-
+  const { data: CertainTrainStatusData, error: CertainTrainStatusError } =
+    useSWR<FetcheGetSumStatusListDataInArray[]>(
+      `fetchCertainTrainStatusData_${carcatalogId}`,
+      fetchCertainSumStatusList
+    );
 
   if (CertainTrainStatusError || error) return <div>Failed to load</div>;
   if (!CertainTrainStatusData || !data) return <Loading />;
@@ -81,6 +91,7 @@ const DetailClientPage: React.FC<{ carcatalogId: string }> = ({
     );
 
   const handleTrainTypeClick = async (trainName: string) => {
+    setLoading(true); // Set loading to true
     if (!slideNavRef.current?.canMoveLeft) {
       slideNavRef.current?.handleMouseEnter("right");
     }
@@ -96,6 +107,7 @@ const DetailClientPage: React.FC<{ carcatalogId: string }> = ({
         );
     }
     setFilteredTrainData(fetchedData.data);
+    setLoading(false); // Set loading to false
   };
 
   const handleTrainClick = async (
@@ -138,17 +150,17 @@ const DetailClientPage: React.FC<{ carcatalogId: string }> = ({
             title={`${carcatalog} - 車種分配資訊`}
             content={
               <div className="flex flex-col items-start gap-2.5 px-3 py-2 relative w-full">
-              {CardData.map((train, index) => (
-                <TrainCategorySectionCard
-                  key={index}
-                  trainName={train.name}
-                  onClick={() => handleTrainTypeClick(train.name)}
-                  isActive={selectedTrainName === train.name}
-                  total={train.value}
-                  available={train.value2}
-                />
-              ))}
-            </div>
+                {CardData.map((train, index) => (
+                  <TrainCategorySectionCard
+                    key={index}
+                    trainName={train.name}
+                    onClick={() => handleTrainTypeClick(train.name)}
+                    isActive={selectedTrainName === train.name}
+                    total={train.value}
+                    available={train.value2}
+                  />
+                ))}
+              </div>
             }
           />
         </div>
@@ -163,6 +175,7 @@ const DetailClientPage: React.FC<{ carcatalogId: string }> = ({
                 <TrainListTable
                   TrainDataInArray={filteredTrainData}
                   handleTrainClick={handleTrainClick}
+                  loading={loading} // Pass loading state
                 />
               </>
             }

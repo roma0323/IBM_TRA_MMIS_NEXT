@@ -7,8 +7,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import Loading2 from "@/components/Loading2";
 
-type TrainDataInArray = {
+type TrainDataInArrayProps = {
   TrainDataInArray: {
     className?: string;
     dept: string;
@@ -31,9 +32,14 @@ type TrainDataInArray = {
     availability: number;
   }[];
   handleTrainClick: (dept: string, cartype: string, divData: string) => void;
+  loading: boolean; // Add loading prop
 };
 
-const TrainListTable: React.FC<TrainDataInArray> = ({ TrainDataInArray, handleTrainClick }) => {
+const TrainListTable: React.FC<TrainDataInArrayProps> = ({
+  TrainDataInArray,
+  handleTrainClick,
+  loading,
+}) => {
   const CanClickClassName =
     " cursor-pointer hover:font-bold hover:underline  text-primary";
 
@@ -42,7 +48,7 @@ const TrainListTable: React.FC<TrainDataInArray> = ({ TrainDataInArray, handleTr
   };
 
   return (
-    <Table >
+    <Table>
       <TableHeader>
         <TableRow>
           <TableHead>車種</TableHead>
@@ -65,38 +71,104 @@ const TrainListTable: React.FC<TrainDataInArray> = ({ TrainDataInArray, handleTr
         </TableRow>
       </TableHeader>
       <TableBody>
-              {TrainDataInArray.length > 0 ? (
-                TrainDataInArray.map((item, itemIndex) => (
-                  <TableRow  className="" key={itemIndex}>
-                    <TableCell>{item.carcatalog}</TableCell>
-                    <TableCell>{item.deptdesc}</TableCell>
-                    <TableCell>{item.cartype}</TableCell>
-                    <TableCell>{item.belongto}</TableCell>
-                    <TableCell className={CanClickClassName} onClick={() => handleDivClick(item.dept, item.cartype, "borrowin")}>{item.borrowin}</TableCell>
-                    <TableCell className={CanClickClassName} onClick={() => handleDivClick(item.dept, item.cartype, "borrowout")}>{item.borrowout}</TableCell>
-                    <TableCell>{item.current_cnt}</TableCell>
-                    <TableCell className={CanClickClassName} onClick={() => handleDivClick(item.dept, item.cartype, "current_use")}>{item.current_use}</TableCell>
-                    <TableCell>{item.current_temp}</TableCell>
-                    <TableCell>{item.current_ready}</TableCell>
-                    <TableCell className={CanClickClassName} onClick={() => handleDivClick(item.dept, item.cartype, "maintain_w")}>{item.maintain_w}</TableCell>
-                    <TableCell className={CanClickClassName} onClick={() => handleDivClick(item.dept, item.cartype, "maintain_sec")}>{item.maintain_sec}</TableCell>
-                    <TableCell className={CanClickClassName} onClick={() => handleDivClick(item.dept, item.cartype, "maintain_fac")}>{item.maintain_fac}</TableCell>
-                    <TableCell className={CanClickClassName} onClick={() => handleDivClick(item.dept, item.cartype, "oth_waitrep")}>{item.oth_waitrep}</TableCell>
-                    <TableCell className={CanClickClassName} onClick={() => handleDivClick(item.dept, item.cartype, "oth_return")}>{item.oth_return}</TableCell>
-                    <TableCell className={CanClickClassName} onClick={() => handleDivClick(item.dept, item.cartype, "oth_stop")}>{item.oth_stop}</TableCell>
-                    <TableCell>{Number(item.availability.toFixed(2))*100}%</TableCell>
-                  </TableRow>
-                ))
-              ) : (
-                <TableRow>
-                  <TableCell colSpan={10} className="text-left">
-                    No data available
-                  </TableCell>
-                </TableRow>
-              )}
+        {loading ? (
+            <div className="pl-5"><Loading2 /></div>
+              
+        ) : TrainDataInArray.length > 0 ? (
+          TrainDataInArray.map((item, itemIndex) => (
+            <TableRow className="" key={itemIndex}>
+              <TableCell>{item.carcatalog}</TableCell>
+              <TableCell>{item.deptdesc}</TableCell>
+              <TableCell>{item.cartype}</TableCell>
+              <TableCell>{item.belongto}</TableCell>
+              <TableCell
+                className={CanClickClassName}
+                onClick={() =>
+                  handleDivClick(item.dept, item.cartype, "borrowin")
+                }
+              >
+                {item.borrowin}
+              </TableCell>
+              <TableCell
+                className={CanClickClassName}
+                onClick={() =>
+                  handleDivClick(item.dept, item.cartype, "borrowout")
+                }
+              >
+                {item.borrowout}
+              </TableCell>
+              <TableCell>{item.current_cnt}</TableCell>
+              <TableCell
+                className={CanClickClassName}
+                onClick={() =>
+                  handleDivClick(item.dept, item.cartype, "current_use")
+                }
+              >
+                {item.current_use}
+              </TableCell>
+              <TableCell>{item.current_temp}</TableCell>
+              <TableCell>{item.current_ready}</TableCell>
+              <TableCell
+                className={CanClickClassName}
+                onClick={() =>
+                  handleDivClick(item.dept, item.cartype, "maintain_w")
+                }
+              >
+                {item.maintain_w}
+              </TableCell>
+              <TableCell
+                className={CanClickClassName}
+                onClick={() =>
+                  handleDivClick(item.dept, item.cartype, "maintain_sec")
+                }
+              >
+                {item.maintain_sec}
+              </TableCell>
+              <TableCell
+                className={CanClickClassName}
+                onClick={() =>
+                  handleDivClick(item.dept, item.cartype, "maintain_fac")
+                }
+              >
+                {item.maintain_fac}
+              </TableCell>
+              <TableCell
+                className={CanClickClassName}
+                onClick={() =>
+                  handleDivClick(item.dept, item.cartype, "oth_waitrep")
+                }
+              >
+                {item.oth_waitrep}
+              </TableCell>
+              <TableCell
+                className={CanClickClassName}
+                onClick={() =>
+                  handleDivClick(item.dept, item.cartype, "oth_return")
+                }
+              >
+                {item.oth_return}
+              </TableCell>
+              <TableCell
+                className={CanClickClassName}
+                onClick={() =>
+                  handleDivClick(item.dept, item.cartype, "oth_stop")
+                }
+              >
+                {item.oth_stop}
+              </TableCell>
+              <TableCell>
+                {Number(item.availability.toFixed(2)) * 100}%
+              </TableCell>
+            </TableRow>
+          ))
+        ) : (
+          <TableRow>
+            <TableCell colSpan={17} className="text-left">
+              No data available
+            </TableCell>
+          </TableRow>
+        )}
       </TableBody>
-
-     
     </Table>
   );
 };

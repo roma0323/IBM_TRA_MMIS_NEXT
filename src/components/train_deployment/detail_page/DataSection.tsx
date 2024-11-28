@@ -21,8 +21,8 @@ const DataSection = ({
       title={`分配資訊`}
       content={
         <div className="size-full flex relative justify-around items-center ">
-          <DataCard text={readySum.toString()} text1="可用數" />
           <DataCard text={cntSum.toString()} text1="總輛數" />
+          <DataCard text={readySum.toString()} text1="可用數" />
           <DataCard
             text={`${Math.round((readySum / cntSum) * 100)}%`}
             text1="可用率"
