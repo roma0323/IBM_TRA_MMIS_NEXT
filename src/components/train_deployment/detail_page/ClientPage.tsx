@@ -3,10 +3,10 @@ import React, { useState, useRef } from "react";
 import useSWR from "swr";
 
 
-import { getSumStatusListAndMultiplierEqualZeorCarcatalogEqualParamCartypeEqualTrainname,getSumStatusDetailListMultiplierZeorDeptParamCartypeParamQtypeParam,getSumStatusListEq3Param,getSumStatusListAndsumtotalEqualone } from "@/api/api";
+import { getSumStatusListAndMultiplierEqualZeorCarcatalogEqualParamCartypeEqualTrainname,getSumStatusDetailListMultiplierZeorDeptParamCartypeParamQtypeParam,getSumStatusListEq3Param,getSumStatusListAndsumtotalEqualone,getSumStatusListAndCarcatalogEqualParam } from "@/api/api";
 import { useSearchParams } from "next/navigation";
 import { FetcheGetSumStatusListDataInArray } from "@/types/type"; 
-
+import {refactorPieChartData } from "@/components/train_deployment/detail_page/ProcessPieChartData"
 import BoardTitleSection from "@/components/BoardTitleSection";
 import Loading from "@/components/Loading";
 
@@ -45,18 +45,32 @@ const DetailClientPage: React.FC<{ carcatalogId: string }> = ({
   //fetch and loading
   const fetcher = async () => {
     const fetchedData = await getSumStatusListAndsumtotalEqualone(date);
-    console.log(fetchedData.data,'fetchedData.data')
-    console.log(fetchedData.data[0],'fetchedData.data')
     return fetchedData.data;
   };
+  const fetchCertainSumStatusList = async () => {
+    const fetchedData = await getSumStatusListAndCarcatalogEqualParam(carcatalog,date);
+    console.log(fetchedData,'fetchedData')
+    console.log('fffffff')
+    return fetchedData.data;
+  };
+
   const { data, error } = useSWR<FetcheGetSumStatusListDataInArray[]>(
     `fetch_${carcatalogId}`,
     fetcher
   );
 
-  if (error) return <div>Failed to load</div>;
-  if (!data) return <Loading />;
-  //fetch and loading
+  const { data: CertainTrainStatusData, error: CertainTrainStatusError } = useSWR<FetcheGetSumStatusListDataInArray[]>(
+    `fetchCertainTrainStatusData_${carcatalogId}`,
+    fetchCertainSumStatusList
+  );
+
+
+  if (CertainTrainStatusError || error) return <div>Failed to load</div>;
+  if (!CertainTrainStatusData || !data) return <Loading />;
+
+console.log(CertainTrainStatusData,'CertainTrainStatusData')
+  const PieChartData = refactorPieChartData(CertainTrainStatusData);
+  console.log(PieChartData,'PieChartData')
 
   const cntSum = data
     .filter((item) => item.carcatalog === carcatalog)
@@ -117,6 +131,7 @@ const DetailClientPage: React.FC<{ carcatalogId: string }> = ({
             cntSum={cntSum}
             readySum={readySum}
             carcatalog={data[0]?.carcatalog}
+            PieChartData={PieChartData}
           />
         </div>
 

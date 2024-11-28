@@ -265,3 +265,9 @@ export type Recent30days = {
   TOTAL: string;
   USUALFLAG: string;
 };
+
+
+export type PiechartData = {
+  name: string;
+  value: number;
+};

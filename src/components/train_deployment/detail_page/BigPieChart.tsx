@@ -1,14 +1,7 @@
 import React, { PureComponent } from "react";
 import { PieChart, Pie, Sector, ResponsiveContainer } from "recharts";
+import {PiechartData} from "@/types/type"
 
-const data = [null];
-
-// const data = [
-//   { name: '太魯閣 - TEMU1000', value: 100 },
-//   { name: '普悠瑪 - TEMU2000', value: 100 },
-//   { name: '新自強號 - MEU3000', value: 150 },
-//   { name: 'PP電力機車 - E1000', value: 90 },
-// ];
 
 interface CustomSectorProps {
   cx: number;
@@ -82,7 +75,7 @@ const renderActiveShape = (props: CustomSectorProps) => {
         y={ey}
         textAnchor={textAnchor}
         fill="#333"
-      >{`PV ${value}`}</text>
+      >{`總數 ${value}`}</text>
       <text
         x={ex + (cos >= 0 ? 1 : -1) * 12}
         y={ey}
@@ -90,7 +83,7 @@ const renderActiveShape = (props: CustomSectorProps) => {
         textAnchor={textAnchor}
         fill="#999"
       >
-        {`(Rate ${(percent * 100).toFixed(2)}%)`}
+        {` ${(percent * 100).toFixed(2)}%`}
       </text>
       <text x={cx} y={cy} dy={85} textAnchor="middle" fill={fill}>
         {payload.name}
@@ -101,8 +94,8 @@ const renderActiveShape = (props: CustomSectorProps) => {
 
 type BigPieChartProps = {
   styleTemplate: string;
-};
-
+  PieChartData:PiechartData[];
+}
 export default class BigPieChart extends PureComponent<BigPieChartProps> {
   state = {
     activeIndex: 0,
@@ -112,48 +105,24 @@ export default class BigPieChart extends PureComponent<BigPieChartProps> {
     this.setState({
       activeIndex: index,
     });
-  };
-
-  getColor = () => {
-    const { styleTemplate } = this.props;
-
-    switch (styleTemplate) {
-      case "城際列車":
-        return `#538164`;
-      case "電力機車":
-        return `#FFBB54`;
-      case "柴電機車":
-        return `#D9730D`;
-      case "柴液機車":
-        return `#C3554E`;
-      case "客車":
-        return `#00BBC7`;
-      case "柴油客車":
-        return `#9F8170`;
-      case "貨車":
-        return `#8F65AF`;
-      case "通勤列車":
-        return `#28BF02`;
-      default:
-        return "#397EFF";
-    }
-  };
+  }
+  
 
   render() {
-    const color = this.getColor();
 
     return (
       <ResponsiveContainer width="100%" aspect={1.5}>
+        
         <PieChart>
           <Pie
             activeIndex={this.state.activeIndex}
             activeShape={renderActiveShape as any}
-            data={data}
+            data={this.props.PieChartData}
             cx="50%"
             cy="50%"
             innerRadius={30}
             outerRadius={55}
-            fill={color}
+            fill="#397EFF"
             dataKey="value"
             onMouseEnter={this.onPieEnter}
           />

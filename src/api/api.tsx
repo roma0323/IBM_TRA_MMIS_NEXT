@@ -13,7 +13,7 @@ function dateFormat(date?: string) {
   return formattedDate;
 }
 
-export async function getSumStatusListAndsumtotalEqualone(date?: string) { //fetch 首頁所有車輛資料
+export async function getSumStatusListAndsumtotalEqualone(date?: string) : Promise<FetcheGetSumStatusList>{ //fetch 首頁所有車輛資料
   let formattedDate = dateFormat(date);
 
   const res = await fetch(
@@ -78,7 +78,7 @@ export async function getSumStatusListAndsumtotalEqualoneNotNormaltrain( //fetch
 export async function getSumStatusListAndCarcatalogEqualParam( //fetch 特定車種資料 deployment detail
   id: String,
   date?: string
-) {
+): Promise<FetcheGetSumStatusList> {
   let formattedDate = dateFormat(date);
 
   const res = await fetch(
