@@ -34,7 +34,7 @@ const CustomTooltip = ({ active, payload, label }: { active?: boolean; payload?:
 const GroupBarChart: React.FC<GroupBarChartProps> = ({ data }) => {
   // Check if data is empty or undefined
   if (!data || Object.keys(data).length === 0) {
-    return <div>No data available</div>;
+    return <div>無資料</div>;
   }
 
   // Transform the data into a format suitable for the BarChart

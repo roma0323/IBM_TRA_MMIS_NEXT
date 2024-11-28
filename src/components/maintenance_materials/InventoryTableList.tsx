@@ -147,7 +147,7 @@ const InventoryTableList: React.FC<InventoryTableListProps> = ({
               ) : (
                 <TableRow>
                   <TableCell colSpan={columns.length} className="text-center">
-                    No data available
+                    無資料
                   </TableCell>
                 </TableRow>
               )}

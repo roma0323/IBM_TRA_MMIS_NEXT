@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Accordion,
   AccordionContent,
@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/accordion";
 
 type CombinedCategorySectionProps = {
-  setSelectTrain: (id: string,title:string, name?: string) => void;
+  setSelectTrain: (id: string, title: string, name?: string) => void;
   data: Record<string, { id: string; name: string }[] | string[]>; // Accept both types of data
 };
 
@@ -16,8 +16,9 @@ const AccordionSection: React.FC<{
   title: string;
   contents?: { id: string; name: string }[] | string[];
   onTriggerClick: () => void;
-  onContentClick?: (id: string,title:string, name?: string) => void;
-}> = ({ value, title, contents, onTriggerClick, onContentClick }) => (
+  onContentClick?: (section: string, id: string, title: string, name?: string) => void;
+  selectedContent: { section: string; id: string } | null;
+}> = ({ value, title, contents, onTriggerClick, onContentClick, selectedContent }) => (
   <AccordionItem value={value}>
     <AccordionTrigger onClick={onTriggerClick}>{title}</AccordionTrigger>
     {contents &&
@@ -25,9 +26,13 @@ const AccordionSection: React.FC<{
         <AccordionContent
           key={content.id || index}
           onClick={() =>
-            onContentClick && onContentClick(content.id || content,title, content.name)
+            onContentClick && onContentClick(value, content.id || content, title, content.name)
           }
-          className={`p-2 text- cursor-pointer rounded-lg hover:bg-secondary-background`}
+          className={`p-2 cursor-pointer rounded-lg hover:border-b-4 ${
+            selectedContent?.section === value && selectedContent?.id === (content.id || content)
+              ? "bg-secondary-background border-b-4"
+              : ""
+          }`}
         >
           {content.name || content}
         </AccordionContent>
@@ -39,12 +44,15 @@ const CombinedCategorySection: React.FC<CombinedCategorySectionProps> = ({
   setSelectTrain,
   data,
 }) => {
-  const handleTrainSelection = (id: string,title:string, name?: string) => {
-    setSelectTrain(id,title, name || '');
+  const [selectedContent, setSelectedContent] = useState<{ section: string; id: string } | null>(null);
+
+  const handleTrainSelection = (section: string, id: string, title: string, name?: string) => {
+    setSelectTrain(id, title, name || '');
+    setSelectedContent({ section, id });
   };
 
   return (
-    <div className="flex flex-col mx-4  relative">
+    <div className="flex flex-col mx-4 relative">
       <Accordion type="single" collapsible>
         {Object.entries(data).map(([key, values]) => (
           <AccordionSection
@@ -53,7 +61,8 @@ const CombinedCategorySection: React.FC<CombinedCategorySectionProps> = ({
             title={key}
             contents={values}
             onTriggerClick={() => {}}
-            onContentClick={(id,title, name) => handleTrainSelection(id,title, name)}
+            onContentClick={(section, id, title, name) => handleTrainSelection(section, id, title, name)}
+            selectedContent={selectedContent}
           />
         ))}
       </Accordion>

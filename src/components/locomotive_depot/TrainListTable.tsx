@@ -157,14 +157,14 @@ const TrainListTable: React.FC<TrainDataInArrayProps> = ({
                 {item.oth_stop}
               </TableCell>
               <TableCell>
-                {Number(item.availability.toFixed(2)) * 100}%
+                {Number(item.availability*100).toFixed(2)}%
               </TableCell>
             </TableRow>
           ))
         ) : (
           <TableRow>
             <TableCell colSpan={17} className="text-left">
-              No data available
+              無資料
             </TableCell>
           </TableRow>
         )}

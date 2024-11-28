@@ -8,20 +8,23 @@ import {
   getSumStatusDetailListMultiplierZeor,
   getSumStatusDetailListMultiplierZeorDeptParamCartypeParamQtypeParam,
 } from "@/api/api";
-import {FetcheGetSumStatusList,} from "@/types/type";
+import { FetcheGetSumStatusList } from "@/types/type";
 
-import SlideNavigationContainer, {SlideNavigationContainerRef,} from "@/components/SlideNavigationContainer";
+import SlideNavigationContainer, {
+  SlideNavigationContainerRef,
+} from "@/components/SlideNavigationContainer";
 import BoardTitleSection from "@/components/BoardTitleSection";
 import Loading from "@/components/Loading";
 import CategorySection from "@/components/ui/accordionSection";
 
-import MaintenanceDetailSection from "@/components/locomotive_depot/MaintenanceDetailSection";
+import MaintenanceCard from "@/components/locomotive_depot/MaintenanceCard";
 import TrainListTable from "@/components/locomotive_depot/TrainListTable";
 
 const TrainPageContent: React.FC = () => {
   const [selectedLabel, setSelectedLabel] = useState<string | null>("全部");
   const [selectedArea, setSelectedArea] = useState<string | null>("全部機務段");
   const [maintenanceData, setMaintenanceData] = useState<any[]>([]);
+  const [LoadingState, setLoadingState] = useState<boolean>(false);
   const searchParams = useSearchParams();
   const date = searchParams?.get("date") || "";
 
@@ -61,24 +64,26 @@ const TrainPageContent: React.FC = () => {
     return acc;
   }, {});
 
-  const filteredTrainData = data?.data.filter((train) => {
-    const areaMatches =
-      selectedArea === "全部機務段" ||
-      !selectedArea ||
-      train.deptdesc.includes(selectedArea.replace("車輛配置", ""));
-    const labelMatches =
-      selectedLabel === "全部" ||
-      !selectedLabel ||
-      train.carcatalog === selectedLabel;
+  const filteredTrainData =
+    data?.data.filter((train) => {
+      const areaMatches =
+        selectedArea === "全部機務段" ||
+        !selectedArea ||
+        train.deptdesc.includes(selectedArea.replace("車輛配置", ""));
+      const labelMatches =
+        selectedLabel === "全部" ||
+        !selectedLabel ||
+        train.carcatalog === selectedLabel;
 
-    return areaMatches && labelMatches;
-  }) || [];
+      return areaMatches && labelMatches;
+    }) || [];
 
   const handleTrainClick = async (
     dept: string,
     cartype: string,
     divData: string
   ) => {
+    setLoadingState(true);
     slideNavRef.current?.handleMouseEnter("right");
     const data =
       await getSumStatusDetailListMultiplierZeorDeptParamCartypeParamQtypeParam(
@@ -88,11 +93,12 @@ const TrainPageContent: React.FC = () => {
         date
       );
     setMaintenanceData(data);
+    setLoadingState(false);
   };
 
   const slideNavRef = useRef<SlideNavigationContainerRef>(null);
   if (error) return <div>Failed to load</div>;
-  if (isLoading) return <div><Loading /></div>;
+  if (isLoading) return <Loading />;
 
   return (
     <div className="h-full overflow-hidden">
@@ -129,6 +135,7 @@ const TrainPageContent: React.FC = () => {
                 <TrainListTable
                   TrainDataInArray={filteredTrainData}
                   handleTrainClick={handleTrainClick}
+                  loading={isLoading}
                 />
               </>
             }
@@ -136,7 +143,28 @@ const TrainPageContent: React.FC = () => {
         </div>
 
         {/* Third Div */}
-        <MaintenanceDetailSection maintenanceData={maintenanceData} />
+        <div className="min-w-[25%] flex items-center justify-center">
+          <BoardTitleSection
+            title="車輛詳情"
+            content={
+              <div>
+                {LoadingState ? (
+                  <Loading />
+                ) : maintenanceData.length === 0 ? (
+                  <div>無資料</div>
+                ) : (
+                  maintenanceData.map((data, index) => (
+                    <MaintenanceCard
+                      key={index}
+                      maintenanceData={data}
+                      index={index + 1}
+                    />
+                  ))
+                )}
+              </div>
+            }
+          />
+        </div>
       </SlideNavigationContainer>
     </div>
   );

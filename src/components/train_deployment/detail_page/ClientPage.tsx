@@ -21,7 +21,7 @@ import TrainCategorySectionCard from "@/components/train_deployment/detail_page/
 
 import DataSection from "@/components/train_deployment/detail_page/DataSection";
 import TrainListTable from "@/components/locomotive_depot/TrainListTable";
-import MaintenanceDetailSection from "@/components/locomotive_depot/MaintenanceDetailSection";
+import MaintenanceCard from "@/components/locomotive_depot/MaintenanceCard";
 import SlideNavigationContainer, {
   SlideNavigationContainerRef,
 } from "@/components/SlideNavigationContainer";
@@ -183,7 +183,22 @@ const DetailClientPage: React.FC<{ carcatalogId: string }> = ({
         </div>
 
         {/* fourth Div */}
-        <MaintenanceDetailSection maintenanceData={maintenanceData} />
+        <div className="min-w-[25%] flex items-center justify-center">
+          <BoardTitleSection
+            title="車輛詳情"
+            content={
+              <div>
+                {maintenanceData.map((data, index) => (
+                  <MaintenanceCard
+                    key={index}
+                    maintenanceData={data}
+                    index={index + 1}
+                  />
+                ))}
+              </div>
+            }
+          />
+        </div>
       </SlideNavigationContainer>
     </div>
   );

@@ -208,7 +208,7 @@ const ClientPage: React.FC = () => {
                       ))}
                     </>
                   ) : (
-                    <p>No data available</p>
+                    <p>無資料</p>
                   )}
                 </div>
               )}

@@ -55,7 +55,7 @@ const TrainListTable: React.FC<TrainData> = ({ TrainDataInArray }) => {
         ) : (
           <TableRow>
             <TableCell colSpan={10} className="text-left">
-              No data available
+              無資料
             </TableCell>
           </TableRow>
         )}
