@@ -18,7 +18,7 @@ const MaintenanceDetailSection: React.FC<MaintenanceDetailSectionProps> = ({
         content={
           <div>
             {maintenanceData.map((maintenance, index) => (
-              <MaintenanceCard key={index} maintenanceData={maintenance} />
+              <MaintenanceCard key={index} maintenanceData={maintenance} index={index+1}/>
             ))}
           </div>
         }
