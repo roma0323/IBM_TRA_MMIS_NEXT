@@ -23,13 +23,7 @@ export default function UseRateAreaChart({
 
   return (
     <ResponsiveContainer width="100%" height="100%">
-      <ComposedChart
-        data={chartData}
-        margin={{
-          top: 10,
-          right: 10,
-        }}
-      >
+      <ComposedChart data={chartData}>
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="name" />
         <YAxis tickFormatter={(value) => `${value}%`} domain={[0, 100]} />

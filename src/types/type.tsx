@@ -244,8 +244,8 @@ export type Signal = {
   DESC?: string;
 };
 
-//annual report data refactor 
-export type AggregatedData =   {
+//annual report data refactor
+export type AggregatedData = {
   failtype: string;
   total: number;
   duty_num: number;
@@ -255,4 +255,13 @@ export type AggregatedData =   {
   monthlyDataBykpicartype: {
     [month: string]: { [kpicartype: string]: number };
   };
-}
+};
+
+export type Recent30days = {
+  ALL_D: string;
+  AVAILABLE: string;
+  EQ11: string;
+  RATION: string;
+  TOTAL: string;
+  USUALFLAG: string;
+};

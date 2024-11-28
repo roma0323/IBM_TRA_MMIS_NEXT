@@ -1,125 +1,63 @@
 "use client";
 import Link from "next/link";
 import React from "react";
-import { useSearchParams } from "next/navigation";
 import useSWR from "swr";
 
-import { DataByCarCatalog } from "@/types/type";
-import { getSumStatusListAndsumtotalEqualone, get30DayData } from "@/api/api";
+import {get30DayData } from "@/api/api";
 
 import { OverviewCard } from "@/components/train_deployment/OverviewCard";
 import { BigOverviewCard } from "@/components/train_deployment/BigOverviewCard";
 import Loading from "@/components/Loading";
-
-
-// RSTA 客車 RSTL 動力車 RSTF RSTP 貨車 USUALFLAG 常用
-
-function processData(data: any[]) {
-  const group1: Record<string, { AVAILABLE: number; TOTAL: number }> = {}; // EQ11 is RSTL, USUALFLAG is "1"
-  const group2: Record<string, { AVAILABLE: number; TOTAL: number }> = {}; // EQ11 is RSTA, USUALFLAG is "1"
-  const group3: Record<string, { AVAILABLE: number; TOTAL: number }> = {}; // EQ11 is RSTF or RSTP, USUALFLAG is "1"
-  const group4: Record<string, { AVAILABLE: number; TOTAL: number }> = {}; // USUALFLAG is "0"
-
-  data.forEach((item) => {
-    const { ALL_D, AVAILABLE, TOTAL, EQ11, USUALFLAG } = item;
-    const availableNum = parseFloat(AVAILABLE);
-    const totalNum = parseFloat(TOTAL);
-
-    let group = null;
-    if (USUALFLAG === "1") {
-      if (EQ11 === "RSTL") {
-        group = group1;
-      } else if (EQ11 === "RSTA") {
-        group = group2;
-      } else if (EQ11 === "RSTF" || EQ11 === "RSTP") {
-        group = group3;
-      }
-    } else if (USUALFLAG === "0") {
-      group = group4;
-    }
-
-    if (group) {
-      if (!group[ALL_D]) {
-        group[ALL_D] = { AVAILABLE: 0, TOTAL: 0 };
-      }
-      group[ALL_D].AVAILABLE += availableNum;
-      group[ALL_D].TOTAL += totalNum;
-    }
-  });
-
-  const groupArray = (
-    group: Record<string, { AVAILABLE: number; TOTAL: number }>
-  ) =>
-    Object.keys(group).map((date) => {
-      const { AVAILABLE, TOTAL } = group[date];
-      const RATION = Math.round((AVAILABLE / TOTAL) * 100);
-      return { name: date, RATION };
-    });
-
-  const final_output = [
-    groupArray(group1),
-    groupArray(group2),
-    groupArray(group3),
-    groupArray(group4),
-  ];
-
-  return final_output;
-}
+import {
+  processAreaChart30DayData,
+  processTotalAndAvailableData,
+} from "@/components/train_deployment/Process30daysChartData";
 
 export default function Page() {
-  const urlParams = useSearchParams();
-  const date = urlParams ? urlParams.get("date") || "" : "";
-
-  const fetchSumStatusList = async () => {
-    const fetchedData = await getSumStatusListAndsumtotalEqualone(date);
-    return fetchedData.data;
-  };
 
   const fetch30DayData = async () => {
     const fetchedData = await get30DayData();
     return fetchedData;
   };
 
-  const { data: sumStatusData, error: sumStatusError } = useSWR(
-    "fetchSumStatusList",
-    fetchSumStatusList
-  );
   const { data: thirtyDayData, error: thirtyDayError } = useSWR(
     "fetch30DayData",
     fetch30DayData
   );
 
-  if (sumStatusError || thirtyDayError) return <div>Failed to load</div>;
-  if (!sumStatusData || !thirtyDayData) return <Loading />;
+  if (thirtyDayError) return <div>Failed to load</div>;
+  if ( !thirtyDayData) return <Loading />;
 
-  const final_output = processData(thirtyDayData);
-
-  const dataByCarCatalog: DataByCarCatalog = {};
-  sumStatusData.forEach((item: DataByCarCatalog[keyof DataByCarCatalog]) => {
-    dataByCarCatalog[item.carcatalog] = item;
+  const area_chart_30days = processAreaChart30DayData({ data: thirtyDayData });
+  const total_Available_data = processTotalAndAvailableData({
+    data: thirtyDayData,
   });
+
 
   return (
     <main className="grow bg-secondary-background overflow-hidden relative">
       <div className="size-full p-6 relative overflow-auto">
-
-        <div className="flex flex-col flex-1 size-full gap-6 ">
-
+        <div className="flex flex-col flex-1 size-full gap-6">
           <div className="grow">
-            <BigOverviewCard Name="全局" Data={dataByCarCatalog["全局"]} />
+            <BigOverviewCard
+              Name="全局"
+              total={total_Available_data["動力車"]?.TOTAL}
+              available={total_Available_data["動力車"]?.AVAILABLE}
+              chartData={area_chart_30days["動力車"]}
+            />
           </div>
 
-          <div className="grid grid-cols-4 gap-4 grow  relative">
+          <div className="grid grid-cols-4 gap-4 grow relative">
             <Link
-             
               href={{
                 pathname: `/navbarpages/train_deployment/power_overview`,
               }}
             >
               <OverviewCard
                 Name="動力車"
-                Data={dataByCarCatalog["動力車"]}
-                chartData={final_output[0]}
+                total={total_Available_data["動力車"]?.TOTAL}
+                available={total_Available_data["動力車"]?.AVAILABLE}
+                chartData={area_chart_30days["動力車"]}
               />
             </Link>
 
@@ -130,8 +68,9 @@ export default function Page() {
             >
               <OverviewCard
                 Name="客車"
-                Data={dataByCarCatalog["客車"]}
-                chartData={final_output[1]}
+                total={total_Available_data["客車"]?.TOTAL}
+                available={total_Available_data["客車"]?.AVAILABLE}
+                chartData={area_chart_30days["客車"]}
               />
             </Link>
             <Link
@@ -141,8 +80,9 @@ export default function Page() {
             >
               <OverviewCard
                 Name="貨車"
-                Data={dataByCarCatalog["貨車"]}
-                chartData={final_output[2]}
+                total={total_Available_data["貨車"]?.TOTAL}
+                available={total_Available_data["貨車"]?.AVAILABLE}
+                chartData={area_chart_30days["貨車"]}
               />
             </Link>
             <Link
@@ -152,8 +92,9 @@ export default function Page() {
             >
               <OverviewCard
                 Name="非常態列車"
-                Data={dataByCarCatalog["非常態列車"]}
-                chartData={final_output[3]}
+                total={total_Available_data["非常態列車"]?.TOTAL}
+                available={total_Available_data["非常態列車"]?.AVAILABLE}
+                chartData={area_chart_30days["非常態列車"]}
               />
             </Link>
           </div>

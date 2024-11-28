@@ -130,16 +130,12 @@ text
 http://192.168.36.21/maximo/zz_data?method=getResult
 F P加起來 貨車
 L動力車
-
 guse flag = 0 非常態
-
-30天資料 加總後相除
-
 加入30天使用率標籤
 
 
 車種細節直接用
-
+貨車細節數量不對
 總量數 beloingto  可用數 current 三個加起來
 
 
