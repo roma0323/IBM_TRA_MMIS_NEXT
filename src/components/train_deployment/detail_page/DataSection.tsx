@@ -1,7 +1,7 @@
 import React from "react";
 import { DataCard } from "@/components/train_deployment/DataCard";
 import UseRateAreaChart from "@/components/train_deployment/UseRateAreaChart";
-import BigPieChart from "@/components/train_deployment/detail_page/BigPieChart";
+import PieChartGradient from "@/components/fault_notification/annual_report/PieChartGradient";
 import BoardTitleSection from "@/components/BoardTitleSection"; // Import the Section component
 import {PiechartData} from "@/types/type"
 
@@ -45,7 +45,7 @@ const DataSection = ({
         title={`城際列車 - 車種配置`}
         content={
           <div className="h-full relative w-full flex items-start justify-start">
-            <BigPieChart styleTemplate={carcatalog} PieChartData={PieChartData}/>
+            <PieChartGradient  data={PieChartData}/>
           </div>
         }
       />

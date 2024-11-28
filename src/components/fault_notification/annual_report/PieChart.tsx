@@ -10,8 +10,15 @@ import {
 } from "recharts";
 import { getCarColor } from "@/lib/getCarColor"; // Import the getCarColor function
 
-
-const CustomTooltip = ({ active, payload, data }: { active?: boolean; payload?: any; data: any[] }) => {
+const CustomTooltip = ({
+  active,
+  payload,
+  data,
+}: {
+  active?: boolean;
+  payload?: any;
+  data: any[];
+}) => {
   if (active && payload && payload.length) {
     const total = data.reduce((sum, entry) => sum + entry.value, 0);
     const value = payload[0].value;
@@ -31,7 +38,7 @@ const CustomTooltip = ({ active, payload, data }: { active?: boolean; payload?: 
         <p className="label" style={{ color }}>{`${payload[0].name}`}</p>
         <p className="label" style={{ color }}>{`數量 : ${value}`}</p>
         <p className="label" style={{ color }}>{`比例 : ${percentage}%`}</p>
-        </div>
+      </div>
     );
   }
 
@@ -41,29 +48,27 @@ export default class Example extends PureComponent<{ data: any[] }> {
   render() {
     const { data } = this.props;
     return (
-      <ResponsiveContainer width="100%" height="100%">
-        <PieChart>
-          <Pie
-            data={data}
-            cx="50%"
-            cy="50%"
-            labelLine={false}
-            outerRadius={80}
-            fill="#8884d8"
-            dataKey="value"
-          >
-            {data.map((entry, index) => (
-              <Cell
-                key={`cell-${index}`}
-                fill={getCarColor(entry.name)} // Use getCarColor to set the color
-              />
-            ))}
-          </Pie>
-          <Legend />
+      <div style={{ width: "100%", height: "90%", marginTop: "5%" }}>
+        <ResponsiveContainer>
+          <PieChart>
+            <Pie
+              data={data}
+              fill="#8884d8"
+              dataKey="value"
+            >
+              {data.map((entry, index) => (
+                <Cell
+                  key={`cell-${index}`}
+                  fill={getCarColor(entry.name)} // Use getCarColor to set the color
+                />
+              ))}
+            </Pie>
+            <Legend />
 
-          <Tooltip content={<CustomTooltip data={data} />} />
-        </PieChart>
-      </ResponsiveContainer>
+            <Tooltip content={<CustomTooltip data={data} />} />
+          </PieChart>
+        </ResponsiveContainer>
+      </div>
     );
   }
 }

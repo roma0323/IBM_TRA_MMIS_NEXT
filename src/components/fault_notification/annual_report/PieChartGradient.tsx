@@ -62,14 +62,15 @@ export default class Example extends PureComponent<{ data: any[] }> {
   render() {
     const { data } = this.props;
     return (
-      <ResponsiveContainer width="100%" height="100%">
+      <div style={{ width: "100%", height: "90%", marginTop: "5%" }}>
+
+      <ResponsiveContainer >
         <PieChart>
           <Pie
             data={data}
             cx="50%"
             cy="50%"
             labelLine={false}
-            outerRadius={80}
             fill="#8884d8"
             dataKey="value"
           >
@@ -84,6 +85,7 @@ export default class Example extends PureComponent<{ data: any[] }> {
           <Tooltip content={<CustomTooltip data={data} />} />
         </PieChart>
       </ResponsiveContainer>
+      </div>
     );
   }
 }
