@@ -6,13 +6,13 @@ import useSWR from "swr";
 import { getSumStatusListAndMultiplierEqualZeorCarcatalogEqualParamCartypeEqualTrainname,getSumStatusDetailListMultiplierZeorDeptParamCartypeParamQtypeParam,getSumStatusListEq3Param,getSumStatusListAndsumtotalEqualone,getSumStatusListAndCarcatalogEqualParam } from "@/api/api";
 import { useSearchParams } from "next/navigation";
 import { FetcheGetSumStatusListDataInArray } from "@/types/type"; 
-import {refactorPieChartData } from "@/components/train_deployment/detail_page/ProcessPieChartData"
+import {refactorPieChartData,refactorCardData } from "@/components/train_deployment/detail_page/ProcessPieChartData"
 import BoardTitleSection from "@/components/BoardTitleSection";
 import Loading from "@/components/Loading";
+import TrainCategorySectionCard from "@/components/train_deployment/detail_page/TrainCategorySectionCard";
 
 import DataSection from "@/components/train_deployment/detail_page/DataSection";
 import TrainListTable from "@/components/locomotive_depot/TrainListTable";
-import TrainCategorySection from "@/components/train_deployment/detail_page/TrainCategorySection";
 import MaintenanceDetailSection from "@/components/locomotive_depot/MaintenanceDetailSection";
 import SlideNavigationContainer, {
   SlideNavigationContainerRef,
@@ -49,8 +49,6 @@ const DetailClientPage: React.FC<{ carcatalogId: string }> = ({
   };
   const fetchCertainSumStatusList = async () => {
     const fetchedData = await getSumStatusListAndCarcatalogEqualParam(carcatalog,date);
-    console.log(fetchedData,'fetchedData')
-    console.log('fffffff')
     return fetchedData.data;
   };
 
@@ -68,9 +66,8 @@ const DetailClientPage: React.FC<{ carcatalogId: string }> = ({
   if (CertainTrainStatusError || error) return <div>Failed to load</div>;
   if (!CertainTrainStatusData || !data) return <Loading />;
 
-console.log(CertainTrainStatusData,'CertainTrainStatusData')
   const PieChartData = refactorPieChartData(CertainTrainStatusData);
-  console.log(PieChartData,'PieChartData')
+  const CardData = refactorCardData(CertainTrainStatusData);
 
   const cntSum = data
     .filter((item) => item.carcatalog === carcatalog)
@@ -140,12 +137,18 @@ console.log(CertainTrainStatusData,'CertainTrainStatusData')
           <BoardTitleSection
             title={`${carcatalog} - 車種分配資訊`}
             content={
-              <TrainCategorySection
-                key={carcatalog}
-                selectedTrainName={selectedTrainName}
-                carcatalog={carcatalog}
-                handleTrainClick={handleTrainTypeClick}
-              />
+              <div className="flex flex-col items-start gap-2.5 px-3 py-2 relative w-full">
+              {CardData.map((train, index) => (
+                <TrainCategorySectionCard
+                  key={index}
+                  trainName={train.name}
+                  onClick={() => handleTrainTypeClick(train.name)}
+                  isActive={selectedTrainName === train.name}
+                  total={train.value}
+                  available={train.value2}
+                />
+              ))}
+            </div>
             }
           />
         </div>

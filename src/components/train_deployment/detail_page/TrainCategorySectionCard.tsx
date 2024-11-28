@@ -4,15 +4,19 @@ import React from "react";
 import { DataCard } from "@/components/train_deployment/DataCard";
 
 type MyComponentProps = {
-  trainName: string;
+  trainName?: string;
   onClick: () => void;
   isActive: boolean;
+  total?:number;
+  available?:number
 };
 
 const DeploymentByTrainCategory: React.FC<MyComponentProps> = ({
-  trainName,
+  trainName = "unknown",
   onClick,
   isActive,
+  total=0,
+  available=0
 }) => {
 
   const handleToggle = () => {
@@ -28,9 +32,9 @@ const DeploymentByTrainCategory: React.FC<MyComponentProps> = ({
     >
       <div >{trainName}</div>
       <div className="flex w-full justify-around" >
-        <DataCard text="" text1="可用數" />
-        <DataCard text="" text1="總輛數" />
-        <DataCard text="" text1="可用率" />
+        <DataCard text={total.toString()} text1="總輛數" />
+        <DataCard text={available.toString()} text1="可用數" />
+        <DataCard text={`${(Math.round((available/total*100))).toString()}%`} text1="可用率" />
       </div>
     </div>
   );
