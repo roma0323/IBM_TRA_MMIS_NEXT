@@ -15,6 +15,7 @@ import { TrainInFactoryCard } from "@/components/factory_maintenance/TrainInFact
 import ComposedChartMonthly from "@/components/factory_maintenance/ComposedChartMonthly";
 import ComposedChartAccmulate from "@/components/factory_maintenance/ComposedChartAccmulate";
 import getChartData from "@/components/factory_maintenance/ChartDataRefactor";
+import TrainListTable from "@/components/factory_maintenance/TrainListTable";
 
 const getCurrentMonthIndex = (): number => {
   const date = new Date();
@@ -53,9 +54,9 @@ const ClientPage: React.FC = () => {
         ref={slideNavRef}
         totalSlides={3}
         visibleSlides={2}
-        slideWidthPercentage={36}
+        slideWidthPercentage={49}
       >
-        <div className="min-w-[35%] flex items-center justify-center">
+        <div className="min-w-[49%] flex items-center justify-center">
           <BoardTitleSection
             title={`機廠檢修預覽`}
             content={
@@ -80,7 +81,7 @@ const ClientPage: React.FC = () => {
           />
         </div>
 
-        <div className="min-w-[63%] flex items-center justify-center">
+        <div className="min-w-[49%] flex items-center justify-center">
           <BoardTitleSection
             title={`${selectFactory}-檢修走勢`}
             content={
@@ -90,7 +91,7 @@ const ClientPage: React.FC = () => {
                     activeCardIndex === index && (
                       <div
                         key={index}
-                        className=" size-full flex flex-col py-8 items-center justify-between"
+                        className=" size-full flex flex-col items-center justify-around"
                       >
                         <div className="flex justify-center items-center w-full">
                           <ComposedChartMonthly data={chartData.monthData.map(item => ({
@@ -114,44 +115,13 @@ const ClientPage: React.FC = () => {
           />
         </div>
 
-        <div className="min-w-[35%] flex items-center justify-center ">
+        <div className="min-w-[48%] flex items-center justify-center ">
           <BoardTitleSection
-            title={`${selectFactory}-該月檢修清單`}
+            title={`${selectFactory}-該月檢修清單-共${(data.listData.data).length}件`}
             content={
               <div className="flex flex-col size-full">
-                {data.listData.data.map((attr: factorySumStatus, index:number) =>
-                  selectFactory === "全部機廠" ||
-                  attr.deptdesc.includes(selectFactory) ? (
-                    <div
-                      key={index}
-                      className="p-4 mx-3 m-3  bg-[#3034380d] rounded-xl  border-l-4"
-                    >
-                      {attr.deptdesc} - {attr.assetnum}
-                      <div className="flex flex-col py-2 self-stretch">
-                        <div className="w-full pt-1 px-6 flex  justify-between">
-                          <p>進場收容單號:</p>
-                          <p>{attr.imnum}</p>
-                        </div>
-                        <div className="w-full pt-1 px-6 flex  justify-between">
-                          <p>工作單號:</p>
-                          <p>{attr.wojp3}</p>
-                        </div>
-                        <div className="w-full pt-1 px-6 flex  justify-between">
-                          <p>車輛數:</p>
-                          <p>{attr.childcarcnt}</p>
-                        </div>
-                        <div className="w-full pt-1 px-6 flex  justify-between">
-                          <p>檢修級別:</p>
-                          <p>{attr.worktype}</p>
-                        </div>
-                        <div className="w-full pt-1 px-6 flex  justify-between">
-                          <p>交段日期:</p>
-                          <p>{attr.facoutdate}</p>
-                        </div>
-                      </div>
-                    </div>
-                  ) : null
-                )}
+                <TrainListTable TrainDataInArray={data.listData.data} />
+                
               </div>
             }
           />

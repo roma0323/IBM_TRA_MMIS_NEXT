@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { DataCard } from "@/components/train_deployment/DataCard";
 interface MonthData {
   name: string;
-  "當月預計": number;
-  "當月達成": number;
-  "累積預計": number;
-  "累積達成": number;
+  當月預計: number;
+  當月達成: number;
+  累積預計: number;
+  累積達成: number;
 }
 
 interface Factory {
@@ -55,19 +55,25 @@ export const TrainInFactoryCard: React.FC<Props> = ({
           </div>
         </div>
 
-        {(isHovered || isActive) && (
-          <div className="self-stretch py-2 justify-between items-center inline-flex">
+        <div className="self-stretch py-2 justify-between items-center inline-flex">
+          <DataCard text={`${cumulativeAchievementRate}%`} text1="累積達成率" />
+          <DataCard
+            text={`${factory.monthData[currentMonthIndex]["累積達成"]}`}
+            text1="累積達成"
+          />
+          <DataCard
+            text={`${factory.monthData[currentMonthIndex]["累積預計"]}`}
+            text1="累積預計"
+          />
+          <div className="pl-2 border-l">
             <DataCard
-              text={`${cumulativeAchievementRate}%`}
-              text1="累積達成率"
+              text={`${
+                factory.monthData[factory.monthData.length - 1]["累積預計"]
+              }`}
+              text1="年度目標"
             />
-            <DataCard text={`${factory.monthData[currentMonthIndex]["累積達成"]}`} text1="累積達成" />
-            <DataCard text={`${factory.monthData[currentMonthIndex]["累積預計"]}`} text1="累積預計" />
-            <div className="pl-2 border-l">
-              <DataCard text={`${factory.monthData[factory.monthData.length - 1]["累積預計"]}`} text1="年度目標" />
-            </div>
           </div>
-        )}
+        </div>
       </div>
     </div>
   );

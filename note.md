@@ -37,6 +37,8 @@ export type InventoryListIssue = {
 機務段數量是配置數還是有幾行
 動力連續定額(HP) ?????
 annual static dploy sometime error , dont know why so far
+小數點兩位
+機場配置->在場車
 
 
 ---------------------
@@ -48,19 +50,22 @@ guse flag = 0 非常態
 加入30天使用率標籤
 車種細節直接用
 總量數 beloingto  可用數 current 三個加起來
+accordino number label
+機場維修 不要hover才顯示
+
+card 總數量
+圖表分太開
+
 ---------------------
 
 undone:
-accordino number label
 機廠檢修清單：
-機場維修 不要hover才顯示
-小數點兩位
-card 總數量
-圖表分太開
-日其功能排序
-機場配置->在場車
+
 車種分類要有總數
 延遲 正的才有顏色
+
+
+日其功能排序
 
 report:
 annual report  error first time  , cannot read forEach
