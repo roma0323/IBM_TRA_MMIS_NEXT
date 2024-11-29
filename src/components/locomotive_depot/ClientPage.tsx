@@ -1,7 +1,7 @@
 "use client";
 
 import useSWR from "swr";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 
 import {
@@ -9,6 +9,10 @@ import {
   getSumStatusDetailListMultiplierZeorDeptParamCartypeParamQtypeParam,
 } from "@/api/api";
 import { FetcheGetSumStatusList } from "@/types/type";
+import {
+  calculateCounts,
+  createFactoryData,
+} from "@/components/locomotive_depot/ProcessData";
 
 import SlideNavigationContainer, {
   SlideNavigationContainerRef,
@@ -38,31 +42,8 @@ const TrainPageContent: React.FC = () => {
     fetcher
   );
 
-  const factoryData: { [key: string]: string[] } = [
-    "全部機務段",
-    "七堵機務段",
-    "臺北機務段",
-    "新竹機務段",
-    "彰化機務段",
-    "嘉義機務段",
-    "高雄機務段",
-    "花蓮機務段",
-    "臺東機務段",
-    "宜蘭機務段",
-  ].reduce((acc: { [key: string]: string[] }, dept: string) => {
-    acc[dept] = [
-      "全部",
-      "客車",
-      "貨車",
-      "柴油客車",
-      "柴液機車",
-      "柴電機車",
-      "電力機車",
-      "通勤列車",
-      "城際列車",
-    ];
-    return acc;
-  }, {});
+  const counts = data ? calculateCounts(data.data) : {};
+  const factoryData = createFactoryData(counts);
 
   const filteredTrainData =
     data?.data.filter((train) => {
@@ -99,7 +80,7 @@ const TrainPageContent: React.FC = () => {
   const slideNavRef = useRef<SlideNavigationContainerRef>(null);
   if (error) return <div>Failed to load</div>;
   if (isLoading) return <Loading />;
-
+  console.log(maintenanceData, "maintenanceData");
   return (
     <div className="h-full overflow-hidden">
       <SlideNavigationContainer
@@ -150,7 +131,8 @@ const TrainPageContent: React.FC = () => {
               <div>
                 {LoadingState ? (
                   <Loading />
-                ) : maintenanceData.length === 0 ? (
+                ) : !Array.isArray(maintenanceData) ||
+                  maintenanceData.length === 0 ? (
                   <div>無資料</div>
                 ) : (
                   maintenanceData.map((data, index) => (

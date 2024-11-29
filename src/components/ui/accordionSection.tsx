@@ -8,13 +8,13 @@ import {
 
 type CombinedCategorySectionProps = {
   setSelectTrain: (id: string, title: string, name?: string) => void;
-  data: Record<string, { id: string; name: string }[] | string[]>; // Accept both types of data
+  data: Record<string, { id: string; name: string; amount?: number }[] | string[]>; // Accept both types of data and optional amount
 };
 
 const AccordionSection: React.FC<{
   value: string;
   title: string;
-  contents?: { id: string; name: string }[] | string[];
+  contents?: ({ id: string; name: string; amount?: number } | string)[];
   onTriggerClick: () => void;
   onContentClick?: (section: string, id: string, title: string, name?: string) => void;
   selectedContent: { section: string; id: string } | null;
@@ -34,7 +34,10 @@ const AccordionSection: React.FC<{
               : ""
           }`}
         >
-          {content.name || content}
+          <div className="flex justify-between">
+            <div>{content.name || content}</div>
+            <div>{content.amount}</div> 
+          </div>
         </AccordionContent>
       ))}
   </AccordionItem>

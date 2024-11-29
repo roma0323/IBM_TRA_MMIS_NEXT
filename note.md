@@ -34,6 +34,7 @@ export type InventoryListIssue = {
 ----------------------------------
 暫緩：
 可否不放貨車 貨車細節數量不對
+機務段數量是配置數還是有幾行
 動力連續定額(HP) ?????
 annual static dploy sometime error , dont know why so far
 
@@ -50,7 +51,7 @@ guse flag = 0 非常態
 ---------------------
 
 undone:
-
+accordino number label
 機廠檢修清單：
 機場維修 不要hover才顯示
 小數點兩位
