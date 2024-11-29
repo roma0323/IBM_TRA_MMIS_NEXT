@@ -15,8 +15,8 @@ export default function UseRateAreaChart({
 }: {
   data: Array<{
     month: string;
-    thisyear_failcnt: number;
-    lastyear_failcnt: number;
+    今年日均故障數: string;
+    去年日均故障數: string;
   }>;
 }) {
 
@@ -24,9 +24,7 @@ export default function UseRateAreaChart({
     <ResponsiveContainer width="100%" height="100%">
       <ComposedChart
         data={data}
-        margin={{
-          
-        }}
+       
       >
         <XAxis dataKey="month" />
         <YAxis
@@ -35,14 +33,14 @@ export default function UseRateAreaChart({
         <Tooltip />
         <Area
           type="monotone"
-          dataKey="lastyear_failcnt"
+          dataKey="去年日均故障數"
           fill="#E8E8E8"
           stroke="#D1D1D1"
           activeDot={{ r: 5 }}
         />
         <Area
           type="monotone"
-          dataKey="thisyear_failcnt"
+          dataKey="今年日均故障數"
           fill="#397EFF"
           stroke="#397EFF"
           activeDot={{ r: 5 }}

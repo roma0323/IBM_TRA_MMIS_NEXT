@@ -1,10 +1,22 @@
-'use client'
+"use client";
 import React, { useEffect, useState } from "react";
 import useSWR from "swr";
 import { useSearchParams } from "next/navigation";
 
-import { getATPFailYear, getATPFailListByYearAndCartype, getATPFailListByYearAndFactor, getATPFailListByYearAndElement, getATPFailListAndCartype } from "@/api/api";
-import { ATPFailListByMonth, ATPReasonByCarType, RefactoredCarTypeForPieChart, FaultListDetail, FaultEquipmentAnalysis } from "@/types/type";
+import {
+  getATPFailYear,
+  getATPFailListByYearAndCartype,
+  getATPFailListByYearAndFactor,
+  getATPFailListByYearAndElement,
+  getATPFailListAndCartype,
+} from "@/api/api";
+import {
+  ATPFailListByMonth,
+  ATPReasonByCarType,
+  RefactoredCarTypeForPieChart,
+  FaultListDetail,
+  FaultEquipmentAnalysis,
+} from "@/types/type";
 
 import BoardTitleSection from "@/components/BoardTitleSection";
 import PieChartGradient from "@/components/fault_notification/annual_report/PieChartGradient";
@@ -19,6 +31,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Button } from "@/components/ui/button";
+import { ArrowUpDown } from "lucide-react";
 
 type FetcherData = {
   lastYearOverviewNumber: ATPFailListByMonth[];
@@ -28,15 +42,23 @@ type FetcherData = {
   faultListDetail: FaultListDetail[];
   faultEquipmentAnalysis: FaultEquipmentAnalysis[];
 };
-
 const ClientPage: React.FC = () => {
-  const [filteredListData, setFilteredListData] = useState<FaultListDetail[]>([]);
-  const [selectedMonth, setSelectedMonth] = useState<string | null>("各");
+  const [filteredListData, setFilteredListData] = useState<FaultListDetail[]>(
+    []
+  );
+  const [selectedMonth, setSelectedMonth] = useState<string | null>("01");
   const [expandedRows, setExpandedRows] = useState<Set<string>>(new Set());
   const [isLoadingState, setIsLoadingState] = useState<boolean>(true);
+  const [showFaultReason, setShowFaultReason] = useState(true);
 
+  const toggleData = () => {
+    setShowFaultReason(!showFaultReason);
+  };
+  
   const searchParams = useSearchParams();
-  const date = searchParams?.get("date") || "";
+  const date = searchParams?.get("date") || new Date().toISOString().slice(0, 10);
+  const year = new Date(date).getFullYear();
+  const startOfYear = `${year}-01-01`;
 
   const fetcher = async (): Promise<FetcherData> => {
     const [
@@ -45,14 +67,22 @@ const ClientPage: React.FC = () => {
       faultListByMonth,
       faultReasonAnalysis,
       faultEquipmentAnalysis,
-      faultListDetail
+      faultListDetail,
     ] = await Promise.all([
       getATPFailYear(date),
-      getATPFailYear(new Date(new Date(date || new Date()).setFullYear(new Date(date || new Date()).getFullYear() - 1)).toISOString().slice(0, 10)),
+      getATPFailYear(
+        new Date(
+          new Date(date || new Date()).setFullYear(
+            new Date(date || new Date()).getFullYear() - 1
+          )
+        )
+          .toISOString()
+          .slice(0, 10)
+      ),
       getATPFailListByYearAndCartype(date),
       getATPFailListByYearAndFactor(date),
       getATPFailListByYearAndElement(date),
-      getATPFailListAndCartype(date)
+      getATPFailListAndCartype(date),
     ]);
 
     return {
@@ -61,7 +91,7 @@ const ClientPage: React.FC = () => {
       faultListByMonth,
       faultReasonAnalysis,
       faultEquipmentAnalysis,
-      faultListDetail
+      faultListDetail,
     };
   };
 
@@ -69,6 +99,15 @@ const ClientPage: React.FC = () => {
     onSuccess: () => setIsLoadingState(false),
     onError: () => setIsLoadingState(false),
   });
+
+  useEffect(() => {
+    if (data) {
+      const filteredData = data.faultListDetail.filter((item) =>
+        item.enterdate.includes(`-${selectedMonth}-`)
+      );
+      setFilteredListData(filteredData);
+    }
+  }, [data, selectedMonth]);
 
   if (isLoadingState) {
     return <Loading />;
@@ -85,7 +124,7 @@ const ClientPage: React.FC = () => {
       faultListByMonth,
       faultReasonAnalysis,
       faultEquipmentAnalysis,
-      faultListDetail
+      faultListDetail,
     } = data;
 
     const refactorCartype = (
@@ -135,12 +174,18 @@ const ClientPage: React.FC = () => {
 
     const combinedData = Array.from(allMonths).map((month) => {
       const thisYearData = overview_number.find((item) => item.month === month);
-      const lastYearData = lastYearOverviewNumber.find((item) => item.month === month);
+      const lastYearData = lastYearOverviewNumber.find(
+        (item) => item.month === month
+      );
 
       return {
         month,
-        thisyear_failcnt: thisYearData ? parseInt(thisYearData.failcnt, 10) : 0,
-        lastyear_failcnt: lastYearData ? parseInt(lastYearData.failcnt, 10) : 0,
+        今年日均故障數: thisYearData
+          ? parseFloat(thisYearData.dailyfailcnt).toFixed(2)
+          : "0.00",
+        去年日均故障數: lastYearData
+          ? parseFloat(lastYearData.dailyfailcnt).toFixed(2)
+          : "0.00",
       };
     });
 
@@ -148,7 +193,7 @@ const ClientPage: React.FC = () => {
       <div className="grid grid-rows-4 grid-flow-col gap-4 p-4 h-full">
         <div className="relative row-span-1 col-span-1">
           <BoardTitleSection
-            title="年度總覽"
+            title={`總覽 ${startOfYear}~${date}`}
             content={
               <div className="size-full flex justify-around items-center">
                 <DataCard text={totalFailCnt.toString()} text1="年度故障次數" />
@@ -179,7 +224,7 @@ const ClientPage: React.FC = () => {
                       <TableRow
                         key={item.month}
                         onClick={() => handleRowClick(item.month)}
-                        className="hover:bg-primary/30 cursor-pointer"
+                        className="hover:bg-primary/20 cursor-pointer"
                       >
                         <TableCell className="font-medium">
                           {item.month}
@@ -199,24 +244,26 @@ const ClientPage: React.FC = () => {
 
         <div className="row-span-2 col-span-3 grid grid-cols-3 gap-4 relative">
           <BoardTitleSection
-            title="當月故障數趨勢圖"
+            title="日故障件數 依據 年-月"
             content={
               <div className="size-full py-6 pr-8  ">
-                <UseRateAreaChart
-                  data={combinedData}
-                />
+                <UseRateAreaChart data={combinedData} />
               </div>
             }
           />
           <BoardTitleSection
-            title="故障要因分析&故障車型分析"
-            content={
-              <div className="size-full">
-                <PieChartGradient data={refactoredfaultReasonAnalysis} />
-                <PieChartGradient data={refactoredCartype} />
-              </div>
-            }
-          />
+      title="故障要因分析&故障車型分析"
+      content={
+        <div className="size-full">
+          <PieChartGradient data={showFaultReason ? refactoredfaultReasonAnalysis : refactoredCartype} />
+
+          <Button  variant="secondary"  onClick={toggleData} className=" absolute top-0 right-0 m-2">
+            {showFaultReason ? '故障車型分析' : '故障要因分析'}
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+          </Button>
+        </div>
+      }
+    />
           <BoardTitleSection
             title="故障設備分析"
             content={
@@ -234,7 +281,7 @@ const ClientPage: React.FC = () => {
                       <React.Fragment key={item.key}>
                         <TableRow
                           onClick={() => handleExpandClick(item.key)}
-                          className={"cursor-pointer"}
+                          className={"hover:bg-primary/20 cursor-pointer"}
                         >
                           <TableCell className="font-medium ">
                             &gt; {item.key}

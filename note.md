@@ -39,6 +39,7 @@ export type InventoryListIssue = {
 annual static dploy sometime error , dont know why so far
 小數點兩位
 機場配置->在場車
+annual report  error first time  , cannot read forEach
 
 
 ---------------------
@@ -55,24 +56,18 @@ accordino number label
 card 總數量
 圖表分太開
 車種分類要有總數
+機廠檢修清單：
+
+延遲 正的才有顏
+label改成中文 件數改成平均
+日其功能排序
+default value
+年度講清楚
 
 ---------------------
 
 undone:
-機廠檢修清單：
 
-延遲 正的才有顏
-
-日其功能排序
-
-report:
-annual report  error first time  , cannot read forEach
-千分位分號
-當月改成個月份 label改成中文
-件數改成平均
-default value
-百分比%
-年度講清楚
 
 1.新增percentage 
 2.整合sum_invbal_mount,sum_issue_mount & curbal,quantity
