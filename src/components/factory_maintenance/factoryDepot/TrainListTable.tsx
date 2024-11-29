@@ -1,4 +1,15 @@
-import React from "react";
+"use client"
+import * as React from "react"
+
+import {
+  ColumnDef,
+  flexRender,
+  getCoreRowModel,
+  useReactTable,  SortingState,
+  getSortedRowModel,
+
+} from "@tanstack/react-table"
+
 import {
   Table,
   TableBody,
@@ -6,62 +17,74 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import { factorySumStatus } from "@/types/type";
-type TrainData = {
-  TrainDataInArray: factorySumStatus[];
-};
+} from "@/components/ui/table"
 
-const TrainListTable: React.FC<TrainData> = ({ TrainDataInArray }) => {
+interface DataTableProps<TData, TValue> {
+  columns: ColumnDef<TData, TValue>[]
+  data: TData[]
+}
+
+export function DataTable<TData, TValue>({
+  columns,
+  data,
+}: DataTableProps<TData, TValue>) {
+  const [sorting, setSorting] = React.useState<SortingState>([])
+
+  const table = useReactTable({
+    data,
+    columns,
+    getCoreRowModel: getCoreRowModel(),
+    onSortingChange: setSorting,
+    getSortedRowModel: getSortedRowModel(),
+    state: {
+      sorting,
+    },
+  })
+
   return (
-    <Table>
-      <TableHeader>
-        <TableRow>
-          <TableHead>車種</TableHead>
-          <TableHead>廠別</TableHead>
-          <TableHead>車型</TableHead>
-          <TableHead>車組/車號</TableHead>
-          <TableHead>檢修級別</TableHead>
-          <TableHead>進場日期</TableHead>
-          <TableHead>開工日期</TableHead>
-          <TableHead>預計完工日期</TableHead>
-          <TableHead>實際完工日期</TableHead>
-          <TableHead>出廠日期</TableHead>
-          <TableHead>在場天數</TableHead>
-          <TableHead>施工天數</TableHead>
-          <TableHead>提前/預期天數</TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {TrainDataInArray.length > 0 ? (
-          TrainDataInArray.map((item, itemIndex) => (
-            <TableRow className="" key={itemIndex}>
-              <TableCell>{item.carcatalog}</TableCell>
-              <TableCell>{item.deptdesc}</TableCell>
-              <TableCell>{item.cartype}</TableCell>
-              <TableCell>{item.assetnum}</TableCell>
-              <TableCell>{item.worktype}</TableCell>
-              <TableCell>{item.facindate}</TableCell>
-              <TableCell>{item.actstart}</TableCell>
-              <TableCell>{item.schedfinish}</TableCell>
-              <TableCell>{item.actfinish}</TableCell>
-              <TableCell>{item.facoutdate}</TableCell>
-              <TableCell>{item.infacdays}</TableCell>
-              <TableCell>{item.inwodays}</TableCell>
-              <TableCell>{item.behindordelaydays}</TableCell>
-              {/* <TableCell>{Number(item.availability.toFixed(2))}</TableCell> */}
+    <div className="rounded-md border">
+      <Table>
+        <TableHeader>
+          {table.getHeaderGroups().map((headerGroup) => (
+            <TableRow key={headerGroup.id}>
+              {headerGroup.headers.map((header) => {
+                return (
+                  <TableHead key={header.id}>
+                    {header.isPlaceholder
+                      ? null
+                      : flexRender(
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
+                  </TableHead>
+                )
+              })}
             </TableRow>
-          ))
-        ) : (
-          <TableRow>
-            <TableCell colSpan={10} className="text-left">
-              無資料
-            </TableCell>
-          </TableRow>
-        )}
-      </TableBody>
-    </Table>
-  );
-};
-
-export default TrainListTable;
+          ))}
+        </TableHeader>
+        <TableBody>
+          {table.getRowModel().rows?.length ? (
+            table.getRowModel().rows.map((row) => (
+              <TableRow
+                key={row.id}
+                data-state={row.getIsSelected() && "selected"}
+              >
+                {row.getVisibleCells().map((cell) => (
+                  <TableCell key={cell.id}>
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </TableCell>
+                ))}
+              </TableRow>
+            ))
+          ) : (
+            <TableRow>
+              <TableCell colSpan={columns.length} className="h-24 text-center">
+                No results.
+              </TableCell>
+            </TableRow>
+          )}
+        </TableBody>
+      </Table>
+    </div>
+  )
+}

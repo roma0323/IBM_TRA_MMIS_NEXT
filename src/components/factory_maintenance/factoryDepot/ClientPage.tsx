@@ -5,11 +5,16 @@ import useSWR from "swr";
 import { useSearchParams } from "next/navigation";
 import {  factorySumStatus } from "@/types/type"; // Update the import path as needed
 import { getFacRepairList } from "@/api/api";
+import {
+  calculateCounts,
+  createFactoryData,
+} from "@/components/factory_maintenance/factoryDepot/ProcessData";
 
 import Loading from "@/components/Loading"
 import BoardTitleSection from "@/components/BoardTitleSection";
 import CategorySection from "@/components/ui/accordionSection";
-import TrainListTable from "@/components/factory_maintenance/factoryDepot/TrainListTable";
+import {DataTable} from "@/components/factory_maintenance/factoryDepot/TrainListTable";
+import {columns} from "@/components/factory_maintenance/factoryDepot/column";
 
 const TrainPageContent: React.FC = () => {
   const [selectedLabel, setSelectedLabel] = useState<string | null>("全部");
@@ -26,25 +31,9 @@ const TrainPageContent: React.FC = () => {
   if (error) return <p>Error loading data</p>;
   if (!data) return <p><Loading /></p>;
 
-  const factoryData: { [key: string]: string[] } = [
-    "全部機廠",
-    "富岡機廠",
-    "潮州機廠",
-    "花蓮機廠",
-  ].reduce((acc: { [key: string]: string[] }, dept: string) => {
-    acc[dept] = [
-      "全部",
-      "客車",
-      "貨車",
-      "柴油客車",
-      "柴液機車",
-      "柴電機車",
-      "電力機車",
-      "通勤列車",
-      "城際列車",
-    ];
-    return acc;
-  }, {});
+  const counts = data ? calculateCounts(data) : {};
+  const factoryData = createFactoryData(counts);
+  
 
   const filteredTrainData = data.filter((train) => {
     const areaMatches =
@@ -62,7 +51,7 @@ const TrainPageContent: React.FC = () => {
   return (
     <div className="size-full flex p-4 gap-4 overflow-hidden">
       {/* First Div */}
-      <div className="min-w-[15%] flex items-center justify-center">
+      <div className="min-w-[15rem] w-[25vw] flex items-center justify-center">
         <BoardTitleSection
           title="機務段分類"
           content={
@@ -80,10 +69,10 @@ const TrainPageContent: React.FC = () => {
       </div>
 
       {/* Second Div */}
-      <div className="min-w-[84%] h-full relative">
+      <div className="w-[75vw]  h-full relative">
         <BoardTitleSection
           title={`${selectedArea} - ${selectedLabel}`}
-          content={<TrainListTable TrainDataInArray={filteredTrainData} />}
+          content={<DataTable columns={columns} data={filteredTrainData} /> }
         />
       </div>
     </div>

@@ -52,18 +52,16 @@ guse flag = 0 非常態
 總量數 beloingto  可用數 current 三個加起來
 accordino number label
 機場維修 不要hover才顯示
-
 card 總數量
 圖表分太開
+車種分類要有總數
 
 ---------------------
 
 undone:
 機廠檢修清單：
 
-車種分類要有總數
-延遲 正的才有顏色
-
+延遲 正的才有顏
 
 日其功能排序
 

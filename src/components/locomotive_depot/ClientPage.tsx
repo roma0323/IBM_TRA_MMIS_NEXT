@@ -8,7 +8,7 @@ import {
   getSumStatusDetailListMultiplierZeor,
   getSumStatusDetailListMultiplierZeorDeptParamCartypeParamQtypeParam,
 } from "@/api/api";
-import { FetcheGetSumStatusList } from "@/types/type";
+import { FetcheGetSumStatusListDataInArray } from "@/types/type";
 import {
   calculateCounts,
   createFactoryData,
@@ -34,19 +34,19 @@ const TrainPageContent: React.FC = () => {
 
   const fetcher = async () => {
     const data = await getSumStatusDetailListMultiplierZeor(date);
-    return data;
+    return data.data;
   };
 
-  const { data, error, isLoading } = useSWR<FetcheGetSumStatusList>(
+  const { data, error, isLoading } = useSWR<FetcheGetSumStatusListDataInArray[]>(
     `locomative${date}`,
     fetcher
   );
 
-  const counts = data ? calculateCounts(data.data) : {};
+  const counts = data ? calculateCounts(data) : {};
   const factoryData = createFactoryData(counts);
 
   const filteredTrainData =
-    data?.data.filter((train) => {
+    data?.filter((train) => {
       const areaMatches =
         selectedArea === "全部機務段" ||
         !selectedArea ||
@@ -87,7 +87,7 @@ const TrainPageContent: React.FC = () => {
         ref={slideNavRef}
         totalSlides={3}
         visibleSlides={2}
-        slideWidthPercentage={26}
+        slideWidthPercentage={25}
       >
         {/* First Div */}
         <div className="min-w-[25%] flex items-center justify-center">
@@ -108,7 +108,7 @@ const TrainPageContent: React.FC = () => {
         </div>
 
         {/* Second Div */}
-        <div className="min-w-[72%] h-full relative">
+        <div className="min-w-[73%] h-full relative">
           <BoardTitleSection
             title={`${selectedArea} - ${selectedLabel}`}
             content={
