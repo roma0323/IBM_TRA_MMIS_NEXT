@@ -5,11 +5,15 @@ import { useSearchParams } from "next/navigation";
 import Loading from "@/components/Loading";
 import BoardTitleSection from "@/components/BoardTitleSection";
 import SlideNavigationContainer, { SlideNavigationContainerRef } from "@/components/SlideNavigationContainer";
-import InventoryTableList from "@/components/maintenance_materials/InventoryTableList";
 import InventoryOverviewTable from "@/components/maintenance_materials/InventoryOverviewTable";
 import CategorySection from "@/components/ui/accordionSection";
 import { factoryData } from "@/components/maintenance_materials/factoryData";
 import { useInventoryData } from "@/components/maintenance_materials/useInventoryData";
+
+import { DataTablePagination } from "@/components/ui/DataTablePagination";
+import { columnInventoryListIssue } from "@/components/maintenance_materials/columnInventoryListIssue";
+import { columnInventoryListBalance } from "@/components/maintenance_materials/columnInventoryListBalance";
+import { InventoryListIssue, InventoryListBalance } from "@/types/type";
 
 export function ClientPage() {
   const urlParams = useSearchParams();
@@ -17,10 +21,8 @@ export function ClientPage() {
   const slideNavRef = useRef<SlideNavigationContainerRef>(null);
 
   const {
-    inventory_overview,
     error,
     isLoading,
-    selectFactory,
     setSelectFactory,
     selectFactoryName,
     setSelectFactoryName,
@@ -29,7 +31,6 @@ export function ClientPage() {
     inventoryList,
     setInventoryList, 
     isLoadingState,
-    totalMoney,
     handleCellClick,
     filteredInventoryOverview,
     chartData,
@@ -37,6 +38,17 @@ export function ClientPage() {
 
   if (error) return <div>Failed to load</div>;
   if (isLoading) return <Loading />;
+
+  function isInventoryListBalance(item: InventoryListBalance | (InventoryListIssue & { percentage: number })): item is InventoryListBalance {
+    return (item as InventoryListBalance).sum_invbal_mount !== undefined;
+  }
+
+  function isInventoryListIssue(item: InventoryListBalance | (InventoryListIssue & { percentage: number })): item is InventoryListIssue & { percentage: number } {
+    return (item as InventoryListIssue).sum_issue_mount !== undefined && (item as { percentage: number }).percentage !== undefined;
+  }
+
+  const inventoryListBalance = inventoryList.filter(isInventoryListBalance);
+  const inventoryListIssue = inventoryList.filter(isInventoryListIssue);
 
   return (
     <div className="h-full overflow-hidden">
@@ -75,11 +87,19 @@ export function ClientPage() {
           <BoardTitleSection
             title={`${selectFactoryName} - ${selectedType}`}
             content={
-              <InventoryTableList
-                data={inventoryList}
-                isLoading={isLoadingState}
-                totalMoney={totalMoney}
-              />
+                <>
+                 { isLoadingState ? (
+                  <Loading />
+                ) : (
+                  inventoryList.length > 0 ? (
+                    inventoryListBalance.length > 0 ? (
+                      <DataTablePagination columns={columnInventoryListBalance} data={inventoryListBalance} />
+                    ) : (
+                      <DataTablePagination columns={columnInventoryListIssue} data={inventoryListIssue} />
+                    )
+                  ) : null
+                )}
+                </>
             }
           />
         </div>

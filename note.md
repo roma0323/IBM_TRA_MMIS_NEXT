@@ -42,6 +42,7 @@ annual static dploy sometime error , dont know why so far
 annual report  error first time  , cannot read forEach
 機廠檢修總覽原本有缺項目（？） 工作單號是否是依據
 Table sticky
+cannot sort can click datatable
 ---------------------
 
 done:
@@ -63,17 +64,18 @@ label改成中文 件數改成平均
 日其功能排序
 default value
 年度講清楚
-
----------------------
-
-undone:
-
-
 1.新增percentage 
 2.整合sum_invbal_mount,sum_issue_mount & curbal,quantity
 數量金額排序功能
 hover chart label 千分位逗號
 動力連續定額(HP) 就空白就好
+---------------------
+
+undone:
+
+
+
+
 
 
 

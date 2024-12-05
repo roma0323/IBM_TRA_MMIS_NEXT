@@ -49,7 +49,7 @@ const CarSetTable: React.FC<CarTypeTableProps> = ({ carTypeChildrenList }) => {
             <TableCell>{item.RST100}</TableCell>
             <TableCell>{item.RST090}</TableCell>
             <TableCell>{item.RST190}</TableCell>
-            <TableCell>???</TableCell>
+            <TableCell> </TableCell>
             <TableCell>{item.RST170}</TableCell>
             <TableCell>{item.RST250}</TableCell>
             <TableCell>{item.RST140}</TableCell>

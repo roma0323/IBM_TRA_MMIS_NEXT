@@ -4,6 +4,7 @@ import { getInvMountListRow, getInvMount } from "@/api/api";
 import { InventoryListIssue, InventoryListBalance, InventoryOverview } from "@/types/type";
 import { SlideNavigationContainerRef } from "@/components/SlideNavigationContainer";
 
+
 type FactoryGroups = {
   All: string[];
   All_depot: string[];
@@ -22,11 +23,11 @@ export const useInventoryData = (date: string) => {
   const [selectFactory, setSelectFactory] = useState<string>("All");
   const [selectFactoryName, setSelectFactoryName] = useState<string>("機務處");
   const [selectedType, setSelectedValue] = useState<string>("");
-  const [inventoryList, setInventoryList] = useState<InventoryListBalance[] | InventoryListIssue[]>([]);
+  const [inventoryList, setInventoryList] = useState<(InventoryListBalance | InventoryListIssue & { percentage: number })[]>([]);
   const [isLoadingState, setisLoadingState] = useState<boolean>(false);
   const [totalMoney, setTotalMoney] = useState<number>(0);
 
-  const fetchAndSumData = async (factories: string[], date: string, month: string, type: string): Promise<InventoryListBalance[] | InventoryListIssue[]> => {
+  const fetchAndSumData = async (factories: string[], date: string, month: string, type: string): Promise<(InventoryListBalance | InventoryListIssue & { percentage: number })[]> => {
     const allData = await Promise.all(factories.map((factory) => getInvMountListRow(date, month, factory, type)));
     return allData.flat().reduce((acc, item) => {
       const existingItem = acc.find((i: InventoryListBalance | InventoryListIssue) => i.itemnum === item.itemnum && i.dept === item.dept);
@@ -34,10 +35,10 @@ export const useInventoryData = (date: string) => {
         existingItem.quantity = (parseFloat(existingItem.quantity) + parseFloat(item.quantity)).toString();
         existingItem.sum_issue_mount = (parseFloat(existingItem.sum_issue_mount) + parseFloat(item.sum_issue_mount)).toString();
       } else {
-        acc.push(item);
+        acc.push({ ...item, percentage: 0 });
       }
       return acc;
-    }, [] as InventoryListBalance[] | InventoryListIssue[]);
+    }, [] as (InventoryListBalance | InventoryListIssue & { percentage: number })[]);
   };
 
   const handleCellClick = async (type: string, month: string, typeName: string, slideNavRef: React.RefObject<SlideNavigationContainerRef>) => {
@@ -45,16 +46,21 @@ export const useInventoryData = (date: string) => {
     setisLoadingState(true);
 
     const factories = factoryGroups[selectFactory as keyof FactoryGroups] || [selectFactory];
-    const summedData: InventoryListBalance[] | InventoryListIssue[] = await fetchAndSumData(factories, date, month, type);
-
-    setInventoryList(summedData);
+    const summedData = await fetchAndSumData(factories, date, month, type);
 
     const total = summedData.reduce((acc: number, item: InventoryListBalance | InventoryListIssue) => {
-      const sumMount = "sum_issue_mount" in item ? parseFloat(item.sum_issue_mount) : parseFloat(item.sum_invbal_mount);
+      const sumMount = "sum_invbal_mount" in item ? parseFloat(item.sum_invbal_mount) : parseFloat(item.sum_issue_mount);
       return acc + sumMount;
     }, 0);
     setTotalMoney(total);
 
+    const updatedData = summedData.map(item => {
+      const sumMount = "sum_invbal_mount" in item ? parseFloat(item.sum_invbal_mount) : parseFloat(item.sum_issue_mount);
+      const percentage = total ? ((sumMount / total) * 100).toFixed(2) : "0.00";
+      return { ...item, percentage: parseFloat(percentage) };
+    });
+
+    setInventoryList(updatedData);
     setisLoadingState(false);
 
     // Trigger slide to the right

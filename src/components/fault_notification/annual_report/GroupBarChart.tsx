@@ -21,7 +21,7 @@ const CustomTooltip = ({ active, payload, label }: { active?: boolean; payload?:
       <p>{`${label}`}</p>
       {payload.map((entry: any, index: number) => (
         <p key={`item-${index}`} style={{ color: entry.fill }}>
-        {`${entry.name}: ${entry.value}`}
+        {`${entry.name}: ${new Intl.NumberFormat().format(entry.value)}`}
         </p>
       ))}
       </div>
