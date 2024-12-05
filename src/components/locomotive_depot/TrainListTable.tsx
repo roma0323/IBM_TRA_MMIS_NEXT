@@ -52,7 +52,7 @@ const TrainListTable: React.FC<TrainDataInArrayProps> = ({
       <TableHeader>
         <TableRow>
           <TableHead>車種</TableHead>
-          <TableHead>機務段</TableHead>
+          <TableHead>段所</TableHead>
           <TableHead>型號</TableHead>
           <TableHead>配置</TableHead>
           <TableHead>借入</TableHead>

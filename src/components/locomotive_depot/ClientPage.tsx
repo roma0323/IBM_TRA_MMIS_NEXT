@@ -23,6 +23,8 @@ import CategorySection from "@/components/ui/accordionSection";
 
 import MaintenanceCard from "@/components/locomotive_depot/MaintenanceCard";
 import TrainListTable from "@/components/locomotive_depot/TrainListTable";
+import {DataTableClickable} from "@/components/ui/DataTableClickable";
+import {columns} from "@/components/locomotive_depot/column";
 
 const TrainPageContent: React.FC = () => {
   const [selectedLabel, setSelectedLabel] = useState<string | null>("全部");
@@ -111,15 +113,17 @@ const TrainPageContent: React.FC = () => {
         <div className="min-w-[73%] h-full relative">
           <BoardTitleSection
             title={`${selectedArea} - ${selectedLabel}`}
-            content={
-              <>
-                <TrainListTable
-                  TrainDataInArray={filteredTrainData}
-                  handleTrainClick={handleTrainClick}
-                  loading={isLoading}
-                />
-              </>
-            }
+            content={<DataTableClickable columns={columns} data={filteredTrainData} /> }
+
+            // content={
+            //   <>
+            //     <TrainListTable
+            //       TrainDataInArray={filteredTrainData}
+            //       handleTrainClick={handleTrainClick}
+            //       loading={isLoading}
+            //     />
+            //   </>
+            // }
           />
         </div>
 
