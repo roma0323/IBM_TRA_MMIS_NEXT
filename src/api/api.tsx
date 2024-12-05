@@ -2,6 +2,7 @@ import {
   FetcheGetSumStatusList,
   FailListData,
   Recent30days,
+  FacStatusList
 } from "@/types/type"; 
 
 function dateFormat(date?: string) {
@@ -203,7 +204,7 @@ export async function getFacRepairYearPlan(date?: string) {
 }
 
 // data type :FacStatusList
-export async function getFacRepairListByMonth(date?: string) {
+export async function getFacRepairListByMonth(date?: string) : Promise<FacStatusList>{
   //fetch 機廠檢修清單
   let formattedDate = dateFormat(date);
   const yearString = formattedDate.split("-")[0];

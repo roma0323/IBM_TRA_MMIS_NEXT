@@ -5,151 +5,137 @@ import { factorySumStatus } from "@/types/type";
 import { ArrowUpDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-// This type is used to define the shape of our data.
-// You can use a Zod schema here if you want.
+
 
 export const columns: ColumnDef<factorySumStatus>[] = [
   {
     accessorKey: "carcatalog",
     header: ({ column }) => (
-      <span
-        className="cursor-pointer hover:bg-gray-200 hover:text-black"
-        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-      >
-        車種
-      </span>
+      <Button size="label" variant="ghost">
+        <span onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
+          <ArrowUpDown />車種
+        </span>
+      </Button>
     ),
   },
   {
     accessorKey: "deptdesc",
     header: ({ column }) => (
-      <span
-        className="cursor-pointer hover:bg-gray-200 hover:text-black"
-        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-      >
-        廠別
-      </span>
+      <Button size="label" variant="ghost">
+        <span onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
+          <ArrowUpDown />廠別
+        </span>
+      </Button>
     ),
   },
   {
     accessorKey: "cartype",
     header: ({ column }) => (
-      <span
-        className="cursor-pointer hover:bg-gray-200 hover:text-black"
-        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-      >
-        車型
-      </span>
+      <Button size="label" variant="ghost">
+        <span onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
+          <ArrowUpDown />車型
+        </span>
+      </Button>
     ),
   },
   {
     accessorKey: "assetnum",
     header: ({ column }) => (
-      <span
-        className="cursor-pointer hover:bg-gray-200 hover:text-black"
-        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-      >
-        車組/車號
-      </span>
+      <Button size="label" variant="ghost">
+        <span onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
+          <ArrowUpDown />車組/車號
+        </span>
+      </Button>
     ),
   },
   {
     accessorKey: "worktype",
     header: ({ column }) => (
-      <span
-        className="cursor-pointer hover:bg-gray-200 hover:text-black"
-        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-      >
-        檢修級別
-      </span>
+      <Button size="label" variant="ghost">
+        <span onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
+          <ArrowUpDown />檢修級別
+        </span>
+      </Button>
     ),
   },
   {
     accessorKey: "facindate",
     header: ({ column }) => (
-      <span
-        className="cursor-pointer hover:bg-gray-200 hover:text-black"
-        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-      >
-        進場日期
-      </span>
+      <Button size="label" variant="ghost">
+        <span onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
+          <ArrowUpDown />進場日期
+        </span>
+      </Button>
     ),
   },
   {
     accessorKey: "actstart",
     header: ({ column }) => (
-      <span
-        className="cursor-pointer hover:bg-gray-200 hover:text-black"
-        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-      >
-        開工日期
-      </span>
+      <Button size="label" variant="ghost">
+        <span onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
+          <ArrowUpDown />開工日期
+        </span>
+      </Button>
     ),
   },
   {
     accessorKey: "schedfinish",
     header: ({ column }) => (
-      <span
-        className="cursor-pointer hover:bg-gray-200 hover:text-black"
-        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-      >
-        預計完工日期
-      </span>
+      <Button size="label" variant="ghost">
+        <span onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
+          <ArrowUpDown />預計完工日期
+        </span>
+      </Button>
     ),
   },
   {
     accessorKey: "actfinish",
     header: ({ column }) => (
-      <span
-        className="cursor-pointer hover:bg-gray-200 hover:text-black"
-        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-      >
-        實際完工日期
-      </span>
+      <Button size="label" variant="ghost">
+        <span onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
+          <ArrowUpDown />實際完工日期
+        </span>
+      </Button>
     ),
   },
   {
     accessorKey: "facoutdate",
     header: ({ column }) => (
-      <span
-        className="cursor-pointer hover:bg-gray-200 hover:text-black"
-        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-      >
-        出廠日期
-      </span>
+      <Button size="label" variant="ghost">
+        <span onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
+          <ArrowUpDown />出廠日期
+        </span>
+      </Button>
     ),
   },
   {
     accessorKey: "infacdays",
     header: ({ column }) => (
-      <span
-        className="cursor-pointer hover:bg-gray-200 hover:text-black"
-        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-      >
-        在場天數
-      </span>
+      <Button size="label" variant="ghost">
+        <span onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
+          <ArrowUpDown />在場天數
+        </span>
+      </Button>
     ),
   },
   {
     accessorKey: "inwodays",
     header: ({ column }) => (
-      <span
-        className="cursor-pointer hover:bg-gray-200 hover:text-black"
-        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-      >
-        施工天數
-      </span>
+      <Button size="label" variant="ghost">
+        <span onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
+          <ArrowUpDown />施工天數
+        </span>
+      </Button>
     ),
   },
   {
     accessorKey: "behindordelaydays",
     header: ({ column }) => (
-      <span
-        className="cursor-pointer hover:bg-gray-200 hover:text-black"
-        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-      >
-        提前/預期天數
-      </span>
+      <Button size="label" variant="ghost">
+        <span onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
+          <ArrowUpDown />提前/預期天數
+        </span>
+      </Button>
     ),
     cell: ({ getValue }) => {
       const value = getValue() as string;

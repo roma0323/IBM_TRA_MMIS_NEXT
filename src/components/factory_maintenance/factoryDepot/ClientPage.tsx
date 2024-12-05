@@ -13,7 +13,7 @@ import {
 import Loading from "@/components/Loading"
 import BoardTitleSection from "@/components/BoardTitleSection";
 import CategorySection from "@/components/ui/accordionSection";
-import {DataTable} from "@/components/factory_maintenance/factoryDepot/TrainListTable";
+import {DataTable} from "@/components/ui/DataTable";
 import {columns} from "@/components/factory_maintenance/factoryDepot/column";
 
 const TrainPageContent: React.FC = () => {

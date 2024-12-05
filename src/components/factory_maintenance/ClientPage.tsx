@@ -4,8 +4,7 @@ import React, { useState, useRef } from "react";
 import useSWR from "swr";
 import { useSearchParams } from "next/navigation";
 import { getFacRepairListByMonth, getFacRepairYearPlan } from "@/api/api";
-import { factorySumStatus } from "@/types/type";
-import Loading from "@/components/Loading"
+import Loading from "@/components/Loading";
 import BoardTitleSection from "@/components/BoardTitleSection";
 import SlideNavigationContainer, {
   SlideNavigationContainerRef,
@@ -16,6 +15,8 @@ import ComposedChartMonthly from "@/components/factory_maintenance/ComposedChart
 import ComposedChartAccmulate from "@/components/factory_maintenance/ComposedChartAccmulate";
 import getChartData from "@/components/factory_maintenance/ChartDataRefactor";
 import TrainListTable from "@/components/factory_maintenance/TrainListTable";
+import { DataTable } from "@/components/ui/DataTable";
+import { columns } from "@/components/factory_maintenance/column";
 
 const getCurrentMonthIndex = (): number => {
   const date = new Date();
@@ -31,23 +32,35 @@ const ClientPage: React.FC = () => {
   const searchParams = useSearchParams();
   const date = searchParams?.get("date") || "";
   const fetcher = async () => {
-    const [
-      ChartData,
-      listData,
-    ] = await Promise.all([
+    const [ChartData, listData] = await Promise.all([
       getFacRepairYearPlan(date),
-      getFacRepairListByMonth(date)
+      getFacRepairListByMonth(date),
     ]);
     return {
       ChartData,
       listData,
     };
   };
-  const { data, error } = useSWR('fetchData', fetcher);
+  const { data, error } = useSWR("fetchData", fetcher);
   if (error) return <p>Error loading data</p>;
-  if (!data) return <p><Loading /></p>;
-
+  if (!data) return <Loading />;
   const refactorChartData = getChartData(data.ChartData);
+
+  const filteredData = data.listData.data.filter(
+    (item) =>
+      (selectFactory === "全部機廠" || item.deptdesc.includes(selectFactory)) &&
+      item.wojp3
+  );
+  const totalChildCarCnt = data.listData.data.reduce((sum: number, item) => {
+    if (
+      (selectFactory === "全部機廠" || item.deptdesc.includes(selectFactory)) &&
+      item.wojp3
+    ) {
+      return sum + item.childcarcnt;
+    }
+    return sum;
+  }, 0);
+
   return (
     <div className="relative h-full  ">
       <SlideNavigationContainer
@@ -94,18 +107,22 @@ const ClientPage: React.FC = () => {
                         className=" size-full flex flex-col items-center justify-around"
                       >
                         <div className="flex justify-center items-center w-full">
-                          <ComposedChartMonthly data={chartData.monthData.map(item => ({
-                            ...item,
-                            當月預計: Number(item.當月預計),
-                            當月達成: Number(item.當月達成),
-                          }))} />
+                          <ComposedChartMonthly
+                            data={chartData.monthData.map((item) => ({
+                              ...item,
+                              當月預計: Number(item.當月預計),
+                              當月達成: Number(item.當月達成),
+                            }))}
+                          />
                         </div>
                         <div className="flex justify-center items-center w-full">
-                          <ComposedChartAccmulate data={chartData.monthData.map(item => ({
-                            ...item,
-                            累積預計: Number(item.累積預計),
-                            累積達成: Number(item.累積達成),
-                          }))} />
+                          <ComposedChartAccmulate
+                            data={chartData.monthData.map((item) => ({
+                              ...item,
+                              累積預計: Number(item.累積預計),
+                              累積達成: Number(item.累積達成),
+                            }))}
+                          />
                         </div>
                       </div>
                     )
@@ -117,11 +134,12 @@ const ClientPage: React.FC = () => {
 
         <div className="min-w-[48%] flex items-center justify-center ">
           <BoardTitleSection
-            title={`${selectFactory}-該月檢修清單-共${(data.listData.data).length}件`}
+            title={`${selectFactory}-該月檢修清單`}
             content={
               <div className="flex flex-col size-full">
-                <TrainListTable TrainDataInArray={data.listData.data} />
-                
+                <DataTable columns={columns} data={filteredData} />
+               
+                <div className="p-2">修理車輛數: {totalChildCarCnt}</div>
               </div>
             }
           />

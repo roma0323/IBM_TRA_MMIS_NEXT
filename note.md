@@ -40,8 +40,8 @@ annual static dploy sometime error , dont know why so far
 小數點兩位
 機場配置->在場車
 annual report  error first time  , cannot read forEach
-
-
+機廠檢修總覽原本有缺項目（？） 工作單號是否是依據
+Table sticky
 ---------------------
 
 done:
@@ -84,3 +84,4 @@ label 寫出來 不可營運 可營運
 每1分鐘刷新
 
 
+非常態 動力車rwd

@@ -87,9 +87,6 @@ export type factorySumStatus = {
   url: string;
 };
 
-export type factorySumStatusOverall = {
-  Data: factorySumStatus[];
-};
 
 export type FacStatusList = {
   data: factorySumStatus[];
