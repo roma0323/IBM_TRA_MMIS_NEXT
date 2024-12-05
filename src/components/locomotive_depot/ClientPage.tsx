@@ -113,17 +113,17 @@ const TrainPageContent: React.FC = () => {
         <div className="min-w-[73%] h-full relative">
           <BoardTitleSection
             title={`${selectedArea} - ${selectedLabel}`}
-            content={<DataTableClickable columns={columns} data={filteredTrainData} /> }
+            // content={<DataTableClickable columns={columns} data={filteredTrainData} /> }
 
-            // content={
-            //   <>
-            //     <TrainListTable
-            //       TrainDataInArray={filteredTrainData}
-            //       handleTrainClick={handleTrainClick}
-            //       loading={isLoading}
-            //     />
-            //   </>
-            // }
+            content={
+              <>
+                <TrainListTable
+                  TrainDataInArray={filteredTrainData}
+                  handleTrainClick={handleTrainClick}
+                  loading={isLoading}
+                />
+              </>
+            }
           />
         </div>
 

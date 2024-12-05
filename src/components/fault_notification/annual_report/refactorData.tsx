@@ -46,7 +46,7 @@
       monthlyData[month] = { 故障通報: 0, 行車責任事故: 0, ATP: 0 };
     });
 
-    data.forEach((item) => {
+    data?.forEach((item) => {
       if (item.atp === "1") {
         atp_num++;
       }

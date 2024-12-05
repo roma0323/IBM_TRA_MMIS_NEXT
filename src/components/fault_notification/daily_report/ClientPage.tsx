@@ -3,37 +3,17 @@
 import useSWR from "swr";
 import React, { useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { FailListItem, FailListData } from "@/types/type";
+import { FailListData } from "@/types/type";
 import { getSumFailListDaily } from "@/api/api";
 import { refactorData } from "@/components/fault_notification/daily_report/refactorData";
-
+import { DataTable } from "@/components/ui/DataTable";
+import { columns } from "@/components/fault_notification/daily_report/column";
 import Loading from "@/components/Loading";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+
+
 import { ReportLevelCard } from "@/components/fault_notification/daily_report/ReportLevelCard";
 import BoardTitleSection from "@/components/BoardTitleSection";
 
-const headers = [
-  "車次",
-  "車型",
-  "車組車號",
-  "通報號",
-  "事故等級",
-  "通報時間",
-  "事故地點",
-  "TCMS故障代碼",
-  "故障位置",
-  "故障現象",
-  "狀態",
-  "責任單位",
-  "臨維單",
-];
 
 const ClientPage: React.FC = () => {
   const [activeCardIndex, setActiveCardIndex] = useState<number | null>(0);
@@ -88,16 +68,8 @@ const ClientPage: React.FC = () => {
         <BoardTitleSection
           title={`${selectFactory}級`}
           content={
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  {headers.map((header, index) => (
-                    <TableHead key={index}>{header}</TableHead>
-                  ))}
-                </TableRow>
-              </TableHeader>
-              <TableBody>{renderTableRows(filteredFailList)}</TableBody>
-            </Table>
+            <DataTable columns={columns} data={filteredFailList} />
+
           }
         />
       </div>
@@ -105,33 +77,5 @@ const ClientPage: React.FC = () => {
   );
 };
 
-const renderTableRows = (data: FailListItem[]) => {
-  return data.map((fail_by_row, index) => (
-    <TableRow key={index}>
-      <TableCell>{fail_by_row.trains_no}</TableCell>
-      <TableCell>{fail_by_row.cartype}</TableCell>
-      <TableCell>{fail_by_row.assetnum}</TableCell>
-      <TableCell>{fail_by_row.repnum}</TableCell>
-      <TableCell>{fail_by_row.fail_lvl}</TableCell>
-      <TableCell>{fail_by_row.reptime}</TableCell>
-      <TableCell>{fail_by_row.rep_loc}</TableCell>
-      <TableCell>{fail_by_row.tcms_code}</TableCell>
-      <TableCell>{fail_by_row.fail_loc}</TableCell>
-      <TableCell>{fail_by_row.fail_phenomenon}</TableCell>
-      <TableCell>{fail_by_row.fail_status}</TableCell>
-      <TableCell>{fail_by_row.fail_dept}</TableCell>
-      <TableCell className="text-primary underline">
-        <a
-          href={fail_by_row.rep_url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className=" cursor-pointer"
-        >
-          {fail_by_row.fail_cmwo}
-        </a>
-      </TableCell>
-    </TableRow>
-  ));
-};
 
 export default ClientPage;
