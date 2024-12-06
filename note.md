@@ -2,35 +2,6 @@
 
 ＡＴＰ圖表需按照月份變更
 
-http://tra.webtw.xyz:8888/maximo/zz_data?method=getInvMountList&year=${yearString}&month=${month}&dept=${dept}&type=${type}`,
-1.新增percentage 
-2.整合sum_invbal_mount,sum_issue_mount & curbal,quantity
-export type InventoryListBalance = {
-  itemnum: string;
-  conditioncode: string;
-  unitprice: string;
-  dept: string;
-  month: string;
-  year: string;
-  unit: string;
-  itemdesc: string;
-  sum_invbal_mount: string;
-  curbal: string;
-};
-
-export type InventoryListIssue = {
-  itemnum: string;
-  conditioncode: string;
-  unitprice: string;
-  dept: string;
-  month: string;
-  year: string;
-  unit: string;
-  itemdesc: string;
-  sum_issue_mount: string;
-  quantity: string;
-};
-
 ----------------------------------
 暫緩：
 機廠檢修總覽原本有缺項目（？） 工作單號是否是依據
@@ -70,5 +41,6 @@ label 寫出來 不可營運 可營運
 ---------------------
 
 undone:
+
 討論：
 可否不放貨車 貨車細節數量不對

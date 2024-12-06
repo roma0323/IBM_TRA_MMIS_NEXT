@@ -116,7 +116,7 @@ const DetailClientPage: React.FC<{ carcatalogId: string }> = ({
     divData: string
   ) => {
     slideNavRef.current?.handleMouseEnter("right");
-
+    setLoading(true); // Set loading to true
     const fetchedData =
       await getSumStatusDetailListMultiplierZeorDeptParamCartypeParamQtypeParam(
         dept,
@@ -124,6 +124,7 @@ const DetailClientPage: React.FC<{ carcatalogId: string }> = ({
         divData
       );
     setMaintenanceData(fetchedData);
+    setLoading(false); // Set loading to true
   };
 
   return (
@@ -188,13 +189,18 @@ const DetailClientPage: React.FC<{ carcatalogId: string }> = ({
             title="車輛詳情"
             content={
               <div>
-                {maintenanceData.map((data, index) => (
-                  <MaintenanceCard
-                    key={index}
-                    maintenanceData={data}
-                    index={index + 1}
-                  />
-                ))}
+                {!Array.isArray(maintenanceData) ||
+                  maintenanceData.length === 0 ? (
+                  <div>無資料</div>
+                ) : (
+                  maintenanceData.map((data, index) => (
+                    <MaintenanceCard
+                      key={index}
+                      maintenanceData={data}
+                      index={index + 1}
+                    />
+                  ))
+                )}
               </div>
             }
           />

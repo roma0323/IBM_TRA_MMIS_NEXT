@@ -17,9 +17,17 @@ const MaintenanceDetailSection: React.FC<MaintenanceDetailSectionProps> = ({
         title="車輛詳情"
         content={
           <div>
-            {maintenanceData.map((maintenance, index) => (
-              <MaintenanceCard key={index} maintenanceData={maintenance} index={index+1}/>
-            ))}
+            {!Array.isArray(maintenanceData) || maintenanceData.length === 0 ? (
+              <div>無資料</div>
+            ) : (
+              maintenanceData.map((data, index) => (
+                <MaintenanceCard
+                  key={index}
+                  maintenanceData={data}
+                  index={index + 1}
+                />
+              ))
+            )}
           </div>
         }
       />
