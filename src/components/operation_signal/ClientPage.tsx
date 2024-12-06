@@ -86,7 +86,7 @@ const ClientPage: React.FC = () => {
     const interval = setInterval(() => {
       mutate(`operation_signal${date}`);
       setLastRefreshTime(new Date()); // Update the last refresh time
-    }, 6000); // 60000 ms = 1 minute
+    }, 60000); // 60000 ms = 1 minute
 
     return () => clearInterval(interval); // Clear interval on component unmount
   }, [date]);
@@ -194,7 +194,7 @@ const ClientPage: React.FC = () => {
                 setSelectTrain={handleSelectLight}
                 data={light_for_accordionitem}
               />
-              <div className="sticky bottom-0 p-4 flex w-full max-w-sm items-center space-x-2">
+              <div className="sticky bottom-0 p-4 flex w-full items-center space-x-2">
                 <Input
                   type="search"
                   placeholder="車輛燈號"

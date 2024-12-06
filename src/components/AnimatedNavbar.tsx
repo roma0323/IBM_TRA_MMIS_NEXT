@@ -49,7 +49,7 @@ const Navbar: React.FC = () => {
 
   return (
     <>
-      <div className="h-fit w-full flex justify-between absolute pr-6">
+      <div className="h-fit w-full flex justify-between absolute p-6">
         <div className="flex items-center">
         <Link
             href={{
@@ -59,7 +59,7 @@ const Navbar: React.FC = () => {
             <Image
               className="relative hover:scale-110"
               alt="IBM Logo"
-              src={`${process.env.BASEPATH}/ibm-logo-frame.svg`}
+              src={`m2/${process.env.BASEPATH}/ibm-logo-frame.svg`}
               width={112}
               height={96}
             />

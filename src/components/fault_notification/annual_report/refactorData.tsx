@@ -73,7 +73,7 @@
 
     return {
       failtype,
-      total: data.length,
+      total: data?.length,
       duty_num,
       atp_num,
       kpicartypeCounts,

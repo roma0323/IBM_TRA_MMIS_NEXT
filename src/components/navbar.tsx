@@ -62,10 +62,7 @@ const Navbar: React.FC = () => {
             name: "客車",
             path: `/navbarpages/train_deployment/certain_train/passenger_car`,
           },
-          {
-            name: "貨車",
-            path: `/navbarpages/train_deployment/certain_train/freight_car`,
-          },
+         
         ],
       },
       {

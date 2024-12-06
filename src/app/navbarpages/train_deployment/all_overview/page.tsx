@@ -73,18 +73,13 @@ export default function Page() {
                 chartData={area_chart_30days["客車"]}
               />
             </Link>
-            <Link
-              href={{
-                pathname: `/navbarpages/train_deployment/certain_train/freight_car`,
-              }}
-            >
+           
               <OverviewCard
                 Name="貨車"
                 total={total_Available_data["貨車"]?.TOTAL}
                 available={total_Available_data["貨車"]?.AVAILABLE}
                 chartData={area_chart_30days["貨車"]}
               />
-            </Link>
             <Link
               href={{
                 pathname: `/navbarpages/train_deployment/unusual_overview`,

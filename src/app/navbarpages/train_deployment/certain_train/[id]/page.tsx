@@ -13,7 +13,6 @@ export function generateStaticParams() {
     { id: "diesel_hydraulic_locomotive", name: "柴液機車" },
     { id: "diesel_passenger_car", name: "柴油客車" },
     { id: "passenger_car", name: "客車" },
-    { id: "freight_car", name: "貨車" },
   ];
 }
 

@@ -34,7 +34,6 @@ const carcatalogMap: { [key: string]: string } = {
   diesel_hydraulic_locomotive: "柴液機車",
   diesel_passenger_car: "柴油客車",
   passenger_car: "客車",
-  freight_car: "貨車",
 };
 
 const DetailClientPage: React.FC<{ carcatalogId: string }> = ({
@@ -45,6 +44,7 @@ const DetailClientPage: React.FC<{ carcatalogId: string }> = ({
   const [filteredTrainData, setFilteredTrainData] = useState<any[]>([]);
   const slideNavRef = useRef<SlideNavigationContainerRef>(null);
   const [loading, setLoading] = useState(false); // Add loading state
+  const [loading2, setLoading2] = useState(false); // Add loading state
   const urlParams = useSearchParams();
   const date = urlParams ? urlParams.get("date") || "" : "";
   const carcatalog = carcatalogMap[carcatalogId] || "Unknown";
@@ -116,7 +116,7 @@ const DetailClientPage: React.FC<{ carcatalogId: string }> = ({
     divData: string
   ) => {
     slideNavRef.current?.handleMouseEnter("right");
-    setLoading(true); // Set loading to true
+    setLoading2(true); // Set loading to true
     const fetchedData =
       await getSumStatusDetailListMultiplierZeorDeptParamCartypeParamQtypeParam(
         dept,
@@ -124,7 +124,7 @@ const DetailClientPage: React.FC<{ carcatalogId: string }> = ({
         divData
       );
     setMaintenanceData(fetchedData);
-    setLoading(false); // Set loading to true
+    setLoading2(false); // Set loading to true
   };
 
   return (
@@ -189,7 +189,10 @@ const DetailClientPage: React.FC<{ carcatalogId: string }> = ({
             title="車輛詳情"
             content={
               <div>
-                {!Array.isArray(maintenanceData) ||
+                
+                {loading2 ? (
+                  <Loading />
+                ) : !Array.isArray(maintenanceData) ||
                   maintenanceData.length === 0 ? (
                   <div>無資料</div>
                 ) : (
