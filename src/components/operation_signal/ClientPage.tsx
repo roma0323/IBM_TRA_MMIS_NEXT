@@ -4,7 +4,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
-import useSWR from "swr";
+import useSWR, { mutate } from "swr";
 
 import Loading from "@/components/Loading";
 import BoardTitleSection from "../BoardTitleSection";
@@ -56,6 +56,7 @@ const ClientPage: React.FC = () => {
   const [selectLight, setSelectLight] = useState<string>("全部燈號");
   const [filteredSignals, setFilteredSignals] = useState<Signal[]>([]);
   const [searchText, setSearchText] = useState<string>("");
+  const [lastRefreshTime, setLastRefreshTime] = useState<Date | null>(null);
 
   useEffect(() => {
     if (signals) {
@@ -78,7 +79,17 @@ const ClientPage: React.FC = () => {
 
       setFilteredSignals(filtered);
     }
-  }, [selectTrain, selectLight, signals, searchText]);
+  }, [selectTrain, selectLight, signals, searchText,lastRefreshTime]);
+
+  // Refresh signals data every minute
+  useEffect(() => {
+    const interval = setInterval(() => {
+      mutate(`operation_signal${date}`);
+      setLastRefreshTime(new Date()); // Update the last refresh time
+    }, 6000); // 60000 ms = 1 minute
+
+    return () => clearInterval(interval); // Clear interval on component unmount
+  }, [date]);
 
   if (error) return <div>Failed to load</div>;
   if (!signals)
@@ -205,7 +216,8 @@ const ClientPage: React.FC = () => {
           title={`${selectLight} - ${selectTrain.join(", ")}`}
           content={
             <>
-              <div className="w-full grid-container px-8 py-6">
+            
+              <div className="w-full grid-container px-8 pt-6">
                 <Button
                   className={` hover:bg-white text-base font-bold text-black  ${getButtonBgColor(
                     ""
@@ -228,7 +240,13 @@ const ClientPage: React.FC = () => {
                 >
                   不可營運
                 </Button>
+                
               </div>
+              {lastRefreshTime && (
+                <div className="text-sm text-right text-gray-500 px-8">
+                  上次更新時間: {lastRefreshTime.toLocaleTimeString()}
+                </div>
+              )}
 
               {selectTrain.length > 0 && (
                 <div>
@@ -272,6 +290,7 @@ const ClientPage: React.FC = () => {
                   )}
                 </div>
               )}
+              
             </>
           }
         />
