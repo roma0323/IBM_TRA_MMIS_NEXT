@@ -23,8 +23,8 @@ import CategorySection from "@/components/ui/accordionSection";
 
 import MaintenanceCard from "@/components/locomotive_depot/MaintenanceCard";
 import TrainListTable from "@/components/locomotive_depot/TrainListTable";
-import {DataTableClickable} from "@/components/ui/DataTableClickable";
-import {columns} from "@/components/locomotive_depot/column";
+import { DataTableClickable } from "@/components/ui/DataTableClickable";
+import { columns } from "@/components/locomotive_depot/column";
 
 const TrainPageContent: React.FC = () => {
   const [selectedLabel, setSelectedLabel] = useState<string | null>("全部");
@@ -39,28 +39,53 @@ const TrainPageContent: React.FC = () => {
     return data.data;
   };
 
-  const { data, error, isLoading } = useSWR<FetcheGetSumStatusListDataInArray[]>(
-    `locomative${date}`,
-    fetcher
-  );
+  const { data, error, isLoading } = useSWR<
+    FetcheGetSumStatusListDataInArray[]
+  >(`locomative${date}`, fetcher);
 
   const counts = data ? calculateCounts(data) : {};
   const factoryData = createFactoryData(counts);
 
-  const filteredTrainData =
-    data?.filter((train) => {
-      const areaMatches =
-        selectedArea === "全部機務段" ||
-        !selectedArea ||
-        train.deptdesc.includes(selectedArea.replace("車輛配置", ""));
-      const labelMatches =
-        selectedLabel === "全部" ||
-        !selectedLabel ||
-        train.carcatalog === selectedLabel;
+ // ClientPage.tsx
 
-      return areaMatches && labelMatches;
-    }) || [];
+const filteredTrainData =
+data?.filter((train) => {
+  const areaMatches =
+    !selectedArea ||
+    selectedArea === "全部機務段" ||
+    train.deptdesc.includes(selectedArea.replace("車輛配置", "")) ||
+    (selectedArea === "其他機務段" && ![
+      "七堵機務段",
+      "臺北機務段",
+      "新竹機務段",
+      "彰化機務段",
+      "嘉義機務段",
+      "高雄機務段",
+      "花蓮機務段",
+      "臺東機務段",
+      "宜蘭機務段",
+    ].includes(train.deptdesc));
 
+  const categories = [
+    "客車",
+    "貨車",
+    "柴油客車",
+    "柴液機車",
+    "柴電機車",
+    "電力機車",
+    "通勤列車",
+    "城際列車",
+    "其他",
+  ];
+
+  const labelMatches =
+    !selectedLabel ||
+    selectedLabel === "全部" ||
+    train.carcatalog === selectedLabel ||
+    (selectedLabel === "其他" && !categories.includes(train.carcatalog));
+
+  return areaMatches && labelMatches;
+}) || [];
   const handleTrainClick = async (
     dept: string,
     cartype: string,

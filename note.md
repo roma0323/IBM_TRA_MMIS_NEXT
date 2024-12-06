@@ -33,14 +33,12 @@ export type InventoryListIssue = {
 
 ----------------------------------
 暫緩：
-可否不放貨車 貨車細節數量不對
-機務段數量是配置數還是有幾行
-動力連續定額(HP) ?????
 annual static dploy sometime error , dont know why so far
-小數點兩位
-機場配置->在場車
 annual report  error first time  , cannot read forEach
+小數點兩位
 機廠檢修總覽原本有缺項目（？） 工作單號是否是依據
+機場配置->在場車
+非常態 動力車rwd
 Table sticky
 cannot sort can click datatable
 ---------------------
@@ -76,14 +74,12 @@ undone:
 
 
 
-
-
-
 營運燈號：點選label要有
 只顯示一個 紅色優先 隨便選
-營運燈號 要很紅 刺眼 燈號 加粗字體
 label 寫出來 不可營運 可營運
 每1分鐘刷新
 
 
-非常態 動力車rwd
+
+討論：
+可否不放貨車 貨車細節數量不對
