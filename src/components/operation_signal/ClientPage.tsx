@@ -81,7 +81,12 @@ const ClientPage: React.FC = () => {
   }, [selectTrain, selectLight, signals, searchText]);
 
   if (error) return <div>Failed to load</div>;
-  if (!signals) return <><Loading /></>;
+  if (!signals)
+    return (
+      <>
+        <Loading />
+      </>
+    );
 
   const handleSelectTrain = (id: string) => {
     setSearchText("");
@@ -121,6 +126,33 @@ const ClientPage: React.FC = () => {
       groups[signal.EQ4] = group;
       return groups;
     }, {} as Record<string, Signal[]>);
+  };
+
+  const filterAndSortSignals = (signals: Signal[]) => {
+    const priority = { 紅燈: 1, 黃燈: 2, 綠燈: 3 };
+    const getPriority = (signal: Signal) => {
+      if (signal.SOURCE === "6" || signal.SOURCE === "7")
+        return priority["黃燈"];
+      if (signal.SOURCE && signal.SOURCE !== "6" && signal.SOURCE !== "7")
+        return priority["紅燈"];
+      return priority["綠燈"];
+    };
+
+    const uniqueSignals = new Map<string, Signal>();
+
+    signals.forEach((signal) => {
+      const existingSignal = uniqueSignals.get(signal.ASSETNUM);
+      if (
+        !existingSignal ||
+        getPriority(signal) < getPriority(existingSignal)
+      ) {
+        uniqueSignals.set(signal.ASSETNUM, signal);
+      }
+    });
+
+    return Array.from(uniqueSignals.values()).sort(
+      (a, b) => getPriority(a) - getPriority(b)
+    );
   };
 
   const groupedSignals = groupByEQ4(filteredSignals);
@@ -173,6 +205,31 @@ const ClientPage: React.FC = () => {
           title={`${selectLight} - ${selectTrain.join(", ")}`}
           content={
             <>
+              <div className="w-full grid-container px-8 py-6">
+                <Button
+                  className={` hover:bg-white text-base font-bold text-black  ${getButtonBgColor(
+                    ""
+                  )}`}
+                >
+                  可營運
+                </Button>
+
+                <Button
+                  className={` hover:bg-white text-base font-bold text-black  ${getButtonBgColor(
+                    "6"
+                  )}`}
+                >
+                  試駛，迴送
+                </Button>
+                <Button
+                  className={` hover:bg-white text-base font-bold text-black  ${getButtonBgColor(
+                    "red"
+                  )}`}
+                >
+                  不可營運
+                </Button>
+              </div>
+
               {selectTrain.length > 0 && (
                 <div>
                   {Object.keys(groupedSignals).length > 0 ? (
@@ -181,29 +238,31 @@ const ClientPage: React.FC = () => {
                         <div key={eq4}>
                           <h1 className="p-4 text-lg">{eq4}</h1>
                           <div className="grid-container px-8">
-                            {signals.map((signal, index) => (
-                              <div key={index} className="grid-item">
-                                <TooltipProvider>
-                                  <Tooltip>
-                                    <TooltipTrigger asChild>
-                                      <Button
-                                        key={index}
-                                        className={`w-full hover:bg-white cursor-default text-base font-bold text-black  ${getButtonBgColor(
-                                          signal.SOURCE
-                                        )}`}
-                                      >
-                                        {signal.ASSETNUM}
-                                      </Button>
-                                    </TooltipTrigger>
-                                    <TooltipContent>
-                                      {signal.DESC
-                                        ? signal.DESC
-                                        : signal.ASSETNUM}
-                                    </TooltipContent>
-                                  </Tooltip>
-                                </TooltipProvider>
-                              </div>
-                            ))}
+                            {filterAndSortSignals(signals).map(
+                              (signal, index) => (
+                                <div key={index} className="grid-item">
+                                  <TooltipProvider>
+                                    <Tooltip>
+                                      <TooltipTrigger asChild>
+                                        <Button
+                                          key={index}
+                                          className={`w-full hover:bg-white cursor-default text-base font-bold text-black  ${getButtonBgColor(
+                                            signal.SOURCE
+                                          )}`}
+                                        >
+                                          {signal.ASSETNUM}
+                                        </Button>
+                                      </TooltipTrigger>
+                                      <TooltipContent>
+                                        {signal.DESC
+                                          ? signal.DESC
+                                          : signal.ASSETNUM}
+                                      </TooltipContent>
+                                    </Tooltip>
+                                  </TooltipProvider>
+                                </div>
+                              )
+                            )}
                           </div>
                         </div>
                       ))}
