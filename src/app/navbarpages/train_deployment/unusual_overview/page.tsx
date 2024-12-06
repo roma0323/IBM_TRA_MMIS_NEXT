@@ -57,9 +57,9 @@ export default function Page() {
 
   return (
     <main className="grow bg-secondary-background overflow-hidden relative">
-      <div className="h-full p-3 relative overflow-auto">
-        <div className="flex flex-col gap-4">
-          <div className="h-1/2">
+      <div className="size-full p-6 relative overflow-auto">
+        <div className="flex flex-col flex-1 size-full gap-6">
+          <div className="grow">
             <BigOverviewCard
               Name="非常態列車"
               total={total_Available_data["非常態列車"]?.TOTAL}
@@ -67,7 +67,7 @@ export default function Page() {
               chartData={area_chart_30days["非常態列車"]}
             />
           </div>
-          <div className="grid grid-cols-4 h-2/5 gap-4 relative">
+          <div className="grid grid-cols-4 gap-4 grow relative">
             <OverviewCard
               Name="客車"
               total={dataByCarCatalog["客車"]?.current_cnt}

@@ -33,12 +33,8 @@ export type InventoryListIssue = {
 
 ----------------------------------
 暫緩：
-annual static dploy sometime error , dont know why so far
-annual report  error first time  , cannot read forEach
-小數點兩位
 機廠檢修總覽原本有缺項目（？） 工作單號是否是依據
 機場配置->在場車
-非常態 動力車rwd
 Table sticky
 cannot sort can click datatable
 ---------------------
