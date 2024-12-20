@@ -52,7 +52,7 @@ function MyComponent()  {
   const aggregatedDataC = refactorData(data.getSumFailYearTypeC, "C");
   const aggregatedDataAll = refactorData(getSumFailYearTypeAll, "All");
   
-  const aggregatedData = [aggregatedDataA, aggregatedDataB, aggregatedDataC, aggregatedDataAll];
+  const aggregatedData = [aggregatedDataA, aggregatedDataB, aggregatedDataC,aggregatedDataAll];
   const pieChartData =
     activeCardIndex !== null 
       ? Object.entries(aggregatedData[activeCardIndex].kpicartypeCounts).map(
