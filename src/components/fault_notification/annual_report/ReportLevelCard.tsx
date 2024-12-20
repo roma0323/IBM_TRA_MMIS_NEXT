@@ -23,6 +23,7 @@ type Props = {
 
 export const ReportLevelCard: React.FC<Props> = ({ isActive, onToggle, CardDataByLevel }) => {
 console.log(CardDataByLevel.monthlyData,'CardDataByLevel.monthlyData')
+console.log(CardDataByLevel,'CardDataByLevel')
   return (
     <div
       className={`mt-3 p-3 rounded-lg border-b border-[#646464]/20 hover:bg-secondary-background transform ${

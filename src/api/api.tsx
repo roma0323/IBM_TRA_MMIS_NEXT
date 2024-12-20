@@ -18,7 +18,7 @@ export async function getSumStatusListAndsumtotalEqualone(date?: string) : Promi
   let formattedDate = dateFormat(date);
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getSumStatusList&qdate=${formattedDate}&sumtotal=1&multiplier=1&normaltrain=1`,
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getSumStatusList&qdate=${formattedDate}&sumtotal=1`,
     {
       method: "POST",
       headers: {
@@ -63,7 +63,7 @@ export async function getSumStatusListAndsumtotalEqualoneNotNormaltrain( //fetch
   let formattedDate = dateFormat(date);
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getSumStatusList&qdate=${formattedDate}&sumtotal=1&multiplier=1&normaltrain=0`,
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/maximo/zz_data?method=getSumStatusList&qdate=${formattedDate}&sumtotal=1`,
     {
       method: "POST",
       headers: {

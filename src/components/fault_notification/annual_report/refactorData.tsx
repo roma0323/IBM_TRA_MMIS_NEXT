@@ -4,6 +4,7 @@
   const refactorData = (data: any[], failtype: string) => {
     let duty_num = 0;
     let atp_num = 0;
+    let total = data.length || 0;
     const kpicartypeCounts: { [key: string]: number } = {};
 
     const kpicartypes = [
@@ -73,7 +74,7 @@
 
     return {
       failtype,
-      total: data?.length,
+      total,
       duty_num,
       atp_num,
       kpicartypeCounts,

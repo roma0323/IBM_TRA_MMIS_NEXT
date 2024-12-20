@@ -163,7 +163,7 @@ const Navbar: React.FC = () => {
               <Image
                 className="relative hover:scale-110  h-[1vw] w-auto min-h-[2rem] "
                 alt="IBM Logo"
-                src={`/m2/ibm-logo-frame.svg`}
+                src={`/ibm-logo-frame.svg`}
                 sizes="10rem"
                 width="0"
                 height="0"
